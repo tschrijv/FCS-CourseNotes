@@ -8,8 +8,8 @@ FIGURES=$(FIGURES_SRC) \
 all: fcweng.pdf
 
 fcweng.pdf: fcweng.tex $(addsuffix .pdf, $(basename $(FIGURES))) \
-	berekenbaarheideng.tex Foreword/inleidingeng.tex GraphTheory/grafeneng.tex talenautomateneng.tex \
-	complexiteiteng.tex prelim.tex
+	Computability/berekenbaarheideng.tex Foreword/inleidingeng.tex GraphTheory/grafeneng.tex LanguagesAutomata/talenautomateneng.tex \
+	Complexity/complexiteiteng.tex prelim.tex
 	pdflatex fcweng.tex
 	pdflatex fcweng.tex
 	pdflatex fcweng.tex
