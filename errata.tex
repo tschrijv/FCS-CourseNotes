@@ -1,0 +1,389 @@
+\documentclass[11pt]{fund}
+\usepackage[dutch]{babel}
+% \usepackage{a4wide}
+\usepackage{epsfig}
+\usepackage{wrapfig}
+\usepackage{subfigure}
+\usepackage{graphics}
+\usepackage{subfigure}
+\renewcommand{\thepage}{\hspace*{-3cm}\arabic{page}}
+\setlength{\textwidth}{18cm}
+\setlength{\oddsidemargin}{-1.5cm}
+
+
+%fancy heading
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+
+%  Een paar definities
+\renewcommand{\thesection}{\arabic{section}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\bin}[2]{{{\ds #1} \choose {\ds #2}}}
+\newcommand{\prend}{\hfill \rule{2.3mm}{2.3mm} \hspace*{3mm} $ $}
+\newcommand{\rpijl}{$\rightarrow~$}
+\newcommand{\eps}{$\epsilon~$}
+\newcommand{\project}[1]{}
+
+\newcommand{\section}[1]{\setcounter{mijnstelling}{1} \section{#1}}
+
+% veranderd door Bart Demoen: eerst degene die een nummer krijgen
+% \newtheorem{stelling}[subsection]{Stelling}
+% \newtheorem{definitie}[subsection]{Definitie}
+% \newtheorem{informeledefinitie}[subsection]{Informele definitie}
+% \newtheorem{lemma}[subsection]{Lemma}
+% \newtheorem{algo}[subsection]{Algoritme}
+% \newtheorem{eig}[subsection]{Eigenschap}
+% \newtheorem{gevolg}[subsection]{Gevolg}
+
+\lhead[\fancyplain{}{\rm\thepage}]{\fancyplain{}{\rightmark}}
+\chead[]{}
+\rhead[\fancyplain{}{\leftmark}]{\fancyplain{}{\rm\thepage}}
+\lfoot[]{}
+\cfoot[]{\fancyplain{\rm\thepage}{}}
+\rfoot[]{}
+
+\newcounter{mijnstelling}
+
+\newenvironment{definitie}{{\bf Definitie \thesection.\themijnstelling~~} \addtocounter{mijnstelling}{1}}{}
+
+\newenvironment{stelling}{{\bf Stelling \thesection.\themijnstelling~~} \addtocounter{mijnstelling}{1}}{}
+
+\newenvironment{informeledefinitie}{{\bf Informele definitie \thesection.\themijnstelling~~} \addtocounter{mijnstelling}{1}}{}
+
+\newenvironment{algo}{{\bf Algoritme \thesection.\themijnstelling~~} \addtocounter{mijnstelling}{1}}{}
+
+\newenvironment{lemma}{{\bf Lemma \thesection.\themijnstelling~~} \addtocounter{mijnstelling}{1}}{}
+
+\newenvironment{gevolg}{{\bf Gevolg \thesection.\themijnstelling~~} \addtocounter{mijnstelling}{1}}{}
+
+
+
+% nu degene zonder nummer
+\newtheorem{vb}{Voorbeeld}
+\renewcommand{\thevb}{}
+
+\newtheorem{opm}{Opmerking}
+\renewcommand{\theopm}{}
+
+\newtheorem{oef}{Oefening}
+\renewcommand{\theoef}{}
+
+\newtheorem{leeg}{\mbox{\hspace*{-0.45cm}}}
+\renewcommand{\theleeg}{}
+
+\setlength{\parindent}{0cm}
+
+\begin{document}
+
+%% TITELBLAD
+\renewcommand{\thepage}{}
+% \pagestyle{plain}
+
+
+\renewcommand{\thepage}{\arabic{page}}
+De bladzijde verwijst naar de originele versie van de cursus (3
+augustus) die door Wina in omloop is gebracht.
+
+
+\begin{tabular}{|r|r|p{6cm}|p{6cm}|p{2cm}|}
+\hline
+blz & datum    & fout & goed  & auteur \\ \hline
+\hline
+7 & 4-10-07 & N~is~een~priemgetal  & n~is~een~priemgetal  & J. Wittocx    \\
+\hline
+9 & 4-10-07 & beschrijving van $(ab)*$ is mis    & {\em elke a wordt door een b gevolgd en er zijn evenveel a's als b's}                     & J. Wittocx    \\
+\hline
+16 & 4-10-07 & transitietabel vermeldt c niet  &  is toegevoegd                     & J. Wittocx    \\
+\hline
+17 & 4-10-07 & aan een eindtoestand &  aan \'e\'en eindtoestand, waaruit bovendien geen pijlen vertrekken                    & J. Wittocx    \\
+\hline
+23 & 4-10-07 &  In stap 2: $E_2*$ &  $E_2^*$                       & J. Wittocx    \\
+\hline
+25 & 4-10-07 & In punt 1: AXB   & AX$^n$B ($n>0$)   & J. Wittocx    \\
+\hline
+27 & 4-10-07 & die met een $\epsilon$-boog bereikbaar zijn & die met \'{e}\'{e}n of meer $\epsilon$-bogen bereikbaar zijn & J. Wittocx    \\
+\hline
+27 & 4-10-07 & $\delta_d({\cal Q},a) = \delta_n(eb({\cal Q}),a)$  & $\delta_d({\cal Q},a) = eb(\delta_n({\cal Q},a))$  & B. Demoen    \\
+\hline
+28 & 4-10-07 & de fout op pagina 27 sijpelde door in tabel 2.2 en fig 2.11 (p.29) & de hele tabel is aangepast en ook figuur 2.11 & B. Demoen    \\
+\hline
+34 & 4-10-07 &  sj                    &   $s_j$                   & J. Wittocx    \\
+\hline
+40 & 4-10-07 &  de tweede $\Longleftrightarrow$ in punt 2 was mis  & een aantal pijlen zijn aangepast en de definitie van $\sim_{sup}$ is ingevoerd   & J. Wittocx    \\
+\hline
+50 & 11-10-07 & de drie automaten aanvaarden te veel strings (bijvoorbeeld 110)   & in elke automaat is \'{e}\'{e}n eindtoestand gewoon gemaakt & R. Strackx    \\ \hline
+66 & 17-10-07  & $\Gamma_\epsilon^*$ & $\Gamma^*$ & B. Demoen \\ \hline
+67 & 17-10-07 &     {\em maar de klasse van talen ...} &     {\em maar {\bf niet} de klasse van talen ...} & B. Demoen \\ \hline
+
+
+80 & 17-10-07 & de grammatica voor $a_nb_nc_n$ voldoet niet aan de originele definitie van context-sensistief   & wel aan een equivalente definitie - dat is toegevoegd & B. Demoen    \\
+\hline
+
+43 &
+23-10-07 &
+$(q_s,q_1,a_2,...,q_f)$ &
+$(q_s,q_1,q_2,...,q_f)$ &
+J. Wittocx \\ \hline
+
+63 &
+23-10-07 &
+stap 5 van de transformatie naar Chomsky NF is onvolledig gespecifieerd &
+... door $A \rightarrow X_1Y_1$, $Y_1 \rightarrow X_2Y_2$, ...,
+$Y_{n-2} \rightarrow X_{n-1}X_n$ &
+J. Wittocx \\ \hline
+
+66 &
+23-10-07 &
+{\em en zitten we in een eindtoestand} &
+{\em en nog \'{e}\'{e}n toepassing brengt ons in de eindtoestand} &
+J. Wittocx \\ \hline
+
+66 &
+23-10-07 &
+$stack_i \in \Gamma$ &
+$stack_k \in \Gamma$ &
+J. Wittocx \\ \hline
+
+74 &
+23-10-07 &
+uvvyyz &
+uvvxyyz &
+J. Wittockx \\ \hline \hline
+\end{tabular}
+
+\begin{tabular}{|r|r|p{6cm}|p{6cm}|p{2cm}|}
+\hline
+blz & datum    & fout & goed  & auteur \\ \hline
+\hline
+
+15 &
+23-11-07 &
+def 6.4, puntje twee - argument van delta vergeten en index verkeerd &
+zie nieuwe versie &
+Stijn Vermeeren \\ \hline
+
+27 &
+23-11-07 &
+de tekst na de definitie van $\delta_d$ was nog niet aangepast aan de
+verbetering van de definitie zelf &
+zie nieuwe versie &
+anoniem in de les \\ \hline
+
+34 &
+23-11-07 &
+in de regel die met {\em Maar:} begint ontbreekt $p_s$ in 2de en 3de term &
+zie nieuwe versie &
+Ruth Nysen \\ \hline
+
+46 &
+23-11-07 &
+$Q_1 \setminus F_2$ &
+$Q_1 \setminus F_1$ &
+Ruth Nysen \\ \hline
+
+51 &
+23-11-07 &
+bij elke overgang \'{e}\'{e}n positie naar opschuift &
+bij elke overgang \'{e}\'{e}n positie naar rechts opschuift &
+Ruth Nysen \\ \hline
+
+66 &
+23-11-07 &
+def 20.2 - indexen en x,y mis&
+zie nieuwe versie &
+Stijn Vermeeren \\ \hline
+
+119 &
+27-11-07 &
+Vermits $A_{TM}$ niet herkenbaar is &
+Vermits $\overline{A_{TM}}$ niet herkenbaar is &
+Johan Wittocx \\ \hline
+
+38 &
+27-11-07 &
+De verzameling $\{reach(q) | q \in Q\}$ is een partitie van $\Sigma^*$ &
+toevoegen: als elke toestand bereikbaar is &
+Stijn Vermeeren \\ \hline
+
+96 &
+27-11-07 &
+in de definitie van $A_{TM}$ staat $s \in L_{TM}$ &
+moet $s \in L_M$ zijn &
+Stijn Vermeeren \\ \hline
+
+70 &
+3-12-07 &
+in de derde overgang E+E te kiezen i.p.v. E$*$E &
+in de derde overgang E*E te kiezen i.p.v. E$+$E &
+Stijn Vermeeren \\ \hline
+
+
+40 &
+10-12-07 &
+de definitie 13.5 vergat dat ook transitieve sluiting moet genomen worden &
+de definitie en setlling 13.6 zijn herschreven &
+Bart Demoen \\ \hline
+
+
+\end{tabular}
+
+\newpage
+\begin{tabular}{|r|r|p{6cm}|p{6cm}|p{2cm}|}
+\hline
+blz & datum    & fout & goed  & auteur \\ \hline
+
+\hline
+122  &
+12-12-2007  &
+${p_n}^i$  &
+${p_i}^n$  (2 maal) &
+Stijn Vermeeren  \\ \hline
+
+\hline
+123  &
+12-12-2007  &
+$Pr[{p_1}^1,Cn[s,{p_3}^3]]$  &
+$Pr[{p_1}^1,Cn[suc,{p_3}^3]]$  &
+Stijn Vermeeren  \\ \hline
+
+\hline
+123  &
+12-12-2007  &
+$Pr[x,Cn[som,{p_1}^3, {p_3}^3]]$  &
+$Pr[nul,Cn[som,{p_1}^3, {p_3}^3]]$  &
+Stijn Vermeeren  \\ \hline
+
+\hline
+122-123 &
+12-12-2007 &
+de definitie van primitieve recursie is onvolledig &
+het geval k=0 is toegevoegd (zie verbeterde tekst) &
+Stijn Vermeeren  \\ \hline
+
+
+\hline
+90 &
+19-12-2007 &
+$\alpha q b \beta$ \rpijl $\alpha a c p \beta$ indien $\delta(q,b) = (p,c,R)$ &
+$\alpha q b \beta$ \rpijl $\alpha c p \beta$ indien $\delta(q,b) = (p,c,R)$ &
+Gutierrez Gonzalez, Andres Humberto  \\ \hline
+
+\hline
+39 &
+19-12-2007 &
+Stelling 13.3 was vaag over waarvoor inductie moest gebruikt worden &
+nieuwe versie is explicieter &
+Bart Demoen  \\ \hline
+
+\hline
+155 &
+19-12-2007 &
+i.v.m. de typering van Y stond er wat verwarrende onzin &
+nieuwe versie is beter &
+Sarah Wauters  \\ \hline
+
+
+\end{tabular}
+
+\newpage
+\begin{tabular}{|r|r|p{6cm}|p{6cm}|p{2cm}|}
+\hline
+blz & datum    & fout & goed  & auteur \\ \hline
+
+114 &
+2-1-2008 &
+\$Aab\$ helemaal onderaan blad & 
+\$Xab\$ &
+Ruth Nysen  \\ \hline
+
+119 &
+2-1-2008 &
+als volgt: met $<M,w>$ laten we & 
+als volgt: met $<M,s>$ laten we & 
+Ruth Nysen  \\ \hline
+
+120 &
+2-1-2008 &
+Omgekeerd: als $L_M \neq \emptyset$, & 
+Omgekeerd: als $L_M = \emptyset$, &
+Ruth Nysen  \\ \hline
+
+62 &
+2-1-2008 &
+$A \rightarrow \gamma$ waar $\gamma$ meer dan twee symbolen beva & 
+$A \rightarrow \gamma$ waar $\gamma$ minstens twee symbolen beva &
+Nick Vannieuwenhoven  \\ \hline
+
+117 &
+2-1-2008 &
+$f(\overline{L_2}) \subseteq \overline{L_2}$ & 
+$f(\overline{L_1}) \subseteq \overline{L_2}$ &
+Nick Vannieuwenhoven  \\ \hline
+
+71 &
+2-1-2008 &
+regels van de vorm $A_{p,q} \rightarrow A_{p,r}A_{r,p}$ & 
+regels van de vorm $A_{p,q} \rightarrow A_{p,r}A_{r,q}$ &
+Raoul Strackx, Nick Vannieuwenhoven  \\ \hline
+
+
+\end{tabular}
+
+\newpage
+\begin{tabular}{|r|r|p{6cm}|p{6cm}|p{2cm}|}
+\hline
+blz & datum    & fout & goed  & auteur \\ \hline
+
+85 &
+3-1-2008 &
+$\Sigma$ in de tabellen moet zijn: &
+$\Gamma$ &
+Sarah Wauters  \\ \hline
+
+66 &
+27-1-2008 &
+$(q_{i+1},y) \in \delta(q_i,w_i,x)$&
+$(q_{i+1},y) \in \delta(q_i,w_{i+1},x)$&
+Nick Vannieuwenhoven \\ \hline
+
+\end{tabular}
+
+\newpage
+\begin{tabular}{|r|r|p{6cm}|p{6cm}|p{2cm}|}
+\hline
+blz & datum    & fout & goed  & auteur \\ \hline
+
+47 &
+10-11-2008 &
+$(+|-|\epsilon)PosCijfer~Cijfer^*$ &
+$(+|-|\epsilon)PosCijfer~Cijfer^*~|~0$ &
+Michaël Vanderheeren \\ \hline
+
+55 &
+10-11-2008 &
+Q \rpijl cPd &
+Q \rpijl cQd &
+Michaël Vanderheeren \\ \hline
+
+117 &
+23-11-2008 &
+in definitie 16.2 $f(\overline{L_2}) \subseteq \overline{L_2}$ &
+$f(\overline{L_1}) \subseteq \overline{L_2}$ &
+Michaël Vanderheeren \\ \hline
+
+\end{tabular}
+
+
+
+
+Veel taalfouten/tikfouten zijn hierboven niet opgenomen (en soms nog
+niet verbeterd in de on-line versie) omdat ze niet zo essentieel zijn
+voor het verstaan van de cursus. Toch dank voor het melden ervan aan
+Ruth Nysen, Dieter Van Melkebeek, Stijn Vermeeren, Thomas De Craemer,
+Pieter Agten, Willem Penninckx, Lore Kesteloot en vooral Johan Wittocx.
+
+\end{document}
+
+
+princiepes/principes ...

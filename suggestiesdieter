@@ -1,0 +1,115 @@
+Een ietwat meer hierarchische structuur in hoofdstuk 2 kan helpen.
+
+
+p 87, term "recursive":
+Tegenwoordig wordt eerder gebruik gemaakt van de termen "computably
+enumerable" en "computable".
+
+p 96-97, halting-probleem:
+Ik zou hier de link leggen naar diagonalisatie en Cantors bewijs dat de
+reele getallen niet aftelbaar zijn.
+
+p 108:
+Een tabel zou overzichtelijk zijn. Concludeer ook uit stelling 11.7 dat
+EQ_CFG niet beslisbaar is.
+
+p 117, term "veel-een reductie":
+Ik zou eerder de term "mapping reductie" gebruiken. Die is meer modern en
+dekt de lading beter.
+
+
+
+Concrete suggesties:
+
+# p 2, twee soorten interessante functies:
+# Ik ben niet overtuigd dat dit onderscheid essentieel is - je kan een
+# functie f vatten als de taal van alle <x,i,b> waarvoor de i-de bit van
+# f(x) gelijk is aan b. Als je het over relaties in plaats van functies wil
+# hebben, wordt de situatie anders.
+# 
+# p 12, structuur:
+# Het behandelen van NFAs voor DFAs komt mij een beetje vreemd over. Dit
+# heeft allicht te maken met "theory A" versus "theory B". Ik zou DFAs zelfs
+# voor reguliere talen behandelen.
+
+# p 21-25, van NFA naar RegEx:
+# Ik weet dat Sipser het op die manier doet, maar ik vind het inzichtelijker
+# om de transformatie te doen zonder GNFAs te introduceren.
+(Linz doet het ook)
+
+# p 35, onderaan:
+# Je kan de uniciteit ook rechtstreeks bewijzen, zonder Myhill-Nerode. Ik
+# zou dit laatste eerder aanzien als een karakterisatie van reguliere talen,
+# met als extra toepassing een eenvoudig uniciteitsargument voor minimale
+# DFAs.
+juist
+
+# p 42, afsluiter:
+# Je kan iets vermelden over de efficientie van minimalisatie. Het
+# minimalisatie-algoritme voor DFAs loopt in polynoomtijd; het minimaliseren
+# van NFAs is NP-hard. Het testen van de equivalentie van reguliere
+# expressies is zelfs PSPACE-hard. Je kan dit relateren aan het feit dat de
+# conversie van NFAs naar DFAs het aantal toestanden exponentieel kan doen
+# toenemen.
+opgenomen
+
+# p 47-48, BNF notatie:
+# Je kan misschien vermelden dat BNF notatie eigen is voor context-vrije
+# talen. Je kan ze gebruiken voor reguliere talen aangezien elke reguliere
+# taal context-vrij is.
+ok
+
+# p 51, laatste regel: bepaald -> bepaalt
+ok
+
+# p 52, Definitie 17.1: eindtoestand -> aanvaardende toestand
+ok
+
+# p 61-63, normaalvormen:
+# Dit zou ik achterwege laten en vervangen door iets anders, vanwege niet zo
+# belangrijk en niet zo interessant.
+CNF is goed voor sommige dingen later
+
+
+# p 72, Chomsky-Schuetzenberger:
+# Ik ken de juiste historie niet, maar ik denk dat in deze context ook vaak
+# gewag gemaakt wordt van "Dyck languages". Een kans om eens een
+# Nederlandstalig iemand te vermelden...
+
+Walter von Dyck blijkt een duitser te zijn
+
+
+
+# p 103, stelling 10.6:
+# Het bewijs volgt meteen uit Stelling 10.4.
+
+klopt - maar een onafhankelijk bewijs mag toch ook ?\
+als opdracht in te doen nu
+
+# p 127, laatste paragraaf voor "Zelf doen":
+# Is dit werkelijk zo?
+
+ja
+
+# p 151, figuur 4.1:
+# Ik denk dat je alle pijlen naar beneden wil richten.
+
+nee - tekening komt uit peyton-jones
+
+# p 161, laatste twee zinnen van eerste paragraaf:
+# Dit lijkt me wat misleidend. De statements gelden enkel voor sommige
+# NP-hard optimisatie-problemen, niet voor alle (tenzij P=NP). De laatste
+# zin geldt ook voor deterministische algoritmen (bijvoorbeeld voor het
+# knapzak-probleem), niet enkel voor stochastische.
+ok
+
+# p 169:
+# Ik zou een grotere rol geven aan quantum computing - een aparte sectie
+# misschien? De ene statement is een beetje misleidend - dit is waar in de
+# context van query complexity, maar is nog steeds niet geweten in de
+# gebruikelijke context van tijd- en ruimte-complexiteit.
+
+???
+
+# p 171-173:
+# Interessant dat je zulk een pamflet in je cursus opneemt... ;)

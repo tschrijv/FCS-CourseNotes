@@ -1,0 +1,469 @@
+\documentclass{seminar}
+%==============================================================================
+\usepackage{fancybox}
+\usepackage{semcolor}
+\usepackage{semlayer}
+\usepackage{sem-a4}
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{amssymb}
+%==============================================================================
+%COLORS: black,darkgray,gray,lightgray,white,red,green,blue,yellow,cyan,magenta
+%==============================================================================
+\newcommand{\LG}{\lightgray}
+%==============================================================================
+% For Black and White slides uncomment the following
+%---------------------------------------------------
+\renewcommand{\red}{\black}
+\renewcommand{\blue}{\black}
+\renewcommand{\gray}{\black}
+\renewcommand{\green}{\black}
+\renewcommand{\magenta}{\black}
+\renewcommand{\darkgray}{\black}
+\newcommand{\beginm}{\vdash }
+\newcommand{\eindm}{\dashv }
+\newcommand{\prend}{\hfill \rule{2.3mm}{2.3mm} \hspace*{3mm} $ $}
+
+
+
+% ==============================================================================
+%==============================================================================
+
+\def\printlandscape{\special{landscape}}    % Works with dvips.
+
+% \slideframe{Oval}
+
+% \onlyslides{1-30}
+
+\overlaystrue
+\printlandscape
+
+
+\begin{document}
+
+\begin{slide}
+
+{\bf Equivalentie van DFA en 2-DFA}
+
+\begin{itemize}
+\item 
+definitie van 2-DFA
+
+\item 
+een equivalentierelatie gebaseerd op een 2-DFA voor een L
+
+\item
+het is een MN(L)-relatie !
+
+
+\end{itemize}
+
+Snel opgeschreven op 20 november 2011 door Bart Demoen
+
+\end{slide}  
+
+\begin{slide}
+
+{\bf Definitie van 2-DFA}
+
+Informeel: 2-DFA kan leeskop links en rechts bewegen ...
+
+\begin{itemize}
+\item 
+($Q$, $\Sigma$, $\delta$, $\beginm$, $\eindm$, $q_s$, $q_a$, $q_r$)
+\begin{itemize}
+\item 
+$\beginm$~en $\eindm$~niet in $\Sigma$ (linkse en rechtse marker)
+
+\item 
+$\delta$:
+$(Q \times (\Sigma \cup \{\beginm, \eindm\})) \rightarrow Q \times\{L,R\}$
+
+
+
+\item 
+$\{q_s, q_a, q_r\} \subseteq Q$ (start, accept en reject toestand)
+\item
+$\#\{q_s, q_a, q_r\} = 3$
+
+\end{itemize}
+
+
+\item 
+niet te links of te rechts lezen ...
+\begin{itemize}
+\item 
+$\forall p, \exists q: \delta(p, \beginm) = (q \times R)$
+en
+$\forall p, \exists q: \delta(p, \eindm) = (q \times L)$
+
+\end{itemize}
+
+
+\item 
+bij accept/reject: leeskop helemaal naar rechts
+\begin{itemize}
+\item 
+$\delta(q_a, \_) = (p \times R)$ en $\delta(q_r, \_) = (p \times R)$
+
+\end{itemize}
+
+
+\end{itemize}
+
+\end{slide} 
+
+\begin{slide}
+
+{\bf String s geaccepteerd door 2-DFA}
+
+\begin{itemize}
+\item
+start 2-DFA in $q_s$ op string $\beginm s\eindm$
+
+\item 
+geaccepteerd als de 2-DFA in de situatie $(q_a, \eindm)$ komt
+
+s behoort tot de taal van de 2-DFA
+\item 
+verworpen als de 2-DFA in de situatie $(q_r, \eindm)$ komt
+
+s behoort niet tot de taal van de 2-DFA
+
+\item 
+anders ... 
+
+s behoort niet tot de taal van de 2-DFA
+
+\end{itemize}
+
+2-DFA mag in een lus gaan en is dus een beetje zoals een TM
+
+strings waarvoor de 2-DFA in een lus gaat behoren niet tot de taal
+bepaald door de 2-DFA
+
+\end{slide} 
+
+\begin{slide}
+
+{\bf Overtuig jezelf ...}
+
+dat de {\em speciale} eisen niet {\em belangrijk} zijn (wat betekent
+dat juist in deze context ?)
+
+maar ze zullen het ons wel iets gemakkelijker maken
+
+\end{slide} 
+
+\begin{slide}
+
+{\bf Het plan}
+
+Gegeven een 2-DFA die taal L bepaalt:
+
+\begin{itemize}
+\item 
+we defini\"eren een equivalentierelatie $\equiv$ op $\Sigma^*$
+
+\item 
+we bewijzen dat $\equiv$ een MN(L)-relatie is
+
+\item 
+dat bewijst dat L regulier is
+
+\end{itemize}
+
+
+vanaf nu is de 2-DFA (en L) gegeven ...
+
+\end{slide} 
+
+
+
+\begin{slide}
+
+{\bf Voorbereiding van $\equiv$ - deel I}
+
+Voor een gegeven string $s$ maken we een functie
+
+~~~~~~~~~~~~~~~~~$T_s: (Q \cup {\bullet}) \rightarrow (Q \cup {\bot})$
+
+\begin{itemize}
+\item[$T_s(\bullet)$]
+
+\begin{itemize}
+\item 
+start 2-DFA op $\beginm s \eindm$ met leeskop op $\beginm$ in $q_s$
+
+\item 
+de eerste keer dat de leeskop op $\eindm$ komt, is de 2-DFA in
+toestand $q$, dan $T_s(\bullet) \triangleq q$
+
+\item 
+
+als er zo geen eerste keer is: $T_s(\bullet) \triangleq \bot$
+\end{itemize}
+
+
+
+\item[$T_s(p)$]
+\begin{itemize}
+\item
+start 2-DFA op $\beginm s \eindm$ met leeskop op symbool vlak voor $\eindm$ 
+in toestand $p$
+\item
+de eerste keer dat de leeskop daarna op $\eindm$ komt, is de 2-DFA in
+toestand $q$, dan $T_s(p) \triangleq q$
+
+\item
+
+als er zo geen eerste keer is: $T_s(p) \triangleq \bot$
+
+\end{itemize}
+
+\end{itemize}
+
+
+
+\end{slide} 
+
+\begin{slide}
+
+{\bf Voorbereiding van $\equiv$: deel II}
+
+Wat betekent die $T_s$ ?
+
+\begin{itemize}
+\item 
+volg de werking van de 2-DFA op een string van de vorm $sw$
+
+\item 
+elke keer dat de leeskop van $w$ naar $s$ gaat en daar aankomt in
+toestand $p$
+
+\item 
+dan: de eerste keer dat de leeskop daarna van $s$ naar $w$ gaat, komt
+ie daar toe in $T_s(p)$ tenzij dat nooit gebeurt
+
+\item
+plus een speciaal geval voor $T_s(\bullet)$ want dat is een overgang van
+$s$ naar $w$ waarvoor geen vorige overgang van $w$ naar $s$ was
+
+\end{itemize}
+
+$T_s$ bevat alle info die van $s$ naar $w$ kan vloeien
+
+
+\end{slide} 
+
+\begin{slide}
+{\bf Interludium over $T_s$}
+
+\begin{itemize}
+\item 
+als je wil beslissen of string $sw$ geaccepteerd wordt, dan heb je
+genoeg aan
+\begin{itemize}
+\item 
+$T_s$
+\item 
+$w$
+\item 
+$\delta$
+\end{itemize}
+
+
+\item maar $s$ moet je niet kennen
+
+\end{itemize}
+
+Lees niet verder totdat je dat verstaat !
+
+Hint: speel zelf voor 2-DFA en kijk wat je nodig hebt als die een
+overgang wil maken van $w$ naar $s$
+
+\end{slide} 
+
+\begin{slide}
+
+{\bf Voorbereiding van $\equiv$: deel III}
+
+hoeveel verschillende functies $(Q \cup {\bullet}) \rightarrow (Q \cup {\bot})$ bestaan er ?
+
+\begin{itemize}
+\item 
+stel $\#Q = k$, dan $(k+1)^{(k+1)}$
+
+\item 
+juiste aantal niet belangrijk, wel dat het eindig is !
+
+\end{itemize}
+
+
+\end{slide} 
+
+\begin{slide}
+{\bf Definitie van $\equiv$ op $\Sigma^*$}
+
+\begin{itemize}
+\item 
+$s \equiv t \Leftrightarrow T_s = T_t$
+
+\item 
+bewijs zelf dat dit een equivalentierelatie is
+
+\item 
+de ge\"{i}nduceerde partitie is eindig, want ...
+
+\item
+als we nu nog kunnen bewijzen dat 
+\begin{itemize}
+\item
+
+die partitie $\{L, \overline{L}\}$
+verfijnt en 
+
+\item
+dat $\equiv$ rechts-congruent is ...
+\end{itemize}
+
+{\bf Dan is $L$ regulier !}
+\end{itemize}
+
+
+\end{slide} 
+
+\begin{slide}
+
+{\bf $\equiv$ verfijnt $\{L, \overline{L}\}$: bewijs}
+
+Stel $T_s = T_t$ en $s \in L$
+
+\begin{itemize}
+\item 
+de overgangen van $s$ naar $\eindm$ en die van $t$ naar $\eindm$
+gebeuren in dezelfde toestanden en in dezelfde volgorde (waarom ?)
+
+\item 
+laatste overgang voor $s$ is in toestand $q_a$
+
+\item
+dus ook voor $t$
+
+\end{itemize}
+
+dus ook $t \in L$
+
+M.a.w. $T_s = T_t \Leftrightarrow (s \in L) \leftrightarrow (t \in L)$
+
+of
+
+~~~~~~~~~~~~~~~~~$\equiv$ verfijnt $\{L, \overline{L}\}$
+
+\prend
+
+De Interludium slide voordien kan je ook helpen ...
+\end{slide} 
+
+
+\begin{slide}
+{\bf $\equiv$ is rechts-congruent: bewijs}
+
+Stel $s \equiv t$, dan $T_s = T_t$ (per definitie)
+
+Neem een $a \in \Sigma$
+
+\begin{itemize}
+\item 
+$T_{sa}(\bullet)$ ($T_{ta}(\bullet)$) krijg je door
+\begin{itemize}
+\item 
+stel $p = T_s(\bullet)~~(= T_t(\bullet))$
+
+\item 
+of: de 2-DFA komt de 1$^{ste}$ keer met leeskop boven de $a$ in $p$
+
+\item 
+$T_s = T_t$ en de overgangen tussen $s$ en $a$ gebeuren in dezelfde
+volgorde als tussen $t$ en $a$, dus $T_{sa}(\bullet) =
+T_{ta}(\bullet)$
+
+\end{itemize}
+
+\item 
+start 2-DFA met leeskop onder $a$
+en in een willekeurige toestand $p$
+\begin{itemize}
+\item 
+leeskop gaat naar rechts ... $T_{sa}(p) = T_{ta}(p)$
+\item 
+of leeskop gaat naar links ... dus $T_{sa}(p) = T_{ta}(p)$
+\end{itemize}
+
+\end{itemize}
+
+\prend
+
+\end{slide} 
+
+
+\begin{slide}
+{\bf Besluit}
+
+\begin{itemize}
+\item 
+elke taal L die bepaald wordt door een 2-DFA is regulier
+\item 
+elke taal L die bepaald wordt door een DFA wordt ook door een 2-DFA
+bepaald
+\item 
+2-DFA en DFA zijn even {\em krachtig}
+\end{itemize}
+
+\end{slide} 
+
+\begin{slide}
+{\bf Om over na te denken ...}
+
+\begin{itemize}
+\item 
+kan een 2-DFA voor een L kleiner zijn dan de minimale DFA ?
+
+\item 
+bestaat een minimalisatie-algoritme voor 2-DFA's ?
+
+\item
+hoe zit het met een transformatie van 2-DFA naar DFA ?
+
+\item 
+bestaan er ook 2-NFA's ? en welke eigenschappen hebben die ?
+
+\item 
+is $H_{2-DFA}$ herkenbaar, beslisbaar ?
+
+
+\end{itemize}
+
+
+\end{slide} 
+
+\begin{slide}
+{\bf Geschiedenis}
+
+\begin{itemize}
+\item 
+probleem eerst bestudeerd (en opgelost) door M. Rabin en D. Scott (1959):
+ingewikkeld bewijs
+\item 
+J. Shepherdson gaf al snel een eenvoudiger bewijs: het staat essentieel
+hierboven - Rabin en Scott vinden het zelfs niet de moeite om hun
+eigen bewijs in detail te publiceren, maar verwijzen naar Shepherdson
+\item 
+1989: M. Vardi geeft een nog {\em gemakkelijker} bewijs - ik vind het moeilijker :-(
+\item
+zie boek {\em Automata and Computability} van Dexter C. Kozen
+\end{itemize}
+
+\end{slide} 
+
+\end{document}

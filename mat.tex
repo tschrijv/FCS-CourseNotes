@@ -1,0 +1,109 @@
+\documentclass[11pt]{report}
+% \documentclass[11]{book}
+% \usepackage[dutch]{babel}
+% \usepackage{a4wide}
+\usepackage{epsfig}
+\usepackage{wrapfig}
+\usepackage{subfigure}
+\usepackage{graphics}
+\usepackage{subfigure}
+\usepackage{fancyvrb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{units}
+\usepackage{amsthm}
+% \renewcommand{\thepage}{\hspace*{-3cm}\arabic{page}}
+
+\usepackage{paralist}
+\usepackage{hyperref}
+
+\setlength{\textwidth}{15cm}
+\setlength{\oddsidemargin}{0.5cm}
+\setlength{\evensidemargin}{0.5cm}
+\setlength{\textheight}{20cm}
+
+\usepackage{titlesec}
+
+\usepackage{amssymb}
+
+\usepackage{shadow}
+\usepackage{xcolor}
+% \newcommand{\grijs}[1]{\fcolorbox{gray}{gray}{#1}}
+\definecolor{shadecolor}{RGB}{230,230,230}
+\newcommand{\grijs}[1]{\par\colorbox{shadecolor}
+  {\parbox{\dimexpr\textwidth-2\fboxsep\relax}{#1}}}
+
+\newcommand{\bart}[1]{\marginpar{\color{red} Bart}\textbf{\color{blue}[#1]}}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+
+
+%fancy heading
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+
+%  Een paar definities
+% \renewcommand{\thesection}{\arabic{section}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\bin}[2]{{{\ds #1} \choose {\ds #2}}}
+\newcommand{\prend}{\hfill \rule{2.3mm}{2.3mm} \hspace*{3mm} $ $}
+\newcommand{\rpijl}{$\rightarrow~$}
+\newcommand{\eps}{$\epsilon~$}
+\newcommand{\project}[1]{}
+
+\newcommand{\myref}[1]{~\ref{#1} op pagina~\pageref{#1}}
+
+\newtheorem{stelling}{Stelling}[section]
+\newtheorem{definitie}[stelling]{Definitie}
+\newtheorem{informeledefinitie}[stelling]{Informele definitie}
+\newtheorem{lemma}[stelling]{Lemma}
+\newtheorem{algo}[stelling]{Algoritme}
+\newtheorem{eig}[stelling]{Eigenschap}
+\newtheorem{gevolg}[stelling]{Gevolg}
+\newtheorem{vb}[stelling]{Voorbeeld}
+
+
+
+
+\lhead[\fancyplain{}{\rm\thepage}]{\fancyplain{}{\rightmark}}
+\chead[]{}
+\rhead[\fancyplain{}{\leftmark}]{\fancyplain{}{\rm\thepage}}
+\lfoot[]{}
+\cfoot[]{\fancyplain{\rm\thepage}{}}
+\rfoot[]{}
+
+% nu degene zonder nummer
+% \newtheorem{vb}{Voorbeeld}
+% \renewcommand{\thevb}{}
+
+\setlength{\parindent}{0cm}
+
+\renewcommand{\P}{{\bf P} }
+\newcommand{\NP}{{\bf NP} }
+\newcommand{\LL}{{\bf L} }
+\newcommand{\NL}{{\bf NL} }
+\newcommand{\NPC}{{\bf NPC} }
+\newcommand{\PSPACE}{{\bf PSPACE} }
+\newcommand{\NPSPACE}{{\bf NPSPACE} }
+\newcommand{\EXP}{{\bf EXP} }
+\newcommand{\NEXP}{{\bf NEXP} }
+
+
+\begin{document}
+
+
+
+\setlength{\parskip}{0.2cm}
+
+\include{gulzig}
+
+
+\end{document}

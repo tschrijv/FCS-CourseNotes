@@ -1,0 +1,16 @@
+Wu-Manber algorithm op DFA
+
+Robertson and Seymour about
+graph minors that says that if X is any property of graphs that is closed
+under taking minors, then there exists a polynomial time algorithm for
+testing the property X.  
+
+"Debugging is twice as hard as writing the code in the first place. 
+ Therefore, if you write the code as cleverly as possible, you are, 
+ by definition, not smart enough to debug it."
+--Brian Kernighan
+
+"Modern Computer Algebra," 2nd ed., by Joachim von zur
+Gathen and Juergen Gerhard (Cambridge University Press, 2003) says:
+
+http://www-history.mcs.st-andrews.ac.uk/Day_files

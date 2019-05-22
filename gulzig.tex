@@ -1,0 +1,185 @@
+
+
+\section{Gulzige algoritmen en matroids}\label{matroids}
+
+De algoritmen van Prim en Kruskal zijn gulzig: je sorteert \'{e}\'{e}n
+keer de bogen - de mogelijke keuzes om een MOB op te bouwen - en dan
+kies je telkens de kleinste om toe te voegen of je verwerpt die voor
+altijd. Die keuze is onderworpen aan een beperking: in het ene geval
+is dat {\em verbindt de huidige MOB met een knoop erbuiten}, in het
+andere geval {\em veroorzaakt geen kring indien toegevoegd}. Het
+bewijs dat dit werkt is ad hoc, in de zin dat het niet past in een
+meer algemeen kader. Dat kader bieden we hier nu aan, en we laten ook
+zien hoe Kruskal past in dit kader. Eerst wat definities en voorbeelden
+die eraan voldoen.
+
+\grijs{\begin{definitie} Deelverzamelingsysteem\\
+{\rm
+Voor een verzameling $S$ en een verzameling $D$ van deelverzamelingen
+van $S$ \\ (dus $D \subseteq {\cal P}(S)$), is $(S,D)$ een
+deelverzamelingsysteem alss
+\begin{itemize}
+\item[]
+$\forall X, Y: (X \in D~ \& ~ Y\subset X) \rightarrow Y \in D$
+\end{itemize}
+ }
+We zeggen ``D is gesloten onder inclusie''.
+
+Als $D$ leeg is, dan noemen we het deelverzamelingsysteem triviaal.
+
+Men noemt de elementen van $D$ dikwijls {\em onafhankelijk}.
+\end{definitie}}
+
+Hier zijn wat voorbeelden van deelverzamelingsystemen: $S$ is steeds
+een willekeurige verzameling
+
+\begin{itemize}
+\item[{\bf Alles}:]
+$(S,{\cal P}(S))$
+
+\item[{\bf Zonder}:]
+$(S,Zonder(s,S))$ waarbij $s \in S$ en $Zonder(s,S) = \{X \subset S| s \notin X\}$
+
+\item[{\bf Onafh:}]
+$(V,Onafh(V))$ waarbij $V$ een vectorruimte is en $Onafh(V)$ de
+verzameling van alle verzamelingen van onafhankelijke vectoren in $V$
+
+\item[{\bf GeenKring:}]
+$(E,GeenKring(G))$ waarbij $E$ de boogverzameling is van een graaf
+$G(V,E)$ en $GeenKring(G)$ de verzameling van deelverzamelingen van
+$E$ die geen kring bevatten
+
+\item[{\bf GeenBoog:}]
+$(V,GeenBoog(G))$ waarbij $V$ de knoopverzameling is van een graaf
+$G(V,E)$ en $GeenBoog(G)$ de verzameling van deelverzamelingen van
+$V$ waartussen geen boog bestaat in $G$
+
+\end{itemize}
+
+Nu nog wat voorbeelden van structuren die geen deelverzamelingsysteem zijn:
+
+\begin{itemize}
+\item[{\bf Met}:]
+$(S,Met(s,S))$ waarbij $s \in S$ en $Met(s,S) = \{X \subset S| s \in X\}$
+
+(merk op: als $(S,D)$ een niet-triviaal deelverzamelingsysteem is, dan $\phi \in D$)
+
+\item[{\bf Basis}:]
+$(V,Basis(V))$ waarbij $V$ een vectorruimte is en $Basis(V)$ de
+verzameling van alle basissen van $V$
+
+\item[{\bf Boom:}]
+$E,Boom(G))$ waarbij $E$ de boogverzameling is van een graaf $G(V,E)$
+en $Boom(G)$ de verzameling van deelverzamelingen van $E$ die een boom
+zijn
+
+\end{itemize}
+
+Als voor een deelverzamelingsysteem $(S,D)$ is aan de elementen van
+$S$ een gewicht wordt gegeven, dan krijgen we in deze context een
+natuurlijk optimalisatieprobleem 
+
+\begin{itemize}
+\item[]
+zoek een element $O$ van $D$ met het grootste gewicht\footnote{het
+gewicht van een verzameling is de som van de gewichten van zijn
+elementen}
+\end{itemize}
+Zulk een $O$ noemen we een {\em maximum} element van $D$.
+
+Dat optimalisatieprobleem kan je proberen op te lossen door een
+generisch gulzig algoritme:
+
+\begin{itemize}
+\item orden de elementen van $S$ van groot naar klein, tot een rij $R$
+die ge\"indexeerd is van 1 tot $|S|$
+
+\item $O := \phi$;
+
+\item $\underline{for}~ i = 1 .. |S|$ 
+\begin{itemize}
+\item[] ~~~$\underline{if}~ O \cup \{R[i]\} \in D$
+\item[] ~~~~~~~~~$\underline{then}~ O := O \cup \{R[i]\}$
+\end{itemize}
+\end{itemize}
+
+Dit algoritme geeft zeker een {\em maximaal} element in $D$ (je kan
+geen element van $S$ meer toevoegen, of je bekomt iets dat buiten
+$D$ ligt - pas op, om dat te bewijzen heb je de definitie van
+deelverzamelingsysteem echt wel nodig !), maar misschien geeft het
+geen {\em maximum} element, en dan lost het het optimalisatieprobleem
+niet op.
+
+\paragraph{Zelf doen}
+
+\begin{itemize}
+\item[] ga na of voor de 5 voorbeelden van deelverzamelingsystemen
+hiervoor, bovenstaand algoritme ook een maximum element berekent - je
+moet zelf de gewichten defini\"eren
+\end{itemize}
+
+\newpage
+
+E\'{e}n bijkomende eigenschap van
+een deelverzamelingsysteem garandeert dat het gulzige algoritme
+hierboven, ook een maximum element berekent, gelijk wat de gewichten
+zijn.
+
+\grijs{\begin{definitie} Matroid\\
+{\rm
+Een matroid is een deelverzamelingsysteem $(S,D)$ met de bijkomende
+eigenschap dat 
+$\forall X, Y: (X \in D, Y \in D, |X| < |Y|) \rightarrow
+\exists y \in Y \setminus X: X \cup \{y\} \in D$
+}
+\end{definitie}}
+
+
+In woorden: als twee elementen van $D$ van verschillende grootte zijn,
+dan zit er in de grootste een element dat je kan toevoegen aan de
+kleinste en dan bekom je nog altijd een element van $D$. Pas op, {\em
+grootte} betekent {\em aantal elementen}, niet {\em gewicht}: gewichten spelen (nog) geen rol.
+
+
+Welke van de deelverzamelingsystemen hierboven is een matroid ?
+
+\begin{lemma}
+In matroid $(S,D)$ zijn alle maximale elementen (van $D$) even groot
+\end{lemma}
+\underline{Proof}
+Stel dat $A$ en $B$ maximale elementen zijn van $(S,D)$, en dat $|A| <
+|B|$, dan $\exists b \in B$ zodat $A \cup \{b\} \in D$ wat de
+maximaliteit van $A$ tegenspreekt. Dus $|A| = |B|$.
+\prend
+
+Er is ook een soort omgekeerde van vorig lemma: voor een $(S,D)$ geldt
+
+als $\forall A \subset D$ $(S,D)$ alle maximale subsets van $A$ even
+groot zijn, dan is $(S,D)$ een matroid.
+
+Het lemma bewees het omgekeerde enkel voor $A = D$.
+
+
+\grijs{\begin{stelling}
+Voor een deelverzamelingsysteem $(S,D)$ geldt:
+het generisch gulzig algoritme lost het optimalisatieprobleem op voor
+$(S,D)$ alss $(S,D)$ een matroid is.
+\end{stelling}}
+\underline{Proof}
+TODO
+\prend
+
+Deze stelling verbindt een eigenschap van deelverzamelingsystemen met
+een eigenschap van een algoritme: de eigenschap van
+deelverzamelingsystemen refereert niet naar het algoritme, en zelfs
+niet naar de gewichten, die toch essentieel zijn voor het algoritme en
+het optimalisatieprobleem. Het algoritme maakt dan weer geen expliciet
+gebruik van de specifieke eigenschap van de matroid. Sterk, nietwaar !
+
+todo
+\begin{itemize}
+\item 
+kruskal
+\item 
+andere ?
+\end{itemize}
