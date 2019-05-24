@@ -30,12 +30,15 @@
 
 \usepackage{shadow}
 \usepackage{xcolor}
+\usepackage{soul}
 % \newcommand{\grijs}[1]{\fcolorbox{gray}{gray}{#1}}
 \definecolor{shadecolor}{RGB}{230,230,230}
 \newcommand{\grijs}[1]{\par\colorbox{shadecolor}
   {\parbox{\dimexpr\textwidth-2\fboxsep\relax}{#1}}}
 
 \newcommand{\bart}[1]{\marginpar{\color{red} Bart}\textbf{\color{blue}[#1]}}
+\newcommand{\marton}[1]{\marginpar{\color{red} Marton}\textbf{\color{red}{#1}}}
+\newcommand{\martonst}[2]{\marginpar{\color{red} Marton}\textbf{\color{red}{\st{#1}$~\mapsto~${#2}}}}
 
 %\renewcommand\qedsymbol{$\blacksquare$}
 
