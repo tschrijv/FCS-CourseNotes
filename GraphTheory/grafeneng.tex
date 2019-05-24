@@ -1,29 +1,29 @@
 \chapter{Introduction to Graphs}
 
 \begin{summary}
-Informally, a graph is picture with dots (we name them vertices)
-connected by lines (edges). 
+Informally, a graph is a picture with dots (we name them vertices)
+connected by lines (edges).
 They can often be used as an abstraction for solving a concrete
 problem. They are a context in which many algorithms were (and are)
 developed: shortest-path algorithms (think of GPS), spanning trees
 (optimisation of networks), graph coloring (register allocation by
 a compiler), maximal flow in networks, cycles of all kinds
-... Therefore, it pays of to study formally the abstract context of
-graphs. 
+\ldots Therefore, it pays off to formally study the abstract context of
+graphs.
 
-The next three chapters of this book deal formally with different kinds
+The next three chapters of this book formally deal with different kinds
 of graphs and related concepts. In this chapter we first illustrate
 the use of graphs for modelling and tackling various problems.
 
 % The first part of this book deals with
 % \begin{inparaenum}[]
-% \item 
+% \item
 % definitions related to graphs, and examples of some particular graphs,
-% \item 
-% planar graphs - Euler's formula - $K_3$ en $K_{2,2}$ as minimal non-planar graphs,
+% \item
+% planar graphs - Euler's formula - $K_3$ and $K_{2,2}$ as minimal non-planar graphs,
 % \item
 % Eulerian and Hamiltonian cycles,
-% \item 
+% \item
 % weighted graphs,
 % \item
 % minimal spanning tree (Kruskal and Prim),
@@ -69,8 +69,8 @@ A farmer owns a wolf, a goat and a cabbage. He lives at the left bank
 of a river, and he wants to move to the right bank. He also has a
 small boat: it is too small to put all his belongings in it at the
 same time, in fact, it is so small he can transport at most one
-item at a time. He could transport one by one his wolf, goat, and
-cabbage to the right bank, in some particular order, but the problem
+item at a time. He could transport his wolf, goat, and
+cabbage to the right bank one by one, in some particular order, but the problem
 is that when the wolf and the goat are left alone, the wolf will eat
 the goat. Similarly for the goat and the cabbage: they can't be left
 alone. So this simple plan does not work. Can the farmer transport all
@@ -78,9 +78,9 @@ his belongings to the other side so that nothing gets eaten?
 
 You could of course try out all possibilities - why not try it now!
 You notice that there is a problem of bookkeeping while doing that.
-A better way is note down all possible situations: a situation
+A better way is to note down all possible situations: a situation
 describes who/what is on which side of the river, and is characterized
-completely by what is on the right side. So, the situation FGC means
+completely by what is on the left side. So, the situation FGC means
 that the farmer, the goat and the cabbage are on the left bank, while
 the wolf is at the right bank. Some situations - like GC - are a
 priori forbidden. All situations can be described by the dots in
@@ -115,7 +115,7 @@ have been abstracted away.
 18$^{th}$ century, K\"onigsberg (now Kaliningrad in Russia): the river Pregel
 crosses the city. It contains two islands, connected by a total of 7
 bridges with each other and the river banks: see
-Figure~\ref{pregel}. The citizens if K\"onigsberg used to make walks
+Figure~\ref{pregel}. The citizens of K\"onigsberg used to make walks
 during the weekend, and they wondered: is it possible to make a walk
 (starting at home and arriving at home of course) so that every bridge
 is crossed exactly once? They couldn't solve it. When the swiss
@@ -134,7 +134,7 @@ How is this problem connected to graph theory? The graph
 representation of the bridges and river banks can be seen in
 Figure~\ref{pregelgraph}. The essence of the problem is now: does the
 graph have a cycle (a closed path) that uses every edge exactly once?
-This kind of cycle is now names an Eulerian cycle. We will later see
+This kind of cycle is now named an Eulerian cycle. We will later see
 that the characterization of graphs with an Eulerian cycle is simple,
 as well as finding an Eulerian cycle.
 
@@ -152,7 +152,7 @@ one point, never lifting it, following all lines not more than once.
 
 Finding Eulerian cycles is important in real life: suppose you need to
 check the state of the median strip of the highways. You need to
-traverse all highways, but preferable only once.
+traverse all highways, but preferably only once.
 
 %===============================================================================
 \section{Hamilton's Toy}
@@ -179,7 +179,7 @@ Travelling Salesman Problem we will encounter in complexity theory.
 
 The Postman Problem has a similar flavor: during his tour, a postman
 wants to visit each street exactly twice (once at each side of the
-street) ... is that always possible? \ldots
+street) \ldots is that always possible \ldots?
 
 Figure~\ref{hamiltonkring} shows a Hamiltonian cycle for Hamilton's puzzle.
 
