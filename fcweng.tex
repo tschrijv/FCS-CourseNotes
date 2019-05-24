@@ -1,4 +1,6 @@
-\documentclass[11pt]{report}
+\documentclass{tstextbook}
+
+% \documentclass[11pt]{report}
 % \documentclass[11]{book}
 % \usepackage[dutch]{babel}
 % \usepackage{a4wide}
@@ -11,7 +13,7 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{units}
-\usepackage{amsthm}
+% \usepackage{amsthm}
 % \renewcommand{\thepage}{\hspace*{-3cm}\arabic{page}}
 
 \usepackage{paralist}
@@ -22,7 +24,7 @@
 \setlength{\evensidemargin}{0.5cm}
 \setlength{\textheight}{20cm}
 
-\usepackage{titlesec}
+% \usepackage{titlesec}
 
 \usepackage{amssymb}
 
@@ -35,7 +37,7 @@
 
 \newcommand{\bart}[1]{\marginpar{\color{red} Bart}\textbf{\color{blue}[#1]}}
 
-\renewcommand\qedsymbol{$\blacksquare$}
+%\renewcommand\qedsymbol{$\blacksquare$}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -46,8 +48,8 @@
 
 
 %fancy heading
-\usepackage{fancyhdr}
-\pagestyle{fancy}
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
 
 
 %  Een paar definities
@@ -64,7 +66,7 @@
 \newtheorem{stelling}{Theorem}[section]
 \newtheorem{definitie}[stelling]{Definition}
 \newtheorem{informeledefinitie}[stelling]{Informal definition}
-\newtheorem{lemma}[stelling]{Lemma}
+%\newtheorem{lemma}[stelling]{Lemma}
 \newtheorem{algo}[stelling]{Algorithm}
 \newtheorem{eig}[stelling]{Property}
 \newtheorem{gevolg}[stelling]{Consequence}
@@ -99,55 +101,67 @@
 
 \begin{document}
 
-%% TITELBLAD
-\renewcommand{\thepage}{}
-% \pagestyle{plain}
+\tsbook{Fundamentals for Computer Science}
+       {Bart Demoen, Tom Schrijvers}
+       {Tobias van Schneider}
+       {2019}
+       {xxxxx}{xxx--xx--xxxx--xx--x}{1.0}
+       {}
+       {Leuven}
+
+% %% TITELBLAD
+% \renewcommand{\thepage}{}
+% % \pagestyle{plain}
+% 
+% 
+% 
+% \begin{center}
+% \shabox{\Huge \bf Fundamentals for Computer Science}
+% ~~\\
+% ~~\\
+% ~~\\
+% ~~\\
+% \includegraphics[%
+%   width=0.1\linewidth,
+%   keepaspectratio]{afbeeldingen/sedes}
+% ~~\\
+% ~~\\
+% {\Large \bf Master of Engineering: Computer Science}\\[0.5cm] \today
+% 
+% \vspace*{2cm}
+% {\large B. Demoen}\\
+% KU Leuven\\
+% Departement\ Computerwetenschappen 
+% \end{center}
+
+%\newpage
 
 
-
-\begin{center}
-\shabox{\Huge \bf Fundamentals for Computer Science}
-~~\\
-~~\\
-~~\\
-~~\\
-\includegraphics[%
-  width=0.1\linewidth,
-  keepaspectratio]{afbeeldingen/sedes}
-~~\\
-~~\\
-{\Large \bf Master of Engineering: Computer Science}\\[0.5cm] \today
-
-\vspace*{2cm}
-{\large B. Demoen}\\
-KU Leuven\\
-Departement\ Computerwetenschappen 
-\end{center}
-
-\newpage
-
-
-\setcounter{tocdepth}{1}
-\tableofcontents
-\setcounter{page}{1}
-\renewcommand{\thepage}{\roman{page}}
+% \setcounter{tocdepth}{1}
+% \tableofcontents
+% \setcounter{page}{1}
+% \renewcommand{\thepage}{\roman{page}}
 % \setcounter{tocdepth}{2}
 % \dominitoc% Initialization
 
-\newpage
+% \newpage
 
 
-\renewcommand{\thepage}{\arabic{page}}
-\setcounter{page}{1}
-\setlength{\parskip}{0.2cm}
+% \renewcommand{\thepage}{\arabic{page}}
+% \setcounter{page}{1}
+% \setlength{\parskip}{0.2cm}
 
 \include{Foreword/inleidingeng}
+\addtocontents{toc}{\protect\vspace{10pt}}
 
 \include{GraphTheory/grafeneng}
+\addtocontents{toc}{\protect\vspace{10pt}}
  
 \include{LanguagesAutomata/talenautomateneng}
+\addtocontents{toc}{\protect\vspace{10pt}}
 
 \include{Computability/berekenbaarheideng}
+\addtocontents{toc}{\protect\vspace{10pt}}
 
 \include{Complexity/complexiteiteng}
 

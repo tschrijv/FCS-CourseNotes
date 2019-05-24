@@ -1,41 +1,42 @@
-\chapter{Introduction to graph theory}
+\chapter{Introduction to Graph Theory}
 
-Graphs can often be used as an abstraction for solving a concrete
+\begin{summary}
+Informally, a graph is picture with dots (we name them vertices)
+connected by lines (edges). 
+They can often be used as an abstraction for solving a concrete
 problem. They are a context in which many algorithms were (and are)
-developed): shortest-path algorithms (think of GPS), spanning trees
-(optimalization of networks), graph coloring (register allocation by
+developed: shortest-path algorithms (think of GPS), spanning trees
+(optimisation of networks), graph coloring (register allocation by
 a compiler), maximal flow in networks, cycles of all kinds
 ... Therefore, it pays of to study formally the abstract context of
-graphs. This chapter deals with
-\begin{inparaenum}[~~]
-\item 
-definitions related to graphs, and examples of some particular graphs,
-\item 
-planar graphs - Euler's formula - $K_3$ en $K_{2,2}$ as minimal non-planar graphs,
-\item
-Eulerian and Hamiltonian cycles,
-\item 
-weighted graphs,
-\item
-minimal spanning tree (Kruskal and Prim),
-\item
-a maximal flow algorithm and the SCCS algorithm,
-\item
-graph coloring,
-\item
-problem modeling with graphs.
-\end{inparaenum}
+graphs. 
 
+The next three chapters of this book deal formally with different kinds
+of graphs and related concepts. In this chapter we first illustrate
+the use of graphs for modelling and tackling various problems.
 
+% The first part of this book deals with
+% \begin{inparaenum}[]
+% \item 
+% definitions related to graphs, and examples of some particular graphs,
+% \item 
+% planar graphs - Euler's formula - $K_3$ en $K_{2,2}$ as minimal non-planar graphs,
+% \item
+% Eulerian and Hamiltonian cycles,
+% \item 
+% weighted graphs,
+% \item
+% minimal spanning tree (Kruskal and Prim),
+% \item
+% a maximal flow algorithm and the SCCS algorithm,
+% \item
+% graph coloring,
+% \item
+% problem modeling with graphs.
+% \end{inparaenum}
+\end{summary}
 
-
-\section{Introduction}
-
-Informally, a graph is picture with dots (we name them vertices)
-connected by lines (edges). We will make the definitions more formal
-later.
-
-\subsection{Three coins}
+\section{Three coins}
 
 Three coins are on a table heads (H) up, tails (T) down. You are
 allowed to perform the following action as often as you want: flip any
@@ -60,7 +61,7 @@ different component of the graph. The property used here is {\em
 reachability}.
 
 
-\subsection{The wolf, the goat, the cabbage, and the farmer}
+\section{The wolf, the goat, the cabbage, and the farmer}
 
 A farmer owns a wolf, a goat and a cabbage. He lives at the left bank
 of a river, and he wants to move to the right bank. He also has a
@@ -106,7 +107,7 @@ Again, reachability is the key concept, and the details of the problem
 have been abstracted away.
 
 
-\subsection{The bridges in K\"onigsberg}
+\section{The bridges in K\"onigsberg}
 
 18$^{th}$ century, K\"onigsberg (now Kaliningrad in Russia): the river Pregel
 crosses the city. It contains two islands, connected by a total of 7
@@ -150,7 +151,7 @@ Finding Eulerian cycles is important in real life: suppose you need to
 check the state of the median strip of the highways. You need to
 traverse all highways, but preferable only once.
 
-\subsection{Hamilton's toy}
+\section{Hamilton's toy}
 
 Sir William Rowan Hamilton tried to commercialize circa 1850 a 3-D
 puzzle in the form of a dodecahedron (it has 12 pentagons):
@@ -187,20 +188,18 @@ Figure~\ref{hamiltonkring} shows a Hamiltonian cycle for Hamilton's puzzle.
 \end{figure}
 
 \clearpage
-\section{Graphs}
+\chapter{Graphs}
 
-\subsection{Definitions and all kinds of paths}
+\section{Definitions and all kinds of paths}
 
-\grijs{
-\begin{definitie} Graph\\
-  \textup{ A (undirected) \textbf{graph} $G$ is tuple $(V,E)$ in which
-$V$ is a set of \textbf{vertices} and $E$ a (multi-) set \footnotemark~
+\begin{definition}[Graph]
+A (undirected) \textbf{graph} $G$ is tuple $(V,E)$ in which
+$V$ is a set of \textbf{vertices} and $E$ a (multi-)set\footnotemark
 of \textbf{edges}; each edge $e \in E$ is a unordered pair $(v,w) \in
 V \times V$; we write $e = (v,w)$ or $e = (w,v)$.
-}
-\end{definitie}
-}
-\footnotetext{A $multi-set$ is similar to a set, but an element can
+\end{definition}
+
+\footnotetext{A \emph{multi-set} is similar to a set, but an element can
 occur more than once; $\{1,1,1,2,2,3,4,5,5\}$ is multi-set.}
 
 We allow some freedom of notation and speech:
@@ -231,49 +230,42 @@ parallel}.
 An edge $(v,w)$ is {\em incident on} the vertex $v$ (and on $w$); 
 the vertices $v$ and $w$ are {\em adjacent to} the edge $(v,w)$.
 
-\grijs{
-\begin{definitie} Directed graph (digraph)\\
-  \textup{ A (undirected) \textbf{graph} $G$ is tuple $(V,E)$ in which
+\begin{definition}[Directed graph (digraph)]
+A (undirected) \textbf{graph} $G$ is tuple $(V,E)$ in which
 $V$ is a set of \textbf{vertices} and $E$ a (multi-) set
 of \textbf{edges}; each edge $e \in E$ is an ordered pair $(v,w) \in
 V \times V$; we write $e = (v,w)$.
-}
-\end{definitie}
-}
+\end{definition}
 
 You can think of a directed graph as a graph in which each edge has an
 arrow, pointing from one vertex to the other.
 
 
-\grijs{
-\begin{definitie} Loop\\
+\begin{definition}[Loop]
   \textup{A \textbf{loop} in a graph is an edge $(v,v)$. }
-\end{definitie}
-}
+\end{definition}
 
 
-\grijs{
-\begin{definitie} Simple graph\\
+\begin{definition}[Simple graph]
 \textup{A graph is \textbf{simple} if the graph has no parallel edges
 neither loops.}
-\end{definitie}
-}
+\end{definition}
 
 
-\grijs{\begin{definitie} Degree of a vertex\\
+\begin{definition}[Degree of a vertex]
   \textup{The \textbf{degree $\delta(v)$ of a vertex $v$} of graph
 $(V,E)$ is the number of edges $(v,w) \in E$, where a loop counts for 2.}
-\end{definitie}}
+\end{definition}
 
 
-\grijs{\begin{definitie} Isolated vertex or point\\
+\begin{definition}[Isolated vertex or point]
 A vertex $v$ in a graph $(V,E)$ is {\bf isolated} if $\delta(v)=0$.
-\end{definitie}}
+\end{definition}
 
 
-\grijs{\begin{stelling} \label{somgraad} Sum of vertex degrees \\
+\begin{theorem}[Sum of vertex degrees] \label{somgraad}
 The sum of all vertex degrees is even.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 Since each edge $(v,w)$ contributes 1 to the degree of both $v$ as
 $w$, each edge contributes 2 to the sum of all vertex degrees, hence
@@ -281,9 +273,9 @@ the conclusion.
 \end{proof}
 
 
-\grijs{\begin{stelling} Number of vertices with odd degree\\
+\begin{theorem}[Number of vertices with odd degree]
 The number of vertices of odd degree is even.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 Partition $V$ in the vertices with even degree $\{a_i |
 i=1,\ldots,n\}$, and the vertices with odd degree $\{b_i |
@@ -292,7 +284,7 @@ i=1,\ldots,m\}$.  Then, because of Theorem~\ref{somgraad}
 \bmod 2 = m \bmod 2 \] and the conclusion follows.  \end{proof}
 
 
-\grijs{\begin{definitie} Path\\
+\begin{definition}[Path]
 \textup{A \textbf{path} (with length $n$) in a graph $(V,E)$ is a
 sequence of edges
 \[( e_1=(v_{1},v_{2}),\;e_2=(v_{2},v_{3}),\;\ldots, e_{n}=(v_{n},v_{n+1})).\]
@@ -300,47 +292,47 @@ We assume that it is clear which of the parallel edges is used (if at
 all important). \\
 In a simple graph, a path can also be characterized by a sequence of
 vertices $(v_{1}, \ldots , v_{n+1})$}
-\end{definitie}}
+\end{definition}
 
-\grijs{\begin{definitie} Simple path\\
+\begin{definition}[Simple path]
   \textup{A \textbf{simple path} $(v_{1}, \ldots , v_{n+1})$ is a path
   with the property that $\forall i,j: i \neq j \Rightarrow v_{i} \neq v_{j}$ }
-\end{definitie}}
+\end{definition}
 
 
 
-\grijs{\begin{definitie} Cycle\\
+\begin{definition}[Cycle]
   \textup{A \textbf{cycle} is a path
     $((v_1,v_2),...,(v_n,v_{n+1}))$ such that all edges in it are
 different and $v_{1} = v_{n+1}$.}
-\end{definitie}}
+\end{definition}
 
 A cycle is sometimes name a circuit.
 
 
-\grijs{\begin{definitie} Eulerian cycle (path)\\
+\begin{definition}[Eulerian cycle (path)]
   \textup{An \textbf{Eulerian cycle (path)} is a cycle (path)
 containing all edges exactly once, and all vertices.}
-\end{definitie}}
+\end{definition}
 
 
-\grijs{\begin{definitie} Hamiltonian cycle\\
+\begin{definition}[Hamiltonian cycle]
   \textup{ A \textbf{Hamiltonian cycle} is a cycle containing all
 vertices of the graph exactly once.}
-\end{definitie}}
+\end{definition}
 
 
-\grijs{\begin{definitie} Connected graph\\
+\begin{definition}[Connected graph]
   \textup{ A graph is \textbf{connected} if for every two different
 vertices $v$ and $w$, there is a path from $v$ to $w$.}
-\end{definitie}}
+\end{definition}
 
 
 
-\grijs{\begin{stelling} Existence of an Eulerian cycle.\\
+\begin{theorem}[Existence of an Eulerian cycle.]
   A graph $G(V,E)$ has an Eulerian cycle if and only of $G$ is
   connected and the degree of each vertex is even.
-\end{stelling}}
+\end{theorem}
 The intuition behind the proof is that when you arrive in a vertex,
 you can leave again because the degree is even. It therefore does not
 matter which path you follow, as long as you don't return to the
@@ -378,10 +370,10 @@ unused edges. Figure~\ref{euler4} illustrates the construction.
 \end{proof}
 
 
-\grijs{\begin{stelling} Existence of an Eulerian path\\
+\begin{theorem}[Existence of an Eulerian path]
   A connected graph $G$ has an Eulerian path from vertex $v$ to $w$
   ($v \neq w$) if $v$ and $w$ are the only vertices with odd degree.
-\end{stelling}}
+\end{theorem}
 \begin{proof} 
 Consider the graph $G'$ obtained by adding the edge $(w,v)$ to $G$.
 $G'$ is connected and each vertex has even degree, so it has an
@@ -389,34 +381,36 @@ Eulerian cycle $(w,v,\ldots,w)$; delete from this cycle the first edge
 to obtain the Eulerian path $(v,\ldots,w)$ in $G$.
 \end{proof}
 
+\begin{example}
 Looking back at Figure~\ref{pregelgraph} (the graph modeling the
 bridges in K\"onigsberg), you notice that there are four vertices with
 odd degree. It follows there is no Eulerian cycle, neither an Eulerian
 path.
+\end{example}
 
 
 
-\grijs{\begin{definitie} Subgraph\\
+\begin{definition}[Subgraph]
   \textup{A graph $(V_1,E_1)$ is a \textbf{subgraph} of $(V,E)$ if
     $V_1 \subseteq V$ en $E_1 \subseteq E$.}
-\end{definitie}}
+\end{definition}
 
 
 
- \grijs{\begin{definitie} Component of a  graph\\
+ \begin{definition}[Component of a  graph]
   \textup{A \textbf{component} $C$ of a graph $G$ is a maximal
     connected subgraph of $G$, i.e.
 $\forall C' \subseteq G: C \subset C' \Rightarrow C'$ is not connected.}
-\end{definitie}}
+\end{definition}
 
- \grijs{\begin{stelling} \label{partitie} Partition of a graph\\
+ \begin{theorem}[\label{partitie} Partition of a graph]
 The components $(V_{i},E_{i})$ ($i=1,\ldots,n$) of a graph $(V,E)$ 
 form a partition,
 i.e. \\
 $(V,E) = (\cup_{i=1}^{n} V_{i},\cup_{i=1}^{n} E_{i})$ and 
 for any $i \neq j$, $V_{i} \cap V_{j} = \emptyset$ en $E_{i} \cap E_{j} =
 \emptyset$
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 Clearly every vertex and edge belongs to at least one component.
 Suppose a vertex belongs to two components $\alpha$ en $\beta$, then
@@ -433,7 +427,7 @@ that a non-connected graph can be uniquely divided in connected
 components.
 
 
-\subsection{Graph representation \label{voorstelgraph}}
+\section{Graph representation \label{voorstelgraph}}
 
 Until now we have just drawn graphs. However, we need often a more
 formal representation of graphs, e.g. because we need to write
@@ -453,6 +447,7 @@ it readily shows which vertices are adjacent.
 \caption{ Some graph \label{adjacency1}}
 \end{figure}
 
+\begin{example}
 The adjacency matrix $A$ of the graph in Figure~\ref{adjacency1} is
 
 \begin{center}
@@ -482,6 +477,7 @@ $
 \right)
 $
 \end{center}
+\end{example}
 
 The adjacency matrix of a simple graph has only zeros on the main
 diagonal. The adjacency matrix does not show whether a graph has
@@ -489,6 +485,7 @@ parallel edges. The adjacency matrix is symmetric and hence not a
 very efficient representation of a graph. Still, it has interesting
 properties.
 
+\begin{example}
 Compute $A^{2}$ for the example above. We get
 
 \begin{center}
@@ -530,19 +527,21 @@ $
 
 The positive contributions in the result result from the paths
 $(a,b)-(b,c)$ and $(a,d)-(d,c)$. This shows that $A^{2}[i,j] = $ the
-number of paths vertex $i$ to vertex $j$ with length 2. But we need to
+number of paths vertex $i$ to vertex $j$ with length 2. 
+\end{example}
+But we need to
 be careful: the adjacency matrix does not show parallel edges, and
 parallel edges increase the number of paths between two vertices.
 As a consequence, the next theorem is about simple graphs.
 
- \grijs{\begin{stelling}
+ \begin{theorem}
 \label{aantalpathen}
 $ $ \\
 Let $A$ be the adjacency matrix of a simple graph $G(V,E)$,\\
 then
 $A^{n}[i,j] = $ the number of paths with length $n$ from vertex $i$ to vertex
 $j$.
-\end{stelling}}
+\end{theorem}
 \begin{proof} We use induction on $n$. For $n=1$, the theorem is true
 because of the definition of adjacency matrix.
 
@@ -655,7 +654,7 @@ i.e. functions that are not called by anyone. In Section~\myref{sccs},
 this application example is used in an interesting graph algorithm.
 
 
-\subsection{Graph Isomorphism}
+\section{Graph Isomorphism}
 
 We do the following experiment: all of you take a pen and paper, and
 without looking at what your neighbour is doing, you follow the
@@ -685,16 +684,14 @@ All these graphs look different, but they were drawn following the
 same instructions: there is a good reason for considering them {\em
 the same} in some sense, hence the following definition:
 
- \grijs{
-\begin{definitie} \label{isomorfegraphs} Graph Isomorphism\\
+\begin{definition}[Graph Isomorphism]\label{isomorfegraphs}
 \textup{The graphs $G_{i}(V_{i},E_{i})$ (i = 1,2) are 
     \textbf{isomorphic}, if there exists a bijection $f: V_{1}
 \rightarrow V_{2}$ such that $g: E_{1} \rightarrow E_{2}$ specified by 
 $g((v,w)) = (f(v),f(w))$ for all $v,w \in E_{1}$ is well defined,
 i.e. $g((v,w)) \in E_{2}$ and a bijection.  Such $f$ is named a
 graph isomorphism.}
-\end{definitie}
-}
+\end{definition}
 
 Between $G_{1}$ and $G_{2}$ of Figure~\ref{experiment1}, there exists
 the isomorphism $f$:
@@ -711,12 +708,12 @@ You can check that this is a graph isomorphism between $G_{1}$ and
 $G_{2}$. Another characterisation of isomorphic graphs relies on the
 following theorem:
 
- \grijs{\begin{stelling} Characterisation of isomorphic graphs with
-the incidence matrix\\
+\begin{theorem}[Characterisation of isomorphic graphs with
+the incidence matrix]
 Graphs $G_{1}$ and $G_{2}$ are isomorphic if and only if there is an
 ordering of the vertices and edges so that the incidence matrices of
 $G_{1}$ and $G_{2}$ are equal.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 \begin{itemize}
 \item 
@@ -736,13 +733,13 @@ since parallel edges and loops are not visible in the adjacency
 matrix. Consequently the following theorem is limited to simple
 graphs.
 
- \grijs{\begin{stelling} Characterisation of isomorphic simple graphs
-with the adjacency matrix\\
+ \begin{theorem}[Characterisation of isomorphic simple graphs
+with the adjacency matrix]
 The simple graphs $G_{1}$ and $G_{2}$ are isomorphic if and only if
 there is an ordering of the vertices so that the adjacency there is an
 ordering of the vertices and edges so that the incidence matrices of
 $G_{1}$ and $G_{2}$ are equal.
-\end{stelling}}
+\end{theorem}
 \begin{proof} Please prove this yourself.
 \end{proof}
 
@@ -760,14 +757,14 @@ graphs are not isomorphic.
 
 
 
-\subsection{Weighted graphs}
+\section{Weighted graphs}
 
- \grijs{\begin{definitie} Weighted graph\\
+ \begin{definition}[Weighted graph]
   \textup{ A \textbf{weighted graph} $(V,E)$ is a graph in which each
 edge $e \in E$ has a \textbf{weight $w(e)$} $\in \R^{+}_0$. The
 weight $w(G)$ of a weighted graph $G$, is the sum of the weights of
 all the edges of $G$.  }
-\end{definitie}}
+\end{definition}
 
 The weight of a of an edge can be interpreted as the length of an
 edge, or some cost associated with the use of the edge in a path: if
@@ -792,7 +789,7 @@ implicit {\bf Go to instruction $n+1$}. {\em Stop} means the algorithm
 finishes.
 
 
-\subsection{Planar graphs}
+\section{Planar graphs}
 
 Informally, a planar graph is a graph one can draw on a sheet of
 paper so that no two edges cross: there is no need for the third
@@ -802,11 +799,11 @@ as well: look it up. We will use the informal definition in proofs.
 Another important class of graphs is the class of {\em bipartite}
 graphs.
 
- \grijs{\begin{definitie} Bipartite graph\\
+ \begin{definition}[Bipartite graph]
   \textup{A \textbf{bipartite graph} is a graph $(V,E)$ with $V =
 V_{1} \cup V_{2}$ so that $V_{1} \cap V_{2} = \emptyset$ en $E
 \subseteq V_{1} \times V_{2}$ }
-\end{definitie}}
+\end{definition}
 
 In words: in a bipartite graph, one can identify two disjoint subsets
 of vertices, so that all the edges have an element of each subset as
@@ -848,10 +845,10 @@ proved in 1752 the following formula\footnote{Descartes
 ($\pm$ 1600) knew the formula and most probably so did Archimedes
 ($\pm$ --250)}:
 
- \grijs{\begin{stelling} Euler's formula for planar graphs:\\ 
+ \begin{theorem}[Euler's formula for planar graphs:] 
 If $G$ is a connected planar graph with $e$ edges, $v$ vertices and
 $f$ {\em faces} then $v-e+f = 2$.
-\end{stelling}}
+\end{theorem}
 
 We haven't defined a face yet: informally, it is a piece of the plane
 enclosed by a minimal cycle, and also the infinite part of the plane
@@ -918,9 +915,9 @@ the hole until all the material is in a plane. The resulting picture
 of edges and vertices form planar graph. The face that was punctured
 corresponds to the infinite face.
 
- \grijs{\begin{stelling}
+ \begin{theorem}
 $K_{3,3}$ and $K_{5}$ are not planar.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 Suppose $K_{3,3}$ is a planar graph. Let $\beta$ be the total number
 of edges in all faces: an edge counts $n$ times of that edge occurs in
@@ -960,15 +957,15 @@ of which $\delta(b) = 2$ by one edge $(a,c)$. See Figure~\ref{rij1}.
 \caption{Smoothing a graph \label{rij1}}
 \end{figure}
 
- \grijs{\begin{definitie}
+\begin{definition}
   \textup{Two graphs $G_{1}$ and $G_{2}$ are \textbf{homeomorphic} if
 by applying smoothing to both graphs, one obtains isomorphic graphs.}
-\end{definitie}}
+\end{definition}
 
- \grijs{\begin{stelling} Kuratowski's Theorem\\
+ \begin{theorem}[Kuratowski's Theorem]
 A graph is planar if and only if it does not contain a subgraph
 homeomorphic to $K_{5}$ nor $K_{3,3}$.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 One direction is obvious (but please give arguments!). The other direction
 is out of the scope of this course.
@@ -978,16 +975,16 @@ The above theorem basically says that $K_{5}$ and $K_{3,3}$ are in
 some sense the smallest non-planar graphs.
 
 
-\subsection{Graph coloring}
+\section{Graph coloring}
 
- \grijs{\begin{definitie}
+ \begin{definition}
 \textup{A \textbf{coloring} of a graph $(V,E)$ is an assignment of a
   color to each $v \in V$ such that the colors of $v$ and $w$ differ
   if $(v,w) \in E$. An
   \mbox{\textbf{n-coloring}} is a coloring with $n$ or less
   (different) colors. A \textbf{minimal} coloring is an $n$-coloring
   with minimal $n$.}
-\end{definitie}}
+\end{definition}
 
 There are lots of practical applications of (minimal) graph colorings.
 Just a few examples:
@@ -1097,9 +1094,9 @@ vice versa.
 In the rest of this section, we prove the 5-color theorem: every
 planar graph can be colored with 5 colors.
 
- \grijs{\begin{stelling} $e \leq 3*v-6$ for every planar, simple graph
+ \begin{theorem} $e \leq 3*v-6$ for every planar, simple graph
      $G$ with more than one edge.\label{euler}
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 We prove the theorem only for connected graphs: first remove from $G$
 every vertex with degree equal to 1 (and the corresponding edge),
@@ -1125,12 +1122,12 @@ from this inequality, and you get: $e' \leq 3*v'-6$ and thus $e'+t
 \leq 3*(v'+t)-6$ and $e \leq 3*v-6$.
 \end{proof}
 
- \grijs{\begin{stelling} A planar, simple graph has at least one
+ \begin{theorem} A planar, simple graph has at least one
  vertex - say $v$ - with $\delta(v) \leq 5$.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
-This is clearly tru for graphs with 1 or 2 vertices. Suppose the
-theorem is not tru for a certain graph with at least 3 vertices,
+This is clearly true for graphs with 1 or 2 vertices. Suppose the
+theorem is not true for a certain graph with at least 3 vertices,
 i.e. this graph has degree at least 6 for each vertex. Then the sum of
 the degrees of all the vertices is at least $6*v$, so, $e \geq 3*v$,
 in contradiction with the $e \leq 3*v-6$ from the previous theorem.
@@ -1138,9 +1135,9 @@ in contradiction with the $e \leq 3*v-6$ from the previous theorem.
 
 We are now ready to state and prove
 
- \grijs{\begin{stelling} 5 colors is enough to color any simple,
+ \begin{theorem} 5 colors is enough to color any simple,
      planar graph $G(V,E)$.
-\end{stelling}} % uit Townsend
+\end{theorem} % uit Townsend
 \begin{proof} (the proof follows Townsend)
 
 We use induction of the number of vertices: a $G$ with just one vertex,
@@ -1192,7 +1189,7 @@ $c_{1}-c_{3}$ paths.  There are two possibilities:
   $c_{3}$ and vice versa. We obtain a different $5$-coloring of $G'$
   (why?) and now vertices $w_{3}$ and $w_{1}$ have the same color 
   $c_{3}$, so $v$ has no neighbor with color $c_{1}$. This means the
-  new 5-coloring of $G'$ can be extended to a $5$-kleuring of $G$, by
+  new 5-coloring of $G'$ can be extended to a $5$-coloring of $G$, by
   assigning $v$ the color $c_{1}$.
   
 \item[$P_{1,3}$ contains a path $p_{1,3}$ that contains $w_{3}$:]
@@ -1249,7 +1246,7 @@ exist also graphs no containing $K_4$ (or larger) with no
 specifically, every bipartite graph (e.g. $K_{3,3}$) has a 2-coloring.
 
 
-\subsection{Strongly connected components: an algorithm by Tarjan}\label{sccs}
+\section{Strongly connected components: an algorithm by Tarjan}\label{sccs}
 
 We abbreviate {\em strongly connected component} to SCC. Robert Endre
 Tarjan \footnote{Turing award 1986} - the master algorithmist -
@@ -1354,29 +1351,29 @@ a byproduct. Can you see that in the algorithm?
 \clearpage
 % \newpage
 
-\section{Trees}
+\chapter{Trees}
 
-\subsection{Introduction}
+\section{Introduction}
 
- \grijs{\begin{definitie} Tree\\
+ \begin{definition}[Tree]
   \textup{ A \textbf{tree} is a simple graph with the property that
 there is a unique simple path between any two different points. }
-\end{definitie}}
+\end{definition}
 
 Any vertex of a tree could be designated as a root of the tree.
 
- \grijs{\begin{definitie} Height of a vertex\\
+ \begin{definition}[Height of a vertex]
   \textup{ 
 The 
  \textbf{height of a vertex} $v$ in a tree with root 
     $w$, is the number of edges in the path from $w$ to $v$. }
-\end{definitie}}
+\end{definition}
 
- \grijs{\begin{definitie} Height of a tree\\
+ \begin{definition}[Height of a tree]
   \textup{ 
 The
 \textbf{height of a tree} is the maximum of the heights of its vertices.}
-\end{definitie}}
+\end{definition}
 
 \begin{figure}[ht]
 \begin{center}
@@ -1409,11 +1406,11 @@ for financial support.
 Figure~\ref{expr1} shows a tree representation of the arithmetic
 expression $(3+1) *5 - 7/3$.
 
-\subsection{Properties of trees}
+\section{Properties of trees}
 
 The following theorem gives 4 equivalent characterisations of trees:
 
- \grijs{\begin{stelling}
+ \begin{theorem}
 For a simple graph $T$ with $n$ vertices 
  $(a) \Leftrightarrow
   (b) \Leftrightarrow (c) \Leftrightarrow (d)$ with \\[2mm]
@@ -1421,12 +1418,12 @@ For a simple graph $T$ with $n$ vertices
 (b) $T$ is connected and cycle free\\
 (c) $T$ is connected and has exactly $(n-1)$ edges\\
 (d) $T$ is cycle free and has exactly $(n-1)$ edges
-\end{stelling}}
+\end{theorem}
 \begin{proof} We prove that $(a) \Rightarrow (b)$, $(b) \Rightarrow
 (c)$, $(c) \Rightarrow (d)$ and $(d) \Rightarrow (a)$
 \begin{itemize}
 \item $(a) \Rightarrow (b)$: since $T$ is a tree, there is a path
-between any ttwo vertices, so $T$ is connected; if $T$ contained
+between any two vertices, so $T$ is connected; if $T$ contained
 cycle, some vertices would be connected by more than one path, so $T$
 is cycle free
 \item $(b) \Rightarrow (c)$: 
@@ -1475,7 +1472,7 @@ tree has no cycles. So, if you know that you are dealing with trees,
 you can and should use that fact in your program.
 
 
- \grijs{\begin{definitie} Terminology related to trees\\ 
+ \begin{definition}[Terminology related to trees] 
 \textup{For a tree $T$ with root $v_{0}$, let $x$, $y$ and $z$ be
 vertices in $T$ and $(v_{0}, v_{1}, \ldots , v_{n})$ a path.
 } {\rm
@@ -1513,7 +1510,7 @@ a subgraph of $T$ with vertex $x$ and all descendants of $x$, is a
 {\bf subtree} of $T$ rooted at $x$\footnotemark
 %\end{itemize}
 \end{verse}}
-\end{definitie}}
+\end{definition}
 \footnotetext{Actually, you should prove that this subgraph is a tree!}
 
 Relating this to Figure~\ref{boom1}:
@@ -1545,22 +1542,22 @@ the subtree rooted in $a$ contains the vertices $a,b,c,d,e,f$
 Often, the order of the siblings is important, especially with binary
 trees.
 
- \grijs{\begin{definitie} Binary tree\\
+ \begin{definition}[Binary tree]
 \textup{A \textbf{binary tree} is a rooted tree in which every node
 has 0, 1 or 2 children; because of the way binary trees are drawn and
 used, we speak of a left child (connected to its parent by the left
 branch) and a right kind (\ldots); this makes an order on the branches
 explicit.  }
-\end{definitie}}
+\end{definition}
 
 You already saw a binary tree in Figure~\ref{decisiontree1}: it is
 important to know whether to go left or right on a positive answer to
 the test in an internal node.
 
- \grijs{\begin{definitie} Full  binary tree\\
+ \begin{definition}[Full  binary tree]
 \textup{A \textbf{full binary tree} is a binary tree
 in which every internal node has exactly two children.  }
-\end{definitie}}
+\end{definition}
 
 \begin{figure}[ht]
 \begin{center}
@@ -1572,11 +1569,11 @@ in which every internal node has exactly two children.  }
 
 Figure~\ref{tornooi1} shows a tournament tree: it is a full binary tree.
 
- \grijs{\begin{stelling}
+ \begin{theorem}
 \label{relatiebladinwendig}
 A full binary tree $T$ with $i$ internal vertices has 
 $T$ $(i+1)$ leaves and $(2i+1)$ vertices.
-\end{stelling}}
+\end{theorem}
 \begin{proof} Each internal vertex has 2 children, so there are $2i$
 children in $T$; there is exactly one vertex that is not a child: the
 root; so there are $2i+1$ vertices. Each vertex is either a leaf or
@@ -1589,11 +1586,11 @@ could wonder how many matches must be played before the winner is
 known. Since the tournament tree has $n$ leaves, the number of
 internal nodes is $n-1$, and that is the number of matches.
 
- \grijs{\begin{stelling}
+ \begin{theorem}
 \label{relatieheightbladeren}
 For a binary tree $T$ with height $h$ and $t$ leaves $\log_2(t) \leq
 h$ (of $t \leq 2^h$).
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 We prove the theorem by induction on $h$ and by considering the
 subtrees of $T$: for $h=0$, there is one leaf (the root), so
@@ -1613,10 +1610,10 @@ by induction $t_{l} \leq 2^{h_{l}}$ and similarly $t_{r} \leq
 2^{h-1}+2^{h-1}=2^h$.
 \end{proof}
 
- \grijs{\begin{stelling} For a binary tree $T$ with $n$ vertices and
+ \begin{theorem} For a binary tree $T$ with $n$ vertices and
 height $h$ $\log_2(n+1) \leq h+1$
 \label{relatieheightnodes}
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 Extend the tree $T$ to a tree $T'$ as follows:
 \begin{itemize}
@@ -1647,12 +1644,12 @@ extension is different from the original.
 \caption{A binary tree and its extension to a full binary tree\label{uitbreiding1}}
 \end{figure}
 
- \grijs{\begin{definitie} Binary search tree\\
+ \begin{definition}[Binary search tree]
 \textup{A \textbf{binary search tree} is a binary tree in which every
 vertex $v$ has a value $w(v)$ (e.g. a number or a string) so that 
 if $l$ belongs to the left subtree of $v$ and $r$ to the right subtree
 of $v$, then  $w(l) < w(v) < w(r)$ }
-\end{definitie}}
+\end{definition}
 
 
 A binary search tree is also named a sorted binary tree.
@@ -1713,7 +1710,7 @@ the left, and has a smaller height.
 \end{figure}
 
 
-\subsection{A more compact representation of (some) trees}
+\section{A more compact representation of (some) trees}
 
 A tree is often represented with {\em directed} edges. This
 representation stresses the fact that often the two functions {\em
@@ -1741,23 +1738,23 @@ Sharing subtrees has its dangers: when the shared subtree is changed,
 {\em both} occurrences change. If that is not intended, one should not
 use the more compact representation.
 
-\subsection{Spanning trees}
+\section{Spanning trees}
 
 In this section, we only consider simple graphs: convince yourself
 (later) that this is not a severe restriction.
 
- \grijs{\begin{definitie} Spanning tree\\
+ \begin{definition}[Spanning tree]
 \textup{$T$ is a \textbf{spanning tree} of a graph $G$,
 if $T$ is a subgraph of $G$ containing all vertices of $G$.}
-\end{definitie}}
+\end{definition}
 
 A spanning tree covers all vertices of a graph, and it is the smallest
 connected subgraph doing so: if you take away an edge from a spanning
 tree, you end up with a subgraph that is not a tree.
 
- \grijs{\begin{stelling}
+ \begin{theorem}
 A graph $G$ has a spanning tree $T$ if and only if $G$ is connected.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 \begin{itemize}
 \item
@@ -1782,11 +1779,10 @@ spanning tree. An algorithm based on this method is not very
 efficient, because we must find cycles and it might be possible to do
 better.
 
- \grijs{\begin{stelling} \label{opspannend4}
-Characterisation of spanning tree\\
+\begin{theorem}[Characterisation of spanning tree]\label{opspannend4}
 A cycle free subgraph $T$ of a connected graph $G$ that contains a
 maximal number of edges of $G$, is a spanning tree of $G$.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 
 Assume that $G$ has at least 2 vertices.
@@ -1842,7 +1838,7 @@ spanning tree of $G$ id $T$ is cycle free and has $n-1$ edges.
 \label{opspannend3}}
 \end{figure}
 
-Theorem~\ref{opspannend4} leads to a a general (non-deterministic) 
+Theorem~\ref{opspannend4} leads to a general (non-deterministic) 
 algorithm for constructing a spanning tree for a graph $G$: start with
 the empty tree $T$; repeatedly add an edge to $T$ so that no cycle is
 introduced, until this is no longer possible: $T$ is now a spanning
@@ -1918,7 +1914,7 @@ spanning tree that neither of the methods can compute.
 \end{figure}
 
 \newpage
-\subsection{Minimal spanning trees}
+\section{Minimal spanning trees}
 
 Consider the following problem: there are a number of cities between
 which a road network must be build. The cost of building any road
@@ -1931,10 +1927,10 @@ Clearly, the network has to be a tree because it can't have cycles
 (otherwise the cost would not be minimal), and it must be connected.
 This kind of trees is defined as:
 
- \grijs{\begin{definitie} Minimal spanning tree (MST)\\
+ \begin{definition}[Minimal spanning tree (MST)]
 \textup{$T$ is a \textbf{minimal spanning tree} of a weighted graph
 $G$ if $T$ is a spanning tree of $G$ with minimal weight.}
-\end{definitie}}
+\end{definition}
 
 Figure~\ref{opspannend1} shows a graph, one of its spanning trees, and
 its minimal spanning tree.
@@ -1952,26 +1948,26 @@ one MST?
 Efficient algorithms for constructing a MST are based on the following
 theorem:
 
-\grijs{\begin{stelling} An edge that belongs to an MST \label{even}
+\begin{theorem} An edge that belongs to an MST \label{even}
 
 Let $(V,E)$ be a connected graph $(V,E)$, $U \subset V$ and $e \in E$
 so that $e$ has minimal length of all edges between $U$ and $V
 \backslash U$. Then $e$ belongs to some minimal spanning tree $T$ of
 $(V,E)$.
-\end{stelling}} % stelling 2.3 from Shimon Even
+\end{theorem} % stelling 2.3 from Shimon Even
 \begin{proof} Let $T_{0}$ be any MST of $(V,E)$. If $e \in T_{0}$,
 then we are done. If not, add $e$ to $T_{0}$, resulting in $T_{1}$
 which contains a cycle (Theorem~\ref{opspannend4}). This cycle
 contains $e$ and also another edge $e' = (u,v)$ so that $u \in U$ and
 $v \in V \backslash U$. Removing $e'$ from $T_{1}$ results in a
-spanning tree $T$ (whu is $T$ a tree?) and moreover $w(T) \leq
+spanning tree $T$ (why is $T$ a tree?) and moreover $w(T) \leq
 w(T_{0})$ since $w(e) \leq w(e')$. So, $T$ is a minimal spanning tree
 containing $e$.
 \end{proof}
 
 
 \newpage
-\begin{algo} Prim \label{prim}\\
+\begin{code}Prim\label{prim} \\
   Let $G(V,E)$ be a connected weighted graph $G(V,E)$ where the
 vertices are numbered: $V = \{v_{1},v_{2},\ldots,v_{n}\}$. The
 following procedure constructs a minimal spanning tree $T$ for $G$.
@@ -1984,7 +1980,7 @@ $b$ from $S$ so that $\forall e \in S: w(b) \leq w(e)$. Add $b$ to
 $T$. The result is still connected and cycle free.
 Go to \textbf{Stop?}.
 \end{enumerate}
-\end{algo}
+\end{code}
 
 \begin{proof}
 At the end of of the algorithm $T$ is a tree with $n$ vertices edges
@@ -2056,7 +2052,7 @@ $G$. There is also a variant of Prim's algorithm without this
 property:
 
 
-\begin{algo} Kruskal \label{kruskal}\\
+\begin{code} Kruskal \label{kruskal}\\
   Let $G(V,E)$ be a connected weighted graph $G(V,E)$ where the
 vertices are numbered: $V = \{v_{1},v_{2},\ldots,v_{n}\}$. The
 following procedure constructs a minimal spanning tree $T$ for $G$.
@@ -2066,7 +2062,7 @@ following procedure constructs a minimal spanning tree $T$ for $G$.
 \item \textbf{Add edge}: Add to $T$ an edge $b$ with minimal weight
   that does not introduce a cycle in the result. Go to {\bf Stop?}.
 \end{enumerate}
-\end{algo}
+\end{code}
 \begin{proof}
 Termination of Kruskal is proven as for Prim.
 
@@ -2110,12 +2106,12 @@ Figure~\ref{kruskal1} on the same graph as in Figure~\ref{prim1}.
 
 
 \newpage
-\section{Network models}
+\chapter{Network models}
 
 A network of connections with each its own capacity can be modelled by
 a directed, weighted graph. The following are examples of such
 networks: a road network, an electrical network, oil pipes ... . An
-interesting and important problem in this area is the optimalization
+interesting and important problem in this area is the optimization
 of the flow, while respecting the capacities. We will solve this
 optimization problem with some graph theory. Problems that are
 seemingly unrelated to flow optimization can often be modelled as a
@@ -2124,9 +2120,9 @@ even partner choice - the latter is know as the {\em marriage
   problem}.
 
 
-\subsection{Transport network}
+\section{Transport network}
 
- \grijs{\begin{definitie} Transport network\\ {\rm A \textbf{transport
+ \begin{definition}[Transport network] {\rm A \textbf{transport
          network} (or simply \textbf{network}) is a simple, weighted,
        directed graph $G$ with the following properties:
 \begin{verse}
@@ -2144,7 +2140,7 @@ named the \textbf{capacity} of the edge
 disregarding the direction of the edges, $G$ is connected
 \end{verse}
 }
-\end{definitie}}
+\end{definition}
 
 
 
@@ -2167,8 +2163,8 @@ edges. This changes nothing essential as far as the problems studied
 later in this section is concerned.
 
 
- \grijs{\begin{definitie}Network flow \label{stroming1}
-\label{stromingdef}\\
+\begin{definition}[Network flow]\label{stroming1}
+\label{stromingdef}
 {\rm A {\bf network flow} $F$ in a network $G(V,E)$ with capacities
   $C_{i,j},\;\; i,j \in V$\footnotemark is a mapping from $E$ to
   $\R^{+}$ so that\\
@@ -2185,7 +2181,7 @@ $F(i,j) \leq C_{i,j}$
 We name $F(i,j)$ the flow in edge $(i,j)$. For a vertex $j$, we name
 the quantity $\sum_{i \in V} F(i,j)$ the incoming flow in $j$, and 
 $\sum_{i \in V} F(j,i)$ the outgoing flow out of $j$.  }
-\end{definitie}}
+\end{definition}
 \footnotetext{if there is no edge $(i,j)$, we assume that $C_{i,j} = 0$} 
 
 
@@ -2230,11 +2226,11 @@ flow coming into the sink.
 \end{center}
 This equality is more generally true:
 
- \grijs{\begin{stelling} Source-out = sink-in \label{source=sink}\\
+ \begin{theorem}[Source-out = sink-in \label{source=sink}]
 For any flow $F$ in a network $G(V,E)$, the flow coming out of the
 source equals the flow going into the sink, or more formally:
 \[\sum_{i \in V} F(a,i) = \sum_{i \in V} F(i,z).\]
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 
 It should be clear that 
@@ -2265,7 +2261,7 @@ It follows that
 
 
 
-since $F(z,i) = 0 = F(i,a)$ voor $\forall i \in V$ (by Definition~\ref{stromingdef})
+since $F(z,i) = 0 = F(i,a)$ for $\forall i \in V$ (by Definition~\ref{stromingdef})
 
 and  $\sum_{i \in V} F(i,j) = \sum_{i \in V} F(j,i)$  $\forall j \in
 (V \backslash \{a,z\})$ (by Formula~\ref{conserve1} in
@@ -2276,11 +2272,11 @@ Definition~\ref{stromingdef})
 
 Theorem~\ref{source=sink} justifies the following:
 
- \grijs{\begin{definitie} Value of a flow\\
+ \begin{definition}[Value of a flow]
 \textup{The \textbf{value of a flow $F$} in a network $G(V,E)$
 with source $a$ and sink $z$ is $\sum_{i \in V} F(a,i)$ or
 $\sum_{i \in V} F(i,z)$ }
-\end{definitie}}
+\end{definition}
 
 The value of the flow in Figure~\ref{stroom2} is 5.
 
@@ -2331,7 +2327,7 @@ maximal.
 \end{figure}
 
 
-\subsection{Maximal flow}
+\section{Maximal flow}
 
 The idea behind the next algorithm for computing a maximal flow is as
 follows: start from any flow and improve it until no longer possible -
@@ -2375,16 +2371,16 @@ capacity of some edges. We formalize this now.
 
 \end{itemize}
 
- \grijs{\begin{definitie} Good and bad edges\\
+ \begin{definition}[Good and bad edges]
 \textup{In a digraph $G(V,E)$ with path $(v_{1},v_{2},\ldots ,v_{n})$
 we name an edge $(v_{i},v_{i+1})$ \textbf{good} if $(v_{i},v_{i+1})
 \in E$, and otherwise \textbf{bad}}
-\end{definitie}}
+\end{definition}
 
 In a path $P$ , we denote the good edges by $P_{+}$, the bad edges by $P_{-}$.
 
 
- \grijs{\begin{stelling} Improving a flow
+ \begin{theorem} Improving a flow
 \label{verbeterflow}\\
 Let $P$ be a path from $a$ to $z$ in a network $G(V,E)$, so that
 \begin{verse}
@@ -2407,7 +2403,7 @@ F'(i,j) & = & F(i,j) \quad \forall (i,j) \notin P\\
 
 The $F'$ is a flow and it is (strictly) larger than $F$ by $\Delta$.
 
-\end{stelling}}
+\end{theorem}
 \begin{proof} In order to prove that $F'$ is a flow, we must check
 \ref{stromingdef1} and ~\ref{conserve1} from
 Definition~\ref{stromingdef}: neither is difficult.
@@ -2444,7 +2440,7 @@ We use a label with two pieces of information: the first component is
 from Theorem~\ref{verbeterflow} in the path up to that vertex. The
 algorithm makes this more precise.
 
-\begin{algo} Construction of a maximal flow.
+\begin{code} Construction of a maximal flow.
 \label{maxflow}\\
 Let $G(V,E)$ be a network with source $a$, sink $z$ and capacity $C$,
 and let all the capacities be a positive integer. Define any order on
@@ -2495,7 +2491,7 @@ otherwise, do not label $w$
 \end{itemize}
 Go to \textbf{Arrived?}
 \end{enumerate}
-\end{algo}
+\end{code}
 \begin{proof}
 ~\\
 \begin{itemize}
@@ -2521,12 +2517,12 @@ Note that not all maximal flows are found by Algorithm~\ref{maxflow}:
 see Figure~\ref{stroom3}.
 
 
- \grijs{\begin{definitie} Cut in a network\\
+ \begin{definition}[Cut in a network]
   \textup{A \textbf{cut} in a network $G(V,E)$ with source $a$ and sink
     $z$, is a tuple $(P,\overline{P})$ 
     so that $a \in P$, $z \in \overline{P}$, $P
     \cup \overline{P} = V$ and $P \cap \overline{P} = \emptyset$ }
-\end{definitie}}
+\end{definition}
 
 We can draw a cut by a line that separates the vertices of the network
 in two sets: in Figure~\ref{snede1}, we have drawn the cut with a
@@ -2561,16 +2557,16 @@ larger than the maximal flow (you can check that the maximal flow in
 the example is 4). Is this a coincidence? We study this more formally.
 
 
- \grijs{\begin{definitie} Capacity $C(P,\overline{P})$ of a cut\\
+ \begin{definition}[Capacity $C(P,\overline{P})$ of a cut]
   \textup{The \textbf{capacity of a cut} $(P,\overline{P})$ is
     $C(P,\overline{P}) = \displaystyle
     \sum_{i \in P} \sum_{j \in \overline{P}} C_{i,j}$}
-\end{definitie}}
+\end{definition}
 
- \grijs{\begin{stelling} \label{snedeflow}
+ \begin{theorem} \label{snedeflow}
 The capacity of a cut is not smaller than a flow, i.e.
 \[\sum_{i \in P} \sum_{j \in \overline{P}} C_{i,j} \geq \sum_{i \in V} F(a,i).\]
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 \begin{eqnarray*}
 \sum_{i \in V} F(a,i) & = & 
@@ -2599,7 +2595,7 @@ equal to the capacity of the minimal cut. The connection between the
 two is even stronger:
 
 
- \grijs{\begin{stelling} Max flow - min cut \label{maxflowmincut}\\
+ \begin{theorem}[Max flow - min cut \label{maxflowmincut}]
   Let $(P,\overline{P})$ be a cut and $F$ a flow in a network $G(V,E)$,
 if 
 \[C(P,\overline{P})=F\mbox{ \ \ (or written out }
@@ -2615,7 +2611,7 @@ $\forall i \in \overline{P}, j \in P: F(i,j) = 0$
 \end{enumerate}
 i.e. all good edges in the cut have a flow equal to their capacity and
 all bad edges have zero flow.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 All this follows from the inequalities in Theorem~\ref{snedeflow}
 \end{proof}
@@ -2683,7 +2679,7 @@ $z$]{\includegraphics[width=0.35\linewidth,keepaspectratio]{maxflow4} \label{max
 \caption{Illustration 2 for Algorithm~\ref{maxflow}}
 \end{figure}
 
-The labeling restarts in the situation ofFigure~\ref{maxflow3}. From
+The labeling restarts in the situation of Figure~\ref{maxflow3}. From
 $a$, $d$ is not labeled now: the flow on edge $(a,d)$ is already
 maximal. $c$ does not get a label from $b$, because the edge $(c,b)$
 is {\em bad} and its flow is zero, so it cannot be decreased. But $d$
@@ -2738,7 +2734,7 @@ $\forall j: \sum_{i} F(i,j) = \sum_{i} F(j,i)$
 This type of problems can also be solved by linear programming,
 e.g. by the simplex algorithm.
 
-\subsection{Matching}
+\section{Matching}
 
 Consider the following problem: 4 students ($A,B,C$ and $D$) want to
 make a separate appointment with an assistant who is available on 5
@@ -2800,7 +2796,7 @@ flow gives us a maximal matching, but not a complete one. More
 formally:
 
 
- \grijs{\begin{definitie}
+ \begin{definition}
 {\rm Let $G(V \cup W,E)$ be a directed, bipartite graph $G(V \cup
 W,E)$ with $V \cap W = \emptyset$ and $E \subseteq V \times W$, then
 $M$ is a \textbf{matching} if
@@ -2816,7 +2812,7 @@ $i \neq x$ and $j \neq y$
 A \textbf{maximal} matching has a maximal number of edges in $M$. A
 matching is \textbf{complete} if $\forall v \in V,\; \exists w\in W:\;
 (v,w) \in M$.  }
-\end{definitie}}
+\end{definition}
 
 A directed, bipartite graph $G(V \cup W,E)$ to which a source and sink
 are added, edges from the source all vertices in $V$ and edges from
@@ -2824,10 +2820,10 @@ the vertices in $W$ to the sink, and with capacity one for every
 edge, is named the \textbf{matching network} derived from $G$.
 
 
-The next theorem formalises the correspondence between a a maximal
+The next theorem formalises the correspondence between a maximal
 flow in a matching network and a maximal matching.
 
- \grijs{\begin{stelling}
+ \begin{theorem}
 Let $G(V \cup W,E)$ be a directed, bipartite graph $G(V \cup W,E)$
 with $V \cap W = \emptyset$ en $E \subseteq V \times W$, then the
 following is true:
@@ -2843,7 +2839,7 @@ A maximal integer flow corresponds to a maximal matching.
 \hspace*{1ex}$\bullet$
 An integer flow with value $\#V$ corresponds to a perfect matching.
 \end{verse}
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 You can work out the proof yourself.
 \end{proof}
@@ -2873,12 +2869,12 @@ If $G$ has a perfect match, then $\#S \leq \#R(S)$ holds $\forall S
 
 The English mathematician Philip Hall proved the converse in 1935:
 
- \grijs{\begin{stelling} Hall's marriage theorem \label{hall}\\
+ \begin{theorem}[Hall's marriage theorem \label{hall}]
 
 A directed, bipartite graph $G(V \cup W,E)$ with $V \cap W =
 \emptyset$ and $E \subseteq V \times W$, has a perfect match if and
 only if $\#S \leq \#R(S),\; \forall S \subseteq V$
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 We have already argued one direction: if $G$ has a perfect match, then
 $\#S \leq \#R(S), \forall S \subseteq V$. Now the converse:
@@ -2926,7 +2922,7 @@ Hall's Theorem~\ref{hall} can be used in partner choice problems, hence its name
 
 
 
-\section{References}
+\chapter{References}
 
 \begin{itemize}
 \item
