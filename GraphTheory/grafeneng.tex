@@ -197,14 +197,14 @@ Figure~\ref{hamiltonkring} shows a Hamiltonian cycle for Hamilton's puzzle.
 \section{Basic Definitions}
 
 \begin{definition}[Graph]
-A (undirected) \textbf{graph} $G$ is tuple $(V,E)$ in which
+A(n undirected) \textbf{graph} $G$ is a tuple $(V,E)$ in which
 $V$ is a set of \textbf{vertices} and $E$ a (multi-)set\footnotemark
-of \textbf{edges}; each edge $e \in E$ is a unordered pair $(v,w) \in
+of \textbf{edges}; each edge $e \in E$ is an unordered pair $(v,w) \in
 V \times V$; we write $e = (v,w)$ or $e = (w,v)$.
 \end{definition}
 
 \footnotetext{A \emph{multi-set} is similar to a set, but an element can
-occur more than once; $\{1,1,1,2,2,3,4,5,5\}$ is multi-set.}
+occur more than once; $\{1,1,1,2,2,3,4,5,5\}$ is a multi-set.}
 
 We allow some freedom of notation and speech:
 \begin{itemize}
@@ -235,11 +235,13 @@ An edge $(v,w)$ is {\em incident on} the vertex $v$ (and on $w$);
 the vertices $v$ and $w$ are {\em adjacent to} the edge $(v,w)$.
 
 \begin{definition}[Directed graph (digraph)]
-A (undirected) \textbf{graph} $G$ is tuple $(V,E)$ in which
+A (undirected) \textbf{graph} $G$ is a tuple $(V,E)$ in which
 $V$ is a set of \textbf{vertices} and $E$ a (multi-) set
 of \textbf{edges}; each edge $e \in E$ is an ordered pair $(v,w) \in
 V \times V$; we write $e = (v,w)$.
 \end{definition}
+\martonst{undirected}{directed}
+\marton{My command breaks the compilation in definitions, so I will append them after the definitions.}
 
 You can think of a directed graph as a graph in which each edge has an
 arrow, pointing from one vertex to the other.
@@ -251,8 +253,8 @@ arrow, pointing from one vertex to the other.
 
 
 \begin{definition}[Simple graph]
-\textup{A graph is \textbf{simple} if the graph has no parallel edges
-neither loops.}
+\textup{A graph is \textbf{simple} if the graph has neither parallel edges
+nor loops.}
 \end{definition}
 
 
@@ -277,12 +279,12 @@ the conclusion.
 \end{proof}
 
 
-\begin{theorem}[Number of vertices with odd degree]
-The number of vertices of odd degree is even.
+\begin{theorem}[Number of vertices with an odd degree]
+The number of vertices with an odd degree is even.
 \end{theorem}
 \begin{proof}
-Partition $V$ in the vertices with even degree $\{a_i |
-i=1,\ldots,n\}$, and the vertices with odd degree $\{b_i |
+Partition $V$ in the vertices with an even degree $\{a_i |
+i=1,\ldots,n\}$, and the vertices with an odd degree $\{b_i |
 i=1,\ldots,m\}$.  Then, because of Theorem~\ref{somgraad}
 \[0 = \left(\sum_{i=1}^{n} \delta(a_{i}) + \sum_{i=1}^{m} \delta(b_{i})\right)
 \bmod 2 = m \bmod 2 \] and the conclusion follows.  \end{proof}
@@ -311,14 +313,14 @@ vertices $(v_{1}, \ldots , v_{n+1})$}
 different and $v_{1} = v_{n+1}$.}
 \end{definition}
 
-A cycle is sometimes name a circuit.
+A cycle is sometimes called a circuit.
 
 
 \begin{definition}[Eulerian cycle (path)]
   \textup{An \textbf{Eulerian cycle (path)} is a cycle (path)
 containing all edges exactly once, and all vertices.}
 \end{definition}
-
+ \martonst{, and all vertices.}{.}
 
 \begin{definition}[Hamiltonian cycle]
   \textup{ A \textbf{Hamiltonian cycle} is a cycle containing all
@@ -334,7 +336,7 @@ vertices $v$ and $w$, there is a path from $v$ to $w$.}
 
 
 \begin{theorem}[Existence of an Eulerian cycle.]
-  A graph $G(V,E)$ has an Eulerian cycle if and only of $G$ is
+  A graph $G(V,E)$ has an Eulerian cycle if and only if $G$ is
   connected and the degree of each vertex is even.
 \end{theorem}
 The intuition behind the proof is that when you arrive in a vertex,
@@ -355,13 +357,13 @@ each vertex is even.
 \item Construct a cycle $P$: start from any vertex $s$, follow any
 edge incident on $s$; from then on extend the partial path with any
 edge incident on the most recently added vertex, never using a
-previously used edge. Repeat until there is no more edge to choose
+previously used edge. Repeat until there is are more edges to choose
 from. Since the degree of each vertex is even, the just constructed
 $P$ is a cycle starting in $s$ and arriving at $s$. If $P$ contains
 all edges from $G$, the theorem is proven. Otherwise, there exists a
-vertex $s'$ on the path $P$, from which an unused edge leaves (explain
-why !). Construct a cycle $P'$ starting at $s'$ not using any edges
-from $P$ (why is this possible?). Then add $P'$ to $P$: you have now a
+vertex $s'$ on the path $P$ from which an unused edge leaves (explain
+why!). Construct a cycle $P'$ starting at $s'$ not using any edges
+from $P$ (why is this possible?). Then add $P'$ to $P$: now you have a
 larger cycle. One can repeat the procedure until there are no more
 unused edges. Figure~\ref{euler4} illustrates the construction.
 \end{itemize}
@@ -376,19 +378,19 @@ unused edges. Figure~\ref{euler4} illustrates the construction.
 
 \begin{theorem}[Existence of an Eulerian path]
   A connected graph $G$ has an Eulerian path from vertex $v$ to $w$
-  ($v \neq w$) if $v$ and $w$ are the only vertices with odd degree.
+  ($v \neq w$) if $v$ and $w$ are the only vertices with an odd degree.
 \end{theorem}
 \begin{proof} 
 Consider the graph $G'$ obtained by adding the edge $(w,v)$ to $G$.
-$G'$ is connected and each vertex has even degree, so it has an
-Eulerian cycle $(w,v,\ldots,w)$; delete from this cycle the first edge
+$G'$ is connected and each vertex has an even degree, so it has an
+Eulerian cycle $(w,v,\ldots,w)$; delete the first edge from this cycle
 to obtain the Eulerian path $(v,\ldots,w)$ in $G$.
 \end{proof}
 
 \begin{example}
 Looking back at Figure~\ref{pregelgraph} (the graph modeling the
-bridges in K\"onigsberg), you notice that there are four vertices with
-odd degree. It follows there is no Eulerian cycle, neither an Eulerian
+bridges in K\"onigsberg), you notice that there are four vertices with an
+odd degree. It follows that there is neither an Eulerian cycle, nor an Eulerian
 path.
 \end{example}
 
@@ -396,7 +398,7 @@ path.
 
 \begin{definition}[Subgraph]
   \textup{A graph $(V_1,E_1)$ is a \textbf{subgraph} of $(V,E)$ if
-    $V_1 \subseteq V$ en $E_1 \subseteq E$.}
+    $V_1 \subseteq V$ and $E_1 \subseteq E$.}
 \end{definition}
 
 
@@ -412,12 +414,12 @@ The components $(V_{i},E_{i})$ ($i=1,\ldots,n$) of a graph $(V,E)$
 form a partition,
 i.e. \\
 $(V,E) = (\cup_{i=1}^{n} V_{i},\cup_{i=1}^{n} E_{i})$ and 
-for any $i \neq j$, $V_{i} \cap V_{j} = \emptyset$ en $E_{i} \cap E_{j} =
+for any $i \neq j$, $V_{i} \cap V_{j} = \emptyset$ and $E_{i} \cap E_{j} =
 \emptyset$
 \end{theorem}
 \begin{proof}
 Clearly every vertex and edge belongs to at least one component.
-Suppose a vertex belongs to two components $\alpha$ en $\beta$, then
+Suppose a vertex belongs to two components $\alpha$ and $\beta$, then
 the union of $\alpha$ and $\beta$ is a connected subgraph of $(V,E)$
 so $\alpha = \beta$, so $V_{i} \cap V_{j} = \emptyset$ for $i \neq
 j$. Since an edge belongs to the component of its incident vertices,
@@ -433,7 +435,7 @@ components.
 
 \section{Graph representation \label{voorstelgraph}}
 
-Until now we have just drawn graphs. However, we need often a more
+Until now we have just drawn graphs. However, we often need a more
 formal representation of graphs, e.g. because we need to write
 programs dealing with graphs. There is no single best representation:
 it depends on what we want to compute. So we introduce several
@@ -506,7 +508,7 @@ A^{2} = \left(
 $
 \end{center}
 
-We got the $(a,c)$-the element van $A^{2}$ by:
+We got the $(a,c)$ element of $A^{2}$ by:
 
 \begin{center}
 $
@@ -529,9 +531,9 @@ $
 0\times 0 + 1\times 1 + 0\times 0 + 1\times 1 + 0\times 1 = 2$
 \end{center}
 
-The positive contributions in the result result from the paths
+The positive contributions in the calculation result from the paths
 $(a,b)-(b,c)$ and $(a,d)-(d,c)$. This shows that $A^{2}[i,j] = $ the
-number of paths vertex $i$ to vertex $j$ with length 2. 
+number of paths from vertex $i$ to vertex $j$ with length 2. 
 \end{example}
 But we need to
 be careful: the adjacency matrix does not show parallel edges, and
@@ -605,7 +607,7 @@ edge}.
 
 Another graph representation consists of the incidence matrix $I$: it
 has a row for each vertex and a column for each edge. $I[i,j] = 1$
-iff the $j$-de edge is incident on $i$ and 0 otherwise.  The
+iff the $j^{th}$ edge is incident on $i$ and 0 otherwise.  The
 incidence matrix of the graph in Figure~\ref{adjacency1} is
 
 \newpage
@@ -697,7 +699,7 @@ i.e. $g((v,w)) \in E_{2}$ and a bijection.  Such $f$ is named a
 graph isomorphism.}
 \end{definition}
 
-Between $G_{1}$ and $G_{2}$ of Figure~\ref{experiment1}, there exists
+Between $G1$ and $G2$ of Figure~\ref{experiment1}, there exists
 the isomorphism $f$:
 \begin{itemize}
 \item[]
@@ -747,14 +749,14 @@ $G_{1}$ and $G_{2}$ are equal.
 \begin{proof} Please prove this yourself.
 \end{proof}
 
-The theorems on graph isomorphism provide a algorithms using the
+The theorems on graph isomorphism provide algorithms using the
 concrete representation of the graphs. However, every currently known
-algorithm for testing whether two graphs are isomorphic, is at least
+algorithm for testing whether two graphs are isomorphic is at least
 exponential. On the other hand, there exist very efficient tests that
-can show that two graphs are {\em not} isomorphism: one checks whether
-some graph properties that is {\em invariant} under graph isomorphism
-holds for both graphs. Such property can be based on the number of
-vertices, the number of edges, the degrees of the vertices ... We will
+can show that two graphs are {\em not} isomorphic: one checks whether
+some graph properties that are {\em invariant} under graph isomorphism
+hold for both graphs. Such properties can be based on the number of
+vertices, the number of edges, the degrees of the vertices \ldots We will
 later see more of such properties. But remember that these simple
 tests never tell you that two graphs are isomorphic, only that two
 graphs are not isomorphic.
@@ -770,10 +772,10 @@ weight $w(G)$ of a weighted graph $G$, is the sum of the weights of
 all the edges of $G$.  }
 \end{definition}
 
-The weight of a of an edge can be interpreted as the length of an
+The weight of an edge can be interpreted as the length of an
 edge, or some cost associated with the use of the edge in a path: if
 the graph models a road network, then the weight can be a distance
-between cities, or a tol to be payed to use the road. The {\em weight
+between cities, or a toll to be paid to use the road. The {\em weight
 of a path} is the sum of the weights of the edges in the path. It is
 clear that in the case of road networks, one would be naturally
 interested in minimal weight paths connecting two given nodes, or put
@@ -805,7 +807,7 @@ graphs.
 
  \begin{definition}[Bipartite graph]
   \textup{A \textbf{bipartite graph} is a graph $(V,E)$ with $V =
-V_{1} \cup V_{2}$ so that $V_{1} \cap V_{2} = \emptyset$ en $E
+V_{1} \cup V_{2}$ so that $V_{1} \cap V_{2} = \emptyset$ and $E
 \subseteq V_{1} \times V_{2}$ }
 \end{definition}
 
@@ -823,7 +825,7 @@ the problem of connecting $n$ houses with $m$ utilities (water, gas,
 electricity, internet \ldots).
 
 $K_{n}$ denotes the graph with $n$ vertices, in which there is an edge
-between every two vertices. Such graphs are {\em completely
+between every two vertex. Such graphs are {\em completely
 connected}, and we name them cliques.
 
 The $K$ is in honour of Kazimierz Kuratowski, a famous graph theorist.
@@ -834,7 +836,7 @@ Figure~\ref{kuratowski1} shows $K_{4}$ and $K_{2,2}$.
 \begin{center}
 \includegraphics[width=0.4\linewidth,keepaspectratio]{kuratowski1}
 \end{center}
-\caption{$K_{4}$ en $K_{2,2}$ \label{kuratowski1}}
+\caption{$K_{4}$ and $K_{2,2}$ \label{kuratowski1}}
 \end{figure}
 
 When you try drawing $K_{n}$ on paper for successive values of $n$,
@@ -845,7 +847,7 @@ $(n,m)$ and $K_{n,m}$, it fails for all $n,m > 2$.
 As we said before, graphs one can draw in the plane without crossing
 edges are named \textbf{planar}. As an application: if the graph of a
 road network is planar, there is no need for tunnels or bridges. Euler
-proved in 1752 the following formula\footnote{Descartes
+proved the following formula in 1752\footnote{Descartes
 ($\pm$ 1600) knew the formula and most probably so did Archimedes
 ($\pm$ --250)}:
 
@@ -855,8 +857,8 @@ $f$ {\em faces} then $v-e+f = 2$.
 \end{theorem}
 
 We haven't defined a face yet: informally, it is a piece of the plane
-enclosed by a minimal cycle, and also the infinite part of the plane
-that lies outside of a (drawing of a) graph counts as a face. The
+enclosed by a minimal cycle. The infinite part of the plane
+that lies outside of a (drawing of a) graph also counts as a face. The
 origin of the word {\em face} is in the study of polyhedra.
 
 
@@ -908,15 +910,15 @@ not valid. You should be able to generalize Euler's formula to
 non-connected graphs, taking into account the number of components.
 
 The origin of Euler's interest in this formula lies in the study of
-spatial objects, more specifically the polyhedra. This interest
+spatial objects, more specifically polyhedra. This interest
 existed already since Greek ancient history: regular polyhedra were
 supposed to be the building blocks of the world. The formula expresses
 the relation between the number of faces, edges and vertices of a
 polyhedron. The transformation from a polyhedron and a planar graph
-can be visualised as follows: image the polyhedron is drawn on a
+can be visualised as follows: imagine the polyhedron is drawn on a
 balloon. Carefully make a hole in the middle of any face, and stretch
 the hole until all the material is in a plane. The resulting picture
-of edges and vertices form planar graph. The face that was punctured
+of edges and vertices form a planar graph. The face that was punctured
 corresponds to the infinite face.
 
  \begin{theorem}
@@ -924,8 +926,8 @@ $K_{3,3}$ and $K_{5}$ are not planar.
 \end{theorem}
 \begin{proof}
 Suppose $K_{3,3}$ is a planar graph. Let $\beta$ be the total number
-of edges in all faces: an edge counts $n$ times of that edge occurs in
-$n$. Since (in a planar drawing) every edge can belong to at most 2
+of edges in all faces: an edge counts $n$ times if that edge occurs in
+$n$ \marton{faces}. Since (in a planar drawing) every edge can belong to at most 2
 faces, we know that $2*e \geq \beta$. 
 
 Moreover, every cycle in $K_{3,3}$ has at least 4 edges (why?) from
@@ -944,7 +946,7 @@ When two graphs are isomorphic, they are basically the same up to a
 renaming of the vertices. But graphs sometimes look similar even
 though they they do not have the same number of edges or
 vertices. E.g. if we add a vertex in the middle of an edge, it feels
-like nothing essential has changed to the graph. For one thing, its
+like nothing essential has changed in the graph. For one thing, its
 planarity has not changed, neither its connectivity (and you may
 perhaps think of other properties that remain invariant). The
 operation of adding the extra vertex is named subdivision or expansion
@@ -995,7 +997,7 @@ Just a few examples:
 
 \begin{itemize}
 \item
-Suppose you need to plan 4 meetings, involving persons A,B,C en D. The
+Suppose you need to plan 4 meetings, involving persons A,B,C and D. The
 first meeting must be attended by A and B; the second by A and C; the
 third by B, C and D, and the fourth one by C and D. What is the
 minimal number of time slots you can make all these meetings happen?
@@ -1016,7 +1018,7 @@ graph, et voil\'{a}! Each color corresponds to a new time slot.
 \end{figure}
 
 \item
-You need to organize the goods in a supermarket in the racks, but some
+You need to organize the goods in a supermarket on the racks, but some
 goods can not be put next to each other, e.g. fuel can't be next to
 bread, porn not next to cleaning powder, etc. Once more, you can
 construct a graph representing the constraints, and a coloring of the
@@ -1048,7 +1050,7 @@ one variable. For example, consider the following code:
 
 $i$ and $l$ can be assigned the same register, and likewise for $k$
 and $m$. You can find that out by constructing the inference graph of
-this piece of code: the graph has as vertices the variables, and an
+this piece of code: the graph has the variables as vertices, and an
 edge between two variables whose value is {\em alive} at the same
 moment. Figure~\ref{regalloc1} shows the corresponding graph.
 
@@ -1079,7 +1081,7 @@ for planar graphs. A map is a planar graph $G$, and can be turned into
 another planar graph - its {\em dual} - $G'$ as follows: assume for
 the sake of simplicity that each region in the map is a country. Each
 country has a capital inside that country. Now construct the graph
-with as nodes the capitals, and define an edge between two capitals if
+with the capitals as nodes, and define an edge between two capitals if
 their countries share a border. Figure~\ref{dual1} shows some
 examples.
 
@@ -1102,11 +1104,11 @@ planar graph can be colored with 5 colors.
      $G$ with more than one edge.\label{euler}
 \end{theorem}
 \begin{proof}
-We prove the theorem only for connected graphs: first remove from $G$
-every vertex with degree equal to 1 (and the corresponding edge),
+We prove the theorem only for connected graphs: first remove
+every vertex from $G$ with a degree of 1 (and the corresponding edge),
 until no more such vertices exist. The resulting graph $G'$ is still
-planar, simple and connected. Denote by $e'$ the number of its edges,
-and $v'$ the number of its vertices; the number of faces is $f$
+planar, simple and connected. Denote the number of its edges by $e'$,
+the number of its vertices by $v'$; the number of faces is $f$
 because removing the particular edges did not change that. So we have
 $e-e'=v-v'$ which is equal to the number of removed edges (or
 vertices). Denote that quantity by $t$. We now make a case distinction:
@@ -1212,7 +1214,7 @@ $c_{1}-c_{3}$ paths.  There are two possibilities:
 \begin{center}
 \includegraphics[width=0.4\linewidth,keepaspectratio]{5kleuring3eng}
 \end{center}
-\caption{$p_{1,3}$ en $p_{2,5}$ \label{5kleuring3}}
+\caption{$p_{1,3}$ and $p_{2,5}$ \label{5kleuring3}}
 \end{figure}
 \end{proof}
 
@@ -1223,20 +1225,20 @@ maps.
 This is a good moment to reflect on the concept of a {\em computer
   proof}. Whether something is accepted as a proof or not, is mainly a
 social given. It feels true that the mathematical correctness of a
-proof is independent of people agree with it, but a proof exists
-mainly by the grace of the community accepting the proof, even of the
+proof is independent of people agreeing with it, but a proof exists
+mainly by the grace of the community accepting the proof, even if the
 proof turns out to be incorrect later. So it is up to the community
 (only to the mathematical community?) to accept or reject computer
 proofs: one could imagine a branch of science that accepts only hand
 written proofs on paper, just as there is a branch of mathematics that
 accepts only constructive proofs, and no existential proofs. It is not
-possible to decide univocally whether to accept computer proofs just
+possible to decide \martonst{univocally}{unequivocally} whether to accept computer proofs just
 based on scientific arguments. But the fact is that the proofs are
 only possible by computer, the more we are inclined to accept such
 proofs, especially if the theorems so proven have useful consequences.
 
 One could argue that it is in principle possible to check a computer
-proof by hand, or proof (by hand) that the computer program generating
+proof by hand, or prove (by hand) that the computer program generating
 the proof is correct. That is currently not possible for larger
 programs. Moreover, one would also have to prove the correctness of
 the machine executing the program \ldots something we might want to
@@ -1244,8 +1246,8 @@ leave to another computer program?
 
 Returning to the coloring of graphs: there are non-planar graphs with
 no 4-coloring, e.g. $K_{n}$ with $n > 4$ needs at least $n$ colors,
-and the same holds for graphs containing the clique $K_n$. But there
-exist also graphs no containing $K_4$ (or larger) with no
+and the same holds for graphs containing the clique $K_n$. But there also
+exist graphs not containing $K_4$ (or larger) with no
 3-coloring. Finally, lots of non-planar graphs have a 4-coloring. More
 specifically, every bipartite graph (e.g. $K_{3,3}$) has a 2-coloring.
 
@@ -1254,7 +1256,7 @@ specifically, every bipartite graph (e.g. $K_{3,3}$) has a 2-coloring.
 
 We abbreviate {\em strongly connected component} to SCC. Robert Endre
 Tarjan \footnote{Turing award 1986} - the master algorithmist -
-designed in 1972 a very nice algorithm that partitions the vertices of
+designed a very nice algorithm in 1972 that partitions the vertices of
 a digraph into SCCs. An SCC is a (maximal) set of vertices in which
 every node is connected to every other node of the same set. We first
 look at an application. Below is a program in pseudo-code, from which
@@ -1272,7 +1274,7 @@ main()               venus()                aurochs()           tarpan()
                                             }
 \end{Verbatim}
 The {\em call graph} of this program can be seen in
-Figure~\ref{vbtarjan}: the vertices are the procedures; there is an
+Figure~\ref{vbtarjan}: the vertices are the procedures; there is a
 directed edge $(p_1,p_2)$ if and only if $p_1$ calls $p_2$. We have
 left out the self-calls.
 
@@ -1302,7 +1304,7 @@ http://en.wikipedia.org/wiki/Tarjan's\_strongly\_connected\_components\_algorith
 %
 Each vertex has 4 fields: the booleans {\em instack} and {\em visited}
 are initially FALSE; the integers {\em index} and {\em lowlink} are
-initialized in time.  Their selection is denoted as e.g. $v.visited$.
+initialized \martonst{in time}{during execution}.  Their selection is denoted as e.g. $v.visited$.
 
 \begin{algorithm}[h]
 \begin{algorithmic}
