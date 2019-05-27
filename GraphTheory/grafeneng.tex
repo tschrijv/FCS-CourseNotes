@@ -2119,9 +2119,9 @@ Figure~\ref{kruskal1} on the same graph as in Figure~\ref{prim1}.
 \newpage
 \chapter{Network models}
 
-A network of connections with each its own capacity can be modelled by
+A network of connections with each having its own capacity can be modelled by
 a directed, weighted graph. The following are examples of such
-networks: a road network, an electrical network, oil pipes ... . An
+networks: a road network, an electrical network, oil pipes \ldots An
 interesting and important problem in this area is the optimization
 of the flow, while respecting the capacities. We will solve this
 optimization problem with some graph theory. Problems that are
@@ -2171,7 +2171,7 @@ be the number of vehicles that can pass through the street per minute.
 The restriction to simple graphs is not so bad: loops and parallel
 edges can be simply removed by putting an extra vertex on such
 edges. This changes nothing essential as far as the problems studied
-later in this section is concerned.
+later in this section are concerned.
 
 
 \begin{definition}[Network flow]\label{stroming1}
@@ -2200,7 +2200,7 @@ $\sum_{i \in V} F(j,i)$ the outgoing flow out of $j$.  }
 Formula~\ref{conserve1} in Definition~\ref{stroming1} expresses the
 law of conservation of goods: everything that comes into an edge must
 get out as well. That prevents accumulation of goods in a vertex, and
-production of goods in a vertex. Think of Kirchoff's law.
+production of goods in a vertex. Think of Kirchhoff's law.
 
 Figure~\ref{stroom2} shows a flow for the network of Figure
 \ref{transport1}; the flow is defined by:
@@ -2297,7 +2297,7 @@ The network problem can now be formulated as: for a given network $G$,
 find a maximal flow, i.e. a flow with maximal value.
 
 
-Before we go into that ... networks could have more than one source
+Before we go into that \ldots Networks could have more than one source
 and/or sink: the network in Figure~\ref{transport2} could represent
 the water supply of cities $A$ and $B$, from sources $X,Y$ and $Z$,
 and with intermediate distribution centers $b,c$ and $d$.
@@ -2327,7 +2327,7 @@ original network: convince yourself about that.
 
 Finally, a maximal flow is often not unique: Figure~\ref{stroom3}
 shows a network with infinitely many maximal flows. Indeed, for each
-$i$ and $j$ satisfying $i+j = 5$ en $0 \leq i,j \leq 3$, the flow is
+$i$ and $j$ satisfying $i+j = 5$ and $0 \leq i,j \leq 3$, the flow is
 maximal.
 
 \begin{figure}[ht]
@@ -2473,8 +2473,8 @@ ${\cal C} = \emptyset$
 \textbf{Label the source}.
 
 Improving the flow works as follows: there is exactly one path $P$ from
-$a$ to $z$ that can be found by constructed backward starting at $z$
-and following repeatedly the first component of the label of the
+$a$ to $z$ that can be found by constructing backwards, starting at $z$
+and repeatedly following the first component of the label of the
 vertex. The second component of the $z$'s label is a quantity $\Delta$
 that is added to the flow in the good edges of $P$, and subtracted
 from the flow in the bad edges. Finally, erase all labels in the network.
@@ -2559,7 +2559,7 @@ that these are also equal to 2! Coincidence?
 We can also try to make an optimistic estimate of how much flow there
 could maximally be over a cut: maybe there exists a flow that uses all
 the capacity of the edges from $P$ to $\overline{P}$, and nothing is
-flowing back over the other edged. We name this quantity the {\em
+flowing back over the other edges. We name this quantity the {\em
 capacity of the cut}. In the example, we get \mbox{$~~~~~~~~C_{c,e} +
 C_{b,d} = 2+3=5$}
 
@@ -2650,18 +2650,18 @@ maximal flow.
 At the moment the algorithm ends, let $P$ be the set of vertices with
 a label (note: $a \in P$) and $\overline{P}$ the set of vertices
 without a label ($z \in \overline{P}$). $(P,\overline{P})$ is a cut.
-Consider an (directed) edge $(i,j)$ with $i \in P$ and $j \in
+Consider a (directed) edge $(i,j)$ with $i \in P$ and $j \in
 \overline{P}$.  Since $i$ has a label $F(i,j)$ must be equal to
-$C_{i,j}$, otherwise $j$ would have gotten a label. Now consider and
+$C_{i,j}$, otherwise $j$ would have gotten a label. Now consider an
 edge $(j,i)$ with $i \in P$ and $j \in \overline{P}$. Since $i$ has a
 label, $F(j,i)$ must be equal to 0, otherwise $j$ would have gotten a
 label. Together with Theorem~\ref{maxflowmincut}, we derive that $F$
 is maximal.
 \end{proof}
 
-You see that the algorithm constructs at the same time a maximal flow
-and a minimal cut. Some of the steps in Algorithm~\ref{maxflow} are
-shown in the Figure~\ref{maxflow1} and~\ref{maxflow2}:
+You see that the algorithm constructs a maximal flow
+and a minimal cut at the same time. Some of the steps in Algorithm~\ref{maxflow} are
+shown in Figure~\ref{maxflow1} and~\ref{maxflow2}:
 
 \begin{figure}[ht]
 \begin{center}
@@ -2697,7 +2697,7 @@ is {\em bad} and its flow is zero, so it cannot be decreased. But $d$
 gets a label from $b$, and since the capacity of edge $(b,d)$ (3)
 is smaller than the $\Delta$ of $b$ (7 at that moment), we give $d$ a
 $\Delta = 3$. $c$ gets a label from $d$ and since the unused capacity
-$(d,c)$ equals 2, we give $c$ as $\Delta$ 2. From $c$, only $z$ can be
+$(d,c)$ equals 2, we give $c$ a $\Delta = 2$. From $c$, only $z$ can be
 labeled: the resulting situation is in Figure \ref{maxflow4}. The flow
 can be improved along the obtained path: the result is in
 Figure~\ref{maxflow5}.
@@ -2742,7 +2742,7 @@ $0 \leq F(i,j) \leq C_{i,j}$ for the given $C_{i,j}$
 $\forall j: \sum_{i} F(i,j) = \sum_{i} F(j,i)$
 \end{itemize}
 
-This type of problems can also be solved by linear programming,
+This type of problem can also be solved by linear programming,
 e.g. by the simplex algorithm.
 
 \section{Matching}
@@ -2784,13 +2784,15 @@ edge 1 as capacity: see Figure~\ref{matching2}.
 1\label{matching2}}
 \end{figure}
 
+\marton{The labels on this figure are not translated.}
+
 We can now construct a maximal (integer) flow $F$ in in this network:
 the value of this maximal flow is 4 (the number of students). We can
 derive an assignment of students to days (or a matching of the
 students with the days) by interpreting an edge $(s,d)$ so that
 $F((s,d)) = 1$ as: student $s$ can see the assistant on day
-$d$. Figure~\ref{matching3} shows a maximal flow with dotted lines. We
-can read out from it the assignment $(A,b)$, $(B,a)$, $(C,d)$,
+$d$. Figure~\ref{matching3} shows a maximal flow with dotted lines. From this, we
+can read out the assignment $(A,b)$, $(B,a)$, $(C,d)$,
 $(D,e)$. The assignment is complete, and we have a complete (or
 perfect) matching, since every student is matched up with a day.
 
@@ -2800,6 +2802,8 @@ perfect) matching, since every student is matched up with a day.
 \end{center}
 \caption{A solution for the assignment problem\label{matching3}}
 \end{figure}
+
+\marton{The labels on this figure are not translated.}
 
 The maximal flow could have been smaller than the number of 
 students (for a different set of preferences of course): that maximal
@@ -2826,21 +2830,21 @@ matching is \textbf{complete} if $\forall v \in V,\; \exists w\in W:\;
 \end{definition}
 
 A directed, bipartite graph $G(V \cup W,E)$ to which a source and sink
-are added, edges from the source all vertices in $V$ and edges from
-the vertices in $W$ to the sink, and with capacity one for every
-edge, is named the \textbf{matching network} derived from $G$.
+are added, with edges from the source to all the vertices in $V$, and edges from
+all the vertices in $W$ to the sink, with a capacity of 1 for every
+edge is named the \textbf{matching network} derived from $G$.
 
 
 The next theorem formalises the correspondence between a maximal
 flow in a matching network and a maximal matching.
 
  \begin{theorem}
-Let $G(V \cup W,E)$ be a directed, bipartite graph $G(V \cup W,E)$
-with $V \cap W = \emptyset$ en $E \subseteq V \times W$, then the
+Let $G(V \cup W,E)$ be a directed, bipartite graph
+with $V \cap W = \emptyset$ and $E \subseteq V \times W$, then the
 following is true:
 \begin{verse}
 \hspace*{1ex}$\bullet$
-An integer flow in $F$ in the corresponding matching network, gives a
+An integer flow in the corresponding matching network $F$ gives a
 matching in $G$: $v \in V$ corresponds to $w \in W$ if and only if
 $F(v,w) = 1$
 
@@ -2857,7 +2861,7 @@ You can work out the proof yourself.
 
 It is sometimes possible to quickly test that no perfect matching
 exists: clearly, when $n$ students together prefer strictly less than
-$n$ days, they can all get one of their preferred days. We generalize this:
+$n$ days, they \martonst{can}{cannot} all get one of their preferred days. We generalize this:
 
 \begin{itemize}
 \item
@@ -2898,7 +2902,7 @@ exists. So assume $m \geq 2$. We distinguish between two cases:
 \begin{enumerate}
 \item 
 Suppose that for all $S$ such that $\emptyset \neq S \subsetneq V$ it
-is true that $|S| + 1 \leq |R(S)|$. Take any edge $(v,w)$ met $v \in
+is true that $|S| + 1 \leq |R(S)|$. Take any edge $(v,w)$ with $v \in
 V$ and consider the $G' = G \setminus \{v,w\}$. $G'$ fulfills the
 conditions of Hall and $V'$ is strictly smaller than $m$: by the
 induction hypothesis there exists a perfect matching of $G'$. Add the
