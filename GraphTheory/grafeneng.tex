@@ -1390,8 +1390,8 @@ The
 
 
 Figure~\ref{bomen1} shows a tree with root $w$ and a tree without a
-root. The heights of $a,b,c,d,e,f,g,h,i$ en $w$ are 1,2,2,1,1,2,3,1,2
-en 0.
+root. The heights of $a,b,c,d,e,f,g,h,i$ and $w$ are 1,2,2,1,1,2,3,1,2
+and 0.
 
 \begin{figure}[ht]
 \centering
@@ -1429,7 +1429,7 @@ For a simple graph $T$ with $n$ vertices
 (c)$, $(c) \Rightarrow (d)$ and $(d) \Rightarrow (a)$
 \begin{itemize}
 \item $(a) \Rightarrow (b)$: since $T$ is a tree, there is a path
-between any two vertices, so $T$ is connected; if $T$ contained
+between any two vertices, so $T$ is connected; if $T$ contained a
 cycle, some vertices would be connected by more than one path, so $T$
 is cycle free
 \item $(b) \Rightarrow (c)$: 
@@ -1550,9 +1550,9 @@ trees.
 
  \begin{definition}[Binary tree]
 \textup{A \textbf{binary tree} is a rooted tree in which every node
-has 0, 1 or 2 children; because of the way binary trees are drawn and
+has 0, 1, or 2 children; because of the way binary trees are drawn and
 used, we speak of a left child (connected to its parent by the left
-branch) and a right kind (\ldots); this makes an order on the branches
+branch) and a right child (\ldots); this makes an order on the branches
 explicit.  }
 \end{definition}
 
@@ -1578,7 +1578,7 @@ Figure~\ref{tornooi1} shows a tournament tree: it is a full binary tree.
  \begin{theorem}
 \label{relatiebladinwendig}
 A full binary tree $T$ with $i$ internal vertices has 
-$T$ $(i+1)$ leaves and $(2i+1)$ vertices.
+$(i+1)$ leaves and $(2i+1)$ vertices.
 \end{theorem}
 \begin{proof} Each internal vertex has 2 children, so there are $2i$
 children in $T$; there is exactly one vertex that is not a child: the
@@ -1595,7 +1595,7 @@ internal nodes is $n-1$, and that is the number of matches.
  \begin{theorem}
 \label{relatieheightbladeren}
 For a binary tree $T$ with height $h$ and $t$ leaves $\log_2(t) \leq
-h$ (of $t \leq 2^h$).
+h$ (or $t \leq 2^h$).
 \end{theorem}
 \begin{proof}
 We prove the theorem by induction on $h$ and by considering the
@@ -1720,7 +1720,7 @@ the left, and has a smaller height.
 
 A tree is often represented with {\em directed} edges. This
 representation stresses the fact that often the two functions {\em
-leftchild} en {\em rightchild} are explicitly available for use in a
+leftchild} and {\em rightchild} are explicitly available for use in a
 program, but not the function {\em parent}.
 
 It can also be useful to represent a tree as a digraph without cycles
@@ -1753,6 +1753,7 @@ In this section, we only consider simple graphs: convince yourself
 \textup{$T$ is a \textbf{spanning tree} of a graph $G$,
 if $T$ is a subgraph of $G$ containing all vertices of $G$.}
 \end{definition}
+\martonst{if $T$ is a subgraph}{if $T$ is a tree and a subgraph}
 
 A spanning tree covers all vertices of a graph, and it is the smallest
 connected subgraph doing so: if you take away an edge from a spanning
@@ -1801,7 +1802,7 @@ tree); (2) $T$ covers all vertices (making it spanning).
 
 
 (2) Suppose there exists a vertex $v \in G \backslash T$; since $G$ is
-connected is, there exits an edge $b$ arriving in $v$; $b \notin T$,
+connected, there exits an edge $b$ arriving in $v$; $b \notin T$,
 since otherwise $v \in T$; since $T$ is maximal, the graph $T \cup
 \{b\}$ contains a cycle that contains $b$. But this means that $v \in
 T$, which contradicts the assumption. So $T$ contains all vertices of
@@ -1832,8 +1833,8 @@ are done. If not, $v$ belongs to another $V_{j}$ and with $j \neq 1$.
 Here is an additional characterisation of spanning trees:
 
 \begin{eig}
-A subgraph of a simple connected graph $G$ with $n$ vertices, is a
-spanning tree of $G$ id $T$ is cycle free and has $n-1$ edges.
+A subgraph of a simple connected graph $G$ with $n$ vertices is a
+spanning tree of $G$ if $T$ is cycle free and has $n-1$ edges.
 \end{eig}
 
 \begin{figure}[ht]
@@ -1893,8 +1894,10 @@ the top vertex.
 \end{figure}
 \end{description}
 
+\marton{I feel like these figures would be more intuitive if the role of the dotted and the solid lines were reversed.}
+
 The correctness of both methods results from the fact that all edges
-are eventually considered for adding to the growing tree, and on
+are eventually considered for adding to the growing tree, and from
 Theorem \ref{opspannend4}. In both methods, the intermediate graph is
 a tree, because it is connected and cycle free.
 
@@ -1907,6 +1910,8 @@ breadth-first constructed spanning trees do not need to be isomorphic.
 \end{center}
 \caption{Spanning trees for $K_{4}$\label{opspannend2}}
 \end{figure}
+
+\marton{The labels on this figure are not translated, I wasn't sure if I should edit the .fig directly}
 
 Maybe you think that {\bf all} spanning trees can be obtained by
 either method, but Figure~\ref{opspannend5} shows a graph with a
@@ -1923,7 +1928,7 @@ spanning tree that neither of the methods can compute.
 \section{Minimal spanning trees}
 
 Consider the following problem: there are a number of cities between
-which a road network must be build. The cost of building any road
+which a road network must be built. The cost of building any road
 between two cities is known (it is always strictly positive). We want
 to choose which cities to connect by a road, while satisfying two
 criteria: (1) the total cost must be minimal, (2) each city must be
@@ -1948,10 +1953,10 @@ its minimal spanning tree.
 \caption{A graph with spanning trees\label{opspannend1}}
 \end{figure}
 
-Can a graph have more than one MST? Does a graph have always at least
+Can a graph have more than one MST? Does a graph always have at least
 one MST?
 
-Efficient algorithms for constructing a MST are based on the following
+Efficient algorithms for constructing an MST are based on the following
 theorem:
 
 \begin{theorem} An edge that belongs to an MST \label{even}
@@ -1989,8 +1994,8 @@ Go to \textbf{Stop?}.
 \end{code}
 
 \begin{proof}
-At the end of of the algorithm $T$ is a tree with $n$ vertices edges
-$(n-1)$ edges, and cycle free, so $T$ is a spanning tree $G$. We still need to prove termination of the algorithm and the minimality of $T$.
+\martonst{At the end of}{The result} of the algorithm $T$ is a tree with $n$ vertices, 
+$(n-1)$ edges, \martonst{and cycle free,}{(comment: we already declared it a tree)} so $T$ is a spanning tree $G$. We still need to prove termination of the algorithm and the minimality of $T$.
 
 Termination is easy: \textbf{Add edge} is executed $(n-1)$ times, and
 then the algorithm stops. Maybe you should convince yourself that
@@ -2000,24 +2005,24 @@ $n-1$ edges.
 Figure \ref{prim2} shows the reasoning below.
 
 After the \textbf{Initialisation}, $T$ consists of one vertex, so at
-that moment $T$ is part of a MOB. We now prove that this property
+that moment $T$ is part of an MST. We now prove that this property
 is invariant under the application of \textbf{Add edge}:
 
 denote by $W$ the vertices of $T$ and suppose that $T \subset T'$ with
-$T'$ a MOB. Denote by $B$ the set
+$T'$ an MST. Denote by $B$ the set
 %
 $\{(x,y)\;|\; x \in W,\; y \in V \backslash W,\; (x,y) \in E\}$.
 %
 Consider a shortest edge $(i,j)$ in $B$ that does not cause a cycle
 when added to $T$. If $(i,j) \in T'$ then clearly $T \cup \{(i,j)\}
-\subseteq T' = $ MOB. If $(i,j) \notin T'$ then $T' \cup \{(i,j)\}$
+\subseteq T' = $ MST. If $(i,j) \notin T'$ then $T' \cup \{(i,j)\}$
 contains a cycle which contains $(i,j)$.  This cycle contains another
 edge $(x,y) \in B$ and we can take it out of $T' \cup \{(i,j)\}$ so
 that we get a new spanning tree $T''$ (it contains all vertices and is
 connected and cycle free). So the question is: is $T''$ minimal?
 Since $w(i,j) \leq w(x,y)$ (that is how $(i,j)$ was chosen), we
-have $w(T'') \leq w(T')$ so $T''$ is a MOB. We can conclude that 
-$T \cup \{(i,j)\}$ is part of a MOB.
+have $w(T'') \leq w(T')$ so $T''$ is an MST. We can conclude that 
+$T \cup \{(i,j)\}$ is part of an MST.
 
 As a result, the spanning tree constructed by Prim is a minimal
 spanning tree.
@@ -2038,7 +2043,7 @@ because of Theorem \ref{even}, this greedy algorithm delivers the
 optimal solution. That is not true for every greedy algorithm: a
 shortest path algorithm that would choose at any junction the shortest
 edge leaving that junction, often does not give an overall shortest
-path; also, a greedy chess player looses more often than they win.
+path; also, a greedy chess player loses more often than they win.
 
 Prim's algorithm is illustrated in Figure~\ref{prim1}: the initial
 vertex is A; the order in which the edges are added, is indicated as
@@ -2052,8 +2057,8 @@ a,b,c \ldots h.
 \end{figure}
 
 
-Prim's algorithm builds the MOB incrementally: at each moment during
-the execution of the algorithm, $T$ is a MOB of a subgraph of
+Prim's algorithm builds the MST incrementally: at each moment during
+the execution of the algorithm, $T$ is an MST of a subgraph of
 $G$. There is also a variant of Prim's algorithm without this
 property:
 
@@ -2074,16 +2079,16 @@ Termination of Kruskal is proven as for Prim.
 
 The proof that $T$ is a spanning tree at the end, is also similar.
 
-We prove minimality of $T$. Assume $T$ is not a MOB.  Name the edges
+We prove minimality of $T$. Assume $T$ is not an MST.  Name the edges
 of $T$ $b_{1},b_{2},\ldots ,b_{n-1}$ in the order as added by the
-algorithm. Let $S$ be a MOB of $G$ so that
+algorithm. Let $S$ be an MST of $G$ so that
 %
 $\{b_{1}, b_{2}, \ldots , b_{i}\} \subseteq S$ and with maximal $i$
 (such an $S$ exists and by Theorem~\ref{even} $i \geq 1$!). There are
 now two possibilities:
 \begin{itemize}
 \item
-\textbf{$i = n-1$}: this means that $T = S$ so $T$ is a MOB.
+\textbf{$i = n-1$}: this means that $T = S$ so $T$ is an MST.
 \item
 \textbf{$i < n-1$}: now $b_{i+1} \notin S$; let $H$ be the graph with
 the edges $\{b_{1}, b_{2}, \ldots , b_{i}\}$ (and their
@@ -2091,16 +2096,16 @@ vertices). Consider the graph $S \cup \{b_{i+1}\} = S'$. $S'$ has a
 cycle with at least one edge $b$ not belonging to $T$ (because $T$ is
 itself cycle free). So, $b \in S$. $H \cup \{b\}$ is cycle free,
 because $H \cup \{b\} \subseteq S$ and since Kruskal added edge
-$b_{i+1}$ in the $(i+1)$-de \textbf{Add edge} (for addition to $H$),
+$b_{i+1}$ in the $(i+1)^{th}$ \textbf{Add edge} (for addition to $H$),
 we know that $w(b_{i+1}) \leq w(b)$. Consequently $S' \backslash \{b\}
-= S''$ is a MOB. But that makes $S''$ into a MOB that contains
+= S''$ is an MST. But that makes $S''$ into an MST that contains
 $\{b_{1}, b_{2}, \ldots , b_{i+1}\}$, in contradiction with the
 maximality of $S$. It follows that $i < n-1$ is not possible.
 \end{itemize}
 \end{proof}
 
 Note that during Kruskal, $T$ does not need to be a tree all the
-time. The execution if Kruskal's algorithm is illustrated in
+time. The execution of Kruskal's algorithm is illustrated in
 Figure~\ref{kruskal1} on the same graph as in Figure~\ref{prim1}.
 
 \begin{figure}[ht]
