@@ -25,11 +25,11 @@ tape that is unbounded in both directions; the read/write head can
 move to the left, to the right, or stay on the same cell at each
 transition.
 
-To get insight in the performance of an algorithm, someone could
-prepare for you a tabel with for a number of input strings $s$ the
-time $time_A(s)$ the algorithm $A$ uses for deciding about $s$.
+To get insight into the performance of an algorithm, someone could
+prepare a table for you with the time $time_A(s)$ the algorithm $A$
+uses for deciding about a number of input strings $s$.
 It is difficult to do that for enough relevant strings, and it is
-difficult to interpret correctly such a tabel. We must find a better
+difficult to correctly interpret such a table. We must find a better
 way to play this game. It is reasonable to expect, and this is true
 for most reasonable/interesting algorithms, that (roughly) {\em the
 longer $s$, the higher $time_A(s)$}. It is therefore reasonable to
@@ -60,13 +60,13 @@ In this chapter the following topics are treated:
 \\
 - polynomial reduction and $\N$P-completeness
 \\
-- examples of $\NP$-complete problems: SAT, HAMPATH ...
+- examples of $\NP$-complete problems: SAT \martonst{, HAMPATH}{} ...
 \\
 - the time hierarchy
 \\
 - co-\NP and $\overline{\NP}$
 \\
-- en introduction to space complexity
+- and introduction to space complexity
 complexity
 \end{verse}
 
@@ -92,7 +92,7 @@ than $time_A(n)$ for most strings with length $n$ and that only a few
 exceptional strings $s$ with that length really need $time_A(n)$.
 
 In general, complexity theory emphasizes the performance of an
-algorithm on large input. Since the exact time needed for one step in
+algorithm on large inputs. Since the exact time needed for one step in
 a TM is not clearly defined, the time complexity of an algorithm is
 relevant only up to a constant\footnote{And don't forget the linear
   speedup theorem!}. Therefore, the following definition comes in
@@ -110,9 +110,9 @@ We also say: f is of order g, and $f$ is asymptotically dominated by
 $g$.  }
 \end{definitie}}
 
- 
+\martonst{$c.g(n)$}{$c \cdot g(n)$}
 
-Note: it is possible that for particular $f$ and $g$, both $f$ is
+Note: it is possible that for a particular $f$ and $g$, both $f$ is
 $O(g)$ and $g$ is $O(f)$ are true, but that does not mean they are
 equal.
 
@@ -150,7 +150,7 @@ and only if they have the same degree.
 
 The $O$-concept provides a means to compare algorithms. Suppose two
 algorithms $A$ and $B$ solve the same problem. Let $time_A(n)$ and
-$time_B(n)$ their complexity functions. $A$ is better (for large
+$time_B(n)$ be their complexity functions. $A$ is better (for large
 input) than $B$ if 
 
 \begin{enumerate}
@@ -160,10 +160,10 @@ input) than $B$ if
 
 So, if we have an algorithm $A$ with linear complexity
 (i.e. $time_A(n)$ is $O(n)$) and an algorithm $B$ with quadratics
-complexity function ($time_B(n)$ is $O(n^2)$), we consider $A$ the
+complexity \martonst{function}{} ($time_B(n)$ is $O(n^2)$), we consider $A$ the
 better algorithm.  One should however not conclude that algorithm $A$
 is always to be preferred over $B$: the constant factor $c$ in the
-definition of big oh could be very large for $A$ and small for $B$,
+definition of big O could be very large for $A$ and small for $B$,
 meaning that if $n$ remains small, $B$ could be more efficient.
 
 To get a bit more insight in the notion of complexity, it pays off to
@@ -178,7 +178,7 @@ other way around).
 
 
 \grijs{\begin{definitie}\label{TtimeTM} Let $T$ be a function with
-signature$ \N \rightarrow \R^+$. We say that a Turing machine $M$ runs
+signature $\N \rightarrow \R^+$. We say that a Turing machine $M$ runs
 in time $T$ if $M$ stops on every input $s$ after at most $T(|s|)$
 steps.
 \end{definitie}}
@@ -194,15 +194,13 @@ true. (Why not?)
 for some $k\in \N$.}
 \end{definitie}}
 
- 
-
-
 
 \grijs{\begin{definitie} An exponential algorithm\\
 { An algorithm is {\bf exponential} if its time complexity is
 $\theta(c^n)$ for some real number $c>1$.}
 \end{definitie}}
 
+\marton{Is the O-theta difference between these two intentional?}
 
 A quick comparison shows that exponential algorithms are eventually
 less efficient than polynomial algorithms. Suppose that a particular
@@ -242,7 +240,7 @@ accept and reject. On the other hand, we can interpret the contents
 of the tape at the end of a decision process as the result of a
 computation. If we look at it that way, the TM $M_f$ implements a
 function $f$ with range $\Sigma^*$. You can construct a TM $M_{fbit}$
-with input a tuple $\langle s,i,b \rangle$ - the TM accepts if the
+with a tuple $\langle s,i,b \rangle$ input - the TM accepts if the
 $i$-th bit of $f(s)$ equals $b$: $M_{fbit}$ uses $M_f$ as a {\em
 subroutine}\footnote{Please make the construction more explicit}. This
 shows a strong link between deciding and computing. It also works the
@@ -317,7 +315,7 @@ another machine ? The answer is ...{\em nothing} on condition we keep
 it reasonable: more than one tape, one-side tape ... it does not
 matter. We can even use random-access machines, n-dimensional tapes
 ... Each of those variant TMs can be simulated by the type of TMs we
-committed to, with only a polynomial overhead. It because tricky when
+committed to, with only a polynomial overhead. It \martonst{because}{would become} tricky when
 one would allow one memory cell to contain an arbitrarily large
 number, or count some arithmetic operations on such numbers as unit
 cost. For instance, it would be weird (but scientifically valid) to
@@ -325,6 +323,8 @@ define the time cost of the $n^{th}$ step during a T execution as
 $2^{-n}$\footnote{This machine is known as a Zeno-machine.}: each
 algorithm takes at most one time unit ... and we can fold the
 complexity theory books.
+
+\marton{The footnote is again unfortunately placed, as part of the exponent}
 
 
 \paragraph{Outside of \P ...} 
@@ -349,7 +349,7 @@ then perhaps determine its complexity.
 
 For numbers, we have (at least) two natural encodings: we can use a
 unary alphabet, or a binary one. In the unary one, the number $2048$
-has representation length 2048, in binary one, it has length 12. Let
+has representation length 2048, in the binary one, it has length 12. Let
 us imagine a $TM_u$ and a $TM_b$ for either encoding. The best
 possible $TM_u$ needs to count (modulo 2) the number of characters in
 $s$, so it is $O(|s|)$. The best $TM_b$ needs to skip all characters
@@ -358,7 +358,7 @@ $O(|s|)$ as well. But in terms of the size of the number represented
 by $s$, the binary representation is superior: for deciding about
 $2048$, $TM_b$ needs a little more than $log_2(2048)$ steps, while
 $TM_u$ needs about 2048. On the one hand, both algorithms have linear
-complexity, on the other hand, the unary encoding needs exponential
+complexity, on the other hand, the unary encoding needs exponentially
 more time for deciding the same number.
 
 A second example makes it worse: consider a naive algorithm to decide
@@ -376,7 +376,7 @@ whether a number $n$ is prime. It has a loop of the form
 \end{algorithmic}
 
 In both encodings, the loop is executed $n$ times, but in terms of the
-size of the encoding, that is exponentially more with the binary
+size of the encoding, that is exponentially \martonst{more}{less} with the binary
 representation than with the unary one. In one case we could think
 that the algorithm is polynomial, in the other case that it is
 exponential.
@@ -400,16 +400,16 @@ as elementary. How many elementary multiplications do we need to
 multiply two numbers? For simplicity, we consider numbers of the same
 length (add zeros if needed):$a= a_na_{n-1}...a_1$, and
 $b = b_nb_{n-1}...b_1$. We want to compute $a \times b$. At school, we
-learned to do this with $n^2$ elementary multiplications,and some
-additions. People have thought for a long time that it could no be
-done with essentially less: the grat A. Kolmogorov even has put this
+learned to do this with $n^2$ elementary multiplications, and some
+additions. People have thought for a long time that it could not be
+done with essentially less: the great A. Kolmogorov even has put this
 forward as a conjecture he strongly believed in. A. Karatsuba showed
 that it is possible anyway.
 
 Again for simplicity, assume that $n$ is even and equal to $2m$. Then
 one can write $a$ and $b$ as
 %
-$a = A_{2}10^m + A_1$ en $b = B_{2}10^m + B_1$.
+$a = A_{2}10^m + A_1$ and $b = B_{2}10^m + B_1$.
 %
 Then 
 
@@ -461,7 +461,7 @@ let $L$ be the set of composite numbers; there exists of course a TM
 $M$ that decides that language: a typical algorithm would try to find
 a divisor for a given number. However, if a number $n \in L$ than
 there exists a divisor $d$, and we could give the numbers $n$ and $d$
-to a TM $V$ that verifies thatr $d$ is indeed a divisor of $n$: $V$
+to a TM $V$ that verifies that $d$ is indeed a divisor of $n$: $V$
 has less work to do than $M$, and according to the definition, it is a
 verifier for $L$, while the given divisor $d$ is the certificate. Note
 that it impossible to fool or mislead the verifier: you cannot make it
@@ -479,7 +479,7 @@ is easier than constructing it: $V$ needs less work than $M$; try to
 fool $V$ ... it is impossible
 
 \item
-let $L$ be the set of TMs $M$ for which $L_M$ is not empty; we showed
+let $L$ be the set of $M$ TMs for which $L_M$ is not empty; we showed
 earlier that this language is not decidable; still, for every TM $M$
 with $L_M \neq \emptyset$, there is a certificate that it is in $L$,
 namely any $c \in L_M$; the verifier just runs $M$ on $c$
@@ -537,10 +537,10 @@ Consider all three examples and comment on that question.
 
 
 Suppose there is a function $f$ so that for a verifier $V$ and
-certificate $c$ for $s$, the length of $s$ is bounded above by
+certificate $c$ for $s$, the length of $s$ has an upper bound of
 $f(|s|)$, or:
 %
-$|c| \leq f(|s|)$. Now we can generate a certificate as follows for
+$|c| \leq f(|s|)$. Now we can generate a certificate for
 any $s \in L$ as follows:
 
 \begin{algorithmic}
@@ -559,7 +559,7 @@ say something about its complexity?
 
 \begin{itemize}
 \item
-in the worst case, the for-loop is executed $O(2^{f(|s|)})$ (we assume
+in the worst case, the for-loop is executed $O(2^{f(|s|)})$ \marton{times} (we assume
 the alphabet has two elements)
 \item 
 if $M$ is a $g$-time machine, the cost of the body of the for-loop is
@@ -598,7 +598,7 @@ known}\label{nondetverifier}
 
 Vice versa, we can transform this {\em NDTM$_V$} into a verifier: it
 needs a certificate. Give as certificate a string representing the
-choices needed for arriving at an accept state. Now simulate simulate
+choices needed for arriving at an accepting state. Now simulate
 {\em NDTM$_V$} with those choices, of course with a deterministic TM
 ...
 
@@ -610,20 +610,20 @@ Turing machine.
 
 \subsection{Two definitions of \NP}
 
-The class \NP can be defined in two way: the material in the previous
+The class \NP can be defined in two ways: the material in the previous
 section contains the ingredients to prove their equivalence.
 
 \grijs{
 \begin{definitie} \NP with verifiers\\
 \NP is the set of languages $L$ for which there exists a polynomial
 verifier and a polynomial $p$ such that for each $s \in L$, there
-exists a certificate $c$ vso that $|c| \leq p(|s|)$.  ~\\ ~\\
+exists a certificate $c$ so that $|c| \leq p(|s|)$.  ~\\ ~\\
 More formally: $L \in \NP$ if and only if
 
 $~~~~~~~~\exists$ a polynomial TM $M$ and a polynomial $p: \N
 \rightarrow \R^+$, so that
 
-$~~~~~~~~~~~~~~~s \in L  \Leftrightarrow  \exists c \in \Sigma^{p(|s|)}$ met $M(\langle s,c \rangle) = accept$
+$~~~~~~~~~~~~~~~s \in L  \Leftrightarrow  \exists c \in \Sigma^{p(|s|)}$ with $M(\langle s,c \rangle) = accept$
 \end{definitie}
 }
 
@@ -651,8 +651,8 @@ graphs with a Hamiltonian cycle (*)
 \item
 non-connected graphs
 \item
-weighted graphs with between two given nodes a simple pad shorter than
-a given number (*)
+weighted graphs with a simple path shorter than
+a given number between two given nodes (*)
 \item
 Come up with something yourself!
 \end{itemize}
@@ -669,8 +669,8 @@ and {\bf not} {\em non-polynomial}.
 
 In a previous chapter, we have reduced languages to each other: the
 many-one reduction $\leq_m$ {\mbox is an example} (See
-Page~\pageref{manyone}). The reduction below takes into account
-complexity.
+Page~\pageref{manyone}). The reduction below takes
+complexity into account.
 
 \grijs{\begin{definitie} Polynomial reduction\\
 { Given two languages $L_1\subseteq \Sigma_1^*$ (over alphabet $T_1$)
@@ -687,9 +687,9 @@ We denote this by $L_1 \leq_p  L_2$.}
 
 
 $\leq_p$ differs from $\leq_m$ only in the fact that the mapping must
-be computable in poly-time. This makes $\leq_p$ finer than $\leq_m$:
+be computable in \martonst{poly-time}{polynomial time}. This makes $\leq_p$ finer than $\leq_m$:
 if $A \leq_p B$ then $A \leq_m B$. Check whether some of the examples
-of $\leq_m$ earlier in this course notes, were actually $\leq_p$?
+of $\leq_m$ earlier in this course notes were actually $\leq_p$?
 
 
 
@@ -698,7 +698,7 @@ The relation $ \leq_p $ is transitive, or more explicitly:\\
 if $L_1 \leq_p L_2$ and $L_2 \leq_p L_3$ then $L_1 \leq_p L_3$.
 \end{stelling}}
 \begin{proof}   
-Let $f$ be the polynomial computable functions belonging to $L_1
+Let $f$ be the polynomial computable function belonging to $L_1
 \leq_p L_2$, and $g$ to $L_2 \leq_p L_3$; $M_f$ and $M_g$ are the
 corresponding TMs: the first is a $T_f$-machine, the second a
 $T_g$-machine, and $T_f$ and $T_g$ are polynomials. We prove that
@@ -731,7 +731,7 @@ If $L_1  \leq_p  L_2$ and $L_2\in \P$ then $L_1 \in \P$.
 
 \begin{proof} Let $L_1\subseteq T_1^*$, $L_2\subseteq T_2^*$, and $L_1
 \leq_p L_2$ via the function $f:T_1^*\rightarrow T_2^*$ that is
-polynomial computable by TM $M_f$. Since $L_2\in \P$, there exists a
+polynomial\marton{ly} computable by TM $M_f$. Since $L_2\in \P$, there exists a
 TM $M_2$ that decides $L_2$ in polynomial time. Construct TM $M$: it
 executes $M_f$ and $M_2$ in sequence. Just as in the previous theorem,
 we can prove that $M$ has polynomial time complexity. Moreover, $M$
@@ -770,8 +770,8 @@ of exactly three equivalence classes. Make sure you understand this.
 
 \subsection{NP--complete}
 
-Within $\NP$, there exists a special class of languages: de most
-difficult of all in \NP !
+Within $\NP$, there exists a special class of languages: the most
+difficult of all in $\NP$!
 
 \grijs{
 \begin{definitie}\label{defnpc} The class $\NP$--complete\\
@@ -786,11 +786,11 @@ We denote the class of $\NP$--complete languages by $\NPC$.
 
 
 Informally, an $\NP$--complete language is so difficult that any other
-language can be translated to it in polynomial. In terms of problems:
-a problem is $\NP$--complete if it has an solution (in the form of an
+language can be translated to it in polynomial \marton{time}. In terms of problems:
+a problem is $\NP$--complete if it has a solution (in the form of an
 algorithm) so that every other $\NP$ problem has a solution that can
 be deduced from the $\NP$--complete solution by a polynomial reduction
-van de $\NP$--complete. A priori, it is not clear whether
+from the $\NP$--complete. A priori, it is not clear whether
 $\NP$--complete languages exist at all, neither whether $\NPC$
 coincides with $\NP$ or $\P$. However, the relevance of this class is
 captured in the following theorem:
@@ -804,7 +804,7 @@ captured in the following theorem:
 \begin{proof} ~~
 \begin{verse}
 1. Suppose $L_1,L_2\in\NPC$. By the definition of $\NP$--completeness,
-both $L_1 \leq_p L_2$ and $L_2 \leq_p L_1$. So,$L_1$ and $L_2$ are
+both $L_1 \leq_p L_2$ and $L_2 \leq_p L_1$. So, $L_1$ and $L_2$ are
 polynomial equivalent. The class $\NPC$ is therefore part of one
 equivalence class $C$. Moreover, suppose that $L' \in C\setminus \NPC$,
 then for every $L\in\NP$, $L \leq_p L'$, meaning $L' \in \NPC$, so $C = \NPC$.
@@ -817,8 +817,8 @@ $L\in\P$, it follows from Theorem~\ref{P_is_klein} that $L'\in
 \end{verse}
 \end{proof}
 
-The previous previous theorem shows that if one $\NP$--complete
-problem can be solved in polynomial time, all problem in \NP can be
+The previous theorem shows that if one $\NP$--complete
+problem can be solved in polynomial time, all problems in \NP can be
 solved in polynomial time. There is however lots of evidence that \NP
 does not equal $\P$.\footnote{On the other hand ... Donald Knuth
 believes in $\P = \NP$.}
@@ -840,7 +840,7 @@ The first problem proven to be in \NPC is the {\bf satisfiability}
 problem, often abbreviated by SAT. We need some definitions to specify
 the SAT language. Let $U = \{u_1,u_2,\ldots,u_n\}$ a finite set of
 boolean variables, i.e. each variable $u_i$ can take the values {\em
-true} or {\em false}.  A literal (or atom) from $U$ we mean either one
+true} or {\em false}.  By a literal (or an atom) from $U$ we mean either one
 of the variables $u_i$, or its negation denoted by $\neg {u}_i$ (read
 this as {\em not $u_i$}). Consider a formula in Conjunctive Normal
 Form (CNF) over $U$, i.e. a conjunction of disjunctions of literals
@@ -848,10 +848,10 @@ over $U$ as in the following example:
 %
 $C= (u_1 \vee u_2) \wedge (u_2 \vee \neg u_4 \vee u_7) \wedge  (\neg u_2 \vee u_3)$.
 
-The SAT problem is: given a formula in DNF, does there exist a truth
+The SAT problem is: given a formula in \martonst{DNF}{CNF}, does there exist a truth
 assignment to the variables so that the formula is true?
 
-More precisely, SAT is the language of DNF formulas that have a
+More precisely, SAT is the language of \martonst{DNF}{CNF} formulas that have a
 satisfying assignment.
 
 Stephen A. Cook\footnote{Turing award 1982} proved in 1971
@@ -868,33 +868,33 @@ non-deterministic definition of \NP, and once using the verifier
 definition. What is the size of the certificate? How did you encode
 the language?
 
-Once the first $\NP$--complete problem was know, many more
+Once the first $\NP$--complete problem was known, many more
 $\NP$--complete were found. Here are just a few examples: Hamiltonian
 graphs, N-colorable graphs, subgraph isomorphism, the knapsack
 problem, pancake sorting, 0-1 integer programming, lots of
 combinatorial problems and even puzzles like Sudoku.
 
-A language $L$ that fulfills only the second condition of Definition
+A language $L$ that only fulfills the second condition of Definition
 \ref{defnpc}, is named {\em NP-hard}. One also uses $\NP$--hard for
 optimization problems whose decision version is $\NP$--complete. There
 exist $\NP$--hard problems that are not $\NP$--complete (i.e. they
-are not in \NP): $SAT$ even has a polynomial reduction to $H_{TM}$,
-and so has every $\NP$. Work this one out!
+are not in $\NP$): $SAT$ even has a polynomial reduction to $H_{TM}$,
+and so has every \marton{other problem in} $\NP$. Work this one out!
 
 
 \subsection{Examples of polynomial reductions}
 
 \subsubsection{SAT to 3-SAT}
 
-3-SAT is SAT with the restriction that each disjunction in the DNF has
+3-SAT is SAT with the restriction that each disjunction in the \martonst{DNF}{CNF} has
 exactly three literals. One formula in 3-SAT is
 %
 $(a \vee b \vee \neg c) \wedge (\neg a \vee b \vee c)$. Every formula
-in DNF can be transformed to that format. Consider each disjunction in
+in \martonst{DNF}{CNF} can be transformed to that format. Consider each disjunction in
 the formula. There are three cases:
 \begin{itemize}
 \item 
-the disjunction contains less than three literals: repeat one of the
+the disjunction contains fewer than three literals: repeat one of the
 literals until there are three
 \item 
 the disjunction contains exactly three literals: just leave them
@@ -903,7 +903,7 @@ unchanged
 the disjunction contains strictly more than three literals: the
 disjunction is of the form
 %
-$a_1 \vee a_2 \vee  ... \vee a_n$ met $n > 3$.
+$a_1 \vee a_2 \vee  ... \vee a_n$ with $n > 3$.
 
 Take a new boolean variable, say $b$, and replace this one disjunction
 by the two disjunctions
@@ -933,12 +933,12 @@ should now be able to show that n-SAT $\in \NPC$ whenever $n \geq 3$,
 but ...
 
 \paragraph{2-SAT} has a polynomial\footnote{in the number of occurring
-literals} algorithm. One find in literature even that 2-SAT has a
+literals} algorithm. One can even find in the literature that 2-SAT has a
 linear algorithm, but that is on a random access machine, not on a
 TM. In any case, 2-$SAT \notin \NPC$ ... or is it?
 
 
-\subsubsection{reducing 3-SAT to $k$-CLIQUE}
+\subsubsection{Reducing 3-SAT to $k$-CLIQUE}
 
 The language $k$-CLIQUE consists of tuples $\langle G,i \rangle$
 in which $G$ is a graph with a clique of size $i$, or otherwise said:
@@ -979,8 +979,8 @@ and only of the formula belongs to SAT.
 
 
 \begin{vb}
-The reduction can be applied to smaller disjunctions as well. We take
-as formula: $(a \vee b) \wedge (\neg a \vee b) \wedge (a \vee \neg b)
+The reduction can be applied to smaller disjunctions as well. We take the following
+as the formula: $(a \vee b) \wedge (\neg a \vee b) \wedge (a \vee \neg b)
 \wedge (\neg a \vee \neg b)$
 
 
@@ -1029,6 +1029,7 @@ general questions:
 
 
 \subsection{Why are some problems to difficult?}
+\martonst{to}{so/too?}
 
 For SAT, one could argue as follows: there are $2^n$ possible
 assignments ($n$ is the number of boolean variables), and our
@@ -1071,8 +1072,8 @@ computed on a TM in $O(f)$ steps and $f(n) \geq n$. Most probably, you
 will never during your life meet a (non-trivial)
 non-time-constructible function :-)
 
-R. Stearns and J. Hartmanis proved in 1965 the first version of the
-time hierarchy theorem, quite a few years before the notion of
+R. Stearns and J. Hartmanis proved the first version of the
+time hierarchy theorem in 1965, quite a few years before the notion of
 $\NP$--completeness came to life. For that - and other things - they
 got the Turing award in 1993.
 
@@ -1082,11 +1083,11 @@ it is limited. This is a good moment to think about the following:
 \begin{verse}
 - how many languages are in $DTIME(n^k)$?
 
-- how many languages are in \P?
+- how many languages are in $\P$?
 
-- how many languages are in \NP?
+- how many languages are in $\NP$?
 
-- if you answered {\em countable infinite} to one or more of these
+- if you answered {\em countably infinite} to one or more of these
 questions, would that also be effectively enumerable?
 \end{verse}
 
@@ -1094,7 +1095,7 @@ questions, would that also be effectively enumerable?
 \section{co-\NP}
 
 Since the definition of \NP treats elements of the language
-differently from the one not in the language, it is worthwhile
+differently from the ones not in the language, it is worthwhile
 investigating the complement of languages in \NP:
 
 \grijs{
@@ -1132,27 +1133,27 @@ you would have missed thinking up a non-trivial polynomial certificate
 
 - COMPOSITE (the set of composite numbers) has a short certificate: a
 divisor of the number; it is difficult to think of a short
-certificate for PRIME (which is $\overline{COMPOSITE}$; on the other
+certificate for PRIME (which is $\overline{COMPOSITE}$); on the other
 hand, since 2004 we know that PRIME $\in \P$, so this short
 certificate indeed exists ... (can you think of one?)
 \end{verse}
 
 
 After these examples, you should understand that $\P \subseteq \NP
-~\cap$ co-\NP, and that $\NP = $co-\NP is not a trivial question. You
+~\cap$ co-\NP, and that $\NP = $ co-\NP is not a trivial question. You
 must also be able to argue that $\P = \NP$ implies $\NP = $ co-\NP.
 And what if $SAT \in$ co-$\NP$?
 
 \section{$\NP$--complete or $\P$?}
 
-In this section, we merely want to point out that the details how a
+In this section, we merely want to point out that the details of how a
 problem is specified really matter. Consider the following two
 languages:
 
 \begin{verse}
 - $k$-CLIQUE = $\{\langle G,i \rangle|$ i an integer, G a graph with an i-clique$\}$
 
-- 7-CLIQUE = $\{\langle G \rangle|$ G a graph with an 7-clique$\}$
+- 7-CLIQUE = $\{\langle G \rangle|$ G a graph with a 7-clique$\}$
 \end{verse}
 
 We showed that $k$-CLIQUE is in \NPC (we reduced SAT to it), but
@@ -1243,7 +1244,7 @@ $\PSPACE = \cup_{k\geq 1} DSPACE(n^k)$
 It should be clear now that $\P \subseteq \PSPACE$.
 
 Just as for time, there exists a space hierarchy
-theorem. A.o. $DSPACE(f) \subsetneq DSPACE(f^2)$ for {\em decent} $f$.
+theorem. \martonst{A.o.}{E.g.} $DSPACE(f) \subsetneq DSPACE(f^2)$ for {\em decent} $f$. \marton{What does decent mean here?}
 
 \grijs{
 \begin{definitie}
@@ -1291,7 +1292,7 @@ number of vertices.
 \end{algorithmic}
 
 {\sc existspath}$(a,z,n)$ returns TRUE if there exists a path from a
-to z with length at more l. Its time complexity is horrible. If you
+to z with length at \martonst{more}{most} l. Its time complexity is horrible. If you
 imagine it is executed on a classical machine (your laptop), you see
 that no more than $\log(n)$ stack frames are needed, and that each
 stack frame has size at most $\log(n)$ bits. The algorithm can be
@@ -1315,7 +1316,7 @@ $\LL = DSPACE(\log)$
 Log-space algorithms are important, e.g. in the context of large
 databases, or long DNA-sequences: with the log of the space taken by a
 database, you can keep a fixed number of pointers (in binary) and
-often that is often enough to traverse the database and answer a
+that is often enough to traverse the database and answer a
 set of queries.
 
 \newpage
@@ -1346,11 +1347,11 @@ decide a regular language, actually none at all. Besides, only regular
 languages can be decided with strictly less than $\log$-SPACE.
 
 Context free languages can be recognized by a general $O(n^3)$
-algorithm (on a 3-tape TM) algorithm known by the names of the authors
+algorithm (on a 3-tape TM) known by the names of the authors
 as Cocke-Younger-Kasami. It is a form of {\em chart} or {\em tabular
   parsing}, or dynamic programming. Moreover, you only need linear space on the stack of the PDA, so $CFL \subset SPACE(n)$.
 
-The class of non-deterministic LBA decides languages by using no more
+The class of non-deterministic LBAs decides languages by using no more
 than the space occupied by the input, so context-sensitive languages
 constitute the class {\bf NSPACE}(n).
 
@@ -1383,7 +1384,7 @@ because of the cold war - his result was not well-known in the West.
 The finishing touch was the understanding that one problem in
 $\NP$-complete $\cap \P$ is enough to collapse $\P$ and $\NP$, or to
 put it in words: verifying [a solution] would be as difficult as
-computing [it] (module the exponent in the polynomial of
+computing [it] (\martonst{module}{modulo?} the exponent in the polynomial of
 course). However, the strict inclusion of $\P$ in $\NP$ is an open
 problem. It feels like betting on the opposite is a bad choice,
 because there are so many NP-complete problems for which researchers
@@ -1392,13 +1393,13 @@ you should make up your own mind about this fundamental problem in CS!
 
 Currently, the separation between $\NP$-complete and $\P$ is important
 because one should not hope for an efficient solver for intractable
-problem (for ever growing input size). Most everyday real problems
+problems (for ever growing input size). Most everyday real problems
 are $\NP$-complete (vehicle routing, exam rostering ...) or they have
 algorithms with an impractical exponent (PRIME). Fortunately,
 efficient solvers based on different principles have been developed,
 as well as the theory on which they are based. We have very fast
-probabilistic algorithms for checking whether a number is prime (they
-fail almost never), we have heuristics and approximation schemes for
+probabilistic algorithms for checking whether a number is prime (they almost never
+fail), we have heuristics and approximation schemes for
 optimization problems for which we have no polynomial algorithm (at
 this moment). Sometimes we can fix a parameter and that results in a
 tractable problem. Complexity theory has ramifications in other
