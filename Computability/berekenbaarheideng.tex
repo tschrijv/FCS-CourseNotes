@@ -5,13 +5,14 @@
 
 In the previous sections, we looked at two classes from the Chomsky
 hierarchy. In particular we studied the machines that decide the
-membership problem for these languages: does a given string belong to
+membership problem for these languages: whether a given string belong to
 a given language. We already understand that some (many?) languages
 are beyond the decision power of DFAs, PDAs, and even LBAs. So it is
 time to start studying machines that can do more. We use Turing
 machines.
 
 Roughly speaking, a TM has a two infinite (unlimited would be enough)
+\marton{maybe a short explanation of what two infinite and unlimited are would be nice here}
 tape consisting of squares (or cells) with one symbol each, a control
 unit, a tape head that can read the symbol in a square, and write a
 new one. The action of the machine depends on the internal state of
@@ -74,9 +75,11 @@ $~~~~~~~~~~Q \times \Gamma \rightarrow Q \times \Gamma \times \{L,R,S\}$
 \end{definitie}
 }
 
+\marton{Maybe a clarification in the definition about L,R,S, as this is the first time we abbreviate}
+
 The machine is initialized as follows: 
 \begin{itemize}
-\item the symbols of a string from $\Sigma^*$ is put in subsequent
+\item the symbols of a string from $\Sigma^*$ are put in subsequent
 tape cells: they constitute the input string; all other cells contain
 \#
 \item the machine is put in start state $q_s$
@@ -85,12 +88,12 @@ tape cells: they constitute the input string; all other cells contain
 \end{itemize}
 
 The machine works as follows: on the basis of the state of the
-machine, and the symbol under its head, $\delta$ determines the next
+machine and the symbol under its head, $\delta$ determines the next
 state of the machine, which symbol needs to be written, and the
 direction of the head movement. This is repeated until
 \begin{itemize}
 \item the machine arrives in the state $q_a$: the input string is
-  accepted and sometimes, the contents of the tape at this moment is
+  accepted and sometimes, the contents of the tape at this moment are
   considered the result of the computation
 \item the machine arrives in the state $q_r$: the input string is
  rejected
@@ -143,8 +146,8 @@ TM so that TM recognizes $L$ or alternatively, $L = L_{TM}$ }
 \end{definitie}}
 
 Here is an example of a recognizable language L and a TM that
-recognizes L: $\Sigma = \{a,b\}$, $L = \{a\}^*$. The next table
-describes $\delta$:
+recognizes L: $\Sigma = \{a,b\}$, $L = \{a\}^*$. Table \ref{turing3}
+describes $\delta$.
 
 \begin{table}[ht]
 \center
@@ -163,7 +166,7 @@ x      &  \#        &  x    &    \#     &  S   \\
 \end{table}
 $\infty_{TM}$ is not empty: every string not in L brings the machine
 in an infinite loop. But we can also construct a TM for L that always
-halts:
+halts, this is shown in table \ref{turing4}.
 
 \begin{table}[ht]
 \center
@@ -207,7 +210,7 @@ Other terminology for {\em decidable language} is {\em recursive
 
  \grijs{\begin{definitie} Co-recognizable/co-decidable\\
 \textup{A language L is \textbf{co-recognizable/co-decidable} if $\overline{L}$
-recognizable/decidable is.}
+is recognizable/decidable.}
 \end{definitie}}
 
  \grijs{\begin{stelling}\label{corecognizable}
@@ -247,7 +250,7 @@ In fact, most languages are not recognizable.
 What is our plan with Turing Machines?
 
 \begin{itemize}
-\item we want to explore further the difference between deciding and
+\item we want to further explore the difference between deciding and
   recognizing
 \item fit into this picture the regular and context free
   languages
@@ -289,7 +292,7 @@ deciding the language $\{0^n1^n|n \geq 0\}$.
 \end{figure}
 
 Each state has as many outgoing edges as elements in $\Gamma$ (some
-parallel edges are treated together) - except for the start and end
+parallel edges are treated together) - except for the \martonst{start and end}{accepting and rejecting}
 state of course. The label represents the $\delta$ of the machine. We
 use \_ to indicate that the value at this place is irrelevant: this is
 typical for transitions to a halting state.
@@ -300,7 +303,7 @@ One can describe in words what the machine does with an input
 consisting of only zeroes and ones.
 
 \begin{itemize}
-\item if in the start state, the head sees a
+\item if in the start state the head sees a
 \begin{itemize}
 \item \#: accept
 \item 1: reject
@@ -308,7 +311,7 @@ consisting of only zeroes and ones.
   will skip all zeroes
 \end{itemize}
 
-\item if in state $n$, the head sees a 
+\item if in state $n$ the head sees a 
 \begin{itemize}
 \item \#: reject
 \item 1: go right to state $e$; it will skip all ones
@@ -347,6 +350,8 @@ The TM in Figure~\ref{turing2} proves that
 %
 $\{0^n1^n|n \geq 0\}$ is a decidable language.
 
+\marton{Does this TM really decide $0^n1^n$ and not $0+1+|\epsilon$?}
+
 % \clearpage
 \section{Representation and simulation of TM computations}
 
@@ -377,11 +382,11 @@ $~~~~~~~~~~\alpha a q b \beta$ \rpijl $\alpha p a c \beta$ if $\delta(q,b) = (p,
 
 $~~~~~~~~~~\alpha q b \beta$ \rpijl $\alpha c p \beta$ if $\delta(q,b) = (p,c,R)$
 
-You can add some transitions for the case that $\alpha$ or $\beta$ is
+You can add some transitions for the case where $\alpha$ or $\beta$ is
 empty: you might need to generate extra occurrences of \#.
 
 
-A sequence of configurations from a begin to an end configuration -
+A sequence of configurations from a start to an end configuration -
 following $\delta$ - is called a {\em computation history}.
 
 It is reasonably easy to see that the computation of any TM can be
@@ -390,7 +395,7 @@ concrete, here is some Prolog code. A configuration $\alpha q \beta$
 is represented as a term with principal functor conf/3, as follows:
 
 $~~~~~~~~~~~~conf([a_n, ... , a_2,a_1],q,[b_1,b_2,...,b_m])$, where
-$a_1a_2...a_n = \alpha$ en $b_1b_2...b_m = \beta$
+$a_1a_2...a_n = \alpha$ and $b_1b_2...b_m = \beta$
 %
 \\ and $a_i, b_j \in \Gamma$.\footnote{Look up {\em Huet's Zipper}}
 
@@ -430,7 +435,7 @@ We often need to combine a number of Turing Machines $TM_1, TM_2
 ... TM_n$ into a new Turing Machine TM. We use words like
 
 $~~~~~~~$ {\em TM calls T$M_1$ as a subroutine}\\
-en
+and
 
 $~~~~~~~$ {\em when $TM_1$ stops in its accepting end state,
 let $TM_2$ run on s}
@@ -470,10 +475,10 @@ iterative deepening (of breadth-first), and as soon as it arrives in an end stat
 
 We have defined the notions recognizable/decidable in terms of
 languages over an alphabet. It is equally common to define those
-concepts in the context of subsets if $\N$. Those two views are
+concepts in the context of subsets of $\N$. Those two views are
 equivalent, because $\N$ can be seen as $\{0,1\}^*$: it would be a
-binary notation of natural numbers (but another one would be ok as
-well). So, a part of $\N$ is a language. Commonly, one reserves the
+binary notation of natural numbers (but another one would be OK as
+well). So, a \martonst{part}{subset} of $\N$ is a language. Commonly, one reserves the
 term {\em (recursive) enumerable} for such sets (or languages), and
 the terms {\em decidable} and {\em recognizable} for properties or
 decision problems. The distinction is not so important: let $P$ be a
@@ -482,10 +487,10 @@ define the subsets $\{x | x \in V, x~has~property~P\}$. It now becomes
 apparent that properties and subsets give an equivalent view on the
 issues.
 
-The word {\em recursive} triggers often the image of a function
+The word {\em recursive} often triggers the image of a function
 (method, predicate, procedure ...) activating itself, or a data type
 defined in terms of itself (a list, a tree, ...). But the {\em
-  recursive} in term {\em recursive enumerable}, it is not related to
+  recursive} in the term {\em recursive enumerable} is not related to
 that.
 
 
@@ -493,7 +498,7 @@ that.
 \section{Encoding}
 
 When we describe a language informally, there is no need to bother
-about an encoding. We can talk about {\em planar graphs} for instance,
+with an encoding. We can talk about {\em planar graphs} for instance,
 without thinking in terms of a particular alphabet. Still, when we
 want to describe an algorithm dealing with planar graphs, then we need
 an alphabet and a mapping from graphs to strings over that alphabet.
@@ -528,12 +533,12 @@ That is reasonable.
 You are studying prime numbers. You chose a two-part representation of
 numbers: the first part indicates whether the number is prime or not;
 if it is, this first part equals $p$, otherwise $n$. The second part
-of the representation is the unary representation. Som 7 is
+of the representation is the unary representation. So 7 is
 represented as p@@@@@@@ and 9 as n@@@@@@@@@
 
 That is not reasonable: your encoding has extra information.
 
-Maybe you think that having more information is a good. For instance,
+Maybe you think that having more information is a good thing. For instance,
 you can now decide whether a number is prime by inspecting its first
 symbol only. You have a constant time check for primality!
 
@@ -553,25 +558,25 @@ above are equivalent: you can transform one into the other with an
 algorithm implemented on a TM.
 
 As far as complexity theory is concerned, the two encodings are not
-equivalent! E.g. adding two number in unary notation is O(n) (with $n$
+equivalent! E.g. adding two numbers in unary notation is O(n) (with $n$
 the size of the numbers), while in binary encoding, it is
 O(log(n)).
 
 We denote the encoding of an object $S$ by $\langle S \rangle$. When
-we encode a sequence if objects $S_i$, we use $\langle
+we encode a sequence of objects $S_i$, we use $\langle
 S_1,S_2,... \rangle$.
 
 \paragraph{Selfie:}
 
 \begin{itemize}
 \item[]
-Find reasonable encodings for trees, XML-document, ...
+Find reasonable encodings for trees, XML-documents, ...
 
 Find some unreasonable encodings for the same objects, or for others.
 
 For a function, say from $\N$ to $\N$, one can also encode the
 output. Your professor gave you as project to compute, on input $i$, the
-$i^{th}$ prime number. You finished very quickly: at input $i$, you
+$i^{th}$ prime number. You finished very quickly: for input $i$, you
 produced output $i$, arguing that $i$ in the output is just the
 encoding of the $i^{th}$ prime number. Your professor was not
 happy. Was that reasonable?
@@ -587,7 +592,7 @@ A TM can be described completely by its transition table (plus some
 conventions to identify the start and end states). One can encode the
 transition table, by using numbers for the states (from 1 to ...),
 numbers for the symbols, and a number for the L,R,S. These numbers
-would then be encoded in unary say, and one would just need a new
+would then be encoded in - say - unary, and one would just need a new
 symbol for delimiting the different numbers. We put the encoding of 
 the transition table on the first tape of a UTM (the program tape). On
 its second tape (the memory), we write an input string (using the same
@@ -614,21 +619,22 @@ Jr. said: {\em One person's data is another person's program.}
 
 
 Is a UTM {\em big}? Claude Shannon showed one can trade states for
-symbols in a TM - see the exercise page \pageref{twosymbols}. So it
+symbols in a TM - see the exercise on page \pageref{twosymbols} \marton{unclear which exercise}. So it
 has become a bit of a habit to express the size of a TM as
 $(|Q|,|\Gamma|)$, or even just the product $|Q| \times |\Gamma|$. In
-1956 Marvin Minsky\footnote{Turing award 1969} constructed (7,4)
-UTM. In the mean time, it has been proven that a particular (2,3)
-machine is universal - but it is a bit controversial.  BTW, (2,2) TMs
+1956 Marvin Minsky\footnote{Turing award 1969} constructed a (7,4)
+UTM. In the meantime, it has been proven that a particular (2,3)
+machine is universal - but it is a bit controversial.  By the way, (2,2) TMs
 cannot be universal.
 
 
 
 \clearpage
 \section{The Halting problem}\label{halting}
+\marton{Why is the halting problem capitalized everywhere?}
 
-Informally, the question is this: given a Turing Machine M, and a
-string s, is it possible to determine whether M stops on input s.
+Informally, the question is this: given a Turing Machine M and a
+string s, is it possible to determine whether M stops on input s?
 We don't care whether M accepts or rejects s: in both cases, M stops.
 So, the question asks whether M goes into a loop or not. We want this
 question to be solved by an algorithm, so we actually want a
@@ -657,8 +663,8 @@ We prove this {\em by contradiction}.
 
 
 Assume the existence of a decider B for $A_{TM}$. This means that on
-input $\langle M,s \rangle$, B accepts if M on input s stops in its
-$q_a$ and rejects if M on input s stops in its $q_r$ or loops. We
+input $\langle M,s \rangle$, B accepts if for input s M stops in its
+$q_a$, and rejects if for input s M stops in its $q_r$ or loops. We
 write:
 
 $~~~~~~~~B(\langle M,s \rangle)$ is accept if M accepts s and otherwise reject
@@ -696,7 +702,7 @@ $A_{TM}$ is undecidable.
 $H_{TM}$ is undecidable.
 \end{stelling}}
 \begin{proof}
-Suppose $H_{TM}$ is decidable by the H. We define a decider $B$ for
+Suppose $H_{TM}$ is decidable by H. We define a decider $B$ for
 $A_{TM}$ as follows: on input $\langle M,s \rangle$:
 \begin{itemize}
 \item $B$ runs $H$ on $\langle M,s \rangle$
@@ -718,11 +724,11 @@ $H_{TM}$ is recognizable.
 \begin{proof}
 On input $\langle M,s \rangle$, the recognizer $H$ for $H_{TM}$ simply
 runs $M$ on s: if it stops (either end state), $H$ accepts its input;
-otherwise it keeps running ... and that is ok.
+otherwise it keeps running ... and that is OK.
 \end{proof}
 
 Quite often, when we construct or define a recognizer, it has an
-accept, but no point at which it rejects.
+accept\marton{ing state}, but no point at which it rejects.
 
 \grijs{\begin{stelling}
 $A_{TM}$ is recognizable.
@@ -750,8 +756,8 @@ recognizable and not decidable. Same for $H_{TM}$.
 
 The enumerator machine seems to be the machine as originally described
 by Alan Turing in his 1936 publication: he was interested in
-generating decimal expansions of {em computable real numbers}. The
-link with recognizable talen is quite direct. We had to wait
+generating decimal expansions of {\em computable real numbers}. The
+link with recognizable languages is quite direct. We had to wait with
 introducing the enumerator until we dealt with the Halting problem: we
 will need it.
 
@@ -765,8 +771,8 @@ will need it.
 \caption{Schema of an enumerator machine\label{enumerator1}}
 \end{figure}
 
-In Figure~\ref{enumerator1} you can see that the enumerator is like a
-Turing Machine with some extra's
+In Figure~\ref{enumerator1} you can see \marton{1 and 3 are not visible on the figure} that the enumerator is like a
+Turing Machine with some extras
 \begin{itemize}
 \item an enumerator state $q_e$
 \item an output tape
@@ -779,7 +785,7 @@ The last $\Gamma_\epsilon$ is meant to be the symbol written at that
 transition to the output tape.
 
 
-The machine start with an empty tape and empty output tape, in the
+The machine starts with an empty tape and empty output tape, in the
 usual $q_s$ and starts working. Whenever something is written on the
 output tape, the write head moves one position to the right. Whenever
 the machine gets in state $q_e$, the output marker is written on the
@@ -787,11 +793,11 @@ output, the machine goes to state $q_s$ and the machine continues.
 
 It is possible that the enumerator does not stop, and outputs one
 after another from a set of strings (separated by output markers):
-this set could be finite, or infinite (can it be uncountable
+this set could be finite, or infinite (can it be uncountably
 infinite?). It is possible that the enumerator does not stop, and
 keeps working on a particular output string, maybe even the first one!
-It is also possible that the machine after a while stops and leaves on
-the output a (finite!) set of strings separated by output markers.
+It is also possible that the machine stops after a while and leaves a (finite!) set of strings on
+the output separated by output markers.
 
 Whichever of the above scenarios, it makes sense to talk about the set
 of (finite) output strings produced by the enumerator: that is the
@@ -817,12 +823,12 @@ Enu. If it equals s, M accepts s. Otherwise Enu continues.
 
 \begin{itemize}
 \item[-] 
-a $TM_{gen}$ that given a number $n$ puts on a tape the first $n$
-strings from $\Sigma^*$: $s_1, s_2, ... s_n$
+a $TM_{gen}$ that given a number $n$ puts the first $n$
+strings from $\Sigma^*$ on a tape: $s_1, s_2, ... s_n$
 
 \item[-]
-a $TM_n$ that executes on each of the $n$ strings, $n$ transitions
-of M: if a string $s_i$ is accepted within that budget, it is written
+a $TM_n$ that executes $n$ transitions
+of M on each of the $n$ strings: if a string $s_i$ is accepted within that budget, it is written
 on the output tape of Enu
 
 \item[-]
@@ -839,7 +845,7 @@ out of a Turing Machine TM:
 
 \begin{itemize}
 \item[]
-generate the strings from $\Sigma^*$ in any order
+generate the strings from $\Sigma^*$ in any order:
 $s_1, s_2...$
 
 \item[]
@@ -939,12 +945,12 @@ machine). Deciding that is easy.
 $EQ_{DFA} = \{\langle DFA_1,DFA_2 \rangle| L_{DFA_1} = L_{DFA_2}\}$ is decidable.
 \end{stelling}}
 \begin{proof}
-We use some algebraic properties of the set of DFA's.
+We use some algebraic properties of the set of DFAs.
 
 From $DFA_1$ and $DFA_2$, construct $DFA_\Delta$ that accepts the
 symmetric difference between $L_{DFA_1}$ and $L_{DFA_2}$. Then decide
 whether $DFA_\Delta$ accepts the empty language using the previous
-theorem. (you saw the reduction?)
+theorem. (did you see the reduction?)
 \end{proof}
 
 
@@ -964,14 +970,14 @@ $A_{CFG} = \{\langle G,s \rangle|G~is~a~CFG,~and~s \in L_G\}$ is
 \end{stelling}}
 \begin{proof}
 A naive proof idea consists in using the CFG to generate strings, and
-as soon s is generated, to accept. You can see why this does not work:
+accepting as soon as s is generated. You can see why this does not work:
 when do you reject? We have a recognizer, not a decider. 
 
 It would be convenient if the CFG were in Chomsky Normal Form: we
 would then have an upper bound on the length of the derivation for a
 given string.
 
-So, at input $\langle G,s \rangle$, first convert G to its Chomsky
+So, for input $\langle G,s \rangle$, first convert G to its Chomsky
 Normal Form. Generate all possible strings with a derivation length
 $2|s|-1$: there are only finitely many of them. If s is one of them,
 accept, otherwise reject.
@@ -981,7 +987,7 @@ accept, otherwise reject.
 $E_{CFG} = \{\langle G \rangle|G~is~a~CFG,~and~L_G = \phi\}$ is decidable: {\em emptiness} of a CFL is decidable.
 \end{stelling}}
 \begin{proof}
-We describe informally an algorithm transforming G to a form in which
+We informally describe an algorithm transforming G to a form in which
 taking the decision is easier.
 \begin{itemize}
 \item
@@ -1008,7 +1014,7 @@ non-equivalent one!
 
 
 \paragraph{Selfie:}
-Write down a grammar that determines the empty language and apply th
+Write down a grammar that determines the empty language and apply the
 above procedure to it. Did you learn something about Prolog programs
 that have no answers?
 
@@ -1065,15 +1071,15 @@ $E_{TM} = \{\langle M \rangle | M~is~a~TM,~and~L_M = \phi\}$ is not
 \end{stelling}}
 \begin{proof}
 Assume that $E_{TM}$ is decidable, then there exists a decider $E$ for
-it. We describe now a decider B for $A_{TM}$ using $E$ as follows:
-B receives as input $\langle M,s \rangle$ and works as follows
+it. We now describe a decider B for $A_{TM}$ using $E$:
+B receives as input $\langle M,s \rangle$ and works as follows:
 \begin{itemize}
 \item 
 it constructs a machine $M_{M,s}$ whose working is given by: on input
 $w$, $M_s$ does the following
 \begin{itemize}
 \item if $w \neq s$, reject
-\item else run M on $w$ (or $s$) en return the same result
+\item else run M on $w$ (or $s$) and return the same result
 \end{itemize}
 
 \item 
@@ -1090,7 +1096,7 @@ It follows that B is a decider for $A_{TM}$, which is impossible, so
 $E$ does not exist, so $E_{TM}$ is not decidable.
 \end{proof}
 
-We can define the $E_{TM}$ problem slightly different, as an instance
+We can define the $E_{TM}$ problem slightly differently, as an instance
 of a more general problem: does a given machine M determine a language
 from a given set? So we have
 
@@ -1113,7 +1119,7 @@ $REGULAR_{TM}$ is not decidable.
 \begin{proof}
 Suppose Turing Machine $R$ decides $REGULAR_{TM}$. Fix two symbols
 from the alphabet, say 0 and 1. Make a decider $B$ for $A_{TM}$ as
-follows: on input $\langle M,s \rangle$ $B$ does the following
+follows: on input $\langle M,s \rangle$ $B$ does the following:
 \begin{itemize}
 \item it constructs a helper machine $H_{M,s}$ that on input $x$ does
   the following
@@ -1131,7 +1137,7 @@ $R$. Finishing the proof:
 
 
 $H_{M.s}$ either accepts the non-regular language $\{0^n1^n\}$
-or all of the regular language $\Sigma^*$. So, $B$ accepts $\langle
+or \martonst{all of}{} the regular language $\Sigma^*$. So, $B$ accepts $\langle
 M,s \rangle$ iff $R$ accepts $\langle H_{M,s} \rangle$, iff $H_{M,s}$
 accepts $\Sigma^*$, iff $M$ accepts $s$. It follows that $B$ is a
 decider for $A_{TM}$, which is impossible, so $R$ does not exist, so
@@ -1145,8 +1151,8 @@ $EQ_{TM}$ is not decidable.
 \begin{proof}
 We already know that $E_{TM}$ is not decidable. $E_{TM}$ is a special
 case of $EQ_{TM}$, in which the second machine is $M_\phi$. It is
-clear that if we could decide about two arbitrary languages that they
-equal, we would also be able to decide about one arbitrary language
+clear that if we could decide the equality of two arbitrary languages, 
+we would also be able to decide about one arbitrary language
 and the empty one. So, we arrive at a contradiction by assuming that
 $EQ_{TM}$ is decidable.
 \end{proof}
@@ -1162,12 +1168,12 @@ the machinery needed to decide them:
  \grijs{\begin{definitie} Linear Bounded Automaton\\
 {\rm
 A Linear Bounded Automaton is a (non-deterministic) Turing Machine
-that read and writes only on the part of the tape that contained the
+that reads and writes only on the part of the tape that contained the
 initial input.  }
 \end{definitie}}
 
 The name of the automaton might strike you as weird. An equivalent
-definitions allows the machine to use a portion of the tape that is
+definition allows the machine to use a portion of the tape that is
 larger by a constant factor $f$ than the input: this $f$ is
 independent of the input. We mentioned earlier that such machines can
 decide context sensitive languages. You can intuitively work that out
@@ -1239,7 +1245,7 @@ $\delta$
 \end{itemize}
 
 It should be clear - at least intuitively - that these checks need at
-most a constant amount of extra space, meaning that the decision kan
+most a constant amount of extra space, meaning that the decision can
 be taken by an LBA. We construct the LBA in such a way that it accepts
 the accepting computation history for $s$, and rejects every other
 input.  We can now start the proof.
@@ -1264,10 +1270,10 @@ $E_{LBA}$ is not decidable.
 \end{proof} 
 
 A small summary of the differences and similarities between PDAs, LBAs
-en TMs follows:
+and TMs follows:
 
 \begin{itemize}
-\item acceptance en halting
+\item acceptance and halting
 \begin{itemize}
 \item PDA and LBA are similar: acceptance and halting are decidable
 \item TM is different: acceptance and halting are not decidable
@@ -1316,12 +1322,12 @@ Some properties of operations on languages:
 \end{itemize}
 
 Let us also have a look at a somewhat unusual operation on languages:
-inversion. Denote by $\hat{s}$ the string obtained by writing the
-symbols of $s$ in reverse order. We define $\widehat{L} = \{\hat{s}|s
+inversion. Denote the string obtained by writing the
+symbols of $s$ in reverse order with $\hat{s}$. We define $\widehat{L} = \{\hat{s}|s
 \in L\}$.
 
 \begin{itemize}
-\item[] $RegLan$, $CFL$, $Dec$ en $Rec$ are closed under inversion
+\item[] $RegLan$, $CFL$, $Dec$ and $Rec$ are closed under inversion
 \item[] $DCFL$ is NOT closed under inversion
 \end{itemize}
 
@@ -1344,8 +1350,8 @@ Still, in the context of computability, we care about such bijection
 being computable by a Turing Machine. We have indeed used
 constructions that use a TM that generates the strings of $\Sigma^*$
 one by one. It is thus not enough that $\Sigma^*$ is countable, it
-needs to be (effectively) enumerable (by a TM). You should be able at
-this point to prove that there exist subsets if $\Sigma^*$ that are
+needs to be (effectively) enumerable (by a TM). You should be able to prove at
+this point that there exist subsets of $\Sigma^*$ that are
 not enumerable, and give concrete examples as well.
 
 So, what is the connection between being generated by an enumerator
@@ -1354,7 +1360,7 @@ generate duplicates. We can prevent it from doing so by modifying it a
 little: any time the enumerator arrives in its enumerator state, we
 check whether the most recently generated string is really new: if
 not, we erase it. Now the enumerator effectively enumerates all its
-strings. Since every language generated by an enumerator recognizable,
+strings. Since every language generated by an enumerator is recognizable,
 and since we proved that there exists a non-recognizable language L,
 it follows that this L can not be enumerated, although it is
 countable.
@@ -1394,8 +1400,10 @@ The property $P$ is {\em language invariant} if
 $~~~~~~~~~L_{M_1} = L_{M_2} \Longrightarrow P(M_1) = P(M_2)$
 
 or in words: {\em machines recognizing the same language either all
-  have $P$m or none has $P$}.  }
+  have $P$ or none have $P$}.  }
 \end{definitie}}
+
+\martonst{language invariant}{semantic?}
 
 \paragraph{Selfie:}
 \begin{itemize}
@@ -1419,13 +1427,13 @@ Machines. $Pos_P$ (and $Neg_P$) is undecidable.
 \begin{proof}
 Suppose $M_\emptyset$ (a machine deciding the empty language) does not
 have property $P$ - if not, replace $P$ by its negation. Since $P$ is
-non-trivial, there exists also a machine $X$ having $P$ - denote
+non-trivial, there also exists a machine $X$ having $P$ - denote
 its language by $L_X$. Suppose $Pos_P$ were decidable by a decider
 $B$. We will use $B$ to construct a decider $A$ for $A_{TM}$.
 
 $A$ has as input $\langle M,s \rangle$ and does the following:
 \begin{itemize}
-\item it constructs a helper machine $H_{M,s}$ that on input $x$:
+\item construct a helper machine $H_{M,s}$ that on input $x$:
 
 \begin{itemize}
 \item runs $M$ on $s$
@@ -1435,11 +1443,11 @@ $A$ has as input $\langle M,s \rangle$ and does the following:
 \item now give $H_{M,s}$ to $B$
 \item if $B$ accepts $H_{M,s}$, accept, else reject
 \end{itemize}
-First check that $H_{M,s}$ accepts either the empty language, or
+First check that $H_{M,s}$ accepts either the empty language or
 $L_X$. This is used in the following:
 
 
-$A$ accepts $\langle M,s \rangle$ iff $B$ $H_{M,s}$ accepts, iff
+$A$ accepts $\langle M,s \rangle$ iff $B$ accepts $H_{M,s}$, iff
 %
 $H_{M,s}$ has property $P$, iff
 %
@@ -1468,23 +1476,23 @@ Use Rice for new proofs of old theorems.
 \section{The {\em Post Correspondence Problem}}
 
 Emile Post was one of the founding fathers of recursion theory, and he
-made contributions to universal of computing mechanisms. The word {\em
+made contributions to \martonst{universal}{??} of computing mechanisms. The word {\em
   correspondence} is related to {\em similarity, agreement}, not to
 sending mail by post. Emile Post developed the following game:
 
-You have a finite collection of dominos, each with two strings
+You have a finite collection of dominoes, each with two strings
 (instead of the usual numbers). Of each type, there is an unlimited
-supply for this game. If you put some dominos next to each other, you
+supply for this game. If you put some dominoes next to each other, you
 see an upper string and a lower string. The question is: is it
-possible to lay out a finite number of dominos to that the upper and
-lower string are the same?
+possible to lay out a finite number of dominoes so that the upper and
+lower strings are the same?
 
 An example:
 \begin{figure}[h]
 \includegraphics[%
   width=0.5\linewidth,
   keepaspectratio]{pcp1}
-\caption{Four given stones and a solution\label{pcp1}}
+\caption{Four given dominoes and a solution\label{pcp1}}
 \end{figure}
 
 \vspace{-5cm}\hspace{10cm}\includegraphics[%
@@ -1495,24 +1503,24 @@ An example:
 
 
 \vspace{0.5cm}
-Figure~\ref{pcp1} shows that you don't need to use all dominos and
+Figure~\ref{pcp1} shows that you don't need to use all dominoes and
 that one type of domino can be used more than once.
 
 We are dealing here with a decision problem: it is enough to answer
 yes or no to the question, there is no need to construct the
-corresponding sequence of dominos.
+corresponding sequence of dominoes.
 
-This simple game (1) undecidable and (2) powerful enough to mimic all
-computations by all Turing Machines. Actually, the former follows form
+This simple game is (1) undecidable and (2) powerful enough to mimic all
+computations by all Turing Machines. Actually, the former follows from
 the latter, as soon as we have shown that the halting of a TM can be
-reduced to existence of a solution to the PCP. We show this by
+reduced to the existence of a solution to the PCP. We show this by
 example: the books by Sipser or Minsky contain a general construction.
 
-\subsection{Turing a Turing Machine in a PCP game}
+\subsection{\martonst{Turing}{?} a Turing Machine in a PCP game}
 
 In this example we use X for the start state, A for the accepting
 state, Z for the reject state. The alphabet is $\{a,b\}$, and the
-transition table looks like
+transition table looks like:
 
 \begin{center}
 \begin{tabular}{|r||l|l||l|l|l|}
@@ -1528,13 +1536,13 @@ transition table looks like
 \end{center}
 
 The numbers at the left are there for ease of reference. Check that
-this TM accepts the language $(ab)^*$. Take as input string $ab$.
+this TM accepts the language $(ab)^*$. Take $ab$ as the input string.
 %
-We introduce an extra symbol \$. We now define the dominos needed in
+We introduce an extra symbol \$. We now define the dominoes needed in
 the Post game for imitating the above Turing Machine:
 
 \begin{itemize}
-\item for each symbol $x$ create a domino with upper and lower string
+\item for each symbol $x$ create a domino with both the upper and lower string
   equal to $x$, i.e. 4 dominoes:
 \begin{tabular}{|l||l||l||l|}
 \hline
@@ -1557,7 +1565,7 @@ A & A & A & A \\
 \hline
 \end{tabular}
 
-\item rule 1 in the transitie table results in a domino
+\item rule 1 in the transition table results in a domino
 \begin{tabular}{|l|}
 \hline
 Xa \\ \hline
@@ -1628,9 +1636,9 @@ starting from the input domino.\footnote{The general PCP allows to
 }
 
 
-In the lower half, you see between any two occurrences of \$ a
-configuration; two subsequent configurations are linked by the
-transition function, until the accepting state appears. After that,
+In the lower half, you see a configuration between any two occurrences of \$; 
+two subsequent configurations are linked by the
+transition function until the accepting state appears. After that,
 the configuration is emptied until only the accepting state and the
 end domino appears. Now, upper and lower are equal.
 
@@ -1689,10 +1697,10 @@ This rewriting system is also Turing complete.
 \clearpage
 \section{Many-one reduction}\label{mappingreduction}
 
-A reduction maps one problem L1 to another L2: it seems a bit counter
-intuitive, but L2 is in some sense {\em more difficult} than L1,
-because a method to solve L1 is (together with the reduction) powerful
-enough solve L2. We will make all this very precise. It is important
+A reduction maps one problem L1 to another L2: it seems a bit counterintuitive, 
+but L2 is in some sense {\em more difficult} than L1,
+because a method to solve \martonst{L1}{L2} is (together with the reduction) powerful
+enough to solve \martonst{L2}{L1}. We will make all this very precise. It is important
 to get a good grasp on the reductions in this section: in complexity
 theory, we use similar reductions, so it is a recurring concept.
 
@@ -1745,7 +1753,7 @@ If $L_1 \leq_m L_2$ and $L_2$ is recognizable, then $L_1$ is recognizable.
 \end{stelling}}
 
  \grijs{\begin{gevolg}
-if $L_1 \leq_m L_2$ andn $L_1$ is not recognizable, then $L_2$ is not
+if $L_1 \leq_m L_2$ and $L_1$ is not recognizable, then $L_2$ is not
 recognizable.  If $L_1 \leq_m L_2$ and $L_1$ is not decidable, then
 $L_2$ is not decidable.
 \end{gevolg}}
@@ -1965,6 +1973,7 @@ $f$ function $\N^m \rightarrow \N$
 
 $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~h(\overline{x}) = f(g_1(\overline{x}), g_2(\overline{x}), ..., g_m(\overline{x}))$\footnote{($\overline{x} = x_1,x_2,...,x_k)$}
 
+\marton{The placement of the footnote number here can be misinterpreted as a vector length}
 
 Notation: $h = Cn[f,g_1,\ldots,g_m]$
 
@@ -2028,7 +2037,7 @@ sum(x,y+1) = sum(x,y) + 1
 
 \item 
 
-$Pr[null,Cn[som,{p_1}^3, {p_3}^3]]$ = product of 2 inputs ($\N^2 \rightarrow \N$)
+$Pr[null,Cn[sum,{p_1}^3, {p_3}^3]]$ = product of 2 inputs ($\N^2 \rightarrow \N$)
 
 \item 
 factorial, minus1 (or predecessor), ...
@@ -2056,7 +2065,7 @@ primitive recursive.\footnote{Actually, another student of Hilbert,
 Ackermann's function with two arguments:
 
 \begin{itemize}
-\item[] Ack(0, y ) = y + 1
+\item[] Ack(0, y) = y + 1
 \item[] Ack(x + 1, 0) = Ack(x, 1)
 \item[] Ack(x + 1, y + 1) = Ack(x, Ack(x + 1, y ))
 \end{itemize}
@@ -2069,14 +2078,14 @@ Often one uses the words {\em Ackermann's function} to mean a function
 with one argument only. It is defined as
 \verb|Ack(n) = Ack(n,n)|. Also this function increases faster than any
 primitive recursive function. Its inverse is important in complexity
-analysis of algorithms, a.o. for the Union-Find algorithm.
+analysis of algorithms, \martonst{a.o.}{e.g.} for the Union-Find algorithm.
 
 
 
 \subsubsection{Unbounded minimization}
 
-Goedel had to enlarge his class of functions, so that also the
-Ackermann function was included. He introduced {\em unbounded
+Goedel had to enlarge his class of functions, so that the
+Ackermann function was also included. He introduced {\em unbounded
   minimization}.
 
 {\bf Given}
@@ -2130,8 +2139,8 @@ specifically, these functions can be computed by a Turing Machine, and
 vice versa. It means that the uring computable functions coincide with
 the recursive functions. It is clear from the definition of unbounded
 minimization that recursive functions can be partial. That is
-consistent with the notion of Turing computable: a TM often defines
-just a partial function. But the Ackermann function shows that really
+consistent with the notion of Turing computable: a TM often only defines 
+a partial function. But the Ackermann function shows that really
 recursive functions can also be total.
 
 
@@ -2158,7 +2167,7 @@ The Ackermann function showed us that the fact that a function
 increases fast, can be an indication that extra machinery is needed to
 compute its values. For the Ackermann function, that worked with
 Turing Machines: TMs can implement unbounded minimization. The essence
-is {\em find the {\bf smallest} number with a particular property
+is to {\em find the {\bf smallest} number with a particular property
   V}. This can be implemented as
 
 $~~~~~~i = 0;$
@@ -2168,7 +2177,7 @@ $~~~~~~while~not(V(i))~i++;$
 
 and you already know that it does not finish if no i satisfies V.
 
-We here introduce another novelty, just for trying it out: {\em
+We introduce another novelty here, just for trying it out: {\em
   unbounded maximalization}, i.e. {\em find the {\bf largest} number
   with a particular property V}. How could we implement that? Here is
 a first attempt:
@@ -2197,12 +2206,12 @@ $~~~~~~~~~~~~i++;$
 and you can certainly spot the weakness here as well ...
 
 This shows that the introduction of a method to construct new
-functions from old ones, has its pitfalls.
+functions from old ones has its pitfalls.
 
 
 \subsection{The busy beaver}
 
-IN 1962, Tibor Rad\'{o} invented the following function $S$:
+In 1962, Tibor Rad\'{o} invented the following function $S$:
 consider the class of all TMs with alphabet $\{0,1\}$ and $n$
 states. There are only a finite number of them. We can let these
 TMs run with an initial empty tape - say all zeros. We then count for
@@ -2219,8 +2228,8 @@ Clearly, $S$ is defined as a total function with signature $\N
 relevant.
 
 
-It feels possible to construct a busy beaver for small $n$: construct
-exhaustively all TMs with $n$ states, start them with an empty tape
+It feels possible to construct a busy beaver for a small $n$: exhaustively construct
+all TMs with $n$ states, start them with an empty tape
 and start counting.
 
 There is however a problem: because of the Halting problem, we know we
@@ -2229,10 +2238,10 @@ the empty input. That means that when a machine runs very long, and we
 are losing patience, we better come up with a proof that the machine
 is actually in a loop, or we must accept that we can only can
 construct lower bounds for $S(n)$. This is really a problem, even for
-small $n$, because there exist very small universal TMs!
+a small $n$, because there exist very small universal TMs!
 
 Nevertheless, the values for $S(n)$ are known exactly for $n <
-5$. For $n = 5$ the current record is 47 176 870, but it is not know
+5$. For $n = 5$ the current record is 47 176 870, but it is not known
 about some machines whether they are in a loop, so that record could
 still be broken. The record for $n = 6$ is $10^{2879}$.
 
@@ -2249,9 +2258,9 @@ we knew $S$ for some $n$.
 
 \begin{itemize}
 \item[] $S(n)$ can be determined for every $n$, but it is $\infty$ for
-  $n$ large enough.
+  large enough $n$s.
 
-It is possible that for $n$ large enough, $Ack(n) > S(n)$.
+It is possible that for a large enough $n$, $Ack(n) > S(n)$.
 
 Every function that increases slower than a given primitive recursive
 function is primitive recursive.
