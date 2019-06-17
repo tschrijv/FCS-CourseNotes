@@ -375,6 +375,8 @@ whether a number $n$ is prime. It has a loop of the form
     \State{ACCEPT}
 \end{algorithmic}
 
+\marton{Why is 2 added to i in the loop (if it was initialized to 2)?}
+
 In both encodings, the loop is executed $n$ times, but in terms of the
 size of the encoding, that is exponentially \martonst{more}{less} with the binary
 representation than with the unary one. In one case we could think
@@ -537,7 +539,7 @@ Consider all three examples and comment on that question.
 
 
 Suppose there is a function $f$ so that for a verifier $V$ and
-certificate $c$ for $s$, the length of $s$ has an upper bound of
+certificate $c$ for $s$, the length of \martonst{$s$}{$c$} has an upper bound of
 $f(|s|)$, or:
 %
 $|c| \leq f(|s|)$. Now we can generate a certificate for
@@ -562,7 +564,7 @@ say something about its complexity?
 in the worst case, the for-loop is executed $O(2^{f(|s|)})$ \marton{times} (we assume
 the alphabet has two elements)
 \item 
-if $M$ is a $g$-time machine, the cost of the body of the for-loop is
+if \martonst{$M$}{$V$} is a $g$-time machine, the cost of the body of the for-loop is
 $O(g(|s|+|c|))$, or $O(g(|s|+f(|s|)))$
 \item
 this results in an overall complexity $O(g(n+f(n))\times 2^{f(n)})$
@@ -662,7 +664,7 @@ for a string belonging to the language. Argue that it is
 polynomial. Note that for the examples marked with (*), no polynomial
 algorithm is known, neither whether one exists.
 
-{\bf Careful:} \NP does means {\em non-deterministic polynomial},
+{\bf Careful:} \NP means {\em non-deterministic polynomial},
 and {\bf not} {\em non-polynomial}.
 
 \subsection{Polynomial reduction}
@@ -764,7 +766,7 @@ Theorem~\ref{transitief}.
 \end{proof}
 
 As with any equivalence relation, we van consider the equivalence
-classes induced by the relation. They form a partition. \P is consists
+classes induced by the relation. They form a partition. \P consists
 of exactly three equivalence classes. Make sure you understand this.
 
 
@@ -1126,7 +1128,7 @@ verified in polynomial time so in case the formula is a tautology
 - the set of sorted sequences is a language in $\NP$; a certificate
 for a non-sorted sequence would be an index $i$ so that the i$^{th}$
 element is larger than the (i+1)$^{th}$ element; so the set of sorted
-sequences belongs to co-$\NP$ as well; yu could have argued: the set
+sequences belongs to co-$\NP$ as well; you could have argued: the set
 of sorted sequences is in \P, so also in co-$\NP$; that is right, but
 you would have missed thinking up a non-trivial polynomial certificate
 
@@ -1282,7 +1284,7 @@ number of vertices.
 \EndIf
 
 
-\ForAll {$(v \in V$}
+\ForAll {$(v \in V)$}
    \If {{\sc existspath}$(a,v,l/2)~ \wedge~ ${\sc existspath}$(v,b,l-l/2)$}
    \State{return(TRUE)}
    \EndIf
@@ -1353,7 +1355,7 @@ as Cocke-Younger-Kasami. It is a form of {\em chart} or {\em tabular
 
 The class of non-deterministic LBAs decides languages by using no more
 than the space occupied by the input, so context-sensitive languages
-constitute the class {\bf NSPACE}(n).
+constitute the class {\bf NSPACE}(n). \marton{NSPACE was not introduced before... DSPACE? NDSPACE?}
 
 
 % \newpage

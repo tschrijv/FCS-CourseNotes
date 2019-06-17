@@ -911,8 +911,8 @@ strings not accepted by it.
 
 
 % \clearpage
-Now is the time to describe an algorithm for constructing an NFA from
-an RE.
+Now is the time to describe an algorithm for constructing \martonst{an NFA from
+an RE}{a RE from an NFA}.
 
 \begin{itemize}
 \item[Step 1:]  {\em Make a GNFA from an NFA} 
@@ -999,7 +999,7 @@ If $s$ is accepted by $GNFA_{before}$ with a path that does not
 contain X, then $s$ is accepted by $GNFA_{after}$ with the same path.
 
 If the accepting path contains X, then there are states A and B so
-that for some $n>0$, AX$^n$B ($n>0$) is a subsequence in the path. The
+that for some $n>0$, AX$^n$B is a subsequence in the path. The
 regular expressions on the edges AX, XX, XB are E1, E2, E3 and
 therefore, to go from A to B through X {\em costs} a piece of string
 that matches $E1(E2)^*E3$: that regular expression is part of the
@@ -1103,7 +1103,7 @@ signature!} for ${\cal Q} \in Q_d$
 
 \item 
 in words: from a DFA state ${\cal Q}$, you move to the next DFA state
-by first using the symbol $a$ an each NFA state in ${\cal Q}$ using
+by first using the symbol $a$ \martonst{an}{in} each NFA state in ${\cal Q}$ using
 the NFA transition function, and then following as many
 $\epsilon$-edges as possible; then take the union of all the NFA
 states you could reach in this way.
@@ -1244,7 +1244,7 @@ Two states are {\bf distinguishable} if they are not indistinguishable.
 }
 \end{definitie}}
 
-If $p$ and $q$ distinguishable, then there exists a word $w$ so that 
+If $p$ and $q$ are distinguishable, then there exists a word $w$ so that 
 
 $~~~~~~~~~~\delta^*(p,w) \in F~~and~~ \delta^*(q,w) \notin F$ or vice versa.
 
@@ -1295,7 +1295,7 @@ and add $(p,q,a)$ to V; go back to the beginning of Repeat;
 \underline{otherwise}: go to Equal;
 
 \item[{\bf Equal:}]
-Consider the complement of $G$: each component is a clique; let $Q_i$
+Consider the complement of \martonst{$G$}{$V$}: each component is a clique; let $Q_i$
 be the set of vertices in the $i^{th}$ component; all states in $Q_i$
 are indistinguishable; every state in $Q_i$ is distinguishable from
 any other state not in $Q_i$
@@ -1325,7 +1325,7 @@ label to arrive (eventually) at the former base case, i.e.
 $\exists w \in \Sigma^* : \exists (p_w,q_w,\epsilon) \in V$, and we
 conclude that $p$ and $q$ distinguishable.
 
-$\underline{\Longleftarrow}$: if $p$ and $q$ distinguishable, then
+$\underline{\Longleftarrow}$: if $p$ and $q$ are distinguishable, then
 there exists a $w$ so that $\delta^*(p,w) \in F~~and~~\delta^*(q,w)
 \notin F$ or vice versa; if $w$ is the empty string, the conclusion
 holds; if not, then $w$ has a last symbol $z \in \Sigma$ and can be
@@ -1335,9 +1335,6 @@ $\delta^*(q,v)$ there is an edge; we can now get rid of the last
 symbol of $v$ etc. until we derive that there is an edge between
 $\delta^*(p,\epsilon)$ and $\delta^*(q,\epsilon)$, and we are done.
 \end{proof}
-
-\martonst{$\delta^*(p,w) = \delta(\delta^*(p,v),z)$}{$\delta^*(p,w) = \delta^*(\delta^*(p,v),z)$}
-
 
 We have now constructed the equivalence classes of indistinguishable
 states - the $Q_i$ at the end of the algorithm: we are now ready to
@@ -1395,14 +1392,14 @@ minimum number of states. We prove a slightly stronger theorem:
 \grijs{\begin{stelling}
 If $DFA_1 = (Q_1,\Sigma,\delta_1,q_s,F_1)$ is a machine in which all of the
 states are reachable, and with every pair of states distinguishable,
-then there is no equivalent DFA with strictly less states.
+then there is no equivalent DFA with strictly fewer states.
 \end{stelling}
 }
 \begin{proof}
 Let $DFA_1$ have states $\{q_s,q_1,...,q_n\}$: $q_s$ is the starting
 state. Assume that 
 %
-$DFA_2 = (Q_2,\Sigma,\delta_2,p_s,F_2)$ is a DFA with strictly less
+$DFA_2 = (Q_2,\Sigma,\delta_2,p_s,F_2)$ is a DFA with strictly fewer
 states $\{p_s,p_1,...,p_m\}$ than $DFA_1$.
 
 Since in $DFA_1$ every state is reachable, there exist strings $s_i,
@@ -1760,7 +1757,7 @@ expression E, and produces a Prolog program with a predicate lex/1: a
 query like ?- lex({\em string}). should succeed if and only if {\em
   string} is in $L_E$. You can represent a string like ``abc'' as the
 list $[a,b,c]$. An RE like $a^*b~|~c$ can be represented as the term
-$of([star(a),b],[c])$ (but you are welcome to try another one).
+$or([star(a),b],[c])$ (but you are welcome to try another one).
 \end{itemize}
 
 \paragraph{The description} above of a $JavaProgr$, is actually a 
@@ -1878,7 +1875,7 @@ machines). What you get is a two-way finite automaton, or a 2DFA.
 About other classes of automata, we know that more freedom in how the
 {\em memory} can be manipulated, leads to more powerful automata: to
 fully appreciate this, you might have to wait until you learn about
-PDA and PBA, but keep this in mind.
+PDA and PBA \marton{PBA?}, but keep this in mind.
 
 Therefore, the question {\em is a 2DFA more powerful than a DFA?}, or
 otherwise said {\em can a 2DFA recognise some non-regular languages?}
@@ -2231,7 +2228,7 @@ or in terms of their parse trees: see Figure~\ref{ambi1}:
 \caption{Two parse trees for $a+a*a$\label{ambi1}}
 \end{figure}
 
-The string a+a*a seems to have more than one leftmost derivations and
+The string a+a*a seems to have more than one leftmost derivation and
 more than one parse tree: the (meaning of the) string is ambiguous.
 We say that grammar Arit1 is ambiguous because there exist ambiguous
 strings in $L_{Arit1}$ w.r.t. Arit1. A priori, it is unclear whether
@@ -2272,10 +2269,10 @@ and even better\martonst{L}{,} every string in its language has exactly one pars
 tree for Arit2. We say: Arit2 is a non-ambiguous grammar.
 
 
-Not every CFGL has a non-ambiguous CFG: such a CFL is named {\em
+Not every \martonst{CFGL}{CFL} has a non-ambiguous CFG: such a CFL is named {\em
   inherently ambiguous}. Here is an example of such a language:
 %
-$\{a^nb^nc^m, a^nb^mc^m| n,m \geq 0\}$.  The proof that it is
+$\{a^nb^nc^m, a^nb^mc^m| n,m \geq 0\}$. \marton{This definition is confusing to me. Is the comma included in the language, or is this a union of two languages?}  The proof that it is
 inherently ambiguous can be found in the Hopcroft-Motwani-Ullman book,
 but you should be able to prove that the language is context free.
 We get back to ambiguity later.
@@ -2449,7 +2446,7 @@ Prolog program with zero or two goals in each clause body?
 
 An FSA has no memory besides its state, and since there is only a
 finite number of them, an FSA can not count in an unlimited way. As a
-result, it is incapable to determine lots of interesting
+result, it is incapable of determining lots of interesting
 languages. The next machine we introduce - the pushdown automaton
 (PDA) - has an unlimited memory, but it can use that memory in a very
 limited way only: the memory is organised as a stack, and at any given
@@ -2832,7 +2829,7 @@ strings that are long enough. Consider a CFG in Chomsky normal form
 for L. Let $n$ be the number of nonterminals.
 \end{proof}
 
-If $d \in L$, it has a parse tree. By deleting the
+If $d \in L$ \martonst{d}{s}, it has a parse tree. By deleting the
 leaves from that tree, we get a full binary tree - because of the Chomsky normal
 form. The height of this tree is at least $log_2(|s|)$, so the longest
 (simple) path from the root has at least $log_2(|s|) + 1$ vertices. If
@@ -2961,7 +2958,7 @@ follows that the members of DCFL have a non-ambiguous grammar.
 
 \project{dit verder uitspitten}
 
-The converse it not true: there exist non-ambiguous non-deterministic
+The converse is not true: there exist non-ambiguous non-deterministic
 languages. One standard example is the language $\{ s\hat{s} | $s$ \in
 \{a,b\}^*\}$ ($\hat{s}$ means the reversed string). A non-ambiguous
 grammar for this language is
@@ -2979,7 +2976,7 @@ There is another way to construct examples of non-deterministic
 languages: one uses the fact that the complement operation is internal
 to DCFL\footnote{For a proof, see for instance the book by
   Kozen}. Now consider $L = \{ss| $s$ \in \{a,b\}^*\}$. Use the
-pumping lemma to prove that L is not in CFL. But is
+pumping lemma to prove that L is not in CFL. But \marton{$\overline{L}$?} is
 context free: page \pageref{zelfdoen1} contains a CFG for $\overline{L}$.
 Consequently, $\overline{L}$ is not deterministic.
 
@@ -3141,7 +3138,7 @@ correction/recovery/reporting, generation of syntax directed editors,
 
 The step from regular expressions to context free grammars involved
 recursion of the nonterminals. The main restriction on a CFG was that
-the lef hand side of a rule could have only one symbol, a nonterminal.
+the left hand side of a rule could have only one symbol, a nonterminal.
 
 The next layer of the Chomsky hierarchy belongs to the context
 sensitive languages, generated by context sensitive grammars: at the
@@ -3170,6 +3167,8 @@ the equivalent definition).
 \item[] bB \rpijl  bb 
 \end{itemize}
 
+\martonst{s}{S}
+
 \paragraph{Selfie}: prove that the above grammar generates the above $L$.
 
 \clearpage
@@ -3187,7 +3186,7 @@ normal form: each rule has one of the forms below.
 A,B,C, and D are nonterminals; $a$ is any terminal.
 
 
-A CSL can be parser by a non-deterministic linear bounded automaton
+A CSL can be parsed by a non-deterministic linear bounded automaton
 (LBA). We introduce this class later: it is strictly stronger than the
 PDAs. LBAs are important because they solve decision problems in
 $O(n)$-space! This also indicates that there exists machinery even

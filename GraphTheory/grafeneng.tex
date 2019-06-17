@@ -232,7 +232,7 @@ Note that $E$ can contain two edges $(v,w)$: we name those edges {\em
 parallel}.
 
 An edge $(v,w)$ is {\em incident on} the vertex $v$ (and on $w$); 
-the vertices $v$ and $w$ are {\em adjacent to} the edge $(v,w)$.
+the vertices $v$ and $w$ are {\em adjacent} \martonst{to}{on} the edge $(v,w)$.
 
 \begin{definition}[Directed graph (digraph)]
 A (undirected) \textbf{graph} $G$ is a tuple $(V,E)$ in which
@@ -350,7 +350,7 @@ starting point too soon. Even if you did, you can still mend the path.
 \begin{itemize}
 \item A graph with an Eulerian cycle is connected: the cycle connects
 all vertices, so there is a path from each vertex to each other
-vertex. Wile traversing the cycle, we leave every vertex in which we
+vertex. While traversing the cycle, we leave every vertex in which we
 arrive, and since all edges are traversed by the cycle, the degree of
 each vertex is even.
 
@@ -641,7 +641,7 @@ $
 
 The incidence matrix shows loops and parallel edges.
 
-Instead of using a adjacency matrix, one can also use an {\em
+Instead of using an adjacency matrix, one can also use an {\em
 adjacency list}: it is just a list of all edges.
 
 
@@ -739,13 +739,16 @@ since parallel edges and loops are not visible in the adjacency
 matrix. Consequently the following theorem is limited to simple
 graphs.
 
- \begin{theorem}[Characterisation of isomorphic simple graphs
+\begin{theorem}[Characterisation of isomorphic simple graphs
 with the adjacency matrix]
 The simple graphs $G_{1}$ and $G_{2}$ are isomorphic if and only if
 there is an ordering of the vertices so that the adjacency there is an
 ordering of the vertices and edges so that the incidence matrices of
 $G_{1}$ and $G_{2}$ are equal.
 \end{theorem}
+
+\martonst{if and only if there is an ordering of the vertices so that the adjacency there is an ordering of the vertices and edges so that the incidence matrices of}{if and only if there is an ordering of the vertices so that the adjacency matrices of}
+
 \begin{proof} Please prove this yourself.
 \end{proof}
 
@@ -1437,13 +1440,13 @@ we prove this by induction on $n$ that $T$ has $(n-1)$ edges; for
 $n=1$ $T$ has zero edges, so the basis for the induction is true;
 suppose that every connected cycle free graph with $n$ vertices has
 $(n-1)$ edges; consider a connected cycle free graph $S$ with $(n+1)$
-vertices; choose a simple path in $P$ of maximal length in $S$
+vertices; choose a simple path $P$ of maximal length in $S$
 (convince yourself this is possible); $P$ contains a vertex $v$ with
 $\delta(v) = 1$, because there are no cycles in $S$: indeed, when
 $\delta(v) > 1$ then one can extend $P$; consider $S \setminus v$ -
 the graph $S$ from which $v$ is removed; $S \setminus v$ has $n$
 vertices, is cycle free and connected, so by induction $S \setminus v$
-has $S_{*}$ $(n-1)$ edges; consequently, $S$ has $n$ edges
+has \martonst{$S_{*}$}{} $(n-1)$ edges; consequently, $S$ has $n$ edges
 
 \item $(c) \Rightarrow (d)$: suppose $T$ contains a cycle; we can now
 remove at least one edge (and no vertices) from $T$ to obtain a
@@ -1635,7 +1638,7 @@ $T'$ has $n$ internal vertices (all the vertices of $T$) and height
 $(h+1)$; $T'$ is full and binary, so we can apply
 Theorem~\ref{relatiebladinwendig} and conclude that $T'$ has
 $(n+1)$ leaves, and by Theorem~\ref{relatieheightbladeren} $lg(n+1)
-\leq h+1$.
+\leq h+1$. \marton{lg}{$log_2$}
 \end{proof}
 
 Figure~\ref{uitbreiding1} shows a tree and its extension as defined in
@@ -1696,6 +1699,8 @@ found, and FALSE otherwise.
 \end{tabbing}
 }
 
+\marton{The function header seems to go against most languages: variable\_name TypeName?}
+
 The complexity of this algorithm can be expressed in the number of
 times the body of the while-loop is executed. In the worst case,
 the value is not in the tree, and we search along the longest path
@@ -1704,7 +1709,7 @@ the tree, so the loop is executed $h+1$ times. From
 Theorem~\ref{relatieheightnodes} we know that $lg(n+1) \leq h+1$, so
 for fixed $n$, the worst case is not less than $lg(n+1)$. By balancing
 the tree as well as possible, we can achieve $\lceil lg(n+1)
-\rceil$. Figure~\ref{balanced1} shows two binary search trees with the
+\rceil$.  \marton{lg}{$log_2$} Figure~\ref{balanced1} shows two binary search trees with the
 same values: the one at the right is balanced better than the one on
 the left, and has a smaller height.
 
@@ -1961,7 +1966,7 @@ theorem:
 
 \begin{theorem} An edge that belongs to an MST \label{even}
 
-Let $(V,E)$ be a connected graph $(V,E)$, $U \subset V$ and $e \in E$
+Let $(V,E)$ be a connected graph, $U \subset V$ and $e \in E$
 so that $e$ has minimal length of all edges between $U$ and $V
 \backslash U$. Then $e$ belongs to some minimal spanning tree $T$ of
 $(V,E)$.
@@ -1995,7 +2000,7 @@ Go to \textbf{Stop?}.
 
 \begin{proof}
 \martonst{At the end of}{The result} of the algorithm $T$ is a tree with $n$ vertices, 
-$(n-1)$ edges, \martonst{and cycle free,}{(comment: we already declared it a tree)} so $T$ is a spanning tree $G$. We still need to prove termination of the algorithm and the minimality of $T$.
+$(n-1)$ edges, and cycle free, so $T$ is a spanning tree $G$. We still need to prove termination of the algorithm and the minimality of $T$.
 
 Termination is easy: \textbf{Add edge} is executed $(n-1)$ times, and
 then the algorithm stops. Maybe you should convince yourself that
@@ -2053,7 +2058,7 @@ a,b,c \ldots h.
 \begin{center}
 \includegraphics[width=0.3\linewidth,keepaspectratio]{prim1} % ,height=5cm}
 \end{center}
-\caption{Prim's algorithm executed~\ref{prim} \label{prim1}}
+\caption{Prim's algorithm~(\ref{prim}) executed \label{prim1}}
 \end{figure}
 
 
@@ -2127,7 +2132,7 @@ of the flow, while respecting the capacities. We will solve this
 optimization problem with some graph theory. Problems that are
 seemingly unrelated to flow optimization can often be modelled as a
 network problem as well: personnel assignment, resource allocation and
-even partner choice - the latter is know as the {\em marriage
+even partner choice - the latter is known as the {\em marriage
   problem}.
 
 
@@ -2503,6 +2508,9 @@ otherwise, do not label $w$
 Go to \textbf{Arrived?}
 \end{enumerate}
 \end{code}
+
+\marton{C(apacity) and C(onsidered) might be a bit confusing in the algorithm.}
+
 \begin{proof}
 ~\\
 \begin{itemize}
@@ -2860,7 +2868,7 @@ You can work out the proof yourself.
 \end{proof}
 
 It is sometimes possible to quickly test that no perfect matching
-exists: clearly, when $n$ students together prefer strictly less than
+exists: clearly, when $n$ students together prefer strictly fewer than
 $n$ days, they \martonst{can}{cannot} all get one of their preferred days. We generalize this:
 
 \begin{itemize}
@@ -2912,7 +2920,7 @@ edge $(v,w)$ to it and obtain a perfect match of $G$.
 Now assume the existence of a set $S$ with $\emptyset \neq S
 \subsetneq V$ and $|S| = |R(S)|$. Consider the subgraph $G_1$ induced
 by the vertices $S \cup R(S)$, and the subgraph $G_2$ induced by
-$(V\setminus S) \cup (W \setminus R(S)$. Now prove that $G_1$ and
+$(V\setminus S) \cup (W \setminus R(S))$. Now prove that $G_1$ and
 $G_2$ fulfill the conditions of Hall, so they both have a perfect
 matching. Take the union of these perfect matchings to obtain a perfect
 matching of $G$. Figure \ref{hallfig} illustrates the construction.
