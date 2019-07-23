@@ -80,7 +80,7 @@ You could of course try out all possibilities - why not try it now!
 You notice that there is a problem of bookkeeping while doing that.
 A better way is to note down all possible situations: a situation
 describes who/what is on which side of the river, and is characterized
-completely by what is on the \martonst{right}{left} side. So, the situation FGC means
+completely by what is on the left side. So, the situation FGC means
 that the farmer, the goat and the cabbage are on the left bank, while
 the wolf is at the right bank. Some situations - like GC - are a
 priori forbidden. All situations can be described by the dots in
@@ -232,16 +232,14 @@ Note that $E$ can contain two edges $(v,w)$: we name those edges {\em
 parallel}.
 
 An edge $(v,w)$ is {\em incident on} the vertex $v$ (and on $w$); 
-the vertices $v$ and $w$ are {\em adjacent} \martonst{to}{on} the edge $(v,w)$.
+the vertices $v$ and $w$ are {\em adjacent} to the edge $(v,w)$.
 
 \begin{definition}[Directed graph (digraph)]
-A (undirected) \textbf{graph} $G$ is a tuple $(V,E)$ in which
+A directed \textbf{graph} $G$ is a tuple $(V,E)$ in which
 $V$ is a set of \textbf{vertices} and $E$ a (multi-) set
 of \textbf{edges}; each edge $e \in E$ is an ordered pair $(v,w) \in
 V \times V$; we write $e = (v,w)$.
 \end{definition}
-\martonst{undirected}{directed}
-\marton{My command breaks the compilation in definitions, so I will append them after the definitions.}
 
 You can think of a directed graph as a graph in which each edge has an
 arrow, pointing from one vertex to the other.
@@ -318,9 +316,8 @@ A cycle is sometimes called a circuit.
 
 \begin{definition}[Eulerian cycle (path)]
   \textup{An \textbf{Eulerian cycle (path)} is a cycle (path)
-containing all edges exactly once, and all vertices.}
+containing all edges exactly once.}
 \end{definition}
- \martonst{, and all vertices.}{.}
 
 \begin{definition}[Hamiltonian cycle]
   \textup{ A \textbf{Hamiltonian cycle} is a cycle containing all
@@ -742,12 +739,9 @@ graphs.
 \begin{theorem}[Characterisation of isomorphic simple graphs
 with the adjacency matrix]
 The simple graphs $G_{1}$ and $G_{2}$ are isomorphic if and only if
-there is an ordering of the vertices so that the adjacency there is an
-ordering of the vertices and edges so that the incidence matrices of
+there is an ordering of the vertices so that the adjacency matrices of
 $G_{1}$ and $G_{2}$ are equal.
 \end{theorem}
-
-\martonst{if and only if there is an ordering of the vertices so that the adjacency there is an ordering of the vertices and edges so that the incidence matrices of}{if and only if there is an ordering of the vertices so that the adjacency matrices of}
 
 \begin{proof} Please prove this yourself.
 \end{proof}
@@ -930,7 +924,7 @@ $K_{3,3}$ and $K_{5}$ are not planar.
 \begin{proof}
 Suppose $K_{3,3}$ is a planar graph. Let $\beta$ be the total number
 of edges in all faces: an edge counts $n$ times if that edge occurs in
-$n$ \marton{faces}. Since (in a planar drawing) every edge can belong to at most 2
+$n$ faces. Since (in a planar drawing) every edge can belong to at most 2
 faces, we know that $2*e \geq \beta$. 
 
 Moreover, every cycle in $K_{3,3}$ has at least 4 edges (why?) from
@@ -1235,7 +1229,7 @@ proof turns out to be incorrect later. So it is up to the community
 proofs: one could imagine a branch of science that accepts only hand
 written proofs on paper, just as there is a branch of mathematics that
 accepts only constructive proofs, and no existential proofs. It is not
-possible to decide \martonst{univocally}{unequivocally} whether to accept computer proofs just
+possible to decide unequivocally whether to accept computer proofs just
 based on scientific arguments. But the fact is that the proofs are
 only possible by computer, the more we are inclined to accept such
 proofs, especially if the theorems so proven have useful consequences.
@@ -1307,7 +1301,7 @@ http://en.wikipedia.org/wiki/Tarjan's\_strongly\_connected\_components\_algorith
 %
 Each vertex has 4 fields: the booleans {\em instack} and {\em visited}
 are initially FALSE; the integers {\em index} and {\em lowlink} are
-initialized \martonst{in time}{during execution}.  Their selection is denoted as e.g. $v.visited$.
+initialized at a later point in the algorithm. Their selection is denoted as e.g. $v.visited$.
 
 \begin{algorithm}[h]
 \begin{algorithmic}
@@ -1446,7 +1440,7 @@ $\delta(v) = 1$, because there are no cycles in $S$: indeed, when
 $\delta(v) > 1$ then one can extend $P$; consider $S \setminus v$ -
 the graph $S$ from which $v$ is removed; $S \setminus v$ has $n$
 vertices, is cycle free and connected, so by induction $S \setminus v$
-has \martonst{$S_{*}$}{} $(n-1)$ edges; consequently, $S$ has $n$ edges
+has $(n-1)$ edges; consequently, $S$ has $n$ edges
 
 \item $(c) \Rightarrow (d)$: suppose $T$ contains a cycle; we can now
 remove at least one edge (and no vertices) from $T$ to obtain a
@@ -1637,8 +1631,8 @@ add a right branch to each internal node missing a right branch
 $T'$ has $n$ internal vertices (all the vertices of $T$) and height
 $(h+1)$; $T'$ is full and binary, so we can apply
 Theorem~\ref{relatiebladinwendig} and conclude that $T'$ has
-$(n+1)$ leaves, and by Theorem~\ref{relatieheightbladeren} $lg(n+1)
-\leq h+1$. \marton{lg}{$log_2$}
+$(n+1)$ leaves, and by Theorem~\ref{relatieheightbladeren} $\log_2(n+1)
+\leq h+1$.
 \end{proof}
 
 Figure~\ref{uitbreiding1} shows a tree and its extension as defined in
@@ -1682,7 +1676,7 @@ found, and FALSE otherwise.
 \parbox{9cm}{
 \begin{tabbing}
 123456789 \= 12 \= 12 \= 12 \= 12 \= 12 \= 12 \kill
-\> boolean search(T tree, W value);\\
+\> boolean search(tree T, value w);\\
 \> \{\\
 \> \> P = root(T);\\
 \> \> while (! empty(P))\\
@@ -1699,8 +1693,6 @@ found, and FALSE otherwise.
 \end{tabbing}
 }
 
-\marton{The function header seems to go against most languages: variable\_name TypeName?}
-
 The complexity of this algorithm can be expressed in the number of
 times the body of the while-loop is executed. In the worst case,
 the value is not in the tree, and we search along the longest path
@@ -1708,8 +1700,8 @@ starting at the root: that path has length equal to the height $h$ of
 the tree, so the loop is executed $h+1$ times. From
 Theorem~\ref{relatieheightnodes} we know that $lg(n+1) \leq h+1$, so
 for fixed $n$, the worst case is not less than $lg(n+1)$. By balancing
-the tree as well as possible, we can achieve $\lceil lg(n+1)
-\rceil$.  \marton{lg}{$log_2$} Figure~\ref{balanced1} shows two binary search trees with the
+the tree as well as possible, we can achieve $\lceil \log_2(n+1)
+\rceil$. Figure~\ref{balanced1} shows two binary search trees with the
 same values: the one at the right is balanced better than the one on
 the left, and has a smaller height.
 
@@ -1755,10 +1747,9 @@ In this section, we only consider simple graphs: convince yourself
 (later) that this is not a severe restriction.
 
  \begin{definition}[Spanning tree]
-\textup{$T$ is a \textbf{spanning tree} of a graph $G$,
-if $T$ is a subgraph of $G$ containing all vertices of $G$.}
+A tree \textup{$T$ is a \textbf{spanning tree} of a graph $G$,
+if it is a subgraph of $G$ containing all vertices of $G$.}
 \end{definition}
-\martonst{if $T$ is a subgraph}{if $T$ is a tree and a subgraph}
 
 A spanning tree covers all vertices of a graph, and it is the smallest
 connected subgraph doing so: if you take away an edge from a spanning
@@ -1999,7 +1990,7 @@ Go to \textbf{Stop?}.
 \end{code}
 
 \begin{proof}
-\martonst{At the end of}{The result} of the algorithm $T$ is a tree with $n$ vertices, 
+At the end of the algorithm, $T$ is a tree with $n$ vertices, 
 $(n-1)$ edges, and cycle free, so $T$ is a spanning tree $G$. We still need to prove termination of the algorithm and the minimality of $T$.
 
 Termination is easy: \textbf{Add edge} is executed $(n-1)$ times, and
@@ -2869,7 +2860,7 @@ You can work out the proof yourself.
 
 It is sometimes possible to quickly test that no perfect matching
 exists: clearly, when $n$ students together prefer strictly fewer than
-$n$ days, they \martonst{can}{cannot} all get one of their preferred days. We generalize this:
+$n$ days, they cannot all get one of their preferred days. We generalize this:
 
 \begin{itemize}
 \item
