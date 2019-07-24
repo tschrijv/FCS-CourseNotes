@@ -1,4 +1,4 @@
-\chapter{Introduction to Graphs}
+\chapter{Introduction to Graph Theory}
 
 \begin{summary}
 Informally, a graph is a picture with dots (we name them vertices)
@@ -191,9 +191,29 @@ Figure~\ref{hamiltonkring} shows a Hamiltonian cycle for Hamilton's puzzle.
 \label{hamiltonkring}}
 \end{figure}
 
+%===============================================================================
+\section{References}
+
+\begin{itemize}
+\item
+Richard Johnsonbaugh ``Discrete Mathematics'', MacMillan, 1984
+\item
+Shimon Even ``Graph Algorithms'', Pitman, 1979
+\item
+Ralph P. Grimaldi ``Discrete and Combinatorial Mathematics''
+\item
+William Barnier, Jean B. Chan ``Discrete Mathematics''
+\item
+Michael Townsend ``Discrete Mathematics: Applied combinatorics and \\
+graph theory''
+\end{itemize}
+
+
+
 %///////////////////////////////////////////////////////////////////////////////
 \chapter{Graphs}
 
+%===============================================================================
 \section{Basic Definitions}
 
 \begin{definition}[Graph]
@@ -430,7 +450,8 @@ that a non-connected graph can be uniquely divided in connected
 components.
 
 
-\section{Graph representation \label{voorstelgraph}}
+%===============================================================================
+\section{Graph Representations \label{voorstelgraph}}
 
 Until now we have just drawn graphs. However, we often need a more
 formal representation of graphs, e.g. because we need to write
@@ -607,7 +628,6 @@ has a row for each vertex and a column for each edge. $I[i,j] = 1$
 iff the $j^{th}$ edge is incident on $i$ and 0 otherwise.  The
 incidence matrix of the graph in Figure~\ref{adjacency1} is
 
-\newpage
 \begin{center}
 \mbox{\space \space \space}
 $\begin{array}{cccccc}
@@ -657,7 +677,8 @@ i.e. functions that are not called by anyone. In Section~\myref{sccs},
 this application example is used in an interesting graph algorithm.
 
 
-\section{Graph Isomorphism}
+%===============================================================================
+\section{Graph Isomorphisms}
 
 We do the following experiment: all of you take a pen and paper, and
 without looking at what your neighbour is doing, you follow the
@@ -760,7 +781,8 @@ graphs are not isomorphic.
 
 
 
-\section{Weighted graphs}
+%===============================================================================
+\section{Weighted Graphs}
 
  \begin{definition}[Weighted graph]
   \textup{ A \textbf{weighted graph} $(V,E)$ is a graph in which each
@@ -792,7 +814,8 @@ implicit {\bf Go to instruction $n+1$}. {\em Stop} means the algorithm
 finishes.
 
 
-\section{Planar graphs}
+%===============================================================================
+\section{Planar Graphs}
 
 Informally, a planar graph is a graph one can draw on a sheet of
 paper so that no two edges cross: there is no need for the third
@@ -978,7 +1001,8 @@ The above theorem basically says that $K_{5}$ and $K_{3,3}$ are in
 some sense the smallest non-planar graphs.
 
 
-\section{Graph coloring}
+%===============================================================================
+\section{Graph Coloring}
 
  \begin{definition}
 \textup{A \textbf{coloring} of a graph $(V,E)$ is an assignment of a
@@ -1249,7 +1273,8 @@ exist graphs not containing $K_4$ (or larger) with no
 specifically, every bipartite graph (e.g. $K_{3,3}$) has a 2-coloring.
 
 
-\section{Strongly connected components: an algorithm by Tarjan}\label{sccs}
+%===============================================================================
+\section{Strongly Connected Components}\label{sccs}
 
 We abbreviate {\em strongly connected component} to SCC. Robert Endre
 Tarjan \footnote{Turing award 1986} - the master algorithmist -
@@ -1351,11 +1376,13 @@ says\footnote{{\bf Twenty Questions for Donald Knuth} at
 algorithm is his favorite one, also because it sorts topologically as
 a byproduct. Can you see that in the algorithm?
 
-\clearpage
+% \clearpage
 % \newpage
 
+%///////////////////////////////////////////////////////////////////////////////
 \chapter{Trees}
 
+%===============================================================================
 \section{Introduction}
 
  \begin{definition}[Tree]
@@ -1409,7 +1436,8 @@ for financial support.
 Figure~\ref{expr1} shows a tree representation of the arithmetic
 expression $(3+1) *5 - 7/3$.
 
-\section{Properties of trees}
+%===============================================================================
+\section{Properties of Trees}
 
 The following theorem gives 4 equivalent characterisations of trees:
 
@@ -1713,7 +1741,8 @@ the left, and has a smaller height.
 \end{figure}
 
 
-\section{A more compact representation of (some) trees}
+%===============================================================================
+\section{A Compact Representation}
 
 A tree is often represented with {\em directed} edges. This
 representation stresses the fact that often the two functions {\em
@@ -1741,7 +1770,8 @@ Sharing subtrees has its dangers: when the shared subtree is changed,
 {\em both} occurrences change. If that is not intended, one should not
 use the more compact representation.
 
-\section{Spanning trees}
+%===============================================================================
+\section{Spanning Trees}
 
 In this section, we only consider simple graphs: convince yourself
 (later) that this is not a severe restriction.
@@ -1920,8 +1950,8 @@ spanning tree that neither of the methods can compute.
 \caption{Graph with a hybrid spanning tree\label{opspannend5}}
 \end{figure}
 
-\newpage
-\section{Minimal spanning trees}
+%===============================================================================
+\section{Minimal Spanning Trees}
 
 Consider the following problem: there are a number of cities between
 which a road network must be built. The cost of building any road
@@ -1973,7 +2003,6 @@ containing $e$.
 \end{proof}
 
 
-\newpage
 \begin{code}Prim\label{prim} \\
   Let $G(V,E)$ be a connected weighted graph $G(V,E)$ where the
 vertices are numbered: $V = \{v_{1},v_{2},\ldots,v_{n}\}$. The
@@ -2112,8 +2141,8 @@ Figure~\ref{kruskal1} on the same graph as in Figure~\ref{prim1}.
 \end{figure}
 
 
-\newpage
-\chapter{Network models}
+%///////////////////////////////////////////////////////////////////////////////
+\chapter{Network Models}
 
 A network of connections with each having its own capacity can be modelled by
 a directed, weighted graph. The following are examples of such
@@ -2127,7 +2156,8 @@ even partner choice - the latter is known as the {\em marriage
   problem}.
 
 
-\section{Transport network}
+%===============================================================================
+\section{Transport Networks}
 
  \begin{definition}[Transport network] {\rm A \textbf{transport
          network} (or simply \textbf{network}) is a simple, weighted,
@@ -2334,7 +2364,8 @@ maximal.
 \end{figure}
 
 
-\section{Maximal flow}
+%===============================================================================
+\section{Maximal Flow}
 
 The idea behind the next algorithm for computing a maximal flow is as
 follows: start from any flow and improve it until no longer possible -
@@ -2744,6 +2775,7 @@ $\forall j: \sum_{i} F(i,j) = \sum_{i} F(j,i)$
 This type of problem can also be solved by linear programming,
 e.g. by the simplex algorithm.
 
+%===============================================================================
 \section{Matching}
 
 Consider the following problem: 4 students ($A,B,C$ and $D$) want to
@@ -2934,22 +2966,5 @@ Hall's Theorem~\ref{hall} can be used in partner choice problems, hence its name
 % nodig is.
 
 
-
-
-\chapter{References}
-
-\begin{itemize}
-\item
-Richard Johnsonbaugh ``Discrete Mathematics'', MacMillan, 1984
-\item
-Shimon Even ``Graph Algorithms'', Pitman, 1979
-\item
-Ralph P. Grimaldi ``Discrete and Combinatorial Mathematics''
-\item
-William Barnier, Jean B. Chan ``Discrete Mathematics''
-\item
-Michael Townsend ``Discrete Mathematics: Applied combinatorics and \\
-graph theory''
-\end{itemize}
 
 
