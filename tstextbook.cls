@@ -172,7 +172,7 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{tstextbook_ima
 % Table of contents styling
 %--------------------------------------------------------------------------
 \RequirePackage{titletoc}
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{1}
 
 \titlecontents{part}
 [3pc]
