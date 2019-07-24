@@ -134,6 +134,28 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{tstextbook_ima
 \vspace{8cm}
 }
 
+% Part styling
+%--------------------------------------------------------------------------
+
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >-2\relax
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\LARGE \color{tssteelblue} \partname~\thepart~--~#1}%
+    \else
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    \markboth{}{}%
+    {\centering
+     \interlinepenalty \@M
+     \normalfont
+     \ifnum \c@secnumdepth >-2\relax
+       \huge\bfseries \partname\nobreakspace\thepart
+       \par
+       \vskip 20\p@
+     \fi
+     \Huge \bfseries #2\par}%
+    \@endpart}
+
 % Minitoc styling
 %--------------------------------------------------------------------------
 \RequirePackage{minitoc}
@@ -151,6 +173,16 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{tstextbook_ima
 %--------------------------------------------------------------------------
 \RequirePackage{titletoc}
 \setcounter{tocdepth}{2}
+
+\titlecontents{part}
+[3pc]
+{\addvspace{1.5pc}%
+\filcenter}
+{\thecontentslabel\\*[.2pc]%
+\huge}
+{\huge}
+{} % That is, without page number
+[\addvspace{.5pc}]
 
 \titlecontents{chapter}[0cm]
 {\addvspace{14pt}\large\sffamily\bfseries}
