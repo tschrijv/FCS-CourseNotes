@@ -251,7 +251,7 @@ surprise: the study of polyhedra and graphs have common points.
 Note that $E$ can contain two edges $(v,w)$: we name those edges {\em
 parallel}.
 
-An edge $(v,w)$ is {\em incident on} the vertex $v$ (and on $w$); 
+An edge $(v,w)$ is {\em incident on} the vertex $v$ (and on $w$);
 the vertices $v$ and $w$ are {\em adjacent} to the edge $(v,w)$.
 
 \begin{definition}[Directed graph (digraph)]
@@ -397,7 +397,7 @@ unused edges. Figure~\ref{euler4} illustrates the construction.
   A connected graph $G$ has an Eulerian path from vertex $v$ to $w$
   ($v \neq w$) if $v$ and $w$ are the only vertices with an odd degree.
 \end{theorem}
-\begin{proof} 
+\begin{proof}
 Consider the graph $G'$ obtained by adding the edge $(w,v)$ to $G$.
 $G'$ is connected and each vertex has an even degree, so it has an
 Eulerian cycle $(w,v,\ldots,w)$; delete the first edge from this cycle
@@ -427,10 +427,10 @@ $\forall C' \subseteq G: C \subset C' \Rightarrow C'$ is not connected.}
 \end{definition}
 
  \begin{theorem}[\label{partitie} Partition of a graph]
-The components $(V_{i},E_{i})$ ($i=1,\ldots,n$) of a graph $(V,E)$ 
+The components $(V_{i},E_{i})$ ($i=1,\ldots,n$) of a graph $(V,E)$
 form a partition,
 i.e. \\
-$(V,E) = (\cup_{i=1}^{n} V_{i},\cup_{i=1}^{n} E_{i})$ and 
+$(V,E) = (\cup_{i=1}^{n} V_{i},\cup_{i=1}^{n} E_{i})$ and
 for any $i \neq j$, $V_{i} \cap V_{j} = \emptyset$ and $E_{i} \cap E_{j} =
 \emptyset$
 \end{theorem}
@@ -551,7 +551,7 @@ $
 
 The positive contributions in the calculation result from the paths
 $(a,b)-(b,c)$ and $(a,d)-(d,c)$. This shows that $A^{2}[i,j] = $ the
-number of paths from vertex $i$ to vertex $j$ with length 2. 
+number of paths from vertex $i$ to vertex $j$ with length 2.
 \end{example}
 But we need to
 be careful: the adjacency matrix does not show parallel edges, and
@@ -709,9 +709,9 @@ same instructions: there is a good reason for considering them {\em
 the same} in some sense, hence the following definition:
 
 \begin{definition}[Graph Isomorphism]\label{isomorfegraphs}
-\textup{The graphs $G_{i}(V_{i},E_{i})$ (i = 1,2) are 
+\textup{The graphs $G_{i}(V_{i},E_{i})$ (i = 1,2) are
     \textbf{isomorphic}, if there exists a bijection $f: V_{1}
-\rightarrow V_{2}$ such that $g: E_{1} \rightarrow E_{2}$ specified by 
+\rightarrow V_{2}$ such that $g: E_{1} \rightarrow E_{2}$ specified by
 $g((v,w)) = (f(v),f(w))$ for all $v,w \in E_{1}$ is well defined,
 i.e. $g((v,w)) \in E_{2}$ and a bijection.  Such $f$ is named a
 graph isomorphism.}
@@ -740,11 +740,11 @@ $G_{1}$ and $G_{2}$ are equal.
 \end{theorem}
 \begin{proof}
 \begin{itemize}
-\item 
+\item
 Let $G_{1}$ and $G_{2}$ be isomorphic, with isomorphism $f$.
 Choose any order of the vertices of $G_{1}$. Now order the vertices of
 $G_{2}$ by: $f(v) < f(w) \Leftrightarrow v < w$; the order on the
-edges of $G_{2}$ is induced in the same way by any order on the edges 
+edges of $G_{2}$ is induced in the same way by any order on the edges
 of $G_{1}$ and the bijection on the edges. The incidence matrices are
 equal.
 \item If the incidence matrices are equal, the isomorphism $f$ is
@@ -871,7 +871,7 @@ proved the following formula in 1752\footnote{Descartes
 ($\pm$ 1600) knew the formula and most probably so did Archimedes
 ($\pm$ --250)}:
 
- \begin{theorem}[Euler's formula for planar graphs:] 
+ \begin{theorem}[Euler's formula for planar graphs:]
 If $G$ is a connected planar graph with $e$ edges, $v$ vertices and
 $f$ {\em faces} then $v-e+f = 2$.
 \end{theorem}
@@ -948,7 +948,7 @@ $K_{3,3}$ and $K_{5}$ are not planar.
 Suppose $K_{3,3}$ is a planar graph. Let $\beta$ be the total number
 of edges in all faces: an edge counts $n$ times if that edge occurs in
 $n$ faces. Since (in a planar drawing) every edge can belong to at most 2
-faces, we know that $2*e \geq \beta$. 
+faces, we know that $2*e \geq \beta$.
 
 Moreover, every cycle in $K_{3,3}$ has at least 4 edges (why?) from
 which it follows that $\beta \geq 4*f$. Together with the previous
@@ -1172,7 +1172,7 @@ can clearly be colored with 5 colors. Also, assume $G$ is connected:
 if not, the theorem will be proven true for its components, and carry
 over to the whole graph. So, assume that the theorem is true for
 graphs with $n$ vertices; let $G$ have $n+1$ vertices. Then there is
-at least one vertex $v$ with degree 5 or less. 
+at least one vertex $v$ with degree 5 or less.
 
 1) If $v$ has degree 4 or less, then $v$ occurs in $G$ as in
 Figure~\ref{5kleuring1}.
@@ -1214,11 +1214,11 @@ $c_{1}-c_{3}$ paths.  There are two possibilities:
 \item[$P_{1,3}$ does not contain a path that contains $w_{3}$:]
   for each vertex in the paths $P_{1,3}$, change color $c_{1}$ in
   $c_{3}$ and vice versa. We obtain a different $5$-coloring of $G'$
-  (why?) and now vertices $w_{3}$ and $w_{1}$ have the same color 
+  (why?) and now vertices $w_{3}$ and $w_{1}$ have the same color
   $c_{3}$, so $v$ has no neighbor with color $c_{1}$. This means the
   new 5-coloring of $G'$ can be extended to a $5$-coloring of $G$, by
   assigning $v$ the color $c_{1}$.
-  
+
 \item[$P_{1,3}$ contains a path $p_{1,3}$ that contains $w_{3}$:]
   construct the path set $P_{2,5}$; as you can see in
   Figure~\ref{5kleuring3}, $P_{2,5}$ cannot contain a path that
@@ -1288,8 +1288,8 @@ everything is stripped except the procedure call and definitions.
 main()               venus()                aurochs()           tarpan()
 { venus();           { pluto();             { dodo();           { aurochs();
   aurochs();           venus();               tarpan();         }
-}                    }                      }                    
-                                                                          
+}                    }                      }
+
                      pluto()                dodo()              mamoet()
                      { venus();             { tarpan();         { mamoet();
                      }                        mamoet();         }
@@ -1393,14 +1393,14 @@ there is a unique simple path between any two different points. }
 Any vertex of a tree could be designated as a root of the tree.
 
  \begin{definition}[Height of a vertex]
-  \textup{ 
-The 
- \textbf{height of a vertex} $v$ in a tree with root 
+  \textup{
+The
+ \textbf{height of a vertex} $v$ in a tree with root
     $w$, is the number of edges in the path from $w$ to $v$. }
 \end{definition}
 
  \begin{definition}[Height of a tree]
-  \textup{ 
+  \textup{
 The
 \textbf{height of a tree} is the maximum of the heights of its vertices.}
 \end{definition}
@@ -1442,7 +1442,7 @@ expression $(3+1) *5 - 7/3$.
 The following theorem gives 4 equivalent characterisations of trees:
 
  \begin{theorem}
-For a simple graph $T$ with $n$ vertices 
+For a simple graph $T$ with $n$ vertices
  $(a) \Leftrightarrow
   (b) \Leftrightarrow (c) \Leftrightarrow (d)$ with \\[2mm]
 (a) $T$ is a tree\\
@@ -1457,7 +1457,7 @@ For a simple graph $T$ with $n$ vertices
 between any two vertices, so $T$ is connected; if $T$ contained a
 cycle, some vertices would be connected by more than one path, so $T$
 is cycle free
-\item $(b) \Rightarrow (c)$: 
+\item $(b) \Rightarrow (c)$:
 we prove this by induction on $n$ that $T$ has $(n-1)$ edges; for
 $n=1$ $T$ has zero edges, so the basis for the induction is true;
 suppose that every connected cycle free graph with $n$ vertices has
@@ -1503,19 +1503,19 @@ tree has no cycles. So, if you know that you are dealing with trees,
 you can and should use that fact in your program.
 
 
- \begin{definition}[Terminology related to trees] 
+ \begin{definition}[Terminology related to trees]
 \textup{For a tree $T$ with root $v_{0}$, let $x$, $y$ and $z$ be
 vertices in $T$ and $(v_{0}, v_{1}, \ldots , v_{n})$ a path.
 } {\rm
 \begin{verse}
 %\begin{itemize}
 %\item
-\hspace*{1ex}$\bullet$ 
+\hspace*{1ex}$\bullet$
 $v_{n-1}$ is the \textbf{parent} of $v_{n}$; we often say father (or mother)
- 
+
 %\item
 \hspace*{1ex}$\bullet$
-$v_{0}$ \ldots\ $v_{n-1}$ are all 
+$v_{0}$ \ldots\ $v_{n-1}$ are all
 \textbf{ancestors} of $v_{n}$, and $v_{n}$ is a \textbf{descendant} of
 $v_{0}$ \ldots\ $v_{n-1}$
 %\item
@@ -1602,7 +1602,7 @@ Figure~\ref{tornooi1} shows a tournament tree: it is a full binary tree.
 
  \begin{theorem}
 \label{relatiebladinwendig}
-A full binary tree $T$ with $i$ internal vertices has 
+A full binary tree $T$ with $i$ internal vertices has
 $(i+1)$ leaves and $(2i+1)$ vertices.
 \end{theorem}
 \begin{proof} Each internal vertex has 2 children, so there are $2i$
@@ -1677,7 +1677,7 @@ extension is different from the original.
 
  \begin{definition}[Binary search tree]
 \textup{A \textbf{binary search tree} is a binary tree in which every
-vertex $v$ has a value $w(v)$ (e.g. a number or a string) so that 
+vertex $v$ has a value $w(v)$ (e.g. a number or a string) so that
 if $l$ belongs to the left subtree of $v$ and $r$ to the right subtree
 of $v$, then  $w(l) < w(v) < w(r)$ }
 \end{definition}
@@ -1696,7 +1696,7 @@ of the vertices are words; the order is alphabetic.
 {\em Er was eens een meisje dat Roodkapje heette} \label{binboom1}}
 \end{figure}
 
-The next algorithm searches a given value in a binary search tree: the 
+The next algorithm searches a given value in a binary search tree: the
 algorithm is written as a procedure returning TRUE if the value is
 found, and FALSE otherwise.
 
@@ -1840,12 +1840,12 @@ $T_{1}$ and $T_{2}$. Since $G$ itself is connected, there exist
 vertices $v_{1} \in T_{1}$ and $v_{2} \in T_{2}$ connected by a simple
 path $P$ in $G$ and this path has no other vertices in $T_{1}$ neither
 $T_{2}$ (see the dotted line in Figure~\ref{opspannend3}). Suppose $P$
-has only one edge $b$. Then $T \cup \{b\}$ contains a cycle through 
+has only one edge $b$. Then $T \cup \{b\}$ contains a cycle through
 $v_{1}$ and $v_{2}$; but that means there exists already a path from
 $v_{1}$ to $v_{2}$ in $T$, which contradicts the assumption that
 $T_{1}$ and $T_{2}$ are two different components.
 
-We still need to prove that in a partition $\{V_{k}\}_{k=1}^{n}$ 
+We still need to prove that in a partition $\{V_{k}\}_{k=1}^{n}$
 vertices of a connected graph $G$, there exist always a $V_{i}$ and
 $V_{j}$ so that there exist $v_{i} \in V_{i}$, $v_{j} \in V_{j}$, and
 an edge $(v_{i},v_{j}) \in G$: consider $V_{1}$ and any other $V_{k}$;
@@ -1871,7 +1871,7 @@ spanning tree of $G$ if $T$ is cycle free and has $n-1$ edges.
 \label{opspannend3}}
 \end{figure}
 
-Theorem~\ref{opspannend4} leads to a general (non-deterministic) 
+Theorem~\ref{opspannend4} leads to a general (non-deterministic)
 algorithm for constructing a spanning tree for a graph $G$: start with
 the empty tree $T$; repeatedly add an edge to $T$ so that no cycle is
 introduced, until this is no longer possible: $T$ is now a spanning
@@ -2010,7 +2010,7 @@ following procedure constructs a minimal spanning tree $T$ for $G$.
 \begin{enumerate}
 \item \textbf{Initialisation}: $T := (\{v_{1}\},\emptyset)$
 \item \textbf{Stop?}: If $T$ has $(n-1)$ edges, stop.
-\item \textbf{Add edge}: 
+\item \textbf{Add edge}:
 Define $S = \{e | e = (u,v), u \in T, v \notin T\}$ and choose an edge
 $b$ from $S$ so that $\forall e \in S: w(b) \leq w(e)$. Add $b$ to
 $T$. The result is still connected and cycle free.
@@ -2019,7 +2019,7 @@ Go to \textbf{Stop?}.
 \end{code}
 
 \begin{proof}
-At the end of the algorithm, $T$ is a tree with $n$ vertices, 
+At the end of the algorithm, $T$ is a tree with $n$ vertices,
 $(n-1)$ edges, and cycle free, so $T$ is a spanning tree $G$. We still need to prove termination of the algorithm and the minimality of $T$.
 
 Termination is easy: \textbf{Add edge} is executed $(n-1)$ times, and
@@ -2046,7 +2046,7 @@ edge $(x,y) \in B$ and we can take it out of $T' \cup \{(i,j)\}$ so
 that we get a new spanning tree $T''$ (it contains all vertices and is
 connected and cycle free). So the question is: is $T''$ minimal?
 Since $w(i,j) \leq w(x,y)$ (that is how $(i,j)$ was chosen), we
-have $w(T'') \leq w(T')$ so $T''$ is an MST. We can conclude that 
+have $w(T'') \leq w(T')$ so $T''$ is an MST. We can conclude that
 $T \cup \{(i,j)\}$ is part of an MST.
 
 As a result, the spanning tree constructed by Prim is a minimal
@@ -2216,10 +2216,10 @@ $F(i,j) \leq C_{i,j}$
 \end{enumerate}
 \end{minipage}\\[2mm]
 We name $F(i,j)$ the flow in edge $(i,j)$. For a vertex $j$, we name
-the quantity $\sum_{i \in V} F(i,j)$ the incoming flow in $j$, and 
+the quantity $\sum_{i \in V} F(i,j)$ the incoming flow in $j$, and
 $\sum_{i \in V} F(j,i)$ the outgoing flow out of $j$.  }
 \end{definition}
-\footnotetext{if there is no edge $(i,j)$, we assume that $C_{i,j} = 0$} 
+\footnotetext{if there is no edge $(i,j)$, we assume that $C_{i,j} = 0$}
 
 
 
@@ -2270,9 +2270,9 @@ source equals the flow going into the sink, or more formally:
 \end{theorem}
 \begin{proof}
 
-It should be clear that 
+It should be clear that
 
-$~~~~~~~~~~\sum_{j \in V} (\sum_{i \in V} F(i,j))  = 
+$~~~~~~~~~~\sum_{j \in V} (\sum_{i \in V} F(i,j))  =
                 \sum_{i \in V} (\sum_{j \in V} F(i,j))
          =  \sum_{j \in V} (\sum_{i \in V} F(j,i))$
 
@@ -2425,7 +2425,7 @@ Let $P$ be a path from $a$ to $z$ in a network $G(V,E)$, so that
 1.
 $\forall (i,j) \in P_{+}$: $F(i,j) < C_{i,j}$
 
-2. 
+2.
 $\forall (i,j) \in P_{-}$: $0 < F(i,j)$
 \end{verse}
 
@@ -2439,7 +2439,7 @@ F'(i,j) & = & F(i,j) \quad \forall (i,j) \notin P\\
         & = & F(i,j) - \Delta \quad \forall (i,j) \in P_{-}
 \end{eqnarray*}
 
-The $F'$ is a flow and it is (strictly) larger than $F$ by $\Delta$.
+Then $F'$ is a flow and it is (strictly) larger than $F$ by $\Delta$.
 
 \end{theorem}
 \begin{proof} In order to prove that $F'$ is a flow, we must check
@@ -2560,7 +2560,7 @@ see Figure~\ref{stroom3}.
 
  \begin{definition}[Cut in a network]
   \textup{A \textbf{cut} in a network $G(V,E)$ with source $a$ and sink
-    $z$, is a tuple $(P,\overline{P})$ 
+    $z$, is a tuple $(P,\overline{P})$
     so that $a \in P$, $z \in \overline{P}$, $P
     \cup \overline{P} = V$ and $P \cap \overline{P} = \emptyset$ }
 \end{definition}
@@ -2610,7 +2610,7 @@ The capacity of a cut is not smaller than a flow, i.e.
 \end{theorem}
 \begin{proof}
 \begin{eqnarray*}
-\sum_{i \in V} F(a,i) & = & 
+\sum_{i \in V} F(a,i) & = &
                 \sum_{i \in V}(F(a,i) - F(i,a)) +
                 \sum_{j \in P \backslash \{a\}} \sum_{i \in V}(F(j,i) - F(i,j))\\
         & = & \sum_{j \in P} \sum_{i \in V} (F(j,i) - F(i,j)) \\
@@ -2638,7 +2638,7 @@ two is even stronger:
 
  \begin{theorem}[Max flow - min cut \label{maxflowmincut}]
   Let $(P,\overline{P})$ be a cut and $F$ a flow in a network $G(V,E)$,
-if 
+if
 \[C(P,\overline{P})=F\mbox{ \ \ (or written out }
 \sum_{i \in P} \sum_{j \in \overline{P}} C_{i,j} = \sum_{i \in V} F(a,i)
  \mbox{ )}\]
@@ -2762,7 +2762,7 @@ Figure~\ref{maxflow7}, with order $(a,b,c,d,e,z)$ on the vertices.
 \end{figure}
 
 Finding the maximal flow in a network is equivalent to finding
-(integer) values $F(i,j)$ so that 
+(integer) values $F(i,j)$ so that
 \begin{itemize}
 \item
 $\sum_{j} F(a,j)$ is maximal
@@ -2836,7 +2836,7 @@ perfect) matching, since every student is matched up with a day.
 
 \marton{The labels on this figure are not translated.}
 
-The maximal flow could have been smaller than the number of 
+The maximal flow could have been smaller than the number of
 students (for a different set of preferences of course): that maximal
 flow gives us a maximal matching, but not a complete one. More
 formally:
@@ -2903,7 +2903,7 @@ $S$}
 $
 \begin{array}{lrcl}
 R: & {\cal P}(V) & \rightarrow & {\cal P}(W)\\
-   & S    & \mapsto     & 
+   & S    & \mapsto     &
                 \{w\in W \;|\; \exists v \in S \mbox{ with }(v,w) \in E\}
 \end{array}
 $
@@ -2931,7 +2931,7 @@ exists. So assume $m \geq 2$. We distinguish between two cases:
 
 
 \begin{enumerate}
-\item 
+\item
 Suppose that for all $S$ such that $\emptyset \neq S \subsetneq V$ it
 is true that $|S| + 1 \leq |R(S)|$. Take any edge $(v,w)$ with $v \in
 V$ and consider the $G' = G \setminus \{v,w\}$. $G'$ fulfills the
