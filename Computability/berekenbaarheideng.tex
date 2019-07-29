@@ -33,10 +33,9 @@ function $\delta$.
   width=0.2\linewidth,
   keepaspectratio]{static/turing}
 
-
 \vspace{0.5cm} More formally:
- \grijs{\begin{definitie} Turing Machine\\
-{\rm
+
+\begin{definition}[Turing Machine]
 A {\bf Turing Machine} is a 7-tuple
 %
 $(Q, \Sigma, \Gamma, \delta, q_s, q_a, q_r)$
@@ -71,9 +70,7 @@ $\delta$ is the transition function: it is a total function with
 $~~~~~~~~~~Q \times \Gamma \rightarrow Q \times \Gamma \times \{L,R,S\}$
 
 \end{itemize}
-}
-\end{definitie}
-}
+\end{definition}
 
 \marton{Maybe a clarification in the definition about L,R,S, as this is the first time we abbreviate}
 
@@ -131,19 +128,17 @@ For a given TM, $\Sigma^*$ consists of three disjunct subsets:
 These subsets are used in the following definitions.
 
 % \clearpage
- \grijs{\begin{definitie} To recognize\\
-{\rm
-A Turing machine TM recognizes $L_{TM}$
-}
-\end{definitie}}
+
+\begin{definition}[To recognize]
+A Turing machine TM recognizes $L_{TM}$.
+\end{definition}
 
 Its complementary definition is
 
- \grijs{\begin{definitie} Turing recognizable language\\
-{\rm
+\begin{definition}[Turing recognizable language]
 A language L is Turing recognizable if there exists a Turing Machine
-TM so that TM recognizes $L$ or alternatively, $L = L_{TM}$ }
-\end{definitie}}
+TM so that TM recognizes $L$ or alternatively, $L = L_{TM}$
+\end{definition}
 
 Here is an example of a recognizable language L and a TM that
 recognizes L: $\Sigma = \{a,b\}$, $L = \{a\}^*$. Table \ref{turing3}
@@ -183,20 +178,15 @@ $q_s$  &  \#        &  $q_a$&    -      &  -   \\
 
 This distinction is captured in the following definitions:
 
- \grijs{\begin{definitie} To decide\\
-{\rm
+\begin{definition}[To decide]
 A Turing Machine TM decides a language L, if TM recognizes L and
 $\infty_{TM} = \emptyset$
-}
-\end{definitie}}
+\end{definition}
 
-
-
- \grijs{\begin{definitie} Turing decidable language\\
-{\rm
+\begin{definition}[Turing decidable language]
 A language L is Turing decidable if there exists a Turing Machine that
-decides L.  }
-\end{definitie}}
+decides L.
+\end{definition}
 
 It might not be clear at this point that to recognize and to decide
 are two very different things, but we will work towards this
@@ -207,22 +197,21 @@ Other terminology for {\em decidable language} is {\em recursive
   language}, and for {\em recognizable language}, one uses {\em
   recursively enumerable}, or sometimes {\em semidecidable}.
 
+\begin{definition}[Co-recognizable/co-decidable]
+A language L is \textbf{co-recognizable/co-decidable} if $\overline{L}$
+is recognizable/decidable.
+\end{definition}
 
- \grijs{\begin{definitie} Co-recognizable/co-decidable\\
-\textup{A language L is \textbf{co-recognizable/co-decidable} if $\overline{L}$
-is recognizable/decidable.}
-\end{definitie}}
-
- \grijs{\begin{stelling}\label{corecognizable}
+\begin{theorem} \label{corecognizable}
 If L is decidable, then L is also co-decidable.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 Let M be the TM deciding L; now switch the roles of $q_a$ and $q_r$.
 \end{proof}
 
- \grijs{\begin{stelling}\label{isdec}
+\begin{theorem} \label{isdec}
 If L is recognizable and co-recognizable, then L is decidable.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 Let M1 be the machine that recognizes L, and M2 the machine
 recognizing $\overline{L}$. The idea is to have a machine M that
@@ -235,10 +224,9 @@ The definition of M is informal, and we should make it more formal:
 define M as a 2-tape machine and work out the details.
 \end{proof}
 
-
-\grijs{\begin{stelling}
+\begin{theorem}
 Some languages are not recognizable.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 The set of Turing Machines is countably infinite, so the set of
 recognizable languages can be at most countably infinite. On the other
@@ -656,8 +644,9 @@ $~~~~~~~~~~A_{TM} = \{\langle M,s \rangle| M~is~a~Turing~Machine~and~s
 $A_{TM}$ is the first language for which we prove that it is
 undecidable.
 
-\grijs{\begin{stelling} $A_{TM}$ is not decidable.
-\end{stelling}}
+\begin{theorem}
+$A_{TM}$ is not decidable.
+\end{theorem}
 \begin{proof}
 We prove this {\em by contradiction}.
 
@@ -698,9 +687,10 @@ $A_{TM}$ is undecidable.
 \end{proof}
 
 \newpage
- \grijs{\begin{stelling}
+
+\begin{theorem}
 $H_{TM}$ is undecidable.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 Suppose $H_{TM}$ is decidable by H. We define a decider $B$ for
 $A_{TM}$ as follows: on input $\langle M,s \rangle$:
@@ -718,9 +708,9 @@ Since a decider for $A_{TM}$ is non-existent, $H$ does not exist, so
 $H_{TM}$ is undecidable.
 \end{proof}
 
- \grijs{\begin{stelling}
+\begin{theorem}
 $H_{TM}$ is recognizable.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 On input $\langle M,s \rangle$, the recognizer $H$ for $H_{TM}$ simply
 runs $M$ on s: if it stops (either end state), $H$ accepts its input;
@@ -730,9 +720,9 @@ otherwise it keeps running ... and that is OK.
 Quite often, when we construct or define a recognizer, it has an
 accept\marton{ing state}, but no point at which it rejects.
 
-\grijs{\begin{stelling}
+\begin{theorem}
 $A_{TM}$ is recognizable.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 Similar to the recognizer for $H_{TM}$.
 \end{proof}
@@ -805,10 +795,10 @@ language determined by the enumerator, or enumerated by the
 enumerator. The enumerator is allowed to produce the same output
 string multiple times. We can now prove:
 
- \grijs{\begin{stelling}
+\begin{theorem}
 The language enumerated by an enumerator is recognizable, and every
 recognizable language can be enumerated by an enumerator.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 (1) Given an enumerator Enu for L, we describe informally a recognizer
   M for L: M uses Enu as a subroutine as follows:
@@ -836,7 +826,6 @@ a $TM_{driver}$ that generates the numbers 1,2,... one after the
 other and for each of them calls $TM_{gen}$ and $TM_n$
 
 \end{itemize}
-
 \end{proof}
 
 Why did we need acquaintance with the Halting problem? Naively, we
@@ -878,11 +867,11 @@ $A_{RegExp} = \{\langle RE,s
   \rangle|RE~is~a~regular~expression,~and~RE~generates~s\}$
 \end{itemize}
 
-
- \grijs{\begin{stelling}\label{reglandec}
+\begin{theorem} \label{reglandec}
 $A_{DFA}$, $A_{NFA}$ and $A_{RegExp}$ are decidable.
-\end{stelling}}
-\begin{proof} The proof is constructive.
+\end{theorem}
+\begin{proof}
+The proof is constructive.
 \begin{itemize}
 \item
 The decider B has input $\langle D,s \rangle$. B simulates D on s. If
@@ -925,10 +914,9 @@ realizable as a TM.
 
 The first question is trivial, because $A_{DFA}$ is decidable.
 
-
-\grijs{\begin{stelling}
+\begin{theorem}
 $E_{DFA} = \{\langle DFA \rangle| L_{DFA} = \phi\}$ is decidable.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 There are many ways to prove this. Here is one that uses some theory
 we studied before, but is also a bit of an overkill: you are invited
@@ -939,11 +927,9 @@ If $L_{DFA} = \phi$ then $DFA_{min}$ is isomorphic with ... (draw that
 machine). Deciding that is easy.
 \end{proof}
 
-
-
-\grijs{\begin{stelling}
+\begin{theorem}
 $EQ_{DFA} = \{\langle DFA_1,DFA_2 \rangle| L_{DFA_1} = L_{DFA_2}\}$ is decidable.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 We use some algebraic properties of the set of DFAs.
 
@@ -963,11 +949,10 @@ The questions are similar to the ones in the previous section, and can
 be formulated either by giving the CFG or the PDA for the context free
 language at hand. We show it for the grammar only.
 
-
-\grijs{\begin{stelling}\label{acfg}
+\begin{theorem} \label{acfg}
 $A_{CFG} = \{\langle G,s \rangle|G~is~a~CFG,~and~s \in L_G\}$ is
     decidable: {\em acceptance} of a string by a CFG is decidable.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 A naive proof idea consists in using the CFG to generate strings, and
 accepting as soon as s is generated. You can see why this does not work:
@@ -983,9 +968,9 @@ $2|s|-1$: there are only finitely many of them. If s is one of them,
 accept, otherwise reject.
 \end{proof}
 
-\grijs{\begin{stelling}
+\begin{theorem}
 $E_{CFG} = \{\langle G \rangle|G~is~a~CFG,~and~L_G = \phi\}$ is decidable: {\em emptiness} of a CFL is decidable.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 We informally describe an algorithm transforming G to a form in which
 taking the decision is easier.
@@ -1018,20 +1003,18 @@ Write down a grammar that determines the empty language and apply the
 above procedure to it. Did you learn something about Prolog programs
 that have no answers?
 
-
-\grijs{\begin{stelling}\label{escfg}
+\begin{theorem} \label{escfg}
 $ES_{CFG} = \{\langle G \rangle|G~is~a~CFG,~and~\epsilon \in L_G\}$ is
-    decidable: it is decidable whether a CFG generates the empty string
-\end{stelling}}
+    decidable: it is decidable whether a CFG generates the empty string.
+\end{theorem}
 \begin{proof}
 Transform the CFG to its Chomsky Normal Form. If it now contains the
 rule $S \rightarrow \epsilon$, accept, otherwise reject.
 \end{proof}
 
-
-\grijs{\begin{stelling}
+\begin{theorem}
 Every CFL is decidable.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 Here, the question is to prove the existence of a decider $B_G$ that
 can decide for each string whether it belongs to G or not. Appreciate
@@ -1064,11 +1047,11 @@ Prove that Theorem~\ref{escfg} follows directly from Theorem~\ref{acfg}.
 In Section~\ref{halting} we proved that $A_{TM}$ and $H_{TM}$ are not
 decidable. Here are some more of the same kind.
 
- \grijs{\begin{stelling}\label{nonreductie1}
+\begin{theorem} \label{nonreductie1}
 $E_{TM} = \{\langle M \rangle | M~is~a~TM,~and~L_M = \phi\}$ is not
      decidable: it is not decidable whether a Turing Machine accepts
      no input.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 Assume that $E_{TM}$ is decidable, then there exists a decider $E$ for
 it. We now describe a decider B for $A_{TM}$ using $E$:
@@ -1113,9 +1096,9 @@ Another instance of the general problem:
 $REGULAR_{TM}$
 \end{itemize}
 
-\grijs{\begin{stelling}
+\begin{theorem}
 $REGULAR_{TM}$ is not decidable.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 Suppose Turing Machine $R$ decides $REGULAR_{TM}$. Fix two symbols
 from the alphabet, say 0 and 1. Make a decider $B$ for $A_{TM}$ as
@@ -1144,10 +1127,9 @@ decider for $A_{TM}$, which is impossible, so $R$ does not exist, so
 $REGULAR_{TM}$ is not decidable.
 \end{proof}
 
-
-\grijs{\begin{stelling}\label{reduction1}
+\begin{theorem} \label{reduction1}
 $EQ_{TM}$ is not decidable.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 We already know that $E_{TM}$ is not decidable. $E_{TM}$ is a special
 case of $EQ_{TM}$, in which the second machine is $M_\phi$. It is
@@ -1165,12 +1147,11 @@ Section~\ref{mappingreduction}.
 The following is about context sensitive languages. We first define
 the machinery needed to decide them:
 
- \grijs{\begin{definitie} Linear Bounded Automaton\\
-{\rm
+\begin{definition}[Linear Bounded Automaton]
 A Linear Bounded Automaton is a (non-deterministic) Turing Machine
 that reads and writes only on the part of the tape that contained the
-initial input.  }
-\end{definitie}}
+initial input.
+\end{definition}
 
 The name of the automaton might strike you as weird. An equivalent
 definition allows the machine to use a portion of the tape that is
@@ -1195,10 +1176,9 @@ $~~~~~~~~~A_{LBA} = \{\langle M,s \rangle | M~is~an~LBA~and~s \in L_{LBA}\}$.
 
 The following might surprise you ...
 
-
- \grijs{\begin{stelling}
-$A_{LBA}$ is decidable
-\end{stelling}}
+\begin{theorem}
+$A_{LBA}$ is decidable.
+\end{theorem}
 \begin{proof}
 Consider the configurations that can occur during the execution of
 an LBA on an input with length $n$. Using $q$ for the number of states
@@ -1219,9 +1199,9 @@ on input $\langle M,s \rangle$, B performs the following
 \end{itemize}
 \end{proof}
 
- \grijs{\begin{stelling}
-$E_{LBA} = \{M | M~is~an~LBA~with~L_M = \emptyset\}$ is not decidable
-\end{stelling}}
+\begin{theorem}
+$E_{LBA} = \{M | M~is~an~LBA~with~L_M = \emptyset\}$ is not decidable.
+\end{theorem}
 \begin{proof}
 We first show that for a given Turing Machine $M$ and string
 $s$, we can construct an LBA that can decide about a finite sequence
@@ -1290,13 +1270,12 @@ strings from $\Sigma^*$, i.e. $ALL_{CFG} = \{\langle G \rangle|L_G =
 \Sigma^*\}$ is not decidable. That is a bit weird, as $E_{CFG}$ is
 decidable. Then again, complement is not internal for CFLs ...
 
- \grijs{\begin{stelling} $ALL_{CFG}$
-is not decidable.
-\end{stelling}}
+\begin{theorem}
+$ALL_{CFG}$ is not decidable.
+\end{theorem}
 \begin{proof}
 No proof this year.
 \end{proof}
-
 
 \paragraph{Selfie:} Prove that $ALL_{RegExp}$ is decidable.
 
@@ -1386,22 +1365,20 @@ property, denoted
 %
 $Neg_P = \{M|P(M) = false\}$.
 
- \grijs{\begin{definitie} Non-trivial property\\
-{\rm
+\begin{definition}[Non-trivial property]
 A property $P$ of TMs is {\em non-trivial} if
 
-$~~~~~~~~~~~~Pos_P \neq \emptyset$ and also $Neg_P \neq \emptyset$.  }
-\end{definitie}}
+$~~~~~~~~~~~~Pos_P \neq \emptyset$ and also $Neg_P \neq \emptyset$.
+\end{definition}
 
-\grijs{\begin{definitie} Language invariant property\\
-{\rm
+\begin{definition}[Language invariant property]
 The property $P$ is {\em language invariant} if
 
 $~~~~~~~~~L_{M_1} = L_{M_2} \Longrightarrow P(M_1) = P(M_2)$
 
 or in words: {\em machines recognizing the same language either all
-  have $P$ or none have $P$}.  }
-\end{definitie}}
+  have $P$ or none have $P$}.
+\end{definition}
 
 \martonst{language invariant}{semantic?}
 
@@ -1420,10 +1397,10 @@ machines have $P$? How many don't?
 
 % \clearpage
 
- \grijs{\begin{stelling} Stelling I by Rice\\
+\begin{theorem}[Stelling I by Rice]
 Let $P$ be a non-trivial, language invariant property of the Turing
 Machines. $Pos_P$ (and $Neg_P$) is undecidable.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 Suppose $M_\emptyset$ (a machine deciding the empty language) does not
 have property $P$ - if not, replace $P$ by its negation. Since $P$ is
@@ -1458,6 +1435,8 @@ $M$ accepts $s$.
 So, $A$ is a decider for $A_{TM}$, clearly impossible, so $B$ does not
 exist, and $Pos_P$ is not decidable.
 \end{proof}
+
+\marton{is Stelling part of the theorem name? It's just theorem in Dutch, right?}
 
 Rice also has a second theorem: every non-monotone property is not
 recognizable; it is worth having a look at it!
@@ -1706,18 +1685,17 @@ to get a good grasp on the reductions in this section: in complexity
 theory, we use similar reductions, so it is a recurring concept.
 
 %
- \grijs{\begin{definitie}
-(Turing) computable function\\ {\rm A function $f$ is (Turing)
+
+\begin{definition}[(Turing) computable function]
+A function $f$ is (Turing)
        computable if there exists a Turing Machine that on input $s$
-       eventually halts with $f(s)$ on the tape.}
-\end{definitie}}
+       eventually halts with $f(s)$ on the tape.
+\end{definition}
 
 We do not care whether the machine stops in an accepting or a
 rejecting end state.
 
-
- \grijs{\begin{definitie}\label{manyone} Many-one Reduction of languages\\
-{\rm
+\begin{definition}[Many-one Reduction of languages] \label{manyone}
 A many-one reduction of language $L_1$ (over $\Sigma_1$) to language
 $L_2$ (over $\Sigma_2$) is a total computable function $f$ from
 $\Sigma_1^*$ to $\Sigma_2^*$ so that $f(L_1) \subseteq L_2$ and
@@ -1725,8 +1703,8 @@ $\Sigma_1^*$ to $\Sigma_2^*$ so that $f(L_1) \subseteq L_2$ and
 $f(\overline{L_1}) \subseteq \overline{L_2}$.
 
 We denote this by $L_1 \leq_m L_2$, and we can also say {\em $L_1$
-  reduces to $L_2$}, or {\em $L_1$ is mapping reducible to $L_2$}.  }
-\end{definitie}}
+  reduces to $L_2$}, or {\em $L_1$ is mapping reducible to $L_2$}.
+\end{definition}
 
 Figure~\ref{mapred} shows the condition on $f$.
 % \clearpage
@@ -1745,13 +1723,13 @@ about $L_1$ into a decision question about $L_2$, indeed,
 $s \in L_1?$ can be answered by deciding about $f(s) \in L_2$. The
 next theorems make that more precise: you must be able to prove them.
 
- \grijs{\begin{stelling}
+\begin{theorem}
 If  $L_1 \leq_m L_2$ and $L_2$ is decidable, then $L_1$ is decidable.
-\end{stelling}}
+\end{theorem}
 
- \grijs{\begin{stelling}
+\begin{theorem}
 If $L_1 \leq_m L_2$ and $L_2$ is recognizable, then $L_1$ is recognizable.
-\end{stelling}}
+\end{theorem}
 
  \grijs{\begin{gevolg}
 if $L_1 \leq_m L_2$ and $L_1$ is not recognizable, then $L_2$ is not
@@ -1762,10 +1740,10 @@ $L_2$ is not decidable.
 We have used reductions informally in previous theorems, e.g. on page
 \pageref{reduction1} when we proved that $EQ_{TM}$ is not decidable.
 Let's do it now based on the definitions.
- \grijs{\begin{stelling}
-$EQ_{TM}$ is not decidable.
-\end{stelling}}
 
+\begin{theorem}
+$EQ_{TM}$ is not decidable.
+\end{theorem}
 \begin{proof}
 We reduce $E_{TM}$ to $EQ_{TM}$: $f$ maps input $\langle M \rangle$ to
 $\langle M,M_\phi \rangle$; $M_\phi$ a Turing Machine accepting the
@@ -1775,10 +1753,9 @@ So, $E_{TM} \leq_m EQ_{TM}$, and since we know already that $E_{TM}$
 is not decidable, $EQ_{TM}$ is not decidable either.
 \end{proof}
 
-
-\grijs{\begin{stelling}
+\begin{theorem}
 If $A \leq_m B$ then  $\overline{A} \leq_m \overline{B}$.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 Selfie!
 \end{proof}
@@ -1789,10 +1766,9 @@ $\overline{A_{TM}}$ to $E_{TM}$: we mapped $\langle M,s \rangle$ to
 $\langle M_s \rangle$ ...  Note that a mapping reduction from
 $A_{TM}$ to $E_{TM}$ does not exist - can you explain why?
 
-
- \grijs{\begin{stelling}
+\begin{theorem}
 $EQ_{TM}$ is not recognizable and not co-recognizable.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 We construct two mapping reductions: $A_{TM} \leq_m
 \overline{EQ_{TM}}$ and $A_{TM} \leq_m EQ_{TM}$. Since
@@ -1844,10 +1820,9 @@ answer. So, the set of oracle machines with oracle $A_{TM}$ is
 strictly stronger than the set of Turing Machines. Here comes another
 example:
 
-
- \grijs{\begin{stelling}
+\begin{theorem}
 There exists an $O^{A_{TM}}$ that decides $E_{TM}$.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 We construct $O^{A_{TM}}$ as follows: on input $\langle M \rangle$
 $O^{A_{TM}}$ performs the following actions
@@ -1873,27 +1848,27 @@ accepts. We conclude that $O^{A_{TM}}$ decides the language $E_{TM}$.
 
 The theorem proves that $E_{TM}$ is decidable relative to
 $A_{TM}$. The relevant definition is:
- \grijs{\begin{definitie}  Turing reducible\\
-{\rm
+
+\begin{definition}[Turing reducible]
 A language $A$ is Turing reducible to language $B$, if $A$
 is decidable relative to $B$, i.e. there exists an oracle machine
-$O^B$ that decides $A$. We write this as $A \leq_T B$.  }
-\end{definitie}}
+$O^B$ that decides $A$. We write this as $A \leq_T B$.
+\end{definition}
 
 The definition supports our intuition about what it means for one
 language to be reducible to another:
 
- \grijs{\begin{stelling}
+\begin{theorem}
 If $A \leq_T B$ and $B$ is decidable, then $A$ is decidable.
-\end{stelling}}
+\end{theorem}
 
 The previous and following theorems are at your mercy!
 
- \grijs{\begin{stelling}
+\begin{theorem}
 If $A \leq_m B$ then also $A \leq_T B$.
 
 In other words: $\leq_m$ is finer than $\leq_T$.
-\end{stelling}}
+\end{theorem}
 
 Time for a description of an oracle for any language $L$: each
 string has a running number in the lexicographic order on strings
@@ -2004,12 +1979,10 @@ $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~h(0) = c$  in which $c$ is a number
 
 $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~h(y+1) = g(y,h(y))$
 
-
- \grijs{\begin{definitie} Primitive recursive function\\
-{\rm
+\begin{definition}[Primitive recursive function]
 All functions that can be constructed from the basic functions and by using composition and primitive recursion, are named
-{\bf primitive recursive}.  }
-\end{definitie}}
+{\bf primitive recursive}.
+\end{definition}
 
 
 Primitive recursive functions are total. They can be
@@ -2126,14 +2099,11 @@ Loosely speaking,
 
 There are two ways you can end up in a loop ...
 
-
-
-\grijs{\begin{definitie} Recursive functions \\
-{\rm
+\begin{definition}[Recursive functions]
 {\bf Recursive functions} are constructed from the basic functions,
 and by applying Pr, Cn and Mn. One also names these functions {\em
-  $\mu$-recursive}. $\mu$ is the minimalization operator. }
-\end{definitie}}
+  $\mu$-recursive}. $\mu$ is the minimalization operator.
+\end{definition}
 
 The recursive functions can be computed with WHILE-programs. More
 specifically, these functions can be computed by a Turing Machine, and
