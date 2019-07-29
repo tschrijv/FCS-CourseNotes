@@ -14,7 +14,7 @@ We can abstract away many details and focus on the essence: in every
 example, there is a mapping from elements in an input domain to
 elements in an output domain. These domains are always discrete, and
 sometimes infinite. This means that from a theoretical point of view,
-programs are just functions from (a part of) $\N$ to (a part of) $\N$.  
+programs are just functions from (a part of) $\N$ to (a part of) $\N$.
 
 In case the input domain is small, that function is not very
 interesting: one could just build a table with all precomputed values,
@@ -47,7 +47,7 @@ If the output domain is infinite, the function can not be reduced
 easily to a finite sequence of functions with a finite output domain.
 
 We can conclude that there exist only two kinds of interesting
-functions. They have signature $\N \rightarrow\{yes, no\}$ and $\N \rightarrow \N$. 
+functions. They have signature $\N \rightarrow\{yes, no\}$ and $\N \rightarrow \N$.
 
 We focus for now on the first kind: it is easy to associate a certain
 structure and semantics with the output domain, but the input domain
@@ -123,7 +123,7 @@ A language can be finite or infinite. If the language $L$ is infinite,
 is it countably infinite?\footnote{If you do not remember what that
 means, now is the time to look it up}
 
-In order to \martonst{fix}{define? describe?} a language, one must give a description for every
+In order to identify a language, one must give a description for every
 element of the language, and that description should not fit any
 string not in the language. E.g. the language of odd numbers (over the
 alphabet of decimal digits), or the set of strings ending on
@@ -145,14 +145,14 @@ Here are some questions for you to think about: this course provides
 you with material to answer them.
 
 \begin{itemize}
-\item 
+\item
 Do formalisms exist that can denote language descriptions?
 
-\item 
+\item
 Does such a formalism allow to (automatically) derive testers and
 generators for the language?
 
-\item 
+\item
 Are there languages that do not fit the formalism?
 
 \item
@@ -255,9 +255,9 @@ In maths, one uses the set notation, e.g.
 \begin{vb}
 Let $\Sigma = \{x,y,z\}$:
 \begin{itemize}
-\item 
+\item
 $\Sigma^* = \{a_1a_2a_3...a_n|~a_i \in \Sigma, n \in \N \}$
-\item 
+\item
 $L = \{a_1a_2a_3...a_n|~a_1 = y, n \in \N, \forall i > 1: a_i \in \Sigma\}$
 
 or in words: L is the set of strings starting with y
@@ -270,9 +270,9 @@ ambiguous about membership.
 \begin{vb}
 ~~
 \begin{itemize}
-\item 
+\item
 $H(n) = \{P | P~is~a~Java~program~and~P~stops~after~at~most~~n~seconds~on~input~n\}$
-\item 
+\item
 $Prime = \{n|n \in \N, n~is~prime\}$
 \end{itemize}
 \end{vb}
@@ -358,7 +358,7 @@ Are we using too many brackets, too few? Why?
 
 
 \grijs{\begin{definitie} A regular expression E {\bf determines} a
-language $L_E$ over its alphabet $\Sigma$ as follows: 
+language $L_E$ over its alphabet $\Sigma$ as follows:
 {\rm
 \begin{itemize}
 \item if E = a ($a \in \Sigma$) then $L_E = \{a\}$ (the language with
@@ -381,7 +381,7 @@ we can agree that $L_{(((a)^*(b))c)} = L_{a^*bc}$. You should however
 never say that the regular expression $(((a)^*(b))c)$ equals the
 regular expression $a^*bc$: the correct wording is {\em the language
 (determined by) $(((a)^*(b))c)$ equals the language (determined by)
-$a^*bc$}. 
+$a^*bc$}.
 
 \paragraph{Selfie:}
 Formulate a verbal description of the languages determined by the REs
@@ -463,7 +463,7 @@ Is every infinite regular language countable?
 Given a regular language, can you construct (one of) its regular
 expression(s)?
 
-For given string $s$ and regular expression $E$, can you 
+For given string $s$ and regular expression $E$, can you
 determine whether $s \in L_E$?
 
 Can you generate all strings in $L_E$ once you have $E$?
@@ -728,7 +728,7 @@ unary one (the star). In the mean time, you know that an NFA can
 always be transformed to an equivalent one with exactly one accepting
 state from which no edges leave. That will make things a little easier.
 
-\paragraph{The union of two NFAs:} 
+\paragraph{The union of two NFAs:}
 
 
 Figure~\ref{uniefsa} shows the intuition about the union of two NFAs:
@@ -749,12 +749,12 @@ to the old starting states.
 
 We can write formally:
 
-Given $NFA_1 = (Q_1,\Sigma,\delta_1,q_{s1},\{q_{f1}\})$ and 
+Given $NFA_1 = (Q_1,\Sigma,\delta_1,q_{s1},\{q_{f1}\})$ and
 %
 $NFA_2 = (Q_2,\Sigma,\delta_2,q_{s2},\{q_{f2}\})$.
 
 The union $NFA_1 \cup NFA_2$ is an $NFA = (Q,\Sigma,\delta,q_s,F)$
-in which 
+in which
 \begin{itemize}
 \item $Q = Q_1 \cup Q_2 \cup \{q_s,q_f\}$ with $q_s$ and $q_f$ new states
 \item $F = \{q_f\}$
@@ -836,7 +836,7 @@ and $E_2$ be two regular expressions, then
 \item $NFA_{E_1|E_2} = union(NFA_{E_1},NFA_{E_2})$
 \end{itemize}
 
-\grijs{\begin{stelling}  
+\grijs{\begin{stelling}
 
 The construction above preserves the language, i.e.
 
@@ -877,7 +877,7 @@ directions) and an edge from each state to itself
 \end{informeledefinitie}}
 
 
-% \clearpage 
+% \clearpage
 Figure~\ref{gfsa1} shows a GNFA.
 
 \begin{figure}[h]
@@ -911,11 +911,10 @@ strings not accepted by it.
 
 
 % \clearpage
-Now is the time to describe an algorithm for constructing \martonst{an NFA from
-an RE}{a RE from an NFA}.
+Now is the time to describe an algorithm for constructing a RE from an NFA.
 
 \begin{itemize}
-\item[Step 1:]  {\em Make a GNFA from an NFA} 
+\item[Step 1:]  {\em Make a GNFA from an NFA}
 
 Introduce a new start state and a new unique end state. Draw an
 $\epsilon$-edge from the new start state to the old start state. and
@@ -927,15 +926,15 @@ label the union of the labels of the parallel edges.
 
 Choose any state X different from start and end state: if there is
 none, go to step 3. Remove X and for each pair of states A and B with
-an edge 
+an edge
 % from
-A to X with $E_1$, 
+A to X with $E_1$,
 %
 from X to itself with $E_2$,
 %
-from X to B with $E_3$, 
+from X to B with $E_3$,
 %
-from A to B with $E_4$, 
+from A to B with $E_4$,
 %
 replace the label on the edge from A to B by
 $E_4~|~E_1E_2^*E_3$. Finally, remove all edges connected to X.
@@ -978,7 +977,7 @@ this on the GNFA of Figure~\ref{gfsa1},
 \end{figure}
 
 
-The main thing to prove is that the elimination of X in 
+The main thing to prove is that the elimination of X in
 Step 2 does not change the set of accepted strings. We need to prove
 two things: (1) if a string $s$ was accepted before the elimination,
 it is also accepted after elimination; (2) if a string was not accepted
@@ -1065,9 +1064,9 @@ We describe this transformation in general.
 \item[{\bf Given:}] an NFA = $(Q_n,\Sigma,\delta_n,q_{sn},F_n)$
 
 \item[{\bf To construct:}] a DFA = $(Q_d,\Sigma,\delta_d,q_{sd},F_d)$
-such that \martonst{xs}{} $L_{NFA} = L_{DFA}$
+such that $L_{NFA} = L_{DFA}$
 
-\item[{\bf Construction:}] 
+\item[{\bf Construction:}]
 $Q_d = {\cal P}(Q_n)$: one state in the DFA is a set of NFA states
 
 $F_d = \{S |S \in Q_d, $s$ \cap F_n \neq \emptyset\}$: an end state in
@@ -1084,26 +1083,26 @@ e}psilon-{\bf r}eachable):
 \item $er(q)$ is the set of NFA states that can be reached from q
 using zero, one or more $\epsilon$-edges
 
-\item 
+\item
 we lift the definition of er to ${\cal P}(Q_n)$ in the usual way: for
 ${\cal Q} \in {\cal P}(Q_n)$
 
 $~~~~~~~~~~~~~~~~~er({\cal Q}) = \cup_{q \in {\cal Q}} er(q)$
 
-\item 
+\item
 we lift $\delta_n$ in a similar way.
 \end{itemize}
 
 
 We can now define $\delta_d$ as:
 \begin{itemize}
-\item 
+\item
 $\delta_d({\cal Q},a) = er(\delta_n({\cal Q},a))$ \footnote{Check the
 signature!} for ${\cal Q} \in Q_d$
 
-\item 
+\item
 in words: from a DFA state ${\cal Q}$, you move to the next DFA state
-by first using the symbol $a$ \martonst{an}{in} each NFA state in ${\cal Q}$ using
+by first using the symbol $a$ in each NFA state in ${\cal Q}$ using
 the NFA transition function, and then following as many
 $\epsilon$-edges as possible; then take the union of all the NFA
 states you could reach in this way.
@@ -1224,7 +1223,7 @@ collapsed on the right.\label{mini1}}
 From states 2 and 3, we see leaving edges with the same label and
 arriving in an end state. This shows that the two states are in some
 sense indistinguishable: from state 2 and 3, the same strings lead to
-F \marton{(the set of the final states)}. On the other hand, states 3 and 5 do not have this property: the
+F (the set of the final states). On the other hand, states 3 and 5 do not have this property: the
 same string can lead to F and not. So, states 3 and 5 are
 distinguishable. The minimalisation idea consists in: identify
 indistinguishable states and collapse them.
@@ -1244,7 +1243,7 @@ Two states are {\bf distinguishable} if they are not indistinguishable.
 }
 \end{definitie}}
 
-If $p$ and $q$ are distinguishable, then there exists a word $w$ so that 
+If $p$ and $q$ are distinguishable, then there exists a word $w$ so that
 
 $~~~~~~~~~~\delta^*(p,w) \in F~~and~~ \delta^*(q,w) \notin F$ or vice versa.
 
@@ -1261,7 +1260,7 @@ F; at this moment, we have not taken a decision about whether any two other stat
 take any pair of states $p$ and $q$ about which we have not taken a
 decision yet: suppose there is a symbol $a$ so that with $a$ you go
 from $p$ and $q$ to distinguishable states; now mark $p$ and $q$ as
-distinguishable; repeat until no more such pair \marton{exists}
+distinguishable; repeat until no more such pair exists
 
 \item[{\bf Consolidate:}]
 for each pair of states $p$ and $q$ without a decision, decide that
@@ -1284,7 +1283,7 @@ $l$ will be denoted by $(x,y,l)$
 
 
 \item[{\bf Repeat:}]
-\underline{If} there exist vertices $p$ and $q$ so that 
+\underline{If} there exist vertices $p$ and $q$ so that
 \begin{itemize}
 \item there is no edge between $p$ and $q$
 \item $\exists a \in \Sigma: \exists (p_a,q_a,\_) \in V$
@@ -1308,7 +1307,7 @@ The termination of the algorithm is obvious: the maximal number of
 edges in $V$ is $N(N-1)/2$ with $N=|Q|$; one such edge is added in
 Repeat each time the condition is fulfilled.
 
-we prove that 
+we prove that
 
 
 $~~~~~~~~~~~~~~~(p,q,\_)$ is an edge in $V$ $\Longleftrightarrow$ $p$ and $q$ are distinguishable
@@ -1320,7 +1319,7 @@ the former case, we know that $p$ and $q$ are distinguishable (take
 $w = \epsilon$ in the conclusion after the definition of
 distinguishable on page \pageref{gelijk}); in the latter case, there
 exists an edge of the form $(p_a,q_a,\_)$ in $V$: you can use the
-label to arrive (eventually) at the former base case, i.e. 
+label to arrive (eventually) at the former base case, i.e.
 %
 $\exists w \in \Sigma^* : \exists (p_w,q_w,\epsilon) \in V$, and we
 conclude that $p$ and $q$ distinguishable.
@@ -1352,14 +1351,14 @@ with
 $\tilde{\delta}(Q_i,a) = Q_j$ in which $Q_j$ is obtained by taking any
   $q \in Q_i$ (*) and then taking the $Q_j$ containing $\delta(q,a)$
 
-\item 
+\item
 $\tilde{q_s}$ is the $Q_i$ for which $q_s \in Q_i$
 
 \item
 $\tilde{F}$ is the set of $Q_i$ for which $Q_i \cap F \neq \emptyset$
 \end{itemize}
 
-Figure~\ref{minim1} illustrates how $V$ evolves for the DFA in 
+Figure~\ref{minim1} illustrates how $V$ evolves for the DFA in
 Figure~\ref{mini1}, and the complement of the final graph.
 \begin{figure}[h]
 \begin{center}\includegraphics[%
@@ -1397,7 +1396,7 @@ then there is no equivalent DFA with strictly fewer states.
 }
 \begin{proof}
 Let $DFA_1$ have states $\{q_s,q_1,...,q_n\}$: $q_s$ is the starting
-state. Assume that 
+state. Assume that
 %
 $DFA_2 = (Q_2,\Sigma,\delta_2,p_s,F_2)$ is a DFA with strictly fewer
 states $\{p_s,p_1,...,p_m\}$ than $DFA_1$.
@@ -1405,7 +1404,7 @@ states $\{p_s,p_1,...,p_m\}$ than $DFA_1$.
 Since in $DFA_1$ every state is reachable, there exist strings $s_i,
 i=1..n$ such that
 %
-$\delta_1^*(q_s,s_i) = q_i$. 
+$\delta_1^*(q_s,s_i) = q_i$.
 
 
 Since $DFA_2$ has less states, there must exist $i \neq j$ so that
@@ -1419,7 +1418,7 @@ so that
 
 $~~~~~~~~~\delta_1^*(q_i,v) \in F_1 \wedge \delta_1^*(q_j,v) \notin F_1$ or vice versa.
 
-Consequently, 
+Consequently,
 %
 $\delta_1^*(q_s,s_iv) \in F_1 \wedge \delta_1^*(q_s,s_jv) \notin F_1$
 or vice versa, meaning that $DFA_1$ accepts $s_iv$ or $s_jv$ but not
@@ -1481,7 +1480,7 @@ number of states ...
 
 
 %% \subsection{De complexiteit van minimizatie en equivalentie}
-%% 
+%%
 %% Een DFA minimalizeren kan in polynoomtijd, maar het minimalizeren
 %% van NFAs is NP-hard. Het testen van de equivalentie van regular
 %% expressions is zelfs PSPACE-hard. Dat kan je intu\"itief argumenteren
@@ -1494,7 +1493,7 @@ number of states ...
 In this section, we get acquainted with a method to prove that a given
 language is not regular. Before doing that, here are two arguments why
 there exist non-regular languages: it is up to you to make those
-arguments \martonst{hard}{more concrete}, if not now, certainly later:
+arguments more concrete, if not now, certainly later:
 \begin{enumerate}
 
 \item
@@ -1596,7 +1595,7 @@ $|y| > 0$ and $|xy| \leq d$. Now $y$ contains only a's and ...
 
 
 
-\paragraph{Note:} Using the pumping lemma to prove that $L$ is not 
+\paragraph{Note:} Using the pumping lemma to prove that $L$ is not
 in RegLan, needs the following:
 \begin{itemize}
 \item for any number $d$ chosen as pumping length
@@ -1657,7 +1656,7 @@ of the two languages
 
 The above constructions show that the union, the intersection, and the
 (symmetric) difference of two regular languages is also regular. It
-follows that also the complement is regular, since 
+follows that also the complement is regular, since
 %
 $\overline{L} = \Sigma^* \setminus L$.
 
@@ -1745,7 +1744,7 @@ There exist tools that do that for you: e.g. flex
 \verb|http://flex.sourceforge.net/|) generates C-code: the C-code
 implements the DFAs (and necessary glue-code, and even error
 handling). jflex (\verb|http://www.jflex.de/|) is based on the same principle and generates Java code. flex and jflex are both lexical
-\martonst{analyse}{analysis} generators.
+analysis generators.
 
 \paragraph{Selfie:}
 \begin{itemize}
@@ -1760,13 +1759,13 @@ list $[a,b,c]$. An RE like $a^*b~|~c$ can be represented as the term
 $or([star(a),b],[c])$ (but you are welcome to try another one).
 \end{itemize}
 
-\paragraph{The description} above of a $JavaProgr$, is actually a 
+\paragraph{The description} above of a $JavaProgr$, is actually a
 BNF-grammar: it is in {\em Backus-Nauer form}: this form is actually
 meant for context free languages. BNF can also be used for regular
 languages, because they are context free as well: see
 Section~\ref{contextvrijelanguages}.
 
-\newpage 
+\newpage
 \section{Variants of finite state automata}
 
 \subsection{The transducer}
@@ -1904,9 +1903,7 @@ which strings satisfy the acceptance condition.
 
 Non-deterministic B\"{u}chi automata are strictly stronger than
 deterministic B\"{u}chi automata: as an example, you could try to
-build a B\"{u}chi automaton for the language $(a|b)^*b^\omega$.
-
-\marton{What does omega mean here?}
+build a B\"{u}chi automaton for the language $(a|b)^*b^\omega$. \footnote{$\omega$: look up transfinite numbers}
 
 \project{buchi automaten bestuderen ?}
 
@@ -1941,13 +1938,13 @@ equivalent.
 \paragraph{References:}
 
 \begin{itemize}
-\item 
-Dexter C. Kozen  {\em Automata and Computability} 
+\item
+Dexter C. Kozen  {\em Automata and Computability}
 
-\item 
+\item
 Peter Linz {\em An Introduction to Formal Languages and Automata}
 
-\item 
+\item
 Michael Sipser {\em Introduction to the Theory of Computation}
 
 \item
@@ -1963,7 +1960,7 @@ If all this gives you the hots, do not forget another important
 book: {\em Regular algebra and finite machines}\footnote{The book is
   not in the library, but if it interests you, pass by my office} by
 John Horton Conway - the same person of {\em The Game of Life} (it
-appears later in this text) and other interesting issues (\martonst{a.o.}{e.g.} the
+appears later in this text) and other interesting issues (e.g. the
 {\em Angels and Devils game}) that directly affect our understanding
 of algorithmics.
 
@@ -2019,7 +2016,7 @@ shorter descriptions of the language can be obtained. An abbreviation
 gives a name to something, and when that name appears somewhere, you
 can replace it with the the thing it abbreviates (or a copy of it):
 you now get an expression that does no longer contain the name, and
-has the intended meaning. This means that 
+has the intended meaning. This means that
 
 ~~~~~~~~~Brackets \rpijl BracketsBrackets $|$ [Brackets] $|$ $\epsilon$
 
@@ -2039,7 +2036,7 @@ S \rpijl \eps
 
 This grammar describes the strings of the form $a^nb^n$
 
-\item 
+\item
 
 S \rpijl PQ
 
@@ -2061,7 +2058,7 @@ Stat \rpijl ITE
 
 ITE \rpijl If Cond Then Stat Else Stat
 
-ITE \rpijl If Cond Then Stat 
+ITE \rpijl If Cond Then Stat
 
 Cond \rpijl Id == Id
 
@@ -2114,18 +2111,18 @@ We are now ready for more formal definitions.
 {\rm
 A context free grammar is a 4-tuple $(V,\Sigma,R,S)$ in which
 \begin{itemize}
-\item 
+\item
 $V$ is a finite set of nonterminal symbols (also named variables or
   nonterminals)
-\item 
+\item
 $\Sigma$ is a finite alphabet of terminal symbols (terminals); $\Sigma
   \cap V = \emptyset$
-\item 
+\item
 $R$ is a finite set of rules (or productions); a rule is a tuple
   consisting of one nonterminal and a string of elements from $V \cup
   \Sigma_\epsilon$; \\ we write the two parts of a rule with a \rpijl
   in between
-\item 
+\item
 $S$ is the start symbol and $S \in V$
 \end{itemize}
 
@@ -2141,7 +2138,7 @@ Let $(V,\Sigma,R,S)$ be a CFG.
 A string $f$ over the alphabet $V \cup \Sigma_\epsilon$ is derived
 from a string $b$ over $V \cup \Sigma_\epsilon$ using the CFG, if
 there exists a finite sequence of strings $s_0, s_1, ..., s_n$
-so that 
+so that
 \begin{itemize}
 \item $s_0 = b$
 \item $s_n = f$
@@ -2196,7 +2193,7 @@ possible choice)
 
 $~~~~~~~~~~\Rightarrow a + a * Expr \Rightarrow a + a * a$
 
-and 
+and
 
 ~~~~~$Expr \Rightarrow Expr + \underline{Expr} \Rightarrow Expr + Expr * \underline{Expr} \Rightarrow Expr + \underline{Expr} * a$
 
@@ -2240,7 +2237,7 @@ for the same language there exists also a non-ambiguous grammar.
 
 \grijs{\begin{definitie} Equivalence of CFGs \\
 {\rm
-Two context free grammars $CFG1$ and $CFG2$ are equivalent if 
+Two context free grammars $CFG1$ and $CFG2$ are equivalent if
 
 $~~~~~~~~~~~L_{CFG1} = L_{CFG2}$
 }
@@ -2268,11 +2265,11 @@ $Expr \Rightarrow Expr + Term \Rightarrow Term + Term \Rightarrow a + Term$
 $~~~~~~~~~~\Rightarrow a + Term * a \Rightarrow a + a * a$
 
 
-and even better\martonst{L}{,} every string in its language has exactly one parse
+and even better, every string in its language has exactly one parse
 tree for Arit2. We say: Arit2 is a non-ambiguous grammar.
 
 
-Not every \martonst{CFGL}{CFL} has a non-ambiguous CFG: such a CFL is named {\em
+Not every CFL has a non-ambiguous CFG: such a CFL is named {\em
   inherently ambiguous}. Here is an example of such a language:
 %
 $\{a^nb^nc^m, a^nb^mc^m| n,m \geq 0\}$. \marton{This definition is confusing to me. Is the comma included in the language, or is this a union of two languages?}  The proof that it is
@@ -2308,7 +2305,7 @@ forms
 }
 \end{definitie}}
 
-Some textbooks do not \marton{include} the rule $S$ \rpijl $\epsilon$: such a grammar
+Some textbooks do not include the rule $S$ \rpijl $\epsilon$: such a grammar
 cannot derive the empty string.
 
 
@@ -2380,16 +2377,16 @@ same language: reasoning on the derivations can help.
 
 \item[{\bf 4.}] There are now 3 types of rules:
 \begin{enumerate}
-\item 
+\item
 $A \rightarrow \gamma$ in which $\gamma$ has exactly two nonterminals:
   they can stay
 
-\item 
+\item
 $A \rightarrow \gamma$ in which $\gamma$ has at least two symbols;
   replace each terminal $a$ by a new nonterminal $A_a$, and add the
   rule $A_a \rightarrow a$
 
-\item 
+\item
 possible $S \rightarrow \epsilon$: it can stay
 
 \end{enumerate}
@@ -2465,10 +2462,10 @@ the start as non-deterministic.
 
 \grijs{\begin{definitie} The pushdown automaton\\
 {\rm A pushdown automaton is a 6-tuple
-$(Q,\Sigma,\Gamma,\delta,q_s,F)$ in which 
+$(Q,\Sigma,\Gamma,\delta,q_s,F)$ in which
 \begin{itemize}
-\item $Q$ is a finite kset of states
-\item $\Sigma$ is a fine input alphabet
+\item $Q$ is a finite set of states
+\item $\Sigma$ is a finite input alphabet
 \item $\Gamma$ is a finite stack alphabet
 \item $\delta$ is a transition function with signature
 %
@@ -2480,13 +2477,10 @@ $Q \times \Sigma_\epsilon \times \Gamma_\epsilon \rightarrow {\cal P}(Q \times  
 }
 \end{definitie}}
 
-\martonst{kset}{set}
-\martonst{fine}{finite}
-
 This definition does not specify how a PDA works. Let us first look at
 a graphical representation of a PDA, similar to the graphical
 representation for an FSA. As an example, we take PDA
-$(Q,\Sigma,\Gamma,\delta,q_s,F)$ with 
+$(Q,\Sigma,\Gamma,\delta,q_s,F)$ with
 
 \begin{itemize}
 \item $Q = \{q_s, q_f, x, y\}$
@@ -2539,7 +2533,7 @@ the language determined by the PDA. Here is the formal definition:
 A string $s$ is accepted by a PDA if $s$ can be split in parts
 $w_i$, i= 1..m ($w_i \in \Sigma_\epsilon$), and there exist states
  $q_j$, j= 0..m, and stacks $stack_k$, k=0..m ($stack_k
-\in \Gamma^*$), so that 
+\in \Gamma^*$), so that
 \begin{itemize}
 \item $stack_0 = \epsilon$  (the stack is empty at the start)
 \item $q_0 = q_s$ (the first state is the start state)
@@ -2728,9 +2722,9 @@ Arit2 on page \pageref{arit2label} also results in a nondeterministic
 PDA, but Arit2 is not ambiguous. Still, you could wonder about the
 following questions
 \begin{itemize}
-\item 
+\item
 if L has a deterministic PDA, then L is not ambiguous
-\item 
+\item
 a nondeterministic PDA can be transformed to an equivalent
 deterministic one
 \end{itemize}
@@ -2791,7 +2785,7 @@ We don't do the proof this year :-)
 
 \paragraph{Consequence II:} every regular language is context free. The reason is that an FSA is also a PDA: it just ignores the stack.
 
-\paragraph{Selfie:} 
+\paragraph{Selfie:}
 Another way to understand that regular languages are context free:
 construct a CFG for the given regular language.
 
@@ -2803,7 +2797,7 @@ essentially the intersection of a regular language with a {\em
   Dyck\footnote{Walther von Dyck} language}: a Dyck language consists
 of balanced strings of parentheses, possibly more than one.
 
-Parikh's theorem can best be formulated using the transformation 
+Parikh's theorem can best be formulated using the transformation
 $Ord$ of a language: you obtain Ord($s$) by putting the symbols of $s$
 in alphabetic order. As an example $Ord(bacabbc) = aabbbcc$. Parikh
 states: for each CFL L, there exists a regular language R so that
@@ -2832,7 +2826,7 @@ strings that are long enough. Consider a CFG in Chomsky normal form
 for L. Let $n$ be the number of nonterminals.
 \end{proof}
 
-If $d \in L$ \martonst{d}{s}, it has a parse tree. By deleting the
+If $s \in L$, it has a parse tree. By deleting the
 leaves from that tree, we get a full binary tree - because of the Chomsky normal
 form. The height of this tree is at least $log_2(|s|)$, so the longest
 (simple) path from the root has at least $log_2(|s|) + 1$ vertices. If
@@ -2852,12 +2846,12 @@ In this derivation u,v,x,y,z are strings from $\Sigma^*$ and moreover
 v and y are not both empty, because that would mean that X could
 derive itself, which is impossible because of the Chomsky normal form.
 
-Since (a) is a good derivation, 
+Since (a) is a good derivation,
 
 
 $~~~~~~~~S \Rightarrow^* uX_2z \Rightarrow^* uxz$
 
-is too, and 
+is too, and
 
 
 
@@ -2890,7 +2884,7 @@ p, say $s = a^pb^pc^p$.  Suppose that $s = uvxyz$ with $|vy| >
 0$. Then there are two possibilities:
 \begin{enumerate}
 \item
-v has the form $\alpha^k$ and y has the form $\beta^l$ and 
+v has the form $\alpha^k$ and y has the form $\beta^l$ and
 $\alpha$ and $\beta$ are in $\{a,b,c\}$; in this case we have that
 $k+l > 0$. Now, $uv^2xy^2z$ does not have the same number of a's, b's
 and c's
@@ -2908,8 +2902,7 @@ As a consequence, $s$ can not be pumped and so L is not context free.
 \section{An algebra of CFLs?}
 
 The union of two CFLs determined by CFGs $CFG_1$ and $CFG_2$ can be
-described easily by the following construction: first \martonst{rename apart the
-nonterminals of the two given CFGs}{make sure the two CFGs don't share any nonterminal names, rename them if necessary}. Let the start symbols of the two
+described easily by the following construction: first make sure the two CFGs don't share any nonterminal names, rename them if necessary. Let the start symbols of the two
 grammars be $S_1$ and $S_2$. Construct the grammar for the union by
 the union of the two rule sets, adding the rule $S_{new} \rightarrow
 S_1 | S_2$, and consider $S_{new}$ as the start symbol of the union
@@ -2917,8 +2910,8 @@ grammar. We can conclude that CFL is closed under union.
 
 How about the intersection of two CFLs? We try an example: take as
 terminals $\{a,b,c\}$ and define $L_1 = \{a^nb^nc^m|n,m \geq 0\}$,
-$L_2 = \{a^nb^mc^m|n,m \geq 0\}$. Clearly, the $L_i$\marton{s} are context
-free\footnote{Make a CFG for them!}. The intersection of the $L_i$\marton{s} is
+$L_2 = \{a^nb^mc^m|n,m \geq 0\}$. Clearly, the $L_i$s are context
+free\footnote{Make a CFG for them!}. The intersection of the $L_i$s is
 the language $\{a^nb^nc^n|n \geq 0\}$ and we proved earlier in
 Section~\ref{voorbeeldpompcfl} that this language is not context
 free. So, the intersection of context free languages is not
@@ -2979,7 +2972,7 @@ There is another way to construct examples of non-deterministic
 languages: one uses the fact that the complement operation is internal
 to DCFL\footnote{For a proof, see for instance the book by
   Kozen}. Now consider $L = \{ss| $s$ \in \{a,b\}^*\}$. Use the
-pumping lemma to prove that L is not in CFL. But \marton{$\overline{L}$?} is
+pumping lemma to prove that $\overline{L}$ is not in CFL. But is
 context free: page \pageref{zelfdoen1} contains a CFG for $\overline{L}$.
 Consequently, $\overline{L}$ is not deterministic.
 
@@ -3022,7 +3015,7 @@ Figure~\ref{dpda2}.
 \caption{The DPDA for L'\label{dpda2}}
 \end{figure}
 
-This PDA accepts $L' = \{a^nb^nc^n|n \in \N\}$ but we know already that this language is not context free!  
+This PDA accepts $L' = \{a^nb^nc^n|n \in \N\}$ but we know already that this language is not context free!
 
 The book by Linz contains a variant with more details.
 
@@ -3060,7 +3053,7 @@ expression, other tools convert a CFG to an efficient syntax
 analyser. The general construction of a PDA from a CFG is not good
 enough: it almost invariably results in a non-deterministic parser.
 Making it deterministic is not easy, and in general even impossible as
-we \martonst{know in the mean time}{have found out}. Therefore, these parser generators impose
+we have found out. Therefore, these parser generators impose
 some restrictions on the kind of languages/grammars they want to deal
 with.
 
@@ -3092,17 +3085,17 @@ rule. Here is a worked out example for the input $a+a*a$.
 \begin{tabular}{|l|r|l|}
 \hline
 seen       & to be read      & action to take \\ \hline
-           & a+a$*$a           & shift    \\ 
-   a       &  +a$*$a           & reduce   \\ 
-   E       &  +a$*$a           & shift    \\ 
-   E+      &  a$*$a            & shift    \\ 
-   E+a     &   $*$a            & reduce   \\ 
-   E+E     &  $*$a             & reduce   \\ 
-   E       &  $*$a             & shift    \\ 
-   E$*$      &   a             & shift    \\ 
-   E$*$a     &                 & reduce   \\ 
-   E$*$E     &                 & reduce   \\ 
-   E       &                 & stop   \\ 
+           & a+a$*$a           & shift    \\
+   a       &  +a$*$a           & reduce   \\
+   E       &  +a$*$a           & shift    \\
+   E+      &  a$*$a            & shift    \\
+   E+a     &   $*$a            & reduce   \\
+   E+E     &  $*$a             & reduce   \\
+   E       &  $*$a             & shift    \\
+   E$*$      &   a             & shift    \\
+   E$*$a     &                 & reduce   \\
+   E$*$E     &                 & reduce   \\
+   E       &                 & stop   \\
 \hline
 \end{tabular}
 \caption{Bottom-up parsing of $a+a*a$} \label{bottomup}
@@ -3148,7 +3141,7 @@ sensitive languages, generated by context sensitive grammars: at the
 left in a rule, one may put an arbitrary string of terminals and
 nonterminals: one of the nonterminals is rewritten. As an example:
 
-$~~~~~~~~~a\underline{X}Yz$ \rpijl $a\underline{bCD}Yz$ 
+$~~~~~~~~~a\underline{X}Yz$ \rpijl $a\underline{bCD}Yz$
 
 
 is a context sensitive grammar rule: X can be rewritten to bCD only in
@@ -3164,13 +3157,11 @@ not context free. But it has a context sensitive grammar (according to
 the equivalent definition).
 
 \begin{itemize}
-\item[] $s$ \rpijl abc
-\item[] $s$ \rpijl aSBc
+\item[] $S$ \rpijl abc
+\item[] $S$ \rpijl aSBc
 \item[] cB \rpijl  Bc
-\item[] bB \rpijl  bb 
+\item[] bB \rpijl  bb
 \end{itemize}
-
-\martonst{s}{S}
 
 \paragraph{Selfie}: prove that the above grammar generates the above $L$.
 
@@ -3248,5 +3239,5 @@ about it.
 % het geval van ambigue grammars voor natuurlijke languages geeft dat
 % inzichten in wat meest waarschijnlijk bedoeld is (bijvoorbeeld als je
 % aan speech recognition doet).
-% 
+%
 
