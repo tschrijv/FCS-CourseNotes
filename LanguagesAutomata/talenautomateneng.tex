@@ -1270,7 +1270,7 @@ To save on writing, we use $p_a$ as a shorthand for $\delta(p,a)$.
 \begin{algo} Indistinguishable states \label{gelijketoestanden}
 \begin{enumerate}
 \item[{\bf Init:}]
-Consider the graph $V$ with the states of the DFA as vertices; add an
+Consider the graph $G$ with the states of the DFA as vertices; add an
 edge between any two vertices of which exactly one belongs to F and
 label these edges with \eps; an edge between $x$ and $y$ with label
 $l$ will be denoted by $(x,y,l)$
@@ -1280,15 +1280,15 @@ $l$ will be denoted by $(x,y,l)$
 \underline{If} there exist vertices $p$ and $q$ so that
 \begin{itemize}
 \item there is no edge between $p$ and $q$
-\item $\exists a \in \Sigma: \exists (p_a,q_a,\_) \in V$
+\item $\exists a \in \Sigma: \exists (p_a,q_a,\_) \in G$
 \end{itemize}
-\underline{then} choose an $a$ with $(p_a,q_a,\_) \in V$
-and add $(p,q,a)$ to V; go back to the beginning of Repeat;
+\underline{then} choose an $a$ with $(p_a,q_a,\_) \in G$
+and add $(p,q,a)$ to G; go back to the beginning of Repeat;
 
 \underline{otherwise}: go to Equal;
 
 \item[{\bf Equal:}]
-Consider the complement of \martonst{$G$}{$V$}: each component is a clique; let $Q_i$
+Consider the complement of $G$: each component is a clique; let $Q_i$
 be the set of vertices in the $i^{th}$ component; all states in $Q_i$
 are indistinguishable; every state in $Q_i$ is distinguishable from
 any other state not in $Q_i$
@@ -1298,24 +1298,24 @@ any other state not in $Q_i$
 \end{algo}
 \begin{proof}
 The termination of the algorithm is obvious: the maximal number of
-edges in $V$ is $N(N-1)/2$ with $N=|Q|$; one such edge is added in
+edges in $G$ is $N(N-1)/2$ with $N=|Q|$; one such edge is added in
 Repeat each time the condition is fulfilled.
 
 we prove that
 
 
-$~~~~~~~~~~~~~~~(p,q,\_)$ is an edge in $V$ $\Longleftrightarrow$ $p$ and $q$ are distinguishable
+$~~~~~~~~~~~~~~~(p,q,\_)$ is an edge in $G$ $\Longleftrightarrow$ $p$ and $q$ are distinguishable
 
 
-$\underline{\Longrightarrow}$: if $(p,q,X)$ is an edge in $V$, then
+$\underline{\Longrightarrow}$: if $(p,q,X)$ is an edge in $G$, then
 there are two possibilities: $X = \epsilon$ or $X = a \in \Sigma$; in
 the former case, we know that $p$ and $q$ are distinguishable (take
 $w = \epsilon$ in the conclusion after the definition of
 distinguishable on page \pageref{gelijk}); in the latter case, there
-exists an edge of the form $(p_a,q_a,\_)$ in $V$: you can use the
+exists an edge of the form $(p_a,q_a,\_)$ in $G$: you can use the
 label to arrive (eventually) at the former base case, i.e.
 %
-$\exists w \in \Sigma^* : \exists (p_w,q_w,\epsilon) \in V$, and we
+$\exists w \in \Sigma^* : \exists (p_w,q_w,\epsilon) \in G$, and we
 conclude that $p$ and $q$ distinguishable.
 
 $\underline{\Longleftarrow}$: if $p$ and $q$ are distinguishable, then
@@ -1352,7 +1352,7 @@ $\tilde{q_s}$ is the $Q_i$ for which $q_s \in Q_i$
 $\tilde{F}$ is the set of $Q_i$ for which $Q_i \cap F \neq \emptyset$
 \end{itemize}
 
-Figure~\ref{minim1} illustrates how $V$ evolves for the DFA in
+Figure~\ref{minim1} illustrates how $G$ evolves for the DFA in
 Figure~\ref{mini1}, and the complement of the final graph.
 \begin{figure}[h]
 \begin{center}\includegraphics[%
@@ -1868,7 +1868,7 @@ machines). What you get is a two-way finite automaton, or a 2DFA.
 About other classes of automata, we know that more freedom in how the
 {\em memory} can be manipulated, leads to more powerful automata: to
 fully appreciate this, you might have to wait until you learn about
-PDA and PBA \marton{PBA?}, but keep this in mind.
+PDA and LBA, but keep this in mind.
 
 Therefore, the question {\em is a 2DFA more powerful than a DFA?}, or
 otherwise said {\em can a 2DFA recognise some non-regular languages?}
@@ -2266,7 +2266,7 @@ tree for Arit2. We say: Arit2 is a non-ambiguous grammar.
 Not every CFL has a non-ambiguous CFG: such a CFL is named {\em
   inherently ambiguous}. Here is an example of such a language:
 %
-$\{a^nb^nc^m, a^nb^mc^m| n,m \geq 0\}$. \marton{This definition is confusing to me. Is the comma included in the language, or is this a union of two languages?}  The proof that it is
+ $\{a^nb^mc^m| n,m \geq 0\} \cup \{a^nb^nc^m| n,m \geq 0\}$. The proof that it is
 inherently ambiguous can be found in the Hopcroft-Motwani-Ullman book,
 but you should be able to prove that the language is context free.
 We get back to ambiguity later.
