@@ -103,21 +103,18 @@ problems. A decision problem corresponds to a subset of all strings
 (or words) consisting of elements of a finite alphabet $\Sigma$. Any
 such subset is a {\em language} over $\Sigma$.
 
-\grijs{\begin{definitie} String over an alphabet $\Sigma$\\
-{\rm
+\begin{definition}[String over an alphabet $\Sigma$]
 A {\bf string} over an alphabet $\Sigma$ is a finite sequence of zero,
-one or more elements of $\Sigma$ }
-\end{definitie}}
+one or more elements of $\Sigma$.
+\end{definition}
 
 Clearly, if we put two strings $x$ and $y$ one after the other, we get
 a new string denoted $xy$.
 
-
-\grijs{\begin{definitie} Language over an alphabet $\Sigma$\\
-{\rm
+\begin{definition}[Language over an alphabet $\Sigma$]
 A {\bf language} over an alphabet $\Sigma$ is a set of (finite)
-strings over $\Sigma$ }
-\end{definitie}}
+strings over $\Sigma$.
+\end{definition}
 
 A language can be finite or infinite. If the language $L$ is infinite,
 is it countably infinite?\footnote{If you do not remember what that
@@ -210,12 +207,11 @@ above, just like with any sets.
 There is also a new way - not directly linked to set theory - to make
 a new language out of two given languages: {\em concatenation}.
 
-\grijs{\begin{definitie} Concatenation of two languages\\
-{\rm
+\begin{definition}[Concatenation of two languages]
 Let $L_1$ and $L_2$ be two languages over the same alphabet $\Sigma$,
 then we denote the concatenation of $L_1$ and $L_2$ by $L_1L_2$ and we
-define: $L_1L_2 = \{xy | x \in L_1, y \in L_2\}$ }
-\end{definitie}}
+define: $L_1L_2 = \{xy | x \in L_1, y \in L_2\}$.
+\end{definition}
 
 When we concatenate three languages, we do not need brackets, because
 clearly, concatenation is associative:
@@ -230,12 +226,9 @@ $\epsilon$.
 Finally, we also define an operation that allows to construct an
 infinite language from a finite one:
 
-\grijs{\begin{definitie} $L^*$ - the Kleene {\bf star} of $L$\\
-{\rm
-
-$~~~~~~~~~~~~~~~~~~~~~~~L^* = \cup_{n=0}^\infty L^n$
-}
-\end{definitie}}
+\begin{definition}[$L^*$ - the Kleene {\bf star} of $L$]
+$L^* = \cup_{n=0}^\infty L^n$
+\end{definition}
 
 As an abbreviation of $LL^*$ one uses $L^+$.
 
@@ -252,7 +245,7 @@ $ L \in {\cal P}(\Sigma^*)$.
 
 In maths, one uses the set notation, e.g.
 
-\begin{vb}
+\begin{example}
 Let $\Sigma = \{x,y,z\}$:
 \begin{itemize}
 \item
@@ -262,12 +255,12 @@ $L = \{a_1a_2a_3...a_n|~a_1 = y, n \in \N, \forall i > 1: a_i \in \Sigma\}$
 
 or in words: L is the set of strings starting with y
 \end{itemize}
-\end{vb}
+\end{example}
 
 Informal descriptions are possible as well, as long as they are not
 ambiguous about membership.
 
-\begin{vb}
+\begin{example}
 ~~
 \begin{itemize}
 \item
@@ -275,7 +268,7 @@ $H(n) = \{P | P~is~a~Java~program~and~P~stops~after~at~most~~n~seconds~on~input~
 \item
 $Prime = \{n|n \in \N, n~is~prime\}$
 \end{itemize}
-\end{vb}
+\end{example}
 
 While the last one is an informal description, it hides the formal
 description of {\em prime}, so we could also have specified $Prime$ as
@@ -315,9 +308,8 @@ this hierarchy, i.e. with the easiest languages.
 %===============================================================================
 \section{Basic Definitions}
 
-\grijs{\begin{definitie} \label{defregexp} Regular Expression
-(RE) over an alphabet $\Sigma$\\
-{\rm E is a {\bf regular expression over alphabet $\Sigma$} if E has the form
+\begin{definition}[Regular Expression (RE) over an alphabet $\Sigma$] \label{defregexp}
+E is a {\bf regular expression over alphabet $\Sigma$} if E has the form
 \begin{itemize}
 \item $\epsilon$
 \item $\phi$
@@ -326,8 +318,7 @@ this hierarchy, i.e. with the easiest languages.
 \item $(E_1)^*$ for a regular expression $E_1$ over $\Sigma$
 \item $(E_1 | E_2)$ for regular expressions $E_1$ and $E_2$ over $\Sigma$
 \end{itemize}
-}
-\end{definitie}}
+\end{definition}
 
 In this way, the set of regular expressions {\em RegExps} (over an
 alphabet $\Sigma$) is defined inductively. It implies that something
@@ -343,23 +334,20 @@ the alphabet.
 %
 In the next examples, $\Sigma = \{a,b,c\}$.
 
-
-\begin{vb}
+\begin{example}
 Regular expressions over $\Sigma$:
 \begin{itemize}
 \item b
 \item a($\epsilon$c)
 \item $(((ab))^*c~|~(bc))$
 \end{itemize}
-\end{vb}
+\end{example}
 
 Are we using too many brackets, too few? Why?
 
-
-
-\grijs{\begin{definitie} A regular expression E {\bf determines} a
+\begin{definition}
+A regular expression E {\bf determines} a
 language $L_E$ over its alphabet $\Sigma$ as follows:
-{\rm
 \begin{itemize}
 \item if E = a ($a \in \Sigma$) then $L_E = \{a\}$ (the language with
 just one string, consisting of the character a)
@@ -369,8 +357,7 @@ just one string, consisting of the character a)
 \item if E = $(E_1)^*$ then $L_E = L_{E_1}^*$
 \item if E = $(E_1 | E_2)$ then $L_E = L_{E_1} \cup L_{E_2}$
 \end{itemize}
-}
-\end{definitie}}
+\end{definition}
 
 This similarity between the structure of the regular expressions and
 the structure of the languages they determine is not a coincidence,
@@ -420,12 +407,9 @@ language (over which alphabet?)
 
 \medskip
 
-
-\grijs{\begin{definitie}Regular Language \\
-{\rm
+\begin{definition}[Regular Language]
 A language determined by a regular expression is named a {\bf regular language}.
-}
-\end{definitie}}
+\end{definition}
 
 We denote the set of regular languages by $RegLan$. Check which of the
 formulas below make sense, and which are true.
@@ -578,21 +562,17 @@ can you comment on {\em the set of strings generated by the NFA equals
   the set of strings accepted by the NFA} ?
 \end{itemize}
 
-
-\grijs{\begin{informeledefinitie} An NFA M determines a language ... \\
-{\rm
+\begin{definition}[An NFA M determines a language (informal)]
 A language L is determined by the NFA M, if M accepts every string
-from L, and no other strings. We denote this language by $L_M$.  }
-\end{informeledefinitie}}
+from L, and no other strings. We denote this language by $L_M$.
+\end{definition}
 
 The alphabets of the NFA and the language do not need to be the same,
 but it is convenient to assume they are.
 
-\grijs{\begin{definitie} Equivalence of NFAs\\
-{\rm
+\begin{definition}[Equivalence of NFAs]
 Two NFAs are {\bf equivalent} if they determine the same language.
-}
-\end{definitie}}
+\end{definition}
 
 The relation {\em NFA-equivalence} defines an equivalence relation on
 NFAs: each equivalence class corresponds to one language.
@@ -614,8 +594,7 @@ for each NFA there exists an equivalent one in which {\em you can't
 We often need the set $\Sigma \cup \{\epsilon\}$: we abbreviate it by
 $\Sigma_\epsilon$.
 
-\grijs{\begin{definitie}\label{nfadef} Non-deterministic finite state automaton\\
-{\rm
+\begin{definition}[Non-deterministic finite state automaton] \label{nfadef}
 A {\bf non-deterministic finite state automaton} is a 5-tuple
 $(Q,\Sigma,\delta,q_s,F)$ with
 \begin{itemize}
@@ -627,9 +606,7 @@ $\delta: Q \times \Sigma_\epsilon \rightarrow {\cal P}(Q)$
 \item $q_s$ is the start state and an element of $Q$
 \item $F \subseteq Q$: F is the set of final states
 \end{itemize}
-
-}
-\end{definitie}}
+\end{definition}
 
 As you guessed by now: NFA is an acronym of {\em Non-deterministic Finite
   Automaton}.
@@ -638,20 +615,17 @@ As you guessed by now: NFA is an acronym of {\em Non-deterministic Finite
 We formally define what it means for a string $s$ to be accepted by an
 NFA.
 
-\grijs{\begin{definitie}A string accepted by an NFA
-    \\\label{defacceptnfa} {\rm A string $s$ is accepted by an NFA
-      $(Q,\Sigma,\delta,q_s,F)$ if $s$ can be written as
-      $a_1a_2a_3...a_n$ with $a_i \in \Sigma_\epsilon$, and there
-      exist a sequence of states $t_1t_2t_2t_3...t_{n+1}$ so that
+\begin{definition}[A string accepted by an NFA] \label{defacceptnfa}
+A string $s$ is accepted by an NFA
+$(Q,\Sigma,\delta,q_s,F)$ if $s$ can be written as
+$a_1a_2a_3...a_n$ with $a_i \in \Sigma_\epsilon$, and there
+exist a sequence of states $t_1t_2t_2t_3...t_{n+1}$ so that
 \begin{itemize}
 \item $t_1 = q_s$
 \item $t_{i+1} \in \delta(t_i,a_i)$
 \item $t_{n+1} \in F$
 \end{itemize}
-
-
-}
-\end{definitie}}
+\end{definition}
 
 \newpage
 \paragraph{Selfie:}
@@ -830,16 +804,14 @@ and $E_2$ be two regular expressions, then
 \item $NFA_{E_1|E_2} = union(NFA_{E_1},NFA_{E_2})$
 \end{itemize}
 
-\grijs{\begin{stelling}
-
+\begin{theorem}
 The construction above preserves the language, i.e.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $L_{NFA_E} = L_E$.
-\end{stelling}}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $L_{NFA_E} = L_E$.
+\end{theorem}
 \begin{proof}
 Prove this yourself - use structural induction.
 \end{proof}
-
 
 \clearpage
 \section{From NFA to regular expression}
@@ -853,8 +825,7 @@ $NFA \rightarrow GNFA \rightarrow GNFA~with~2~states \rightarrow regular~express
 
 In each of the steps, we must prove that the language stays the same.
 
-\grijs{\begin{informeledefinitie} GNFA\\
-{\rm
+\begin{definition}[GNFA (informal)]
 A {\bf GNFA} is a finite state machine with the following
 modifications and restrictions:
 \begin{itemize}
@@ -867,9 +838,7 @@ the end state has no outgoing edge
 directions) and an edge from each state to itself
 \item the edges carry a regular expression as a label
 \end{itemize}
-}
-\end{informeledefinitie}}
-
+\end{definition}
 
 % \clearpage
 Figure~\ref{gfsa1} shows a GNFA.
@@ -953,7 +922,7 @@ state. There is only one edge and it has RE as a label.
 
 % \clearpage
 \paragraph{Example:} Figures~\ref{gfsa2}~and~\ref{gfsa3} illustrate
-this on the GNFA of Figure~\ref{gfsa1},
+this on the GNFA of Figure~\ref{gfsa1}.
 
 
 \begin{figure}[h]
@@ -1227,15 +1196,12 @@ is an outgoing edge for every symbol in the alphabet. A DFA without
 that property can be easily transformed to a DFA complying to it:
 convince yourself you need at most one extra state.
 
-
-\grijs{\begin{definitie}\label{gelijk} Indistinguishable states\\
-{\rm Two states p and q are {\bf indistinguishable} if
-
-$~~~~~~~~~~~~\forall w \in \Sigma^*: \delta^*(p,w) \in F \Longleftrightarrow \delta^*(q,w) \in F$
+\begin{definition}[Indistinguishable states] \label{gelijk}
+Two states p and q are {\bf indistinguishable} if
+$\forall w \in \Sigma^*: \delta^*(p,w) \in F \Longleftrightarrow \delta^*(q,w) \in F$
 
 Two states are {\bf distinguishable} if they are not indistinguishable.
-}
-\end{definitie}}
+\end{definition}
 
 If $p$ and $q$ are distinguishable, then there exists a word $w$ so that
 
@@ -1382,12 +1348,11 @@ What happens when the algorithm is given a DFA with unreachable states
 We still need to prove that the just constructed $DFA_{min}$ has the
 minimum number of states. We prove a slightly stronger theorem:
 
-\grijs{\begin{stelling}
+\begin{theorem}
 If $DFA_1 = (Q_1,\Sigma,\delta_1,q_s,F_1)$ is a machine in which all of the
 states are reachable, and with every pair of states distinguishable,
 then there is no equivalent DFA with strictly fewer states.
-\end{stelling}
-}
+\end{theorem}
 \begin{proof}
 Let $DFA_1$ have states $\{q_s,q_1,...,q_n\}$: $q_s$ is the starting
 state. Assume that
@@ -1440,8 +1405,7 @@ $\delta$, final states and start state must be the same. Still, two
 DFAs (on the same alphabet) can be similar except for the names of the
 states. We express that by the notion of a DFA isomorphism.
 
-\grijs{\begin{definitie} Isomorphic DFAs\\
-{\rm
+\begin{definition}[Isomorphic DFAs]
 $DFA_1 = (Q_1,\Sigma,\delta_1,q_{s1},F_1)$ is {\bf isomorphic} to
   $DFA_2 = (Q_2,\Sigma,q_{s2},\delta_2,F_2)$ if there exists a
   bijection
@@ -1452,8 +1416,8 @@ $b: Q_1 \rightarrow Q_2$ so that
 \item $b(q_{s1}) = q_{s2}$
 \item $b(\delta_1(q,a)) = \delta_2(b(q),a)$ (see Figure~\ref{diagram1})
 \end{itemize}
-}
-\end{definitie}}
+\end{definition}
+
 \begin{figure}[h]
 \begin{center}\includegraphics[%
   width=0.4\linewidth,
@@ -1514,7 +1478,7 @@ with $xy^iz$ for any $i \geq 0$.
 
 More formally
 
-\grijs{\begin{stelling} The pumping lemma for regular languages \\
+\begin{theorem}[The pumping lemma for regular languages]
 For every regular language $L$, there exists a pumping length $d$,
 so that
 %
@@ -1532,10 +1496,7 @@ $|y| > 0$
 \item
 $|xy| \leq d$
 \end{enumerate}
-
-
-\end{stelling}}
-
+\end{theorem}
 \begin{proof}
 Take any DFA that determines $L$. Take $d = \#Q$.
 
@@ -1884,11 +1845,10 @@ feed them infinite strings: at no moment is the string finished.
 That means that acceptance of a string by such an automata is
 different from acceptance by an NFA:
 
-\grijs{\begin{definitie}
-{\rm
+\begin{definition}
 The infinite string is accepted by a B\"{u}chi automaton if the
-sequence of states followed by the string passes by an accepting state infinitely many times.  }
-\end{definitie}}
+sequence of states followed by the string passes by an accepting state infinitely many times.
+\end{definition}
 
 Clearly that is something one can't try out or implement, but that is
 not the purpose of B\"{u}chi automata: you use them to model a problem
@@ -2020,7 +1980,7 @@ name. However, we can still use the above {\em rule} to define a
 language. Such rules form a {\em context free grammar}. Before we
 define that formally, here are a few examples:
 
-\begin{vb}
+\begin{example}
 ~~~
 \begin{itemize}
 \item
@@ -2065,8 +2025,7 @@ Id \rpijl b
 Id \rpijl c
 
 \end{itemize}
-
-\end{vb}
+\end{example}
 
 Informally, a context free grammar (CFG) consists of rules; at the
 left side in a rule, we see a nonterminal symbol; at the right side
@@ -2101,8 +2060,7 @@ during the derivation.
 
 We are now ready for more formal definitions.
 
-\grijs{\begin{definitie} Context Free grammar - CFG\\
-{\rm
+\begin{definition}[Context Free grammar - CFG]
 A context free grammar is a 4-tuple $(V,\Sigma,R,S)$ in which
 \begin{itemize}
 \item
@@ -2119,15 +2077,12 @@ $R$ is a finite set of rules (or productions); a rule is a tuple
 \item
 $S$ is the start symbol and $S \in V$
 \end{itemize}
+\end{definition}
 
-}
-\end{definitie}}
 It is often clear which are the terminals and which symbol is the
 start symbol, and in such cases, we just mention the rules.
 
-
-\grijs{\begin{definitie} Derivation of a string, based on a CFG\\
-{\rm
+\begin{definition}[Derivation of a string, based on a CFG]
 Let $(V,\Sigma,R,S)$ be a CFG.
 A string $f$ over the alphabet $V \cup \Sigma_\epsilon$ is derived
 from a string $b$ over $V \cup \Sigma_\epsilon$ using the CFG, if
@@ -2142,23 +2097,18 @@ so that
 \end{itemize}
 
 We use the notation: $s_i \Rightarrow s_{i+1}$ and $b \Rightarrow^* f$
-}
-\end{definitie}}
+\end{definition}
 
-\grijs{\begin{definitie} The language determined by a CFG\\
-{\rm
+\begin{definition}[The language determined by a CFG]
 The language $L_{CFG}$ determined by the CFG $(V,\Sigma,R,S)$ is the
 set of strings over $\Sigma$ that can be derived from $S$; or more
 formally: $L_{CFG} = \{s \in \Sigma^* | S \Rightarrow^* s\}$.
+\end{definition}
 
-}
-\end{definitie}}
-
-\grijs{\begin{definitie} Context Free language - CFL\\
-{\rm
+\begin{definition}[Context Free language - CFL]
 A language $L$ is {\bf context free} if there exists a CFG so that $L
-= L_{CFG}$ }
-\end{definitie}}
+= L_{CFG}$
+\end{definition}
 
 Regarding CFLs, we intend to follow a similar path as for RegLans: we
 define a new kind of machine and prove that the set of its accepted
@@ -2228,14 +2178,11 @@ We say that grammar Arit1 is ambiguous because there exist ambiguous
 strings in $L_{Arit1}$ w.r.t. Arit1. A priori, it is unclear whether
 for the same language there exists also a non-ambiguous grammar.
 
-
-\grijs{\begin{definitie} Equivalence of CFGs \\
-{\rm
+\begin{definition}[Equivalence of CFGs]
 Two context free grammars $CFG1$ and $CFG2$ are equivalent if
 
 $~~~~~~~~~~~L_{CFG1} = L_{CFG2}$
-}
-\end{definitie}}
+\end{definition}
 
 You should be able to prove that this defines an equivalence relation
 on the CFGs.
@@ -2287,8 +2234,7 @@ Arit2 can be written as:
 Often, it is convenient to have grammars of a restricted form, but
 without excluding any CFLs. Here is such a form.
 
-\grijs{\begin{definitie} Chomsky Normal Form\\
-{\rm
+\begin{definition}[Chomsky Normal Form]
 A CFG is in Chomsky Normal Form if every rule has one of the following
 forms
 \begin{enumerate}
@@ -2296,17 +2242,14 @@ forms
 \item A \rpijl $\alpha$ (with $\alpha$ a terminal)
 \item $S$ \rpijl $\epsilon$ (with $S$ the start symbol)
 \end{enumerate}
-}
-\end{definitie}}
+\end{definition}
 
 Some textbooks do not include the rule $S$ \rpijl $\epsilon$: such a grammar
 cannot derive the empty string.
 
-
-\grijs{
-\begin{stelling}\label{chomskynormalform}
+\begin{theorem} \label{chomskynormalform}
 For each CFG there exists an equivalent CFG in Chomsky Normal Form.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 The proof is constructive, a bit long but not difficult. We start from
 a given CFG and transform it in little steps to Chomsky Normal Form
@@ -2453,9 +2396,8 @@ stack, the machine goes to a new state, and possibly changes the top
 of the stack. Just as with regular automata, we define the PDA from
 the start as non-deterministic.
 
-
-\grijs{\begin{definitie} The pushdown automaton\\
-{\rm A pushdown automaton is a 6-tuple
+\begin{definition}[The pushdown automaton]
+A pushdown automaton is a 6-tuple
 $(Q,\Sigma,\Gamma,\delta,q_s,F)$ in which
 \begin{itemize}
 \item $Q$ is a finite set of states
@@ -2467,9 +2409,7 @@ $Q \times \Sigma_\epsilon \times \Gamma_\epsilon \rightarrow {\cal P}(Q \times  
 \item $q_s$ is the start state
 \item $F \subseteq Q$ is the set of (accepting) end states
 \end{itemize}
-
-}
-\end{definitie}}
+\end{definition}
 
 This definition does not specify how a PDA works. Let us first look at
 a graphical representation of a PDA, similar to the graphical
@@ -2522,8 +2462,7 @@ string and a final application of $\delta$ brings us in the end
 state. We say: $a^2bc^2$ is accepted by the PDA, or $a^2bc^2$ is in
 the language determined by the PDA. Here is the formal definition:
 
-\grijs{\begin{definitie} A string accepted by a PDA\\
-{\rm
+\begin{definition}[A string accepted by a PDA]
 A string $s$ is accepted by a PDA if $s$ can be split in parts
 $w_i$, i= 1..m ($w_i \in \Sigma_\epsilon$), and there exist states
  $q_j$, j= 0..m, and stacks $stack_k$, k=0..m ($stack_k
@@ -2537,8 +2476,7 @@ $w_i$, i= 1..m ($w_i \in \Sigma_\epsilon$), and there exist states
 
 $stack_i = xt,~~stack_{i+1} = yt$ with $t \in \Gamma^*$
 \end{itemize}
-}
-\end{definitie}}
+\end{definition}
 
 The last bullet indicates that the transitions follow $\delta$.
 
@@ -2561,12 +2499,10 @@ proof or an exercise.
 \project{ivm equivalentie van die dingen - misschien ook minimisatie
 NFA/MN voor NFA}
 
-\grijs{\begin{definitie} The language determined by a PDA\\
-{\rm
+\begin{definition}[The language determined by a PDA]
 The language determined by a PDA is the set of strings accepted by the
-PDA.  }
-\end{definitie}
-}
+PDA.
+\end{definition}
 
 Clearly, the language $\{a^nbc^n|n \geq 0\}$ is determined by a PDA:
 Figure~\ref{pda2} shows the implementation. Strings like aabc are not
@@ -2597,12 +2533,13 @@ languages determined by PDAs.
 
 We want to prove
 
-\grijs{\begin{stelling}
+\begin{theorem}
 Every PDA determines a CFL and every CFL is determined by a PDA.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 There are clearly two parts in this theorem. We prove the first part
-in the lemma on page \pageref{equicfgpda1}, and the second part in the lemma on page \pageref{equicfgpda2}. \end{proof}
+in the lemma on page \pageref{equicfgpda1}, and the second part in the lemma on page \pageref{equicfgpda2}.
+\end{proof}
 
 We first need some preparatory work and an example.
 
@@ -2612,12 +2549,6 @@ done that yet, this is a good moment to prove it! We use this feature
 because it makes the description of the example much shorter.
 
 % \clearpage
-\begin{vb}
-Consider again the CFG Arit1 of page \pageref{arit1label}
-\begin{itemize}
-\item E \rpijl E + E~~~~~~~E \rpijl E * E~~~~~~~E \rpijl a
-\end{itemize}
-with E the start symbol. Now look at the PDA in Figure~\ref{pda3}.
 
 \begin{figure}[h]
 \begin{center}\includegraphics[%
@@ -2625,6 +2556,13 @@ with E the start symbol. Now look at the PDA in Figure~\ref{pda3}.
   keepaspectratio]{pda3}\end{center}
 \caption{A PDA derived from Arit1\label{pda3}}
 \end{figure}
+
+\begin{example}
+Consider again the CFG Arit1 of page \pageref{arit1label}
+\begin{itemize}
+\item E \rpijl E + E~~~~~~~E \rpijl E * E~~~~~~~E \rpijl a
+\end{itemize}
+with E the start symbol. Now look at the PDA in Figure~\ref{pda3}.
 
 This PDA has a bit more symmetry than you would get starting from
 another CFG. Still, it is constructed in a systematic way as follows:
@@ -2656,7 +2594,7 @@ another CFG. Still, it is constructed in a systematic way as follows:
 \end{itemize}
 
 \end{itemize}
-\end{vb}
+\end{example}
 
 \paragraph{Selfie:} Describe exactly $\Sigma$ and $\Gamma$ for this PDA.
 
@@ -2700,10 +2638,10 @@ by the PDA in Figure~\ref{pda3}.
 We can generalize the example to the following lemma:
 
 % \newpage
-\grijs{\begin{lemma}\label{equicfgpda1}
+\begin{lemma} \label{equicfgpda1}
 The construction of a PDA from a CFG as described above, results in
 a PDA that accepts the language $L_{CFG}$.
-\end{lemma}}
+\end{lemma}
 \begin{proof}
 You can check that there is a one-to-one correspondence between a
 derivation of string $s$ using the CFG, and an accepting execution of the PDA for $s$.
@@ -2767,9 +2705,9 @@ The intuition behind this construction is this: the strings that bring
 you in the PDA from state p with an empty stack to state q with an empty
 stack, are exactly the strings generated by the nonterminal $A_{p,q}$.
 
-\grijs{\begin{lemma}\label{equicfgpda2}
+\begin{lemma} \label{equicfgpda2}
 The above construction of a CFG from a PDA preserves the language.
-\end{lemma}}
+\end{lemma}
 \begin{proof}
 We don't do the proof this year :-)
 \end{proof}
@@ -2803,7 +2741,7 @@ strings, regular and context free languages are the same!
 \clearpage
 \section{A pumping lemma for Context Free Languages}\label{pompcfl}
 
-\grijs{\begin{stelling}
+\begin{theorem}
 For every context free language L, there exists a number p (the
 pumping length), so that for each string $s \in L$ with $|s| \geq p$,
 there exists a partition of $s$ in 5 pieces u,v,x,y and z from
@@ -2813,12 +2751,11 @@ $\Sigma^*$ so that $s$ = uvxyz
 \item $|vy| > 0$
 \item $|vxy| \leq p$
 \end{enumerate}
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 We use once more the pigeon hole principle, now on the parse tree for
 strings that are long enough. Consider a CFG in Chomsky normal form
 for L. Let $n$ be the number of nonterminals.
-\end{proof}
 
 If $s \in L$, it has a parse tree. By deleting the
 leaves from that tree, we get a full binary tree - because of the Chomsky normal
@@ -2860,7 +2797,8 @@ So we already have obtained (1) and (2) from the theorem if we take strings long
 We now prove (3): vxy is derived from X with a parse tree smaller than
 $n$, so it has at most $2^{n-1}$ leaves which correspond exactly with
 vxy. Figure~\ref{parsetree2} once more illustrates this.
-\prend
+\end{proof}
+
 \begin{figure}[h]
 \begin{center}\includegraphics[%
   width=0.35\linewidth,
