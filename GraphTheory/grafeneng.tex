@@ -1895,7 +1895,7 @@ that path and start at that node constructing a maximal simple path;
 repeat backing up and constructing paths ... until you are back at the
 initial vertex and can't construct a path anymore;
 Figure~\ref{diepteeerst1} illustrates the method starting from the top
-vertex: the dotted edges belong to the spanning tree.
+vertex: the solid edges belong to the spanning tree.
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=0.6\linewidth,keepaspectratio]{diepteeerst1}
@@ -1920,8 +1920,6 @@ the top vertex.
 \end{figure}
 \end{description}
 
-\marton{I feel like these figures would be more intuitive if the role of the dotted and the solid lines were reversed.}
-
 The correctness of both methods results from the fact that all edges
 are eventually considered for adding to the growing tree, and from
 Theorem \ref{opspannend4}. In both methods, the intermediate graph is
@@ -1936,8 +1934,6 @@ breadth-first constructed spanning trees do not need to be isomorphic.
 \end{center}
 \caption{Spanning trees for $K_{4}$\label{opspannend2}}
 \end{figure}
-
-\marton{The labels on this figure are not translated, I wasn't sure if I should edit the .fig directly}
 
 Maybe you think that {\bf all} spanning trees can be obtained by
 either method, but Figure~\ref{opspannend5} shows a graph with a
@@ -2815,8 +2811,6 @@ edge 1 as capacity: see Figure~\ref{matching2}.
 1\label{matching2}}
 \end{figure}
 
-\marton{The labels on this figure are not translated.}
-
 We can now construct a maximal (integer) flow $F$ in in this network:
 the value of this maximal flow is 4 (the number of students). We can
 derive an assignment of students to days (or a matching of the
@@ -2833,8 +2827,6 @@ perfect) matching, since every student is matched up with a day.
 \end{center}
 \caption{A solution for the assignment problem\label{matching3}}
 \end{figure}
-
-\marton{The labels on this figure are not translated.}
 
 The maximal flow could have been smaller than the number of
 students (for a different set of preferences of course): that maximal
