@@ -31,7 +31,7 @@ function $\delta$.
 
 \vspace{-5cm}\hspace{10cm}\includegraphics[%
   width=0.2\linewidth,
-  keepaspectratio]{afbeeldingen/turing}
+  keepaspectratio]{static/turing}
 
 
 \vspace{0.5cm} More formally:
@@ -44,27 +44,27 @@ $(Q, \Sigma, \Gamma, \delta, q_s, q_a, q_r)$
 with $Q, \Sigma, \Gamma$ finite sets:
 
 \begin{itemize}
-\item 
+\item
 Q is the set of states
 
-\item 
+\item
 $\Sigma$ is an input alphabet not containing \#
 
-\item 
+\item
 $\Gamma$ is the tape alphabet; $\# \in \Gamma$ and $\Sigma \subset \Gamma$
 
-\item 
+\item
 $q_s$ is the start state
 
-\item 
+\item
 $q_a$ is the accepting end state
 
 
-\item 
+\item
 $q_r$ is the rejecting end state and different from $q_a$
 
 
-\item 
+\item
 $\delta$ is the transition function: it is a total function with
   signature
 
@@ -77,7 +77,7 @@ $~~~~~~~~~~Q \times \Gamma \rightarrow Q \times \Gamma \times \{L,R,S\}$
 
 \marton{Maybe a clarification in the definition about L,R,S, as this is the first time we abbreviate}
 
-The machine is initialized as follows: 
+The machine is initialized as follows:
 \begin{itemize}
 \item the symbols of a string from $\Sigma^*$ are put in subsequent
 tape cells: they constitute the input string; all other cells contain
@@ -154,12 +154,12 @@ describes $\delta$.
 \begin{tabular}{|l|c||l|c|c|}
 \hline
 $Q$    & $\Gamma$   &  $Q$  &  $\Gamma$ &  LRS \\ \hline
-$q_s$  &  a         &  $q_s$&   \#      &  R   \\ 
-$q_s$  &  b         &  x    &    b      &  S   \\ 
-$q_s$  &  \#        &  $q_a$&    -      &  -   \\ 
-x      &  a         &  x    &    a      &  S   \\ 
-x      &  b         &  x    &    b      &  S   \\ 
-x      &  \#        &  x    &    \#     &  S   \\ 
+$q_s$  &  a         &  $q_s$&   \#      &  R   \\
+$q_s$  &  b         &  x    &    b      &  S   \\
+$q_s$  &  \#        &  $q_a$&    -      &  -   \\
+x      &  a         &  x    &    a      &  S   \\
+x      &  b         &  x    &    b      &  S   \\
+x      &  \#        &  x    &    \#     &  S   \\
 \hline
 \end{tabular}
 \caption{A TM recognizing $\{a\}^*$} \label{turing3}
@@ -173,9 +173,9 @@ halts, this is shown in table \ref{turing4}.
 \begin{tabular}{|l|c||l|c|c|}
 \hline
 $Q$    & $\Gamma$   &  $Q$  &  $\Gamma$ &  LRS \\ \hline
-$q_s$  &  a         &  $q_s$&   \#      &  R   \\ 
-$q_s$  &  b         &  $q_r$&    -      &  -   \\ 
-$q_s$  &  \#        &  $q_a$&    -      &  -   \\ 
+$q_s$  &  a         &  $q_s$&   \#      &  R   \\
+$q_s$  &  b         &  $q_r$&    -      &  -   \\
+$q_s$  &  \#        &  $q_a$&    -      &  -   \\
 \hline
 \end{tabular}
 \caption{A TM that decides $\{a\}^*$} \label{turing4}
@@ -185,7 +185,7 @@ This distinction is captured in the following definitions:
 
  \grijs{\begin{definitie} To decide\\
 {\rm
-A Turing Machine TM decides a language L, if TM recognizes L and 
+A Turing Machine TM decides a language L, if TM recognizes L and
 $\infty_{TM} = \emptyset$
 }
 \end{definitie}}
@@ -311,7 +311,7 @@ consisting of only zeroes and ones.
   will skip all zeroes
 \end{itemize}
 
-\item if in state $n$ the head sees a 
+\item if in state $n$ the head sees a
 \begin{itemize}
 \item \#: reject
 \item 1: go right to state $e$; it will skip all ones
@@ -515,21 +515,21 @@ A reasonable encoding should not introduce extra information.
 
 Some examples:
 \begin{enumerate}
-\item 
+\item
 You are studying prime numbers. You chose a unary representation: the
 alphabet is $\{@\}$. You represent 7 by 7 times the symbol @, i.e. by
 @@@@@@@
 
 That is reasonable.
 
-\item 
+\item
 You are studying prime numbers. You chose a binary representation: the
 alphabet is $\{@,!\}$. You represent 9 by !@@!
 
 That is reasonable.
 
 
-\item 
+\item
 You are studying prime numbers. You chose a two-part representation of
 numbers: the first part indicates whether the number is prime or not;
 if it is, this first part equals $p$, otherwise $n$. The second part
@@ -593,7 +593,7 @@ conventions to identify the start and end states). One can encode the
 transition table, by using numbers for the states (from 1 to ...),
 numbers for the symbols, and a number for the L,R,S. These numbers
 would then be encoded in - say - unary, and one would just need a new
-symbol for delimiting the different numbers. We put the encoding of 
+symbol for delimiting the different numbers. We put the encoding of
 the transition table on the first tape of a UTM (the program tape). On
 its second tape (the memory), we write an input string (using the same
 encoding for the symbols).  UTM may have even more tapes if that makes
@@ -674,7 +674,7 @@ We now construct a contraction machine C defined as
 $~~~~~~~~C(\langle M \rangle) = opposite(B(\langle M,M \rangle))$ for
 any Turing Machine M.
 
-We used: 
+We used:
 $opposite(accept) = reject$ and $opposite(reject) = accept$.
 
 
@@ -686,10 +686,10 @@ $~~~~~~~~C(\langle C \rangle) = opposite(B(\langle C,C \rangle))$
 
 Now,  $C(\langle C \rangle) = accept \Leftrightarrow B(\langle C,C \rangle)
 = accept$
-% 
+%
 $ \Leftrightarrow opposite(B(\langle C,C \rangle)) = reject$
 
-$~~~~~~~ \Leftrightarrow C(\langle C \rangle) = reject$ 
+$~~~~~~~ \Leftrightarrow C(\langle C \rangle) = reject$
 
 (make sure you understand and can explain every step above)
 
@@ -822,7 +822,7 @@ Enu. If it equals s, M accepts s. Otherwise Enu continues.
 (2) Suppose M recognizes L. We construct an enumerator Enu for L with the following ingredients:
 
 \begin{itemize}
-\item[-] 
+\item[-]
 a $TM_{gen}$ that given a number $n$ puts the first $n$
 strings from $\Sigma^*$ on a tape: $s_1, s_2, ... s_n$
 
@@ -871,9 +871,9 @@ that sentence, depending on how the regular language itself is given.
 \begin{itemize}
 \item
 $A_{DFA} = \{\langle D,s \rangle|D~is~a~DFA,~and~D~accepts~s\}$
-\item 
+\item
 $A_{NFA} = \{\langle N,s \rangle|N~is~a~NFA,~and~N~accepts~s\}$
-\item 
+\item
 $A_{RegExp} = \{\langle RE,s
   \rangle|RE~is~a~regular~expression,~and~RE~generates~s\}$
 \end{itemize}
@@ -884,12 +884,12 @@ $A_{DFA}$, $A_{NFA}$ and $A_{RegExp}$ are decidable.
 \end{stelling}}
 \begin{proof} The proof is constructive.
 \begin{itemize}
-\item 
+\item
 The decider B has input $\langle D,s \rangle$. B simulates D on s. If
 D accepts s, B stops in its $q_a$. If D rejects s, B stops in its
 $q_r$. Looping does not occur.
 
-\item 
+\item
 The simulation of an NFA can loop, unless one performs loop detection
 ... We chose an easier path: the decider B has input $\langle D,s
 \rangle$. B transforms the NFA D to a DFA (see the algorithm in
@@ -971,7 +971,7 @@ $A_{CFG} = \{\langle G,s \rangle|G~is~a~CFG,~and~s \in L_G\}$ is
 \begin{proof}
 A naive proof idea consists in using the CFG to generate strings, and
 accepting as soon as s is generated. You can see why this does not work:
-when do you reject? We have a recognizer, not a decider. 
+when do you reject? We have a recognizer, not a decider.
 
 It would be convenient if the CFG were in Chomsky Normal Form: we
 would then have an upper bound on the length of the derivation for a
@@ -999,7 +999,7 @@ for a rule $A \rightarrow \alpha$ with $\alpha$ only terminal symbols
 
 
 \item
-keep doing this until 
+keep doing this until
 \begin{itemize}
 \item the start symbol is removed: reject, because the start symbol
   can derive a string
@@ -1036,7 +1036,7 @@ Every CFL is decidable.
 Here, the question is to prove the existence of a decider $B_G$ that
 can decide for each string whether it belongs to G or not. Appreciate
 the difference with $A_{CFG}$. Work out the details yourself.
-\end{proof} 
+\end{proof}
 
 The remaining one is $EQ_{CFG}$, i.e. if we get two CFGs, can we
 decide whether they have the same language? The decider for $EQ_{DFA}$
@@ -1074,7 +1074,7 @@ Assume that $E_{TM}$ is decidable, then there exists a decider $E$ for
 it. We now describe a decider B for $A_{TM}$ using $E$:
 B receives as input $\langle M,s \rangle$ and works as follows:
 \begin{itemize}
-\item 
+\item
 it constructs a machine $M_{M,s}$ whose working is given by: on input
 $w$, $M_s$ does the following
 \begin{itemize}
@@ -1082,7 +1082,7 @@ $w$, $M_s$ does the following
 \item else run M on $w$ (or $s$) and return the same result
 \end{itemize}
 
-\item 
+\item
 run $E$ on input $\langle M_{M,s} \rangle$
 \begin{itemize}
 \item if $E$ accepts $\langle M_{M,s} \rangle$, then B rejects its
@@ -1109,7 +1109,7 @@ Then $E_{TM} = IsIn_{TM,\{\phi\}}$
 Another instance of the general problem:
 \begin{itemize}
 \item[] does a given Turing Machine M determine a regular language,
-  i.e.  is $IsIn_{TM,RegLan}$ decidable? We denote that problem as 
+  i.e.  is $IsIn_{TM,RegLan}$ decidable? We denote that problem as
 $REGULAR_{TM}$
 \end{itemize}
 
@@ -1151,7 +1151,7 @@ $EQ_{TM}$ is not decidable.
 \begin{proof}
 We already know that $E_{TM}$ is not decidable. $E_{TM}$ is a special
 case of $EQ_{TM}$, in which the second machine is $M_\phi$. It is
-clear that if we could decide the equality of two arbitrary languages, 
+clear that if we could decide the equality of two arbitrary languages,
 we would also be able to decide about one arbitrary language
 and the empty one. So, we arrive at a contradiction by assuming that
 $EQ_{TM}$ is decidable.
@@ -1163,7 +1163,7 @@ Section~\ref{mappingreduction}.
 % \clearpage
 
 The following is about context sensitive languages. We first define
-the machinery needed to decide them: 
+the machinery needed to decide them:
 
  \grijs{\begin{definitie} Linear Bounded Automaton\\
 {\rm
@@ -1217,7 +1217,7 @@ on input $\langle M,s \rangle$, B performs the following
 \item if $M$ has not yet stopped, it means that $M$ loops and does not
   accept: reject
 \end{itemize}
-\end{proof} 
+\end{proof}
 
  \grijs{\begin{stelling}
 $E_{LBA} = \{M | M~is~an~LBA~with~L_M = \emptyset\}$ is not decidable
@@ -1267,7 +1267,7 @@ $s$. The latter is equivalent with $M$ accepts $s$.
 
 So, $B$ does not exist, so neither can $E$, and as a conclusion:
 $E_{LBA}$ is not decidable.
-\end{proof} 
+\end{proof}
 
 A small summary of the differences and similarities between PDAs, LBAs
 and TMs follows:
@@ -1333,12 +1333,12 @@ symbols of $s$ in reverse order with $\hat{s}$. We define $\widehat{L} = \{\hat{
 
 {\bf Example:} The language
 %
-$L = \{ba^mb^nc^k|m \neq n\} \cup \{ca^mb^nc^k|n \neq k\}$ is 
+$L = \{ba^mb^nc^k|m \neq n\} \cup \{ca^mb^nc^k|n \neq k\}$ is
 deterministic context free (construct its DCFG) but $\widehat{L}$ is
 not.
 
 
-% \clearpage			     
+% \clearpage
 \section{Countable}
 
 A set $V$ is countable if there exists a bijection between $V$ and (a
@@ -1395,7 +1395,7 @@ $~~~~~~~~~~~~Pos_P \neq \emptyset$ and also $Neg_P \neq \emptyset$.  }
 
 \grijs{\begin{definitie} Language invariant property\\
 {\rm
-The property $P$ is {\em language invariant} if 
+The property $P$ is {\em language invariant} if
 
 $~~~~~~~~~L_{M_1} = L_{M_2} \Longrightarrow P(M_1) = P(M_2)$
 
@@ -1457,7 +1457,7 @@ $M$ accepts $s$.
 
 So, $A$ is a decider for $A_{TM}$, clearly impossible, so $B$ does not
 exist, and $Pos_P$ is not decidable.
-\end{proof} 
+\end{proof}
 
 Rice also has a second theorem: every non-monotone property is not
 recognizable; it is worth having a look at it!
@@ -1497,7 +1497,7 @@ An example:
 
 \vspace{-5cm}\hspace{10cm}\includegraphics[%
   width=0.2\linewidth,
-  keepaspectratio]{afbeeldingen/post}
+  keepaspectratio]{static/post}
 
 
 
@@ -1599,14 +1599,14 @@ the end domino
 \begin{tabular}{|l|}
 \hline
 A\$\$                     \\ \hline
-   \$                     \\ 
+   \$                     \\
 \hline
 \end{tabular}
 and the blank generators left and right
 \begin{tabular}{|l||l|}
 \hline
         \$   & \$         \\ \hline
-        \$\# & \#\$       \\ 
+        \$\# & \#\$       \\
 \hline
 \end{tabular}
 
@@ -1615,7 +1615,7 @@ finally, the input $ab$ turns into a starting domino
 \begin{tabular}{|l|}
 \hline
 \$ \\ \hline
-\$Xab\$ \\ 
+\$Xab\$ \\
 \hline
 \end{tabular}
 \end{itemize}
@@ -1637,7 +1637,7 @@ starting from the input domino.\footnote{The general PCP allows to
 }
 
 
-In the lower half, you see a configuration between any two occurrences of \$; 
+In the lower half, you see a configuration between any two occurrences of \$;
 two subsequent configurations are linked by the
 transition function until the accepting state appears. After that,
 the configuration is emptied until only the accepting state and the
@@ -1698,7 +1698,7 @@ This rewriting system is also Turing complete.
 \clearpage
 \section{Many-one reduction}\label{mappingreduction}
 
-A reduction maps one problem L1 to another L2: it seems a bit counterintuitive, 
+A reduction maps one problem L1 to another L2: it seems a bit counterintuitive,
 but L2 is in some sense {\em more difficult} than L1,
 because a method to solve \martonst{L1}{L2} is (together with the reduction) powerful
 enough to solve \martonst{L2}{L1}. We will make all this very precise. It is important
@@ -1852,7 +1852,7 @@ There exists an $O^{A_{TM}}$ that decides $E_{TM}$.
 We construct $O^{A_{TM}}$ as follows: on input $\langle M \rangle$
 $O^{A_{TM}}$ performs the following actions
 \begin{itemize}
-\item 
+\item
 it constructs a Turing Machine $P$ that on input $w$ performs the
 following actions
 \begin{itemize}
@@ -1890,7 +1890,7 @@ If $A \leq_T B$ and $B$ is decidable, then $A$ is decidable.
 The previous and following theorems are at your mercy!
 
  \grijs{\begin{stelling}
-If $A \leq_m B$ then also $A \leq_T B$. 
+If $A \leq_m B$ then also $A \leq_T B$.
 
 In other words: $\leq_m$ is finer than $\leq_T$.
 \end{stelling}}
@@ -1915,7 +1915,7 @@ difference is: the particular complexity hierarchy would still
 collapse in case it turns out that $NP = P$. Our compatibility
 hierarchy however stands strong!
 
-\paragraph{Selfie:} In the theorem on page \pageref{allestrings}, 
+\paragraph{Selfie:} In the theorem on page \pageref{allestrings},
 a statement is marked by a (*): how can we let M run on all strings?
 There are infinitely many of them ...
 
@@ -1939,18 +1939,18 @@ Jacques Herbrand did it.
 \subsubsection{The basic functions}
 
 \begin{itemize}
-\item 
+\item
 the null function: $null : \N \rightarrow \N$
 
 $~~~~~~~~~~~~~~~~~~~null(x) = 0$
 
 
-\item 
+\item
 the successor function: $succ : \N \rightarrow \N$
 
 $~~~~~~~~~~~~~~~~~~~~~~~~~~~succ(x) = x+1$
 
-\item 
+\item
 the projections: ${p_i}^n : \N^n \rightarrow \N$
 
 $~~~~~~~~~~~~~~~{p_i}^n(x_1,x_2,...,x_n) = x_i$
@@ -1966,7 +1966,7 @@ $~~~~~~~~~~~~~~~{p_i}^n(x_1,x_2,...,x_n) = x_i$
 \item
 $g_1, g_2, ..., g_m$ functions $\N^k \rightarrow \N$
 
-\item 
+\item
 $f$ function $\N^m \rightarrow \N$
 \end{itemize}
 
@@ -1992,7 +1992,7 @@ $g: \N^{k+2}  \rightarrow \N$
 
 {\bf construct using primitive recursion $h: \N^{k+1}  \rightarrow \N$}:
 
-$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~h(\overline{x},0) = f(\overline{x})$ 
+$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~h(\overline{x},0) = f(\overline{x})$
 
 $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~h(\overline{x},y+1) = g(\overline{x},y,h(\overline{x},y))$
 
@@ -2007,7 +2007,7 @@ $~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~h(y+1) = g(y,h(y))$
 
  \grijs{\begin{definitie} Primitive recursive function\\
 {\rm
-All functions that can be constructed from the basic functions and by using composition and primitive recursion, are named 
+All functions that can be constructed from the basic functions and by using composition and primitive recursion, are named
 {\bf primitive recursive}.  }
 \end{definitie}}
 
@@ -2020,13 +2020,13 @@ computed by FOR-programs.
 \subsubsection{Examples}
 
 \begin{itemize}
-\item 
+\item
 $Cn[succ,null]$ is the constant function 1
 
-\item 
+\item
 $Cn[succ,Cn[succ,Cn[succ,null]]]$ is the constant function 3
 
-\item 
+\item
 $Pr[{p_1}^1,Cn[succ,{p_3}^3]]$ = sum of 2 inputs ($\N^2 \rightarrow \N$)
 
 write out the definition and see the analogy with the Haskell program:
@@ -2036,11 +2036,11 @@ sum(x,0) = x
 sum(x,y+1) = sum(x,y) + 1
 
 
-\item 
+\item
 
 $Pr[null,Cn[sum,{p_1}^3, {p_3}^3]]$ = product of 2 inputs ($\N^2 \rightarrow \N$)
 
-\item 
+\item
 factorial, minus1 (or predecessor), ...
 
 \end{itemize}
@@ -2111,7 +2111,7 @@ $f(\overline{x},z) \neq 0$
 
 Notation: $g = Mn[f]$
 
-Loosely speaking, 
+Loosely speaking,
 {\em g gives the minimal roots of f}
 
 \subsubsection{Code to compute Mn[f](x)}
@@ -2140,7 +2140,7 @@ specifically, these functions can be computed by a Turing Machine, and
 vice versa. It means that the Turing computable functions coincide with
 the recursive functions. It is clear from the definition of unbounded
 minimization that recursive functions can be partial. That is
-consistent with the notion of Turing computable: a TM often only defines 
+consistent with the notion of Turing computable: a TM often only defines
 a partial function. But the Ackermann function shows that really
 recursive functions can also be total.
 

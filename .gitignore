@@ -1,4 +1,5 @@
 *.pdf
+!*/figures/static/*.pdf
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

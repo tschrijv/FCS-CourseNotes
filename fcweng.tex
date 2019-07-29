@@ -115,9 +115,9 @@
 % %% TITELBLAD
 % \renewcommand{\thepage}{}
 % % \pagestyle{plain}
-% 
-% 
-% 
+%
+%
+%
 % \begin{center}
 % \shabox{\Huge \bf Fundamentals for Computer Science}
 % ~~\\
@@ -130,11 +130,11 @@
 % ~~\\
 % ~~\\
 % {\Large \bf Master of Engineering: Computer Science}\\[0.5cm] \today
-% 
+%
 % \vspace*{2cm}
 % {\large B. Demoen}\\
 % KU Leuven\\
-% Departement\ Computerwetenschappen 
+% Departement\ Computerwetenschappen
 % \end{center}
 
 %\newpage
@@ -158,20 +158,28 @@
 
 \part{Graph Theory}
 
+\graphicspath{{./GraphTheory/figures/}}
+
 \include{GraphTheory/grafeneng}
 \addtocontents{toc}{\protect\vspace{10pt}}
 
 \part{Languages \& Automata}
- 
+
+\graphicspath{{./LanguagesAutomata/figures/}}
+
 \include{LanguagesAutomata/talenautomateneng}
 \addtocontents{toc}{\protect\vspace{10pt}}
 
 \part{Computability}
 
+\graphicspath{{./Computability/figures/}}
+
 \include{Computability/berekenbaarheideng}
 \addtocontents{toc}{\protect\vspace{10pt}}
 
 \part{Complexity}
+
+\graphicspath{{./Complexity/figures/}}
 
 \include{Complexity/complexiteiteng}
 

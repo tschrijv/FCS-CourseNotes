@@ -1,9 +1,7 @@
-FIGURES_SRC=$(wildcard *.fig)
+FIGURES_SRC=$(wildcard */figures/*.fig)
 FIGURES=$(FIGURES_SRC) \
 		$(filter-out $(addsuffix .pdf,$(basename $(FIGURES_SRC))), \
-			$(wildcard *.pdf))
-#all:
-#	pdflatex mat.tex
+			$(wildcard */figures/*.pdf))
 
 all: fcweng.pdf
 
@@ -38,7 +36,7 @@ extra: extrales.tex mn1.eps mn2.eps mn3.eps mn4.eps
 	dvips extrales.dvi -o extrales.ps
 	ps2pdf extrales.ps
 
-2dfa: 2dfa.tex 
+2dfa: 2dfa.tex
 	latex 2dfa.tex
 	dvips 2dfa.dvi -o 2dfa.ps
 	ps2pdf 2dfa.ps
@@ -54,5 +52,5 @@ clean:
 	rm -f *.bak *.aux *.log *~ *.w *.bbl *.blg *.out *.toc
 
 realclean:
-	rm -f *~ *.bak *.aux *.blg *.log *.bbl *.toc  *.pdf
+	rm -f *~ *.bak *.aux *.blg *.log *.bbl *.toc *.pdf */figures/*.pdf
 
