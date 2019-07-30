@@ -74,16 +74,16 @@ complexity
 
 \section{Time complexity of algorithms}
 
-\grijs{\begin{definitie} Time complexity of an algorithm\\
-{ The {\bf time complexity} of an algorithm $A$ is a function
+\begin{definition}[Time complexity of an algorithm]
+The {\bf time complexity} of an algorithm $A$ is a function
   $time_A(n):\N\rightarrow \N$ that maps an input size $n$ to the
   maximally needed steps performed by $A$ on any input string of size
   $n$:
 
-~~~~~~~~~~~~~~~~~~~~$time_A(n) = max(\{time_A(s)|~|s| = n\})$ }
+~~~~~~~~~~~~~~~~~~~~$time_A(n) = max(\{time_A(s)|~|s| = n\})$
 
 $time_A(s)$ is the number of steps $A$ performs to decide $s$.
-\end{definitie}}
+\end{definition}
 
 The definition shows that $time_A(n)$ is a {\bf worst case}
 measure. It is quite possible that the algorithm needs much less time
@@ -97,17 +97,16 @@ relevant only up to a constant\footnote{And don't forget the linear
   speedup theorem!}. Therefore, the following definition comes in
 handy:
 
-\grijs{\begin{definitie} The big $O$-notation (pronounce as {\em big
-      oh)}\\
-{ let $f,g$ be functions with signature $\N$ to $\R^+$. We say
+\begin{definition}[The big $O$-notation (pronounce as {\em big oh)}]
+Let $f,g$ be functions with signature $\N$ to $\R^+$. We say
 $f(n)$ is $O(g(n))$ (or $f$ is $O(g)$, and we write also
   $f(n)=O(g(n))$) if
 \[\exists c\in \R_0^+,\; \exists N\in \N,\;
 \forall n\in \N: \; n\geq N \Rightarrow f(n)\leq c.g(n)\]
 
 We also say: f is of order g, and $f$ is asymptotically dominated by
-$g$.  }
-\end{definitie}}
+$g$.
+\end{definition}
 
 \martonst{$c.g(n)$}{$c \cdot g(n)$}
 
@@ -115,13 +114,13 @@ Note: it is possible that for a particular $f$ and $g$, both $f$ is
 $O(g)$ and $g$ is $O(f)$ are true, but that does not mean they are
 equal.
 
-\begin{vb}{
+\begin{example}{
 The function mapping $n$ on $3n^2+4n +3$ is $O(n^2)$, because
 \[ 3 n^2+4n +3 \leq 4 n^2,\;\; \forall n\geq 5 \;\;(c=4,\;\;N=5).\]
 On the other hand, $n^2$ is also $O(3n^2+4n +3)$ because
 \[ n^2 \leq 3 n^2+4n+3,\;\; \forall n\geq 0 \;\; (c=1,\;\; N=0). \]
 }
-\end{vb}
+\end{example}
 
 {\bf A selfie:} prove that a positive polynomial with degree $k$ is
 $O(n^{k+i})$ if $i \geq 0$, but not if $i < 0$; prove that the
@@ -129,17 +128,12 @@ relation {\em dominates asymptotically} is transitive; provide two
 functions $f$ and $g$ so that $f$ is not $O(g)$ and (at the same time)
 $g$ is not $O(f)$.
 
-
-
-\grijs{\begin{definitie} Asymptotic equivalence of functions.\\
-{ Two functions $f,g:\N\rightarrow \R^+$ are asymptotically equivalent
+\begin{definition}[Asymptotic equivalence of functions]
+Two functions $f,g:\N\rightarrow \R^+$ are asymptotically equivalent
   if
 \[ f\mbox{ is }O(g)\mbox{ and } g \mbox{ is } O(f) \]
 We denote this by $f$ is $\theta(g)$ (or $g$ is $\theta(f)$).
-}
-\end{definitie}}
-
-
+\end{definition}
 
 {\bf A selfie:} {\em asymptotically equivalent} is an equivalence
 relation; two positive polynomials are asymptotically equivalent if
@@ -174,30 +168,26 @@ other way around).
 \cdots\;\; \;\;2^n \;\; n!  \]
 
 
-
-
-\grijs{\begin{definitie}\label{TtimeTM} Let $T$ be a function with
+\begin{definition} \label{TtimeTM}
+Let $T$ be a function with
 signature $\N \rightarrow \R^+$. We say that a Turing machine $M$ runs
 in time $T$ if $M$ stops on every input $s$ after at most $T(|s|)$
 steps.
-\end{definitie}}
+\end{definition}
 
 We also say {\em $M$ is a $T$-time Turing machine}. The algorithm
 implemented by $M$ is of course $O(T)$, but the converse is not
 true. (Why not?)
 
+\begin{definition}[A polynomial algorithm]
+An algorithm is {\bf polynomial} if its time complexity is $O(n^k)$
+for some $k\in \N$.
+\end{definition}
 
-
-\grijs{\begin{definitie} A polynomial algorithm\\
-{ An algorithm is {\bf polynomial} if its time complexity is $O(n^k)$
-for some $k\in \N$.}
-\end{definitie}}
-
-
-\grijs{\begin{definitie} An exponential algorithm\\
-{ An algorithm is {\bf exponential} if its time complexity is
-$\theta(c^n)$ for some real number $c>1$.}
-\end{definitie}}
+\begin{definition}[An exponential algorithm]
+An algorithm is {\bf exponential} if its time complexity is
+$\theta(c^n)$ for some real number $c>1$.
+\end{definition}
 
 \marton{Is the O-theta difference between these two intentional?}
 
@@ -255,11 +245,12 @@ machines (NDTM). The non-deterministic analogue of
 Definition~\ref{TtimeTM} is
 \end{sloppypar}
 
-\grijs{\begin{definitie}\label{TtimeNDTM} Let $T$ be a function with
+\begin{definition} \label{TtimeNDTM}
+Let $T$ be a function with
 signature $\N \rightarrow \R^+$. We say that a non-deterministic
 Turing machine $M$ runs in time $T$ if $M$ stops on every input $s$
 after at most $T(|s|)$ steps for each choice of the transition.
-\end{definitie}}
+\end{definition}
 
 
 \section{Time complexity of languages or decision problems}
@@ -273,12 +264,10 @@ get some understanding of the difficulty of a problem.
 
 \subsection{Time complexity classes}
 
-
-
-\grijs{\begin{definitie} DTIME(T)\\
-{ DTIME(T) is the set of languages that can be decided by a
-  (deterministic) $c.T$-time Turing machine, with $c > 0$.}
-\end{definitie}}
+\begin{definition}[DTIME(T)]
+DTIME(T) is the set of languages that can be decided by a
+  (deterministic) $c.T$-time Turing machine, with $c > 0$.
+\end{definition}
 
 
 $NDTIME(T)$ is similar but for a decision by a $c.T$-time NDTM.
@@ -293,8 +282,9 @@ $DTIME(T) \subseteq NDTIME(T)$
 The next definition captures the class of languages that can be
 decided by a polynomial Turing machine:
 
-\grijs{\begin{definitie} \P = $\cup_{k\geq 1} DTIME(n^k)$
-\end{definitie}}
+\begin{definition}
+\P = $\cup_{k\geq 1} DTIME(n^k)$
+\end{definition}
 
 \paragraph{Examples of languages in \P}
 \begin{itemize}
@@ -330,8 +320,9 @@ complexity theory books.
 Some problems cannot be solved in polynomial time. The class of
 languages that need at most exponential time contains such languages:
 
-\grijs{\begin{definitie} \EXP = $\cup_{k\geq 1} DTIME(2^{n^k})$
-\end{definitie}}
+\begin{definition}
+\EXP = $\cup_{k\geq 1} DTIME(2^{n^k})$
+\end{definition}
 
 It should be clear that $\P \subseteq \EXP$. The inclusion is even strict: see Section~\ref{timeshierarchie}.
 %
@@ -441,9 +432,7 @@ independent of their use in complexity: you must be able to understand
 and interpret their definitions (and properties) without referring to
 complexity.
 
-
-\grijs{
-\begin{definitie}\label{verifiercertificate}
+\begin{definition} \label{verifiercertificate}
 A {\bf verifier} for a language $L$ is a deterministic TM $V$
 such that
 
@@ -452,8 +441,7 @@ $\forall s \in \Sigma^* : (s \in L \leftrightarrow \exists c \in \Sigma^*: V(\la
 
 
 $c$ is named the {\bf certificate} for $s$
-\end{definitie}
-}
+\end{definition}
 
 Some examples:
 \begin{itemize}
@@ -614,8 +602,7 @@ Turing machine.
 The class \NP can be defined in two ways: the material in the previous
 section contains the ingredients to prove their equivalence.
 
-\grijs{
-\begin{definitie} \NP with verifiers\\
+\begin{definition}[\NP with verifiers]
 \NP is the set of languages $L$ for which there exists a polynomial
 verifier and a polynomial $p$ such that for each $s \in L$, there
 exists a certificate $c$ so that $|c| \leq p(|s|)$.  ~\\ ~\\
@@ -625,16 +612,14 @@ $~~~~~~~~\exists$ a polynomial TM $M$ and a polynomial $p: \N
 \rightarrow \R^+$, so that
 
 $~~~~~~~~~~~~~~~s \in L  \Leftrightarrow  \exists c \in \Sigma^{p(|s|)}$ with $M(\langle s,c \rangle) = accept$
-\end{definitie}
-}
+\end{definition}
 
 The alternative definition of \NP uses non-deterministic Turing machines:
-\grijs{
-\begin{definitie} \NP with non-determinism\\
+
+\begin{definition}[\NP with non-determinism]
 \NP is the set of languages accepted by a polynomial non-deterministic
 Turing machine.
-\end{definitie}
-}
+\end{definition}
 
 You should be able to argue that these two definitions define the same
 set. Also, you must be able to argue that \NP is robust with respect
@@ -673,8 +658,8 @@ many-one reduction $\leq_m$ {\mbox is an example} (See
 Page~\pageref{manyone}). The reduction below takes
 complexity into account.
 
-\grijs{\begin{definitie} Polynomial reduction\\
-{ Given two languages $L_1\subseteq \Sigma_1^*$ (over alphabet $T_1$)
+\begin{definition}[Polynomial reduction]
+Given two languages $L_1\subseteq \Sigma_1^*$ (over alphabet $T_1$)
 and $L_2\subseteq \Sigma_2^*$ (over $T_2$). We say that $L_1$
 reduces polynomially to $L_2$ if there exists a mapping $f:\Sigma_1^*
 \rightarrow \Sigma_2^*$ so that:
@@ -683,21 +668,18 @@ reduces polynomially to $L_2$ if there exists a mapping $f:\Sigma_1^*
 L_2$\\[2mm] 2. There exists a deterministic TM that computes $f$ in
 polynomial time.
 \end{verse}
-We denote this by $L_1 \leq_p  L_2$.}
-\end{definitie}}
-
+We denote this by $L_1 \leq_p  L_2$.
+\end{definition}
 
 $\leq_p$ differs from $\leq_m$ only in the fact that the mapping must
 be computable in \martonst{poly-time}{polynomial time}. This makes $\leq_p$ finer than $\leq_m$:
 if $A \leq_p B$ then $A \leq_m B$. Check whether some of the examples
 of $\leq_m$ earlier in this course notes were actually $\leq_p$?
 
-
-
-\grijs{\begin{stelling} \label{transitief}
+\begin{theorem} \label{transitief}
 The relation $ \leq_p $ is transitive, or more explicitly:\\
 if $L_1 \leq_p L_2$ and $L_2 \leq_p L_3$ then $L_1 \leq_p L_3$.
-\end{stelling}}
+\end{theorem}
 \begin{proof}
 Let $f$ be the polynomial computable function belonging to $L_1
 \leq_p L_2$, and $g$ to $L_2 \leq_p L_3$; $M_f$ and $M_g$ are the
@@ -726,10 +708,9 @@ $|s|$.
 The next theorem has the same feel as an earlier theorem about
 $\leq_m$.
 
-\grijs{\begin{stelling}\label{P_is_klein}
+\begin{theorem} \label{P_is_klein}
 If $L_1  \leq_p  L_2$ and $L_2\in \P$ then $L_1 \in \P$.
-\end{stelling}}
-
+\end{theorem}
 \begin{proof} Let $L_1\subseteq T_1^*$, $L_2\subseteq T_2^*$, and $L_1
 \leq_p L_2$ via the function $f:T_1^*\rightarrow T_2^*$ that is
 polynomial\marton{ly} computable by TM $M_f$. Since $L_2\in \P$, there exists a
@@ -742,14 +723,11 @@ decides $L_1$, so $L_1\in \P$.
 We name two languages equivalent if each can be polynomially reduced
 to the other.
 
-
-\grijs{\begin{definitie} Polynomial equivalence of languages\\
-{
+\begin{definition}[Polynomial equivalence of languages]
 Two languages $L_1$ and $L_2$ are polynomial equivalent (denoted by
 $L_1\sim_p L_2$) if
 \[ L_1 \leq_p  L_2 \mbox{ \ and \ } L_2  \leq_p  L_1\]
-}\end{definitie}}
-
+\end{definition}
 
 
 The wording in this definition is justified by
@@ -774,16 +752,14 @@ of exactly three equivalence classes. Make sure you understand this.
 Within $\NP$, there exists a special class of languages: the most
 difficult of all in $\NP$!
 
-\grijs{
-\begin{definitie}\label{defnpc} The class $\NP$--complete\\
+\begin{definition}[The class $\NP$--complete] \label{defnpc}
 A language $L$ is $\NP$--complete if and only if
 \begin{verse}
 1. $L\in \NP$ and \\[2mm]
 2. for each language $L'\in\NP$, it is true that $L' \leq_p  L$.
 \end{verse}
 We denote the class of $\NP$--complete languages by $\NPC$.
-\end{definitie}
-}
+\end{definition}
 
 
 Informally, an $\NP$--complete language is so difficult that any other
@@ -796,12 +772,12 @@ $\NP$--complete languages exist at all, neither whether $\NPC$
 coincides with $\NP$ or $\P$. However, the relevance of this class is
 captured in the following theorem:
 
-\grijs{\begin{stelling}$ $
+\begin{theorem}
 \begin{verse}
 1. \NPC is an equivalence class for $\sim_p$.\\[2mm]
 2. If $\NPC\cap\P\neq \emptyset$ then $\NP=\P$.
 \end{verse}
-\end{stelling}}
+\end{theorem}
 \begin{proof} ~~
 \begin{verse}
 1. Suppose $L_1,L_2\in\NPC$. By the definition of $\NP$--completeness,
@@ -857,11 +833,9 @@ satisfying assignment.
 
 Stephen A. Cook\footnote{Turing award 1982} proved in 1971
 
-
-
-\grijs{\begin{stelling} The Cook-Levin Theorem.
+\begin{theorem}[The Cook-Levin Theorem]
 $SAT \in \NPC$
-\end{stelling}}
+\end{theorem}
 
 We do not study the proof of this theorem in this course. What you
 should be able to do is: show that $SAT \in \NP$, once using the
@@ -946,10 +920,6 @@ in which $G$ is a graph with a clique of size $i$, or otherwise said:
 $G$ contains a subgraph isomorphic to $K_i$. Two examples show how the
 reduction works:
 
-\begin{vb}
-The formula in 3-SAT is
-$(a \vee b \vee c) \wedge (a \vee \neg b \vee \neg c) \wedge (\neg a \vee b \vee \neg c) \wedge (\neg a \vee \neg b \vee c)$
-
 \begin{figure}[h]
 \begin{center}
 \includegraphics[height=0.2\textheight,keepaspectratio]{satclique}
@@ -958,6 +928,10 @@ $(a \vee b \vee c) \wedge (a \vee \neg b \vee \neg c) \wedge (\neg a \vee b \vee
 4-clique}\label{satclique}
 \end{center}
 \end{figure}
+
+\begin{example}
+The formula in 3-SAT is
+$(a \vee b \vee c) \wedge (a \vee \neg b \vee \neg c) \wedge (\neg a \vee b \vee \neg c) \wedge (\neg a \vee \neg b \vee c)$
 
 Figure~\ref{satclique} shows at the left the graph resulting from the
 reduction:
@@ -973,17 +947,10 @@ disjunction are not compatible either
 The incidence matrix of this graph can be computed in polynomial
 time. The required clique size (4 in the example) is the number of
 disjunctions in the formula.
-\end{vb}
+\end{example}
 
 Convince yourself that the graph has a clique of the required size if
 and only of the formula belongs to SAT.
-
-
-\begin{vb}
-The reduction can be applied to smaller disjunctions as well. We take the following
-as the formula: $(a \vee b) \wedge (\neg a \vee b) \wedge (a \vee \neg b)
-\wedge (\neg a \vee \neg b)$
-
 
 \begin{figure}[h]
 \begin{center}
@@ -993,13 +960,18 @@ as the formula: $(a \vee b) \wedge (\neg a \vee b) \wedge (a \vee \neg b)
 \end{center}
 \end{figure}
 
+\begin{example}
+The reduction can be applied to smaller disjunctions as well. We take the following
+as the formula: $(a \vee b) \wedge (\neg a \vee b) \wedge (a \vee \neg b)
+\wedge (\neg a \vee \neg b)$
+
 Because the graph has no 4-clique, the formula does not belong to
 SAT. Of course, the graph does have k-cliques: the maximal k gives us
 the maximal number of disjunctions that can be true at the same
 time. In this way, two optimization problems are connected by a
 polynomial reduction.
 
-\end{vb}
+\end{example}
 
 % \newpage
 {\bf Selfie:}
@@ -1061,12 +1033,10 @@ As far as we discussed it, the structure of \P is rather uniform.
 The time hierarchy theorem changes that: below is a correct version,
 but not the strongest possible one:
 
-\grijs{
-\begin{stelling}
+\begin{theorem}
 $DTIME(f) \subsetneq DTIME(f^2)$ for every {\em time-constructible}
 $f$.
-\end{stelling}
-}
+\end{theorem}
 
 Loosely speaking, a function $f$ is time-constructible if $f$ can be
 computed on a TM in $O(f)$ steps and $f(n) \geq n$. Most probably, you
@@ -1099,11 +1069,9 @@ Since the definition of \NP treats elements of the language
 differently from the ones not in the language, it is worthwhile
 investigating the complement of languages in \NP:
 
-\grijs{
-\begin{definitie} co-\NP:
+\begin{definition}[co-\NP]
 co-\NP = $\{L | \overline{L} \in \NP\}$
-\end{definitie}
-}
+\end{definition}
 
 Be careful: co-\NP does not equal $\overline{\NP}$. The latter
 contains non-decidable languages like $A_{TM}$, but every language in
@@ -1218,12 +1186,10 @@ with
 The space cost of an algorithm is equal to the number of cells used on
 the R/W tape.
 
-\grijs{
-\begin{definitie}
+\begin{definition}
 DSPACE(f) is the set of languages decided by a deterministic Turing
 machine using $O(f)$ cells on the R/W-tape.
-\end{definitie}
-}
+\end{definition}
 
 \grijs{\begin{eig} \label{grootte_van_string}
 If the function $f$ is computed on a $T$-time TM, then
@@ -1235,24 +1201,19 @@ it makes steps.
 
 Now, you argue that $DTIME(f) \subseteq DSPACE(f)$.
 
-
-\grijs{
-\begin{definitie}
+\begin{definition}
 $\PSPACE = \cup_{k\geq 1} DSPACE(n^k)$
-\end{definitie}
-}
+\end{definition}
 
 It should be clear now that $\P \subseteq \PSPACE$.
 
 Just as for time, there exists a space hierarchy
 theorem. \martonst{A.o.}{E.g.} $DSPACE(f) \subsetneq DSPACE(f^2)$ for {\em decent} $f$. \marton{What does decent mean here?}
 
-\grijs{
-\begin{definitie}
+\begin{definition}
 $\NPSPACE$ is like \PSPACE, but with non-deterministic Turing
   machines.
-\end{definitie}
-}
+\end{definition}
 
 The inclusion $\PSPACE \subseteq \NPSPACE$ is easy to prove, and one
 might suspect that $\PSPACE \neq \NPSPACE$, or that it is unknown.
@@ -1307,11 +1268,9 @@ graph, while you remember the visited nodes: that is $O(n)$.
 Algorithms (and problems requiring them) that use log-space are
 interesting enough to warrant their own class:
 
-\grijs{
-\begin{definitie}
+\begin{definition}
 $\LL = DSPACE(\log)$
-\end{definitie}
-}
+\end{definition}
 
 
 Log-space algorithms are important, e.g. in the context of large
