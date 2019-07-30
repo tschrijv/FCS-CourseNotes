@@ -77,7 +77,7 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{tstextbook_ima
     \begin{tikzpicture}[remember picture,overlay]
       % Background image
       \node[anchor=north west,inner sep=0pt] at (0,0)
-           {\includegraphics[width=\paperwidth]{tstextbook_images/background_alt}};
+           {\includegraphics[width=\paperwidth]{tstextbook_images/chapter\thechapter}};
       % Chapter heading
       \draw[anchor=west, inner sep=0pt] (-0.1cm,-1.5cm) node
            [black,
