@@ -1370,8 +1370,8 @@ A property $P$ of TMs is {\em non-trivial} if
 $~~~~~~~~~~~~Pos_P \neq \emptyset$ and also $Neg_P \neq \emptyset$.
 \end{definition}
 
-\begin{definition}[Language invariant property]
-The property $P$ is {\em language invariant} if
+\begin{definition}[Semantic property]
+The property $P$ is {\em semantic} if
 
 $~~~~~~~~~L_{M_1} = L_{M_2} \Longrightarrow P(M_1) = P(M_2)$
 
@@ -1379,25 +1379,22 @@ or in words: {\em machines recognizing the same language either all
   have $P$ or none have $P$}.
 \end{definition}
 
-\martonst{language invariant}{semantic?}
-
 \paragraph{Selfie:}
 \begin{itemize}
 \item[]
-Invent some examples of language invariant, non-trivial
+Invent some examples of semantic, non-trivial
 properties of TMs.
 
-Invent some examples of properties of TMs that are not language
-invariant.
+Invent some examples of properties of TMs that are not semantic.
 
-For a given non-trivial and language invariant property $P$, how many
+For a given non-trivial and semantic property $P$, how many
 machines have $P$? How many don't?
 \end{itemize}
 
 % \clearpage
 
 \begin{theorem}[Theorem I by Rice]
-Let $P$ be a non-trivial, language invariant property of the Turing
+Let $P$ be a non-trivial, semantic property of Turing
 Machines. $Pos_P$ (and $Neg_P$) is undecidable.
 \end{theorem}
 \begin{proof}
