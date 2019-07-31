@@ -338,6 +338,7 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{tstextbook_ima
 \theoremstyle{styletheorem}
 \newtheorem{envtheorem}{Theorem}[chapter]
 \newtheorem{envlemma}{Lemma}[chapter]
+\newtheorem{envcorollary}{Corollary}[chapter]
 \theoremstyle{styleexercise}
 \newtheorem{envexercise}{Exercise}[chapter]
 \newtheorem{envproblem}{Problem}[chapter]
@@ -356,8 +357,8 @@ contents={\includegraphics[width=\paperwidth,height=\paperheight]{tstextbook_ima
                {\end{envtheorem}\end{boxtheorem}}
 
 \newenvironment{corollary}
-               {\begin{boxtheorem}\begin{envtheorem}}
-               {\end{envtheorem}\end{boxtheorem}}
+               {\begin{boxtheorem}\begin{envcorollary}}
+               {\end{envcorollary}\end{boxtheorem}}
 
 \newenvironment{lemma}
                {\begin{boxtheorem}\begin{envlemma}}

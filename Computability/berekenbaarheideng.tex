@@ -730,9 +730,9 @@ Similar to the recognizer for $H_{TM}$.
 
 As a direct consequence we have
 
- \grijs{\begin{gevolg}
+\begin{corollary}
 $\overline{A_{TM}}$ and $\overline{H_{TM}}$ are not recognizable.
-\end{gevolg}}
+\end{corollary}
 \begin{proof}
 This follows from Theorem~\ref{isdec} and the fact that $A_{TM}$ is
 recognizable and not decidable. Same for $H_{TM}$.
@@ -1724,18 +1724,18 @@ $s \in L_1?$ can be answered by deciding about $f(s) \in L_2$. The
 next theorems make that more precise: you must be able to prove them.
 
 \begin{theorem}
-If  $L_1 \leq_m L_2$ and $L_2$ is decidable, then $L_1$ is decidable.
+If $L_1 \leq_m L_2$ and $L_2$ is decidable, then $L_1$ is decidable.
 \end{theorem}
 
 \begin{theorem}
 If $L_1 \leq_m L_2$ and $L_2$ is recognizable, then $L_1$ is recognizable.
 \end{theorem}
 
- \grijs{\begin{gevolg}
-if $L_1 \leq_m L_2$ and $L_1$ is not recognizable, then $L_2$ is not
+\begin{corollary}
+If $L_1 \leq_m L_2$ and $L_1$ is not recognizable, then $L_2$ is not
 recognizable.  If $L_1 \leq_m L_2$ and $L_1$ is not decidable, then
 $L_2$ is not decidable.
-\end{gevolg}}
+\end{corollary}
 
 We have used reductions informally in previous theorems, e.g. on page
 \pageref{reduction1} when we proved that $EQ_{TM}$ is not decidable.

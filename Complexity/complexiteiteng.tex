@@ -734,8 +734,9 @@ The wording in this definition is justified by
 
 
 
-\grijs{\begin{eig} The relation $\sim_p$ is an equivalence relation.
-\end{eig}}
+{\begin{theorem}
+The relation $\sim_p$ is an equivalence relation.
+\end{theorem}
 \begin{proof} We need to show that $\sim_p$ is reflexive, symmetric
 and transitive. Reflexivity is trivial, symmetry follows directly from
 the definition of $\sim_p$, and transitivity was already proven in
@@ -1191,11 +1192,11 @@ DSPACE(f) is the set of languages decided by a deterministic Turing
 machine using $O(f)$ cells on the R/W-tape.
 \end{definition}
 
-\grijs{\begin{eig} \label{grootte_van_string}
+\begin{lemma} \label{grootte_van_string}
 If the function $f$ is computed on a $T$-time TM, then
 %
 $|f(s)| \leq T(|s|)$.
-\end{eig}}
+\end{lemma}
 This essentially says that a TM cannot write on more tape cells than
 it makes steps.
 
