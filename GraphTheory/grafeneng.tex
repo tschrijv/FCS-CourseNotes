@@ -2480,8 +2480,8 @@ Let $G(V,E)$ be a network with source $a$, sink $z$ and capacity $C$,
 and let all the capacities be a positive integer. Define any order on
 the vertices: $a = v_{0}, v_{1}, \ldots , v_{n} = z$.
 
-We use ${\cal C}$ to denote the set of considered vertices, ${\cal L}$
-for the labeled vertices. We will make the operations on ${\cal C}$
+We use $H$ to denote the set of handled vertices, ${\cal L}$
+for the labeled vertices. We will make the operations on $H$
 explicit and leave the operations on ${\cal L}$ implicit.
 
 \begin{enumerate} \item \textbf{Initialisation}:
@@ -2489,7 +2489,7 @@ Define $\forall (i,j) \in E: F(i,j) = 0$
 
 \item
 \textbf{Label the source}: Give $a$ the label $(\_,\infty)$; set
-${\cal C} = \emptyset$
+$H = \emptyset$
 
 \item
 \textbf{Arrived?}: If $z$ has a label, improve the flow and go back to
@@ -2503,10 +2503,10 @@ that is added to the flow in the good edges of $P$, and subtracted
 from the flow in the bad edges. Finally, erase all labels in the network.
 
 \item
-\textbf{Choose the next vertex}: If ${\cal L} \setminus {\cal C} =
+\textbf{Choose the next vertex}: If ${\cal L} \setminus H =
 \emptyset$, \textbf{stop}: the flow $F$ is maximal.
 
-Let $v$ be the $v_{i} \notin {\cal C}$ with a label and with minimal
+Let $v$ be the $v_{i} \notin H$ with a label and with minimal
 index $i$.
 \item
 \textbf{Label the neighbours}: Suppose the label of $v$ equals
@@ -2527,8 +2527,6 @@ Go to \textbf{Arrived?}
 \end{enumerate}
 \end{code}
 
-\marton{C(apacity) and C(onsidered) might be a bit confusing in the algorithm.}
-
 \begin{proof}
 ~\\
 \begin{itemize}
@@ -2542,8 +2540,8 @@ finite number of times, as each transition implies that the flow
 improved with $\Delta > 0$; moreover, $\Delta$ is an integer.
 So after a finite number of transitions from point 3 to point 2, the
 transitions from point 3 must go to point 4, in which a vertex is
-added to ${\cal C}$ (it is never reset to $\emptyset$!). So, after a
-while ${\cal L}={\cal C}$ and the algorithm stops.
+added to $H$ (it is never reset to $\emptyset$!). So, after a
+while ${\cal L}=H$ and the algorithm stops.
 \item
 \textbf{Maximality}: we postpone the proof until after
 Theorem~\ref{maxflowmincut}.
