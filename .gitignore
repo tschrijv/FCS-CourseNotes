@@ -1,5 +1,5 @@
-*.pdf
-!*/figures/static/*.pdf
+fcweng.pdf
+*/figures/*.pdf
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
