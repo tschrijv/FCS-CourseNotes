@@ -618,8 +618,7 @@ cannot be universal.
 
 
 \clearpage
-\section{The Halting problem}\label{halting}
-\marton{Why is the halting problem capitalized everywhere?}
+\section{The halting problem}\label{halting}
 
 Informally, the question is this: given a Turing Machine M and a
 string s, is it possible to determine whether M stops on input s?
@@ -748,7 +747,7 @@ The enumerator machine seems to be the machine as originally described
 by Alan Turing in his 1936 publication: he was interested in
 generating decimal expansions of {\em computable real numbers}. The
 link with recognizable languages is quite direct. We had to wait with
-introducing the enumerator until we dealt with the Halting problem: we
+introducing the enumerator until we dealt with the halting problem: we
 will need it.
 
 
@@ -828,7 +827,7 @@ other and for each of them calls $TM_{gen}$ and $TM_n$
 \end{itemize}
 \end{proof}
 
-Why did we need acquaintance with the Halting problem? Naively, we
+Why did we need acquaintance with the halting problem? Naively, we
 would have proposed the following procedure to make an enumerator Enu
 out of a Turing Machine TM:
 
@@ -842,7 +841,7 @@ give each $s_i$ as input to M and if M accepts, output $s_i$
 \end{itemize}
 
 That does not work, because M might loop on some $s_i$, and thanks to
-the Halting problem, we understand there is no way to know this in
+the halting problem, we understand there is no way to know this in
 advance. Suppose $s_{i+1}$ belongs to $L_M$, then our thus constructed
 Enu would not enumerate it.
 
@@ -2200,7 +2199,7 @@ It feels possible to construct a busy beaver for a small $n$: exhaustively const
 all TMs with $n$ states, start them with an empty tape
 and start counting.
 
-There is however a problem: because of the Halting problem, we know we
+There is however a problem: because of the halting problem, we know we
 do not always know in advance whether a machine eventually stops on
 the empty input. That means that when a machine runs very long, and we
 are losing patience, we better come up with a proof that the machine
