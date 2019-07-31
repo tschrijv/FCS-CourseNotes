@@ -280,7 +280,7 @@ deciding the language $\{0^n1^n|n \geq 0\}$.
 \end{figure}
 
 Each state has as many outgoing edges as elements in $\Gamma$ (some
-parallel edges are treated together) - except for the \martonst{start and end}{accepting and rejecting}
+parallel edges are treated together) - except for the accepting and rejecting
 state of course. The label represents the $\delta$ of the machine. We
 use \_ to indicate that the value at this place is irrelevant: this is
 typical for transitions to a halting state.
@@ -466,7 +466,7 @@ languages over an alphabet. It is equally common to define those
 concepts in the context of subsets of $\N$. Those two views are
 equivalent, because $\N$ can be seen as $\{0,1\}^*$: it would be a
 binary notation of natural numbers (but another one would be OK as
-well). So, a \martonst{part}{subset} of $\N$ is a language. Commonly, one reserves the
+well). So, a subset of $\N$ is a language. Commonly, one reserves the
 term {\em (recursive) enumerable} for such sets (or languages), and
 the terms {\em decidable} and {\em recognizable} for properties or
 decision problems. The distinction is not so important: let $P$ be a
@@ -718,7 +718,7 @@ otherwise it keeps running ... and that is OK.
 \end{proof}
 
 Quite often, when we construct or define a recognizer, it has an
-accept\marton{ing state}, but no point at which it rejects.
+accepting state, but no point at which it rejects.
 
 \begin{theorem}
 $A_{TM}$ is recognizable.
@@ -1120,7 +1120,7 @@ $R$. Finishing the proof:
 
 
 $H_{M.s}$ either accepts the non-regular language $\{0^n1^n\}$
-or \martonst{all of}{} the regular language $\Sigma^*$. So, $B$ accepts $\langle
+or the regular language $\Sigma^*$. So, $B$ accepts $\langle
 M,s \rangle$ iff $R$ accepts $\langle H_{M,s} \rangle$, iff $H_{M,s}$
 accepts $\Sigma^*$, iff $M$ accepts $s$. It follows that $B$ is a
 decider for $A_{TM}$, which is impossible, so $R$ does not exist, so
@@ -1397,7 +1397,7 @@ machines have $P$? How many don't?
 
 % \clearpage
 
-\begin{theorem}[Stelling I by Rice]
+\begin{theorem}[Theorem I by Rice]
 Let $P$ be a non-trivial, language invariant property of the Turing
 Machines. $Pos_P$ (and $Neg_P$) is undecidable.
 \end{theorem}
@@ -1436,8 +1436,6 @@ So, $A$ is a decider for $A_{TM}$, clearly impossible, so $B$ does not
 exist, and $Pos_P$ is not decidable.
 \end{proof}
 
-\marton{is Stelling part of the theorem name? It's just theorem in Dutch, right?}
-
 Rice also has a second theorem: every non-monotone property is not
 recognizable; it is worth having a look at it!
 
@@ -1454,10 +1452,10 @@ Use Rice for new proofs of old theorems.
 \clearpage
 \section{The {\em Post Correspondence Problem}}
 
-Emile Post was one of the founding fathers of recursion theory, and he
-made contributions to \martonst{universal}{??} of computing mechanisms. The word {\em
+Emil Post was one of the founding fathers of recursion theory, and he
+made contributions to universal computing mechanisms. The word {\em
   correspondence} is related to {\em similarity, agreement}, not to
-sending mail by post. Emile Post developed the following game:
+sending mail by post. Emil Post developed the following game:
 
 You have a finite collection of dominoes, each with two strings
 (instead of the usual numbers). Of each type, there is an unlimited
@@ -1495,8 +1493,7 @@ the latter, as soon as we have shown that the halting of a TM can be
 reduced to the existence of a solution to the PCP. We show this by
 example: the books by Sipser or Minsky contain a general construction.
 
-\subsection{Turing a Turing Machine in a PCP game}
-\martonst{Turing}{?}
+\subsection{Turning a Turing Machine into a PCP game}
 
 In this example we use X for the start state, A for the accepting
 state, Z for the reject state. The alphabet is $\{a,b\}$, and the
@@ -1679,8 +1676,8 @@ This rewriting system is also Turing complete.
 
 A reduction maps one problem L1 to another L2: it seems a bit counterintuitive,
 but L2 is in some sense {\em more difficult} than L1,
-because a method to solve \martonst{L1}{L2} is (together with the reduction) powerful
-enough to solve \martonst{L2}{L1}. We will make all this very precise. It is important
+because a method to solve L2 is (together with the reduction) powerful
+enough to solve L1. We will make all this very precise. It is important
 to get a good grasp on the reductions in this section: in complexity
 theory, we use similar reductions, so it is a recurring concept.
 
@@ -2052,7 +2049,7 @@ Often one uses the words {\em Ackermann's function} to mean a function
 with one argument only. It is defined as
 \verb|Ack(n) = Ack(n,n)|. Also this function increases faster than any
 primitive recursive function. Its inverse is important in complexity
-analysis of algorithms, \martonst{a.o.}{e.g.} for the Union-Find algorithm.
+analysis of algorithms, e.g., for the Union-Find algorithm.
 
 
 

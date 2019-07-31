@@ -153,7 +153,7 @@ input) than $B$ if
 
 So, if we have an algorithm $A$ with linear complexity
 (i.e. $time_A(n)$ is $O(n)$) and an algorithm $B$ with quadratics
-complexity \martonst{function}{} ($time_B(n)$ is $O(n^2)$), we consider $A$ the
+complexity ($time_B(n)$ is $O(n^2)$), we consider $A$ the
 better algorithm.  One should however not conclude that algorithm $A$
 is always to be preferred over $B$: the constant factor $c$ in the
 definition of big O could be very large for $A$ and small for $B$,
@@ -186,10 +186,8 @@ for some $k\in \N$.
 
 \begin{definition}[An exponential algorithm]
 An algorithm is {\bf exponential} if its time complexity is
-$\theta(c^n)$ for some real number $c>1$.
+$O(c^n)$ for some real number $c>1$.
 \end{definition}
-
-\marton{Is the O-theta difference between these two intentional?}
 
 A quick comparison shows that exponential algorithms are eventually
 less efficient than polynomial algorithms. Suppose that a particular
@@ -304,7 +302,7 @@ another machine ? The answer is ...{\em nothing} on condition we keep
 it reasonable: more than one tape, one-side tape ... it does not
 matter. We can even use random-access machines, n-dimensional tapes
 ... Each of those variant TMs can be simulated by the type of TMs we
-committed to, with only a polynomial overhead. It \martonst{because}{would become} tricky when
+committed to, with only a polynomial overhead. It would become tricky when
 one would allow one memory cell to contain an arbitrarily large
 number, or count some arithmetic operations on such numbers as unit
 cost. For instance, it would be weird (but scientifically valid) to
@@ -359,16 +357,14 @@ whether a number $n$ is prime. It has a loop of the form
     \While {$i \leq n$}
          \If{i divides n}
          \State{REJECT;}
-         \State{i += 2;}
+         \State{i += 1;}
          \EndIf
     \EndWhile
     \State{ACCEPT}
 \end{algorithmic}
 
-\marton{Why is 2 added to i in the loop (if it was initialized to 2)?}
-
 In both encodings, the loop is executed $n$ times, but in terms of the
-size of the encoding, that is exponentially \martonst{more}{less} with the binary
+size of the encoding, that is exponentially less with the binary
 representation than with the unary one. In one case we could think
 that the algorithm is polynomial, in the other case that it is
 exponential.
@@ -526,7 +522,7 @@ Consider all three examples and comment on that question.
 
 
 Suppose there is a function $f$ so that for a verifier $V$ and
-certificate $c$ for $s$, the length of \martonst{$s$}{$c$} has an upper bound of
+certificate $c$ for $s$, the length of $c$ has an upper bound of
 $f(|s|)$, or:
 %
 $|c| \leq f(|s|)$. Now we can generate a certificate for
@@ -548,10 +544,10 @@ say something about its complexity?
 
 \begin{itemize}
 \item
-in the worst case, the for-loop is executed $O(2^{f(|s|)})$ \marton{times} (we assume
+in the worst case, the for-loop is executed $O(2^{f(|s|)})$ times (we assume
 the alphabet has two elements)
 \item
-if \martonst{$M$}{$V$} is a $g$-time machine, the cost of the body of the for-loop is
+if $V$ is a $g$-time machine, the cost of the body of the for-loop is
 $O(g(|s|+|c|))$, or $O(g(|s|+f(|s|)))$
 \item
 this results in an overall complexity $O(g(n+f(n))\times 2^{f(n)})$
@@ -672,7 +668,7 @@ We denote this by $L_1 \leq_p  L_2$.
 \end{definition}
 
 $\leq_p$ differs from $\leq_m$ only in the fact that the mapping must
-be computable in \martonst{poly-time}{polynomial time}. This makes $\leq_p$ finer than $\leq_m$:
+be computable in polynomial time. This makes $\leq_p$ finer than $\leq_m$:
 if $A \leq_p B$ then $A \leq_m B$. Check whether some of the examples
 of $\leq_m$ earlier in this course notes were actually $\leq_p$?
 
@@ -713,7 +709,7 @@ If $L_1  \leq_p  L_2$ and $L_2\in \P$ then $L_1 \in \P$.
 \end{theorem}
 \begin{proof} Let $L_1\subseteq T_1^*$, $L_2\subseteq T_2^*$, and $L_1
 \leq_p L_2$ via the function $f:T_1^*\rightarrow T_2^*$ that is
-polynomial\marton{ly} computable by TM $M_f$. Since $L_2\in \P$, there exists a
+polynomially computable by TM $M_f$. Since $L_2\in \P$, there exists a
 TM $M_2$ that decides $L_2$ in polynomial time. Construct TM $M$: it
 executes $M_f$ and $M_2$ in sequence. Just as in the previous theorem,
 we can prove that $M$ has polynomial time complexity. Moreover, $M$
@@ -764,7 +760,7 @@ We denote the class of $\NP$--complete languages by $\NPC$.
 
 
 Informally, an $\NP$--complete language is so difficult that any other
-language can be translated to it in polynomial \marton{time}. In terms of problems:
+language can be translated to it in polynomial time. In terms of problems:
 a problem is $\NP$--complete if it has a solution (in the form of an
 algorithm) so that every other $\NP$ problem has a solution that can
 be deduced from the $\NP$--complete solution by a polynomial reduction
@@ -826,10 +822,10 @@ over $U$ as in the following example:
 %
 $C= (u_1 \vee u_2) \wedge (u_2 \vee \neg u_4 \vee u_7) \wedge  (\neg u_2 \vee u_3)$.
 
-The SAT problem is: given a formula in \martonst{DNF}{CNF}, does there exist a truth
+The SAT problem is: given a formula in CNF, does there exist a truth
 assignment to the variables so that the formula is true?
 
-More precisely, SAT is the language of \martonst{DNF}{CNF} formulas that have a
+More precisely, SAT is the language of CNF formulas that have a
 satisfying assignment.
 
 Stephen A. Cook\footnote{Turing award 1982} proved in 1971
@@ -855,18 +851,18 @@ A language $L$ that only fulfills the second condition of Definition
 optimization problems whose decision version is $\NP$--complete. There
 exist $\NP$--hard problems that are not $\NP$--complete (i.e. they
 are not in $\NP$): $SAT$ even has a polynomial reduction to $H_{TM}$,
-and so has every \marton{other problem in} $\NP$. Work this one out!
+and so has every other problem in $\NP$. Work this one out!
 
 
 \subsection{Examples of polynomial reductions}
 
 \subsubsection{SAT to 3-SAT}
 
-3-SAT is SAT with the restriction that each disjunction in the \martonst{DNF}{CNF} has
+3-SAT is SAT with the restriction that each disjunction in the CNF has
 exactly three literals. One formula in 3-SAT is
 %
 $(a \vee b \vee \neg c) \wedge (\neg a \vee b \vee c)$. Every formula
-in \martonst{DNF}{CNF} can be transformed to that format. Consider each disjunction in
+in CNF can be transformed to that format. Consider each disjunction in
 the formula. There are three cases:
 \begin{itemize}
 \item
@@ -1002,8 +998,7 @@ general questions:
 \end{verse}
 
 
-\subsection{Why are some problems to difficult?}
-\martonst{to}{so/too?}
+\subsection{Why are some problems difficult?}
 
 For SAT, one could argue as follows: there are $2^n$ possible
 assignments ($n$ is the number of boolean variables), and our
@@ -1209,7 +1204,7 @@ $\PSPACE = \cup_{k\geq 1} DSPACE(n^k)$
 It should be clear now that $\P \subseteq \PSPACE$.
 
 Just as for time, there exists a space hierarchy
-theorem. \martonst{A.o.}{E.g.} $DSPACE(f) \subsetneq DSPACE(f^2)$ for {\em decent} $f$. \marton{What does decent mean here?}
+theorem. E.g. $DSPACE(f) \subsetneq DSPACE(f^2)$ for {\em decent} $f$.
 
 \begin{definition}
 $\NPSPACE$ is like \PSPACE, but with non-deterministic Turing
@@ -1255,7 +1250,7 @@ number of vertices.
 \end{algorithmic}
 
 {\sc existspath}$(a,z,n)$ returns TRUE if there exists a path from a
-to z with length at \martonst{more}{most} l. Its time complexity is horrible. If you
+to z with length at most l. Its time complexity is horrible. If you
 imagine it is executed on a classical machine (your laptop), you see
 that no more than $\log(n)$ stack frames are needed, and that each
 stack frame has size at most $\log(n)$ bits. The algorithm can be
@@ -1345,7 +1340,7 @@ because of the cold war - his result was not well-known in the West.
 The finishing touch was the understanding that one problem in
 $\NP$-complete $\cap \P$ is enough to collapse $\P$ and $\NP$, or to
 put it in words: verifying [a solution] would be as difficult as
-computing [it] (\martonst{module}{modulo?} the exponent in the polynomial of
+computing [it] (modulo the exponent in the polynomial of
 course). However, the strict inclusion of $\P$ in $\NP$ is an open
 problem. It feels like betting on the opposite is a bad choice,
 because there are so many NP-complete problems for which researchers
