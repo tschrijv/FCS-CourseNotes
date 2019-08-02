@@ -59,7 +59,7 @@ In this chapter the following topics are treated:
 \\
 - polynomial reduction and $\N$P-completeness
 \\
-- examples of $\NP$-complete problems: SAT \martonst{, HAMPATH}{} ...
+- examples of $\NP$-complete problems: SAT, HAMPATH ...
 \\
 - the time hierarchy
 \\
@@ -102,13 +102,11 @@ Let $f,g$ be functions with signature $\N$ to $\R^+$. We say
 $f(n)$ is $O(g(n))$ (or $f$ is $O(g)$, and we write also
   $f(n)=O(g(n))$) if
 \[\exists c\in \R_0^+,\; \exists N\in \N,\;
-\forall n\in \N: \; n\geq N \Rightarrow f(n)\leq c.g(n)\]
+\forall n\in \N: \; n\geq N \Rightarrow f(n)\leq c \cdot g(n)\]
 
 We also say: f is of order g, and $f$ is asymptotically dominated by
 $g$.
 \end{definition}
-
-\martonst{$c.g(n)$}{$c \cdot g(n)$}
 
 Note: it is possible that for a particular $f$ and $g$, both $f$ is
 $O(g)$ and $g$ is $O(f)$ are true, but that does not mean they are
@@ -264,11 +262,11 @@ get some understanding of the difficulty of a problem.
 
 \begin{definition}[DTIME(T)]
 DTIME(T) is the set of languages that can be decided by a
-  (deterministic) $c.T$-time Turing machine, with $c > 0$.
+  (deterministic) $c \cdot T$-time Turing machine, with $c > 0$.
 \end{definition}
 
 
-$NDTIME(T)$ is similar but for a decision by a $c.T$-time NDTM.
+$NDTIME(T)$ is similar but for a decision by a $c \cdot T$-time NDTM.
 
 {\bf A selfie:}
 \begin{verse}
@@ -307,11 +305,8 @@ one would allow one memory cell to contain an arbitrarily large
 number, or count some arithmetic operations on such numbers as unit
 cost. For instance, it would be weird (but scientifically valid) to
 define the time cost of the $n^{th}$ step during a T execution as
-$2^{-n}$\footnote{This machine is known as a Zeno-machine.}: each
-algorithm takes at most one time unit ... and we can fold the
+$2^{-n}$: each algorithm takes at most one time unit\footnote{This machine is known as a Zeno-machine.} ... and we can fold the
 complexity theory books.
-
-\marton{The footnote is again unfortunately placed, as part of the exponent}
 
 
 \paragraph{Outside of \P ...}
