@@ -96,7 +96,7 @@ you interchange $yes$ and $no$?
 \end{itemize}
 
 \newpage
-\section{What is a language?}
+\section{What Is a Language?}
 
 The introduction gives the motivation for studying decision
 problems. A decision problem corresponds to a subset of all strings
@@ -454,7 +454,7 @@ Can you generate all strings in $L_E$ once you have $E$?
 \end{itemize}
 
 
-\section{The subalgebra of regular languages}
+\section{The Subalgebra of Regular Languages}
 
 We denote the set of languages over alphabet $\Sigma$ by
 $L_\Sigma$. It is an algebra for certain operations, and
@@ -479,7 +479,7 @@ L_{E_1} \cup L_{E_2}$. Did you succeed for complement?
 
 
 
-\section{Finite automata}
+\section{Finite Automata}
 
 Finite state machines (FSM) are used to describe languages: testing
 and generating strings is part of that. We start with a
@@ -649,7 +649,7 @@ and later we do the reverse. Together, this will prove that the two
 formalisms are (in some sense) equivalent.
 
 
-\section{The transition table}
+\section{The Transition Table}
 
 The $\delta$ of an NFA is a function with a finite domain. It can be
 represented in the form of a table named the {\em transition table}:
@@ -692,7 +692,7 @@ don't panic: we will get rid of it.
 
 
 
-\section{An algebra of NFAs}
+\section{An Algebra of NFAs}
 
 We fix the alphabet: we might relax this later. The set of NFAs
 over this alphabet is well defined: use the definition on page
@@ -777,7 +777,7 @@ What does this prove about the algebraic isomorphism between ... and ... ?
 
 
 
-\section{From regular expression to NFA}\label{re2fsasec}
+\section{From Regular Expression to NFA}\label{re2fsasec}
 
 We now have all the necessary ingredients to construct an NFA from a regular
 expression RE such that $L_{RE} = L_{NFA}$. Since regular
@@ -814,7 +814,7 @@ Prove this yourself - use structural induction.
 \end{proof}
 
 
-\section{From NFA to regular expression}
+\section{From NFA to Regular Expression}
 
 The opposite way is a bit more complicated: we first introduce a new
 kind of finite automata, the {\em Generalized Non-deterministic Finite
@@ -997,7 +997,7 @@ machine in Section~\ref{minfsa}.
 
 
 
-\section{Deterministic finite state machines}\label{detfsa}
+\section{Deterministic Finite State Machines}\label{detfsa}
 
 The definition of a (non-deterministic) finite state machine NFA
 allows for more than one edge leaving a state with the same symbol,
@@ -1160,7 +1160,7 @@ Prove that $\delta^*(q,wa) = \delta(\delta^*(q,w),a)$ for $a \in
 \end{itemize}
 
 
-\section{The minimal DFA}\label{minfsa}
+\section{The Minimal DFA}\label{minfsa}
 
 For any regular language L, there exist many DFAs - how many? It is
 important to construct small machines: in an application in which a
@@ -1446,7 +1446,7 @@ number of states ...
 %% aantal toestanden exponentieel kan doen toenemen.
 
 
-\section{The pumping lemma for regular languages}
+\section{The Pumping Lemma for Regular Languages}
 
 In this section, we get acquainted with a method to prove that a given
 language is not regular. Before doing that, here are two arguments why
@@ -1582,7 +1582,7 @@ related to the minimal DFA for that language?
 \end{itemize}
 
 
-\section{Intersection, difference and complement of two DFAs}
+\section{Intersection, Difference and Complement of Two DFAs}
 
 We have considered the union of regular languages before. Now it is
 time to study the other usual set operations: intersection,
@@ -1630,7 +1630,7 @@ Why (not)?
 
 
 
-\section{Regular expressions and lexical analysis}
+\section{Regular Expressions and Lexical Analysis}
 
 It is often easy to use a regular expression to specify which {\em
   input} is allowed within a certain context. For instance
@@ -1721,7 +1721,7 @@ languages, because they are context free as well: see
 Section~\ref{contextvrijelanguages}.
 
 \newpage
-\section{Variants of finite state automata}
+\section{Variants of Finite State Automata}
 
 \subsection{The transducer}
 
@@ -2379,7 +2379,7 @@ Prolog program with zero or two goals in each clause body?
 
 
 
-\section{The pushdown automaton}
+\section{The Pushdown Automaton}
 
 An FSA has no memory besides its state, and since there is only a
 finite number of them, an FSA can not count in an unlimited way. As a
@@ -2739,7 +2739,7 @@ strings, regular and context free languages are the same!
 \project{Parikh of Chomsky-Sch\"{u}tzenberger uitwerken}
 
 
-\section{A pumping lemma for Context Free Languages}\label{pompcfl}
+\section{A Pumping Lemma for Context Free Languages}\label{pompcfl}
 
 \begin{theorem}
 For every context free language L, there exists a number p (the
@@ -2831,7 +2831,7 @@ As a consequence, $s$ can not be pumped and so L is not context free.
 
 
 
-\section{An algebra of CFLs?}
+\section{An Algebra of CFLs?}
 
 The union of two CFLs determined by CFGs $CFG_1$ and $CFG_2$ can be
 described easily by the following construction: first make sure the two CFGs don't share any nonterminal names, rename them if necessary. Let the start symbols of the two
@@ -2875,7 +2875,7 @@ language is generated by the following context free grammar:
 \end{itemize}
 
 
-\section{Ambiguity and determinism}
+\section{Ambiguity and Determinism}
 
 A bit more detail about the link between inherent ambiguity of a
 context free language and its determinism. We denote by DCFL the set of context free languages that have a deterministic PDA (DPDA).
@@ -2957,7 +2957,7 @@ CFLs and their PDAs: one step higher in the Chomsky hierarchy,
 non-determinism is suddenly very important.
 
 
-\section{Practical parsing techniques}
+\section{Practical Parsing Techniques}
 
 We could be confronted with the following problem: given the
 specification of a language, construct a parser for it. Perhaps this

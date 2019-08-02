@@ -263,7 +263,7 @@ What is our plan with Turing Machines?
 
 
 
-\section{A graphical representation of Turing Machines}
+\section{A Graphical Representation of Turing Machines}
 
 Just as FSAs and PDAs, TMs can be visualized by a graph: the vertices
 are the states. Figure~\ref{turing2} illustrates it for the TM
@@ -339,7 +339,7 @@ The TM in Figure~\ref{turing2} proves that
 $\{0^n1^n|n \geq 0\}$ is a decidable language.
 
 
-\section{Representation and simulation of TM computations}
+\section{Representation and Simulation of TM Computations}
 
 It is often handy to be able to compactly represent a {\em
   configuration} of a TM: it is like a computer memory dump, together
@@ -457,7 +457,7 @@ the Prolog program given earlier can be meta-interpreted according to
 iterative deepening (of breadth-first), and as soon as it arrives in an end state, it stops with the same result. So, if we can simulate a NDTM in Prolog, we can with a DTM.
 
 
-\section{Languages, ${\cal P}(\N)$, properties and terminology}
+\section{Languages, ${\cal P}(\N)$, Properties and Terminology}
 
 We have defined the notions recognizable/decidable in terms of
 languages over an alphabet. It is equally common to define those
@@ -613,7 +613,7 @@ UTM. In the meantime, it has been proven that a particular (2,3)
 machine is universal - but it is a bit controversial.  By the way, (2,2) TMs
 cannot be universal.
 
-\section{The halting problem}\label{halting}
+\section{The Halting Problem}\label{halting}
 
 Informally, the question is this: given a Turing Machine M and a
 string s, is it possible to determine whether M stops on input s?
@@ -736,7 +736,7 @@ recognizable and not decidable. Same for $H_{TM}$.
 
 
 
-\section{The enumerator machine}\label{enumerator}
+\section{The Enumerator Machine}\label{enumerator}
 
 The enumerator machine seems to be the machine as originally described
 by Alan Turing in his 1936 publication: he was interested in
@@ -842,7 +842,7 @@ Enu would not enumerate it.
 
 
 
-\section{Decidable languages}
+\section{Decidable Languages}
 
 \subsection{Related to regular languages}
 
@@ -1036,7 +1036,7 @@ Prove that Theorem~\ref{escfg} follows directly from Theorem~\ref{acfg}.
 
 
 
-\section{Undecidable languages}
+\section{Undecidable Languages}
 
 In Section~\ref{halting} we proved that $A_{TM}$ and $H_{TM}$ are not
 decidable. Here are some more of the same kind.
@@ -1274,7 +1274,7 @@ No proof this year.
 \paragraph{Selfie:} Prove that $ALL_{RegExp}$ is decidable.
 
 
-\section{Some trivia on languages}
+\section{Some Trivia on Languages}
 
 Let $Dec$ denote the set of decidable languages, and $Rec$ the
 recognizable languages. First some inclusions, all strict:
@@ -1341,7 +1341,7 @@ countable.
 \paragraph{Selfie:} Construct languages that are countable, but not enumerable.
 
 
-\section{How to kill $N$ birds with one stone: Rice's Theorem}
+\section{How to Kill $N$ Birds With One Stone: Rice's Theorem}
 
 We have seen some concrete examples of undecidable languages, often by
 reduction to $A_{TM}$: every time, we found a new little trick so that
@@ -1661,7 +1661,7 @@ This rewriting system is also Turing complete.
 2-tag systems have been used to simulate small UTMs.
 
 
-\section{Many-one reduction}\label{mappingreduction}
+\section{Many-one Reduction}\label{mappingreduction}
 
 A reduction maps one problem L1 to another L2: it seems a bit counterintuitive,
 but L2 is in some sense {\em more difficult} than L1,
@@ -1781,7 +1781,7 @@ straightforward.
 
 
 
-\section{Oracle machines and a hierarchy of decidability}
+\section{Oracle Machines and a Hierarchy of Decidability}
 
 Suppose we had another way to decide $A_{TM}$ - not a TM of course -
 would there be a way to use that power to decide everything? Let's
@@ -1881,7 +1881,7 @@ a statement is marked by a (*): how can we let M run on all strings?
 There are infinitely many of them ...
 
 
-\section{The computable functions and the  recursive functions}
+\section{The Computable Functions and the Recursive Functions}
 
 We gave a definition of Turing computable function in the previous
 section. It was rather abstract and {\em existential}. We can also
@@ -2111,7 +2111,7 @@ Is the range of a (partial) recursive function recognizable?
 \end{itemize}
 
 
-\section{The busy beaver and fast increasing functions}
+\section{The Busy Beaver and Fast Increasing Functions}
 
 The Ackermann function showed us that the fact that a function
 increases fast, can be an indication that extra machinery is needed to
