@@ -127,7 +127,7 @@ For a given TM, $\Sigma^*$ consists of three disjunct subsets:
 \end{enumerate}
 These subsets are used in the following definitions.
 
-% \clearpage
+
 
 \begin{definition}[To recognize]
 A Turing machine TM recognizes $L_{TM}$.
@@ -262,7 +262,7 @@ What is our plan with Turing Machines?
 
 
 
-% \clearpage
+
 \section{A graphical representation of Turing Machines}
 
 Just as FSAs and PDAs, TMs can be visualized by a graph: the vertices
@@ -285,7 +285,7 @@ state of course. The label represents the $\delta$ of the machine. We
 use \_ to indicate that the value at this place is irrelevant: this is
 typical for transitions to a halting state.
 
-% \clearpage
+
 
 One can describe in words what the machine does with an input
 consisting of only zeroes and ones.
@@ -338,7 +338,7 @@ The TM in Figure~\ref{turing2} proves that
 %
 $\{0^n1^n|n \geq 0\}$ is a decidable language.
 
-% \clearpage
+
 \section{Representation and simulation of TM computations}
 
 It is often handy to be able to compactly represent a {\em
@@ -431,7 +431,7 @@ Make sure you know what this means, i.e. formalize it to some extent.
 
 
 
-% \clearpage
+
 \section{Non-deterministic Turing Machines}
 
 We mention non-deterministic TMs for no other reason than that every
@@ -571,7 +571,7 @@ happy. Was that reasonable?
 
 
 
-% \clearpage
+
 \section{Universal Turing Machines}
 
 A TM can be described completely by its transition table (plus some
@@ -605,7 +605,7 @@ Jr. said: {\em One person's data is another person's program.}
 
 
 Is a UTM {\em big}? Claude Shannon showed one can trade states for
-symbols in a TM - see the exercise on page \pageref{twosymbols} \marton{unclear which exercise}. So it
+symbols in a TM - see page \pageref{twosymbols}. So it
 has become a bit of a habit to express the size of a TM as
 $(|Q|,|\Gamma|)$, or even just the product $|Q| \times |\Gamma|$. In
 1956 Marvin Minsky\footnote{Turing award 1969} constructed a (7,4)
@@ -613,9 +613,6 @@ UTM. In the meantime, it has been proven that a particular (2,3)
 machine is universal - but it is a bit controversial.  By the way, (2,2) TMs
 cannot be universal.
 
-
-
-\clearpage
 \section{The halting problem}\label{halting}
 
 Informally, the question is this: given a Turing Machine M and a
@@ -738,7 +735,7 @@ recognizable and not decidable. Same for $H_{TM}$.
 
 
 
-% \clearpage
+
 \section{The enumerator machine}\label{enumerator}
 
 The enumerator machine seems to be the machine as originally described
@@ -844,7 +841,7 @@ advance. Suppose $s_{i+1}$ belongs to $L_M$, then our thus constructed
 Enu would not enumerate it.
 
 
-% \clearpage
+
 \section{Decidable languages}
 
 \subsection{Related to regular languages}
@@ -894,7 +891,7 @@ We can also prove that any regular language is decidable. Try to
 understand the subtle difference with the statement in
 Theorem~\ref{reglandec}. (there is a hint in the proof)
 
-% \clearpage
+
 The following three questions about a language are quite popular:
 \begin{itemize}
 \item does the language contain the empty string?
@@ -939,7 +936,7 @@ theorem. (did you see the reduction?)
 
 \paragraph{Selfie:} Find other proofs for the theorems above.
 
-% \clearpage
+
 \subsection{Related to context free languages}
 
 The questions are similar to the ones in the previous section, and can
@@ -1038,7 +1035,7 @@ Prove that Theorem~\ref{escfg} follows directly from Theorem~\ref{acfg}.
 % niet-recognizable is
 
 
-% \clearpage
+
 \section{Undecidable languages}
 
 In Section~\ref{halting} we proved that $A_{TM}$ and $H_{TM}$ are not
@@ -1139,7 +1136,7 @@ $EQ_{TM}$ is decidable.
 The above proof technique is studied in more detail in
 Section~\ref{mappingreduction}.
 
-% \clearpage
+
 
 The following is about context sensitive languages. We first define
 the machinery needed to decide them:
@@ -1276,7 +1273,7 @@ No proof this year.
 
 \paragraph{Selfie:} Prove that $ALL_{RegExp}$ is decidable.
 
-% \clearpage
+
 \section{Some trivia on languages}
 
 Let $Dec$ denote the set of decidable languages, and $Rec$ the
@@ -1314,7 +1311,7 @@ deterministic context free (construct its DCFG) but $\widehat{L}$ is
 not.
 
 
-% \clearpage
+
 \section{Countable}
 
 A set $V$ is countable if there exists a bijection between $V$ and (a
@@ -1343,7 +1340,7 @@ countable.
 
 \paragraph{Selfie:} Construct languages that are countable, but not enumerable.
 
-% \clearpage
+
 \section{How to kill $N$ birds with one stone: Rice's Theorem}
 
 We have seen some concrete examples of undecidable languages, often by
@@ -1389,7 +1386,7 @@ For a given non-trivial and semantic property $P$, how many
 machines have $P$? How many don't?
 \end{itemize}
 
-% \clearpage
+
 
 \begin{theorem}[Theorem I by Rice]
 Let $P$ be a non-trivial, semantic property of Turing
@@ -1443,7 +1440,6 @@ Use Rice for new proofs of old theorems.
 \end{itemize}
 
 
-\clearpage
 \section{The {\em Post Correspondence Problem}}
 
 Emil Post was one of the founding fathers of recursion theory, and he
@@ -1628,7 +1624,7 @@ Formulate more precisely the link between PCP and $H_{TM}$.
 
 
 
-% \clearpage
+
 \paragraph{An extra: the Post tag machine}
 
 E. Post is also known for his {\em tag systems} or {\em Post tag
@@ -1665,7 +1661,6 @@ This rewriting system is also Turing complete.
 2-tag systems have been used to simulate small UTMs.
 
 
-\clearpage
 \section{Many-one reduction}\label{mappingreduction}
 
 A reduction maps one problem L1 to another L2: it seems a bit counterintuitive,
@@ -1698,7 +1693,7 @@ We denote this by $L_1 \leq_m L_2$, and we can also say {\em $L_1$
 \end{definition}
 
 Figure~\ref{mapred} shows the condition on $f$.
-% \clearpage
+
 \begin{figure}[h]
 \begin{center}
 \includegraphics[%
@@ -1784,7 +1779,7 @@ straightforward.
 
 
 
-% \clearpage
+
 
 \section{Oracle machines and a hierarchy of decidability}
 
@@ -1886,9 +1881,6 @@ a statement is marked by a (*): how can we let M run on all strings?
 There are infinitely many of them ...
 
 
-
-
-\clearpage
 \section{The computable functions and the  recursive functions}
 
 We gave a definition of Turing computable function in the previous
@@ -2117,8 +2109,6 @@ Is the domain of a (partial) recursive function recognizable?
 \item[]
 Is the range of a (partial) recursive function recognizable?
 \end{itemize}
-
-\clearpage
 
 
 \section{The busy beaver and fast increasing functions}

@@ -477,7 +477,7 @@ in a constructive way, i.e. (for union) construct an E so that $L_E =
 L_{E_1} \cup L_{E_2}$. Did you succeed for complement?
 
 
-\clearpage
+
 
 \section{Finite automata}
 
@@ -648,7 +648,7 @@ NFAs: we first construct an NFA from a RE so that $L_{RE} = L_{NFA}$,
 and later we do the reverse. Together, this will prove that the two
 formalisms are (in some sense) equivalent.
 
-% \clearpage
+
 \section{The transition table}
 
 The $\delta$ of an NFA is a function with a finite domain. It can be
@@ -690,7 +690,7 @@ implements the NFA. The non-determinism is perhaps a bit scary, but
 don't panic: we will get rid of it.
 
 
-% \clearpage
+
 
 \section{An algebra of NFAs}
 
@@ -750,7 +750,7 @@ graphical representation of concatenation in Figure~\ref{concatfsa}:
 \caption{Concatenation of two NFAs\label{concatfsa}}
 \end{figure}
 
-\clearpage
+
 \paragraph{The star of an NFA:} see Figure~\ref{starfsa}.
 
 \begin{figure}[h]
@@ -775,7 +775,7 @@ What does this prove about the algebraic isomorphism between ... and ... ?
 
 \end{itemize}
 
-\clearpage
+
 
 \section{From regular expression to NFA}\label{re2fsasec}
 
@@ -813,7 +813,7 @@ The construction above preserves the language, i.e.
 Prove this yourself - use structural induction.
 \end{proof}
 
-\clearpage
+
 \section{From NFA to regular expression}
 
 The opposite way is a bit more complicated: we first introduce a new
@@ -840,7 +840,7 @@ directions) and an edge from each state to itself
 \end{itemize}
 \end{definition}
 
-% \clearpage
+
 Figure~\ref{gfsa1} shows a GNFA.
 
 \begin{figure}[h]
@@ -873,7 +873,7 @@ strings not accepted by it.
 \end{itemize}
 
 
-% \clearpage
+
 Now is the time to describe an algorithm for constructing a RE from an NFA.
 
 \begin{itemize}
@@ -920,7 +920,7 @@ The GNFA has exactly two states: the start and the accepting
 state. There is only one edge and it has RE as a label.
 \end{itemize}
 
-% \clearpage
+
 \paragraph{Example:} Figures~\ref{gfsa2}~and~\ref{gfsa3} illustrate
 this on the GNFA of Figure~\ref{gfsa1}.
 
@@ -1118,7 +1118,7 @@ Some states are not reachable from the start state $\{S,A\}$. It
 suffices to represent only the reachable states, as in the graphical
 representation of the DFA in Figure~\ref{fsa3}.
 
-\clearpage
+
 \begin{figure}[h]
 \begin{center}\includegraphics[%
   width=0.45\linewidth,
@@ -1159,7 +1159,7 @@ Prove that $\delta^*(q,wa) = \delta(\delta^*(q,w),a)$ for $a \in
 \Sigma$ and $w \in \Sigma_{\epsilon}^*$
 \end{itemize}
 
-\clearpage
+
 \section{The minimal DFA}\label{minfsa}
 
 For any regular language L, there exist many DFAs - how many? It is
@@ -1445,7 +1445,7 @@ number of states ...
 %% door te wijzen op het feit dat de conversie van NFAs naar DFAs het
 %% aantal toestanden exponentieel kan doen toenemen.
 
-% \clearpage
+
 \section{The pumping lemma for regular languages}
 
 In this section, we get acquainted with a method to prove that a given
@@ -1629,7 +1629,7 @@ Why (not)?
 
 
 
-\clearpage
+
 \section{Regular expressions and lexical analysis}
 
 It is often easy to use a regular expression to specify which {\em
@@ -1666,7 +1666,7 @@ or the general form of a bank account number:
 ~~~~~~~~~~~~$BANKNR \leftarrow Digit^3(-~|~\epsilon)Digit^7(-~|~\epsilon)Digit^2$
 
 As for the Java lexicon:
-% \clearpage
+
 
 \begin{itemize}
 \item[]
@@ -1837,7 +1837,7 @@ is relevant. What do you think?
 
 \project{hier kan zeker een mooi ding mee gedaan worden}
 
-\clearpage
+
 \subsection{B\"{u}chi automata}
 
 B\"{u}chi\footnote{Julius B\"{u}chi} automata are like NFAs, only you
@@ -1862,7 +1862,7 @@ build a B\"{u}chi automaton for the language $(a|b)^*b^\omega$. \footnote{$\omeg
 \project{buchi automaten bestuderen ?}
 
 
-\clearpage
+
 \section{References}
 
 \setlength{\intextsep}{0pt}
@@ -1918,7 +1918,7 @@ appears later in this text) and other interesting issues (e.g. the
 {\em Angels and Devils game}) that directly affect our understanding
 of algorithmics.
 
-\clearpage
+
 
 \paragraph{Selfie:}
 Below, we use the same alphabet for all languages, and it contains at
@@ -2228,7 +2228,7 @@ Arit2 can be written as:
 
 
 
-\clearpage
+
 \subsection{Special forms of CFGs}
 
 Often, it is convenient to have grammars of a restricted form, but
@@ -2378,7 +2378,7 @@ Prolog program with zero or two goals in each clause body?
 \end{itemize}
 
 
-\clearpage
+
 \section{The pushdown automaton}
 
 An FSA has no memory besides its state, and since there is only a
@@ -2528,7 +2528,7 @@ hand, the details of the definition change nothing to the class of
 languages determined by PDAs.
 
 
-% \clearpage
+
 \section{Equivalence of CFG and PDA}
 
 We want to prove
@@ -2548,7 +2548,7 @@ during a transition does not change the power of PDAs: if you haven't
 done that yet, this is a good moment to prove it! We use this feature
 because it makes the description of the example much shorter.
 
-% \clearpage
+
 
 \begin{figure}[h]
 \begin{center}\includegraphics[%
@@ -2603,7 +2603,7 @@ We use the PDA to parse the string $a+a*a$: Table~\ref{parsing1} shows the
 stack and the string during parsing. Note that when we push the
 sequence of symbols XYZ, we actually want them in reverse order, so the representation of the stack is a string to which we add at the front (without reversing the XYZ) and from which we pop from the left.
 
-% \clearpage
+
 \begin{table}[ht]
 \center
 \begin{tabular}{|r|r|r|}
@@ -2668,7 +2668,7 @@ The reverse direction - from a PDA to a CFG - is disappointingly more
 complicated, partly because not every PDA has 3 states. Also, our
 DFA-to-RE method using the GNFA seems not to work here (why not?).
 
-\clearpage
+
 We will assume that the PDA has a particular form
 \begin{itemize}
 \item there is only one end state
@@ -2738,7 +2738,7 @@ strings, regular and context free languages are the same!
 
 \project{Parikh of Chomsky-Sch\"{u}tzenberger uitwerken}
 
-\clearpage
+
 \section{A pumping lemma for Context Free Languages}\label{pompcfl}
 
 \begin{theorem}
@@ -2830,7 +2830,7 @@ $y^2$ contains those symbols in the wrong order, so $uv^2xy^2z$ does not belong 
 As a consequence, $s$ can not be pumped and so L is not context free.
 
 
-\clearpage
+
 \section{An algebra of CFLs?}
 
 The union of two CFLs determined by CFGs $CFG_1$ and $CFG_2$ can be
@@ -2874,7 +2874,7 @@ language is generated by the following context free grammar:
 \item C \rpijl a $|$ b
 \end{itemize}
 
-\clearpage
+
 \section{Ambiguity and determinism}
 
 A bit more detail about the link between inherent ambiguity of a
@@ -2956,7 +2956,7 @@ languages and their FSAs, determinism makes a huge difference for
 CFLs and their PDAs: one step higher in the Chomsky hierarchy,
 non-determinism is suddenly very important.
 
-\clearpage
+
 \section{Practical parsing techniques}
 
 We could be confronted with the following problem: given the
@@ -3061,7 +3061,7 @@ correction/recovery/reporting, generation of syntax directed editors,
 
 % \end{verbatim}
 
-\clearpage
+
 \section{Context Sensitive Grammar}
 
 The step from regular expressions to context free grammars involved
@@ -3097,7 +3097,7 @@ the equivalent definition).
 
 \paragraph{Selfie}: prove that the above grammar generates the above $L$.
 
-\clearpage
+
 
 There exists a normal form for context sensitive grammars: the Kuroda
 normal form: each rule has one of the forms below.
@@ -3153,7 +3153,7 @@ Chomsky is also known for his political activism - it is worth to read
 about it.
 
 
-% \clearpage
+
 % \section{Een toemaatje: Stochastische Context Free Grammar}
 
 % In een stochastische CFG (ook probabilistische CFG genoemd) wordt aan
