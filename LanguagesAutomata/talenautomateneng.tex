@@ -95,7 +95,6 @@ you interchange $yes$ and $no$?
 
 \end{itemize}
 
-\newpage
 \section{What Is a Language?}
 
 The introduction gives the motivation for studying decision
@@ -627,7 +626,6 @@ exist a sequence of states $t_1t_2t_2t_3...t_{n+1}$ so that
 \end{itemize}
 \end{definition}
 
-\newpage
 \paragraph{Selfie:}
 \begin{itemize}
 \item[]
@@ -864,7 +862,7 @@ can't take that edge
 empty string, we say {\em the GNFA has accepted the initial string $s$}
 \end{enumerate}
 
-% \newpage
+
 \paragraph{Selfie:}
 \begin{itemize}
 \item[]
@@ -946,7 +944,7 @@ two things: (1) if a string $s$ was accepted before the elimination,
 it is also accepted after elimination; (2) if a string was not accepted
 before elimination, it is not accepted afterwards.
 
-% \newpage
+
 
 We use the notion of a path through the GNFA that can be followed to
 accept a string - the related notion for NFAs can be found on page
@@ -1397,7 +1395,7 @@ All states of the constructed $DFA_{min}$ are reachable, and they are
 pairwise distinguishable, so our $DFA_{min}$ has the minimum possible
 number of states.
 
-% \newpage
+
 
 Two DFAs can only be really the same if their states are the same, or
 otherwise said, if their states have the same name. Also, their
@@ -1720,7 +1718,6 @@ meant for context free languages. BNF can also be used for regular
 languages, because they are context free as well: see
 Section~\ref{contextvrijelanguages}.
 
-\newpage
 \section{Variants of Finite State Automata}
 
 \subsection{The transducer}
@@ -1774,7 +1771,7 @@ addition 3+13=16. A DFA for this language is in Figure~\ref{telop}.
 \caption{An addition checker \label{telop}}
 \end{figure}
 
-% \newpage
+
 \subsection{Adding by using a transducer}
 
 Addition is: given two numbers as input, output their sum. This is
@@ -1791,7 +1788,6 @@ addition transducers that are derived from the checker.
   output \label{telop2}}
 \end{figure}
 
-\newpage
 \paragraph{Selfie:}
 \begin{itemize}
 \item[]
@@ -2423,7 +2419,6 @@ $(Q,\Sigma,\Gamma,\delta,q_s,F)$ with
 \item $\Gamma = \{m, \$\}$
 \end{itemize}
 
-\newpage
 The $\delta$ can be seen in Figure~\ref{pda2}.
 
 \medskip
@@ -2508,7 +2503,7 @@ Clearly, the language $\{a^nbc^n|n \geq 0\}$ is determined by a PDA:
 Figure~\ref{pda2} shows the implementation. Strings like aabc are not
 accepted.
 
-% \newpage
+
 Switching between alternative definitions of the PDA can be
 tricky. Look at the PDA defined in Figure~\ref{pda1}: at first sight
 you might think it accepts the same language as in Figure~\ref{pda2},
@@ -2637,7 +2632,7 @@ by the PDA in Figure~\ref{pda3}.
 
 We can generalize the example to the following lemma:
 
-% \newpage
+
 \begin{lemma} \label{equicfgpda1}
 The construction of a PDA from a CFG as described above, results in
 a PDA that accepts the language $L_{CFG}$.
@@ -2923,7 +2918,6 @@ is not even context free!
 One more example of a non-deterministic language and a proof sketch
 that shows it: $L = \{a^nb^n|n \in \N\} \cup \{a^nb^{2n}|n \in \N\}$.
 
-\newpage
 Suppose that a DPDA M determines $L$. M has a structure as in
 Figure~\ref{dpda1}.
 

@@ -29,11 +29,11 @@ function $\delta$.
 \caption{Schema of a Turing machine\label{turing1}}
 \end{figure}
 
-\vspace{-5cm}\hspace{10cm}\includegraphics[%
-  width=0.2\linewidth,
-  keepaspectratio]{static/turing}
+\begin{wrapfigure}[7]{r}{.2\textwidth}
+\includegraphics[width=.2\textwidth,keepaspectratio]{static/turing}
+\end{wrapfigure}
 
-\vspace{0.5cm} More formally:
+ More formally:
 
 \begin{definition}[Turing Machine]
 A {\bf Turing Machine} is a 7-tuple
@@ -679,8 +679,6 @@ $~~~~~~~ \Leftrightarrow C(\langle C \rangle) = reject$
 As a conclusion, $C$ does not exist, and likewise for $B$. So,
 $A_{TM}$ is undecidable.
 \end{proof}
-
-\newpage
 
 \begin{theorem}
 $H_{TM}$ is undecidable.
@@ -1442,6 +1440,10 @@ Use Rice for new proofs of old theorems.
 
 \section{The {\em Post Correspondence Problem}}
 
+\begin{wrapfigure}[7]{r}{.2\textwidth}
+\includegraphics[width=.2\textwidth,keepaspectratio]{static/post}
+\end{wrapfigure}
+
 Emil Post was one of the founding fathers of recursion theory, and he
 made contributions to universal computing mechanisms. The word {\em
   correspondence} is related to {\em similarity, agreement}, not to
@@ -1456,20 +1458,14 @@ lower strings are the same?
 
 An example:
 \begin{figure}[h]
+\begin{center}
 \includegraphics[%
   width=0.5\linewidth,
   keepaspectratio]{pcp1}
+  \end{center}
 \caption{Four given dominoes and a solution\label{pcp1}}
 \end{figure}
 
-\vspace{-5cm}\hspace{10cm}\includegraphics[%
-  width=0.2\linewidth,
-  keepaspectratio]{static/post}
-
-
-
-
-\vspace{0.5cm}
 Figure~\ref{pcp1} shows that you don't need to use all dominoes and
 that one type of domino can be used more than once.
 

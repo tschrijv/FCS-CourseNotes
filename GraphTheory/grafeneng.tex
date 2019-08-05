@@ -363,7 +363,7 @@ starting point too soon. Even if you did, you can still mend the path.
 
 
 \begin{proof}
-
+~\\
 \begin{itemize}
 \item A graph with an Eulerian cycle is connected: the cycle connects
 all vertices, so there is a path from each vertex to each other
@@ -739,6 +739,7 @@ ordering of the vertices and edges so that the incidence matrices of
 $G_{1}$ and $G_{2}$ are equal.
 \end{theorem}
 \begin{proof}
+~\\
 \begin{itemize}
 \item
 Let $G_{1}$ and $G_{2}$ be isomorphic, with isomorphism $f$.
@@ -871,7 +872,7 @@ proved the following formula in 1752\footnote{Descartes
 ($\pm$ 1600) knew the formula and most probably so did Archimedes
 ($\pm$ --250)}:
 
- \begin{theorem}[Euler's formula for planar graphs:]
+ \begin{theorem}[Euler's formula for planar graphs]
 If $G$ is a connected planar graph with $e$ edges, $v$ vertices and
 $f$ {\em faces} then $v-e+f = 2$.
 \end{theorem}
@@ -1286,12 +1287,14 @@ everything is stripped except the procedure call and definitions.
 
 \begin{Verbatim}[frame=single, samepage=true, fontsize=\scriptsize]
 main()               venus()                aurochs()           tarpan()
-{ venus();           { pluto();             { dodo();           { aurochs();
+{                    {                      {                   {
+  venus();             pluto();               dodo();             aurochs();
   aurochs();           venus();               tarpan();         }
 }                    }                      }
 
                      pluto()                dodo()              mamoet()
-                     { venus();             { tarpan();         { mamoet();
+                     {                      {                   {
+                       venus();               tarpan();           mamoet();
                      }                        mamoet();         }
                                             }
 \end{Verbatim}
@@ -1377,7 +1380,7 @@ algorithm is his favorite one, also because it sorts topologically as
 a byproduct. Can you see that in the algorithm?
 
 
-% \newpage
+
 
 %///////////////////////////////////////////////////////////////////////////////
 \chapter{Trees}
@@ -1789,6 +1792,7 @@ tree, you end up with a subgraph that is not a tree.
 A graph $G$ has a spanning tree $T$ if and only if $G$ is connected.
 \end{theorem}
 \begin{proof}
+~\\
 \begin{itemize}
 \item
 If $G$ has a spanning tree $T$, then $G$ is connected: a path between
@@ -2259,7 +2263,7 @@ flow coming into the sink.
 \end{center}
 This equality is more generally true:
 
- \begin{theorem}[Source-out = sink-in \label{source=sink}]
+ \begin{theorem}[Source-out = sink-in] \label{source=sink}
 For any flow $F$ in a network $G(V,E)$, the flow coming out of the
 source equals the flow going into the sink, or more formally:
 \[\sum_{i \in V} F(a,i) = \sum_{i \in V} F(i,z).\]
@@ -2411,7 +2415,7 @@ we name an edge $(v_{i},v_{i+1})$ \textbf{good} if $(v_{i},v_{i+1})
 \in E$, and otherwise \textbf{bad}}
 \end{definition}
 
-In a path $P$ , we denote the good edges by $P_{+}$, the bad edges by $P_{-}$.
+In a path $P$, we denote the good edges by $P_{+}$, the bad edges by $P_{-}$.
 
 
  \begin{theorem} Improving a flow
@@ -2905,7 +2909,7 @@ If $G$ has a perfect match, then $\#S \leq \#R(S)$ holds $\forall S
 
 The English mathematician Philip Hall proved the converse in 1935:
 
- \begin{theorem}[Hall's marriage theorem \label{hall}]
+ \begin{theorem}[Hall's marriage theorem] \label{hall}
 
 A directed, bipartite graph $G(V \cup W,E)$ with $V \cap W =
 \emptyset$ and $E \subseteq V \times W$, has a perfect match if and
