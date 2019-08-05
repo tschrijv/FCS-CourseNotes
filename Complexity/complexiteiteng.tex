@@ -702,8 +702,8 @@ $\leq_m$.
 \begin{theorem} \label{P_is_klein}
 If $L_1  \leq_p  L_2$ and $L_2\in \P$ then $L_1 \in \P$.
 \end{theorem}
-\begin{proof} Let $L_1\subseteq T_1^*$, $L_2\subseteq T_2^*$, and $L_1
-\leq_p L_2$ via the function $f:T_1^*\rightarrow T_2^*$ that is
+\begin{proof} Let $L_1\subseteq \Sigma_1^*$, $L_2\subseteq \Sigma_2^*$, and $L_1
+\leq_p L_2$ via the function $f: \Sigma_1^*\rightarrow \Sigma_2^*$ that is
 polynomially computable by TM $M_f$. Since $L_2\in \P$, there exists a
 TM $M_2$ that decides $L_2$ in polynomial time. Construct TM $M$: it
 executes $M_f$ and $M_2$ in sequence. Just as in the previous theorem,
@@ -1304,7 +1304,7 @@ as Cocke-Younger-Kasami. It is a form of {\em chart} or {\em tabular
 
 The class of non-deterministic LBAs decides languages by using no more
 than the space occupied by the input, so context-sensitive languages
-constitute the class {\bf NSPACE}(n). \marton{NSPACE was not introduced before... DSPACE? NDSPACE?}
+constitute the class {\bf NDSPACE}(n).
 
 
 % \newpage
