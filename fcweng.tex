@@ -1,9 +1,5 @@
 \documentclass{tstextbook}
 
-% \documentclass[11pt]{report}
-% \documentclass[11]{book}
-% \usepackage[dutch]{babel}
-% \usepackage{a4wide}
 \usepackage{epsfig}
 \usepackage{wrapfig}
 \usepackage{subfigure}
@@ -13,8 +9,6 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{units}
-% \usepackage{amsthm}
-% \renewcommand{\thepage}{\hspace*{-3cm}\arabic{page}}
 
 \usepackage{paralist}
 \usepackage{hyperref}
@@ -24,14 +18,11 @@
 \setlength{\evensidemargin}{0.5cm}
 \setlength{\textheight}{20cm}
 
-% \usepackage{titlesec}
-
 \usepackage{amssymb}
 
 \usepackage{shadow}
 \usepackage{xcolor}
 \usepackage{soul}
-% \newcommand{\grijs}[1]{\fcolorbox{gray}{gray}{#1}}
 \definecolor{shadecolor}{RGB}{230,230,230}
 \newcommand{\grijs}[1]{\par\colorbox{shadecolor}
   {\parbox{\dimexpr\textwidth-2\fboxsep\relax}{#1}}}
@@ -40,23 +31,13 @@
 \newcommand{\marton}[1]{\marginpar{\color{red} Marton}\textbf{\color{red}{#1}}}
 \newcommand{\martonst}[2]{\marginpar{\color{red} Marton}\textbf{\color{red}{\st{#1}$~\mapsto~${#2}}}}
 
-%\renewcommand\qedsymbol{$\blacksquare$}
-
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 
-
-
-%fancy heading
-% \usepackage{fancyhdr}
-% \pagestyle{fancy}
-
-
 %  Een paar definities
-% \renewcommand{\thesection}{\arabic{section}}
 \newcommand{\ds}{\displaystyle}
 \newcommand{\bin}[2]{{{\ds #1} \choose {\ds #2}}}
 \newcommand{\prend}{\hfill \rule{2.3mm}{2.3mm} \hspace*{3mm} $ $}
@@ -69,14 +50,10 @@
 \newtheorem{stelling}{Theorem}[section]
 \newtheorem{definitie}[stelling]{Definition}
 \newtheorem{informeledefinitie}[stelling]{Informal definition}
-%\newtheorem{lemma}[stelling]{Lemma}
 \newtheorem{algo}[stelling]{Algorithm}
 \newtheorem{eig}[stelling]{Property}
 \newtheorem{gevolg}[stelling]{Consequence}
 \newtheorem{vb}[stelling]{Example}
-
-
-
 
 \lhead[\fancyplain{}{\rm\thepage}]{\fancyplain{}{\rightmark}}
 \chead[]{}
@@ -84,10 +61,6 @@
 \lfoot[]{}
 \cfoot[]{\fancyplain{\rm\thepage}{}}
 \rfoot[]{}
-
-% nu degene zonder nummer
-% \newtheorem{vb}{Voorbeeld}
-% \renewcommand{\thevb}{}
 
 \setlength{\parindent}{0cm}
 
@@ -101,7 +74,6 @@
 \newcommand{\EXP}{{\bf EXP} }
 \newcommand{\NEXP}{{\bf NEXP} }
 
-
 \begin{document}
 
 \tsbook{Fundamentals for Computer Science}
@@ -111,47 +83,6 @@
        {xxxxx}{xxx--xx--xxxx--xx--x}{1.0}
        {}
        {Leuven}
-
-% %% TITELBLAD
-% \renewcommand{\thepage}{}
-% % \pagestyle{plain}
-%
-%
-%
-% \begin{center}
-% \shabox{\Huge \bf Fundamentals for Computer Science}
-% ~~\\
-% ~~\\
-% ~~\\
-% ~~\\
-% \includegraphics[%
-%   width=0.1\linewidth,
-%   keepaspectratio]{afbeeldingen/sedes}
-% ~~\\
-% ~~\\
-% {\Large \bf Master of Engineering: Computer Science}\\[0.5cm] \today
-%
-% \vspace*{2cm}
-% {\large B. Demoen}\\
-% KU Leuven\\
-% Departement\ Computerwetenschappen
-% \end{center}
-
-
-
-
-% \tableofcontents
-% \setcounter{page}{1}
-% \renewcommand{\thepage}{\roman{page}}
-% \setcounter{tocdepth}{2}
-% \dominitoc% Initialization
-
-
-
-
-% \renewcommand{\thepage}{\arabic{page}}
-% \setcounter{page}{1}
-% \setlength{\parskip}{0.2cm}
 
 \include{Foreword/inleidingeng}
 \addtocontents{toc}{\protect\vspace{10pt}}
@@ -182,6 +113,5 @@
 \graphicspath{{./Complexity/figures/}}
 
 \include{Complexity/complexiteiteng}
-
 
 \end{document}
