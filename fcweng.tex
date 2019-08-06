@@ -23,11 +23,7 @@
 \usepackage{shadow}
 \usepackage{xcolor}
 \usepackage{soul}
-\definecolor{shadecolor}{RGB}{230,230,230}
-\newcommand{\grijs}[1]{\par\colorbox{shadecolor}
-  {\parbox{\dimexpr\textwidth-2\fboxsep\relax}{#1}}}
 
-\newcommand{\bart}[1]{\marginpar{\color{red} Bart}\textbf{\color{blue}[#1]}}
 \newcommand{\marton}[1]{\marginpar{\color{red} Marton}\textbf{\color{red}{#1}}}
 \newcommand{\martonst}[2]{\marginpar{\color{red} Marton}\textbf{\color{red}{\st{#1}$~\mapsto~${#2}}}}
 
@@ -38,22 +34,13 @@
 \newcommand{\C}{\mathbb{C}}
 
 %  Een paar definities
-\newcommand{\ds}{\displaystyle}
-\newcommand{\bin}[2]{{{\ds #1} \choose {\ds #2}}}
-\newcommand{\prend}{\hfill \rule{2.3mm}{2.3mm} \hspace*{3mm} $ $}
 \newcommand{\rpijl}{$\rightarrow~$}
 \newcommand{\eps}{$\epsilon~$}
 \newcommand{\project}[1]{}
 
 \newcommand{\myref}[1]{~\ref{#1} on page~\pageref{#1}}
 
-\newtheorem{stelling}{Theorem}[section]
-\newtheorem{definitie}[stelling]{Definition}
-\newtheorem{informeledefinitie}[stelling]{Informal definition}
 \newtheorem{algo}[stelling]{Algorithm}
-\newtheorem{eig}[stelling]{Property}
-\newtheorem{gevolg}[stelling]{Consequence}
-\newtheorem{vb}[stelling]{Example}
 
 \lhead[\fancyplain{}{\rm\thepage}]{\fancyplain{}{\rightmark}}
 \chead[]{}
