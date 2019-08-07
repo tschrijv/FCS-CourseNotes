@@ -1231,7 +1231,7 @@ later
 To save on writing, we use $p_a$ as a shorthand for $\delta(p,a)$.
 
 
-\begin{algo} Indistinguishable states \label{gelijketoestanden}
+\begin{code} Indistinguishable states \label{gelijketoestanden}
 \begin{enumerate}
 \item[{\bf Init:}]
 Consider the graph $G$ with the states of the DFA as vertices; add an
@@ -1259,13 +1259,13 @@ any other state not in $Q_i$
 
 \end{enumerate}
 
-\end{algo}
+\end{code}
 \begin{proof}
 The termination of the algorithm is obvious: the maximal number of
 edges in $G$ is $N(N-1)/2$ with $N=|Q|$; one such edge is added in
 Repeat each time the condition is fulfilled.
 
-we prove that
+We prove that
 
 
 $~~~~~~~~~~~~~~~(p,q,\_)$ is an edge in $G$ $\Longleftrightarrow$ $p$ and $q$ are distinguishable
