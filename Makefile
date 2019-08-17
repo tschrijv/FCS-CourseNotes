@@ -7,7 +7,7 @@ all: fcweng.pdf
 
 fcweng.pdf: fcweng.tex $(addsuffix .pdf, $(basename $(FIGURES))) \
 	Computability/berekenbaarheideng.tex Foreword/inleidingeng.tex GraphTheory/grafeneng.tex LanguagesAutomata/talenautomateneng.tex \
-	Complexity/complexiteiteng.tex
+	Complexity/complexiteiteng.tex Definitions/definitions.tex
 	pdflatex fcweng.tex
 	pdflatex fcweng.tex
 	pdflatex fcweng.tex

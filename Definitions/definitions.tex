@@ -1,0 +1,50 @@
+\chapter*{Some definitions}
+
+There are some mathematical definitions that you might be unfamiliar with, that are required for understanding the course material. These are covered here.
+
+\subsection*{Powerset}
+
+The powerset of a set $S$ is the set of all subsets of $S$.
+
+For example:
+
+\begin{align*}
+S &= \{1, 2, 3\} \\
+{\cal P}(S) &= \{\emptyset, \{1\}, \{2\}, \{3\}, \{1, 2\}, \{1, 3\}, \{2, 3\}, \{1, 2, 3\}\}
+\end{align*}
+
+\subsection*{Equivalence relation}
+
+A binary relation R on a set $S$ is an equivalence relation if and only if it is
+\begin{enumerate}
+\item reflexive $ a = a $
+\item symmetric $ a = b \Leftrightarrow b = a $
+\item transitive $ a = b \land b = c \Rightarrow a = c $
+\end{enumerate}
+
+\subsection*{Order relations}
+
+A binary relation $R$ on a set $S$ is a \em{partial} order if and only if it is
+\begin{enumerate}
+\item reflexive $ a \leq a $
+\item antisymmetric $ a \leq b \land b \leq a \Rightarrow a = b $
+\item transitive $ a \leq b \land b \leq c \Rightarrow a \leq c $
+\end{enumerate}
+
+A binary relation $R$ on a set $S$ is a \em{total} order if and only if it is
+\begin{enumerate}
+\item a partial order
+\item for any pair of elements $a$ and $b$ of $S$: $ (a, b) \in R \lor (b, a) \in R $
+\end{enumerate}
+
+\subsection*{Transitive closure}
+
+The transitive closure of a binary relation $R$ on a set $S$ is the smallest relation on $S$ that contains $R$ and is transitive.
+
+For example:
+
+\begin{align*}
+S &= \{1, 2, 3\} \\
+R &= \{(1, 2), (2, 3)\} \\
+T &= \{(1, 2), (2, 3), (1, 3)\}
+\end{align*}
