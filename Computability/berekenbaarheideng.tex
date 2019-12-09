@@ -1,6 +1,6 @@
-\chapter{Languages and Computability}\label{berekenbaarheid}
+\chapter{Turing Machines}\label{berekenbaarheid}
 
-
+%===============================================================================
 \section{The Turing Machine as a Decider or Recognizer}\label{turingmachines}
 
 In the previous sections, we looked at two classes from the Chomsky
@@ -263,6 +263,7 @@ What is our plan with Turing Machines?
 
 
 
+%===============================================================================
 \section{A Graphical Representation of Turing Machines}
 
 Just as FSAs and PDAs, TMs can be visualized by a graph: the vertices
@@ -339,6 +340,7 @@ The TM in Figure~\ref{turing2} proves that
 $\{0^n1^n|n \geq 0\}$ is a decidable language.
 
 
+%===============================================================================
 \section{Representation and Simulation of TM Computations}
 
 It is often handy to be able to compactly represent a {\em
@@ -432,6 +434,7 @@ Make sure you know what this means, i.e. formalize it to some extent.
 
 
 
+%===============================================================================
 \section{Non-deterministic Turing Machines}
 
 We mention non-deterministic TMs for no other reason than that every
@@ -457,6 +460,7 @@ the Prolog program given earlier can be meta-interpreted according to
 iterative deepening (of breadth-first), and as soon as it arrives in an end state, it stops with the same result. So, if we can simulate a NDTM in Prolog, we can with a DTM.
 
 
+%===============================================================================
 \section{Languages, ${\cal P}(\N)$, Properties and Terminology}
 
 We have defined the notions recognizable/decidable in terms of
@@ -481,6 +485,7 @@ that.
 
 
 
+%===============================================================================
 \section{Encoding}
 
 When we describe a language informally, there is no need to bother
@@ -572,6 +577,7 @@ happy. Was that reasonable?
 
 
 
+%===============================================================================
 \section{Universal Turing Machines}
 
 A TM can be described completely by its transition table (plus some
@@ -613,6 +619,10 @@ UTM. In the meantime, it has been proven that a particular (2,3)
 machine is universal - but it is a bit controversial.  By the way, (2,2) TMs
 cannot be universal.
 
+%###############################################################################
+\chapter{Computability}
+
+%===============================================================================
 \section{The Halting Problem}\label{halting}
 
 Informally, the question is this: given a Turing Machine M and a
@@ -753,7 +763,7 @@ will need it.
 \caption{Schema of an enumerator machine\label{enumerator1}}
 \end{figure}
 
-In Figure~\ref{enumerator1} you can see \marton{1 and 3 are not visible on the figure} that the enumerator is like a
+In Figure~\ref{enumerator1} you can see that the enumerator is like a
 Turing Machine with some extras
 \begin{itemize}
 \item an enumerator state $q_e$
@@ -1339,7 +1349,7 @@ countable.
 \paragraph{Selfie:} Construct languages that are countable, but not enumerable.
 
 
-\section{How to Kill $N$ Birds With One Stone: Rice's Theorem}
+\section{Rice's Theorem}
 
 We have seen some concrete examples of undecidable languages, often by
 reduction to $A_{TM}$: every time, we found a new little trick so that
@@ -1438,9 +1448,13 @@ Use Rice for new proofs of old theorems.
 \end{itemize}
 
 
+%###############################################################################
+\chapter{Reductions}
+
 \section{The {\em Post Correspondence Problem}}
 
-\begin{wrapfigure}[7]{r}{.2\textwidth}
+\begingroup
+\begin{wrapfigure}[9]{r}{.2\textwidth}
 \includegraphics[width=.2\textwidth,keepaspectratio]{static/post}
 \end{wrapfigure}
 
@@ -1455,6 +1469,8 @@ supply for this game. If you put some dominoes next to each other, you
 see an upper string and a lower string. The question is: is it
 possible to lay out a finite number of dominoes so that the upper and
 lower strings are the same?
+
+\endgroup
 
 An example:
 \begin{figure}[h]
@@ -1777,7 +1793,7 @@ straightforward.
 
 
 
-\section{Oracle Machines and a Hierarchy of Decidability}
+\section{Oracle Machines and a Decidability Hierarchy}
 
 Suppose we had another way to decide $A_{TM}$ - not a TM of course -
 would there be a way to use that power to decide everything? Let's
@@ -1877,7 +1893,7 @@ a statement is marked by a (*): how can we let M run on all strings?
 There are infinitely many of them ...
 
 
-\section{The Computable Functions and the Recursive Functions}
+\section{The Computable and the Recursive Functions}
 
 We gave a definition of Turing computable function in the previous
 section. It was rather abstract and {\em existential}. We can also
