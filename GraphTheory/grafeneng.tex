@@ -669,8 +669,9 @@ One use of the boolean adjacency matrix is in finding out the
 functions that are called (directly or indirectly) from a given
 function in a given program: you can work that out yourself, and also
 discover how you can detect {\em dead code} (compiler jargon),
-i.e. functions that are not called by anyone. In Section~\myref{sccs},
-this application example is used in an interesting graph algorithm.
+i.e. functions that are not called by anyone. 
+% In Section~\myref{sccs},
+% this application example is used in an interesting graph algorithm.
 
 
 %===============================================================================
@@ -805,10 +806,10 @@ constructing} a shortest path. We restrict ourselves to simple graphs:
 loops can't occur in a shortest path, and of the parallel edges
 between two nodes, we need only the shortest one.
 
-Algorithms in this chapter consist of a sequence of instructions,
-numbered 1,2, \ldots . At the end of instruction $n$, there is an
-implicit {\bf Go to instruction $n+1$}. {\em Stop} means the algorithm
-finishes.
+% Algorithms in this chapter consist of a sequence of instructions,
+% numbered 1,2, \ldots . At the end of instruction $n$, there is an
+% implicit {\bf Go to instruction $n+1$}. {\em Stop} means the algorithm
+% finishes.
 
 
 %===============================================================================
@@ -1270,110 +1271,110 @@ exist graphs not containing $K_4$ (or larger) with no
 specifically, every bipartite graph (e.g. $K_{3,3}$) has a 2-coloring.
 
 
-%===============================================================================
-\section{Strongly Connected Components}\label{sccs}
-
-We abbreviate {\em strongly connected component} to SCC. Robert Endre
-Tarjan \footnote{Turing award 1986} - the master algorithmist -
-designed a very nice algorithm in 1972 that partitions the vertices of
-a digraph into SCCs. An SCC is a (maximal) set of vertices in which
-every node is connected to every other node of the same set. We first
-look at an application. Below is a program in pseudo-code, from which
-everything is stripped except the procedure call and definitions.
-
-\begin{Verbatim}[frame=single, samepage=true, fontsize=\scriptsize]
-main()               venus()                aurochs()           tarpan()
-{                    {                      {                   {
-  venus();             pluto();               dodo();             aurochs();
-  aurochs();           venus();               tarpan();         }
-}                    }                      }
-
-                     pluto()                dodo()              mamoet()
-                     {                      {                   {
-                       venus();               tarpan();           mamoet();
-                     }                        mamoet();         }
-                                            }
-\end{Verbatim}
-The {\em call graph} of this program can be seen in
-Figure~\ref{vbtarjan}: the vertices are the procedures; there is a
-directed edge $(p_1,p_2)$ if and only if $p_1$ calls $p_2$. We have
-left out the self-calls.
-
-
-
-\begin{figure}[h]
-\begin{center}
-\includegraphics[height=0.2\textheight,keepaspectratio]{vbtarjan}
-\caption{The directed call graph}\label{vbtarjan}
-\end{center}
-\end{figure}
-
-SCCs partition the program in smaller parts of which the analysis can
-be performed independently, and/or sequentialized
-appropriately. The analysis could concern complexity, invariants (for
-correctness), data-flow, liveness analysis (for optimization) ... One
-finds uses of SCCs in very different contexts.
-
-
-The SCCs are indicated in Figure~\ref{vbtarjan} with a rectangle: each
-vertex belongs to exactly one SCC. Try understanding and proving this.
-
-Algorithm~\ref{alg:tarjan} is an adapted version from
-Wikipedia\footnote{
-http://en.wikipedia.org/wiki/Tarjan's\_strongly\_connected\_components\_algorithm,
-28-7-2014}.
-%
-Each vertex has 4 fields: the booleans {\em instack} and {\em visited}
-are initially FALSE; the integers {\em index} and {\em lowlink} are
-initialized at a later point in the algorithm. Their selection is denoted as e.g. $v.visited$.
-
-\begin{algorithm}[h]
-\begin{algorithmic}
-
-\Function {tarjan}{}
-    \State{index := 1;}
-    \ForAll{$v \in V \wedge (\neg v.visited)$}
-    \State{strongconnect(v);}
-    \EndFor
-\EndFunction
-~\\
-\Function {strongconnect}{v}
-\State{v.visited := TRUE;}
-\State{v.index := v.lowlink := index++;}
-\State{push(v); v.instack := TRUE;}
-~\\
-\ForAll {$(v,w) \in E$}
-       \If {$\neg w.visited$};
-       \State{strongconnect(w);}
-       \State{v.lowlink  := min(v.lowlink, w.lowlink);}
-       \ElsIf {w.instack}
-       \State{v.lowlink  := min(v.lowlink, w.index)}
-       \EndIf
-\EndFor
+% %===============================================================================
+% \section{Strongly Connected Components}\label{sccs}
+% 
+% We abbreviate {\em strongly connected component} to SCC. Robert Endre
+% Tarjan \footnote{Turing award 1986} - the master algorithmist -
+% designed a very nice algorithm in 1972 that partitions the vertices of
+% a digraph into SCCs. An SCC is a (maximal) set of vertices in which
+% every node is connected to every other node of the same set. We first
+% look at an application. Below is a program in pseudo-code, from which
+% everything is stripped except the procedure call and definitions.
+% 
+% \begin{Verbatim}[frame=single, samepage=true, fontsize=\scriptsize]
+% main()               venus()                aurochs()           tarpan()
+% {                    {                      {                   {
+%   venus();             pluto();               dodo();             aurochs();
+%   aurochs();           venus();               tarpan();         }
+% }                    }                      }
+% 
+%                      pluto()                dodo()              mamoet()
+%                      {                      {                   {
+%                        venus();               tarpan();           mamoet();
+%                      }                        mamoet();         }
+%                                             }
+% \end{Verbatim}
+% The {\em call graph} of this program can be seen in
+% Figure~\ref{vbtarjan}: the vertices are the procedures; there is a
+% directed edge $(p_1,p_2)$ if and only if $p_1$ calls $p_2$. We have
+% left out the self-calls.
+% 
+% 
+% 
+% \begin{figure}[h]
+% \begin{center}
+% \includegraphics[height=0.2\textheight,keepaspectratio]{vbtarjan}
+% \caption{The directed call graph}\label{vbtarjan}
+% \end{center}
+% \end{figure}
+% 
+% SCCs partition the program in smaller parts of which the analysis can
+% be performed independently, and/or sequentialized
+% appropriately. The analysis could concern complexity, invariants (for
+% correctness), data-flow, liveness analysis (for optimization) ... One
+% finds uses of SCCs in very different contexts.
+% 
+% 
+% The SCCs are indicated in Figure~\ref{vbtarjan} with a rectangle: each
+% vertex belongs to exactly one SCC. Try understanding and proving this.
+% 
+% Algorithm~\ref{alg:tarjan} is an adapted version from
+% Wikipedia\footnote{
+% http://en.wikipedia.org/wiki/Tarjan's\_strongly\_connected\_components\_algorithm,
+% 28-7-2014}.
+% %
+% Each vertex has 4 fields: the booleans {\em instack} and {\em visited}
+% are initially FALSE; the integers {\em index} and {\em lowlink} are
+% initialized at a later point in the algorithm. Their selection is denoted as e.g. $v.visited$.
+% 
+% \begin{algorithm}[h]
+% \begin{algorithmic}
+% 
+% \Function {tarjan}{}
+%     \State{index := 1;}
+%     \ForAll{$v \in V \wedge (\neg v.visited)$}
+%     \State{strongconnect(v);}
+%     \EndFor
+% \EndFunction
 % ~\\
-    \If{v.lowlink == v.index}
-    \State{start a new SCC}
-    \Repeat
-         \State{w := pop(); w.instack := FALSE;}
-         \State{add w to current SCC}
-    \Until {w == v}
-    \State{output current SCC}
-    \EndIf
-\EndFunction
-
-  \end{algorithmic}
-  \caption{Tarjan's algorithm computes the SCCs}
-  \label{alg:tarjan}
-\end{algorithm}
-
-
-Give arguments why this algorithm ends and is correct.
-
-Donald E. Knuth\footnote{Turing award in 1974}
-says\footnote{{\bf Twenty Questions for Donald Knuth} at
-\url{http://www.informit.com/articles/article.aspx?p=2213858}} that Tarjan's
-algorithm is his favorite one, also because it sorts topologically as
-a byproduct. Can you see that in the algorithm?
+% \Function {strongconnect}{v}
+% \State{v.visited := TRUE;}
+% \State{v.index := v.lowlink := index++;}
+% \State{push(v); v.instack := TRUE;}
+% ~\\
+% \ForAll {$(v,w) \in E$}
+%        \If {$\neg w.visited$};
+%        \State{strongconnect(w);}
+%        \State{v.lowlink  := min(v.lowlink, w.lowlink);}
+%        \ElsIf {w.instack}
+%        \State{v.lowlink  := min(v.lowlink, w.index)}
+%        \EndIf
+% \EndFor
+% % ~\\
+%     \If{v.lowlink == v.index}
+%     \State{start a new SCC}
+%     \Repeat
+%          \State{w := pop(); w.instack := FALSE;}
+%          \State{add w to current SCC}
+%     \Until {w == v}
+%     \State{output current SCC}
+%     \EndIf
+% \EndFunction
+% 
+%   \end{algorithmic}
+%   \caption{Tarjan's algorithm computes the SCCs}
+%   \label{alg:tarjan}
+% \end{algorithm}
+% 
+% 
+% Give arguments why this algorithm ends and is correct.
+% 
+% Donald E. Knuth\footnote{Turing award in 1974}
+% says\footnote{{\bf Twenty Questions for Donald Knuth} at
+% \url{http://www.informit.com/articles/article.aspx?p=2213858}} that Tarjan's
+% algorithm is his favorite one, also because it sorts topologically as
+% a byproduct. Can you see that in the algorithm?
 
 
 
@@ -1787,21 +1788,23 @@ tree, you end up with a subgraph that is not a tree.
  \begin{theorem}
 A graph $G$ has a spanning tree $T$ if and only if $G$ is connected.
 \end{theorem}
-\begin{proof}
-~\\
+\begin{proof}~\\
 \begin{itemize}
-\item
+\item[\fbox{$\Rightarrow$}]
 If $G$ has a spanning tree $T$, then $G$ is connected: a path between
 any two edges can use the edges of $T$.
 
-\item
-If $G$ is connected and cycle free, then $G$ is a tree and a spanning
-tree of itself.
-
-If $G$ is connected and has a cycle, remove one edge from that cycle
-(but not the vertices); the resulting graph is still connected and has
-one cycle less than $G$; the theorem is now proved by induction on the
-number of cycles.
+\item[\fbox{$\Leftarrow$}]
+We prove this direction by induction on the number of cycles $c$ of $G$.
+\begin{itemize}
+\item[$c = 0$:]
+Then $G$ is a tree and a spanning tree of itself.
+\item[$c > 0$:]
+Remove one edge from a cycle (but not the vertices). The resulting graph $G'$
+is still connected and has fewer than $c$ cycles. By the induction hypothesis,
+$G'$ has a spanning tree $T$. It should be easy to see that $T$ is also
+a spanning tree of $G$.
+\end{itemize}
 \end{itemize}
 \end{proof}
 
@@ -2904,40 +2907,120 @@ If $G$ has a perfect match, then $\#S \leq \#R(S)$ holds $\forall S
 \end{itemize}
 
 The English mathematician Philip Hall proved the converse in 1935:
-
- \begin{theorem}[Hall's marriage theorem] \label{hall}
-
+\begin{theorem}[Hall's marriage theorem] \label{hall}
 A directed, bipartite graph $G(V \cup W,E)$ with $V \cap W =
 \emptyset$ and $E \subseteq V \times W$, has a perfect match if and
 only if $\#S \leq \#R(S),\; \forall S \subseteq V$
 \end{theorem}
-\begin{proof}
-We have already argued one direction: if $G$ has a perfect match, then
-$\#S \leq \#R(S), \forall S \subseteq V$. Now the converse:
+\begin{proof}~
+\begin{itemize}
+\item[\fbox{$\Rightarrow$}]
+We have already argued this.
+\item[\fbox{$\Leftarrow$}]
+Let $m = \#V$. We prove this direction by induction on $m$.
+\begin{itemize}
+\item[\underline{$m=0$}:] Then the perfect match is trivial: $M = \emptyset$.
+\item[\underline{$m>1$}:] 
+We distinguish two mutually exclusive cases: whether or not 
+for all $S$ such that $\emptyset \neq S \subsetneq V$ it
+is true that $\#S \leq \#R(S) - 1$.
+\begin{itemize}
+\item[\dashuline{$\forall S: \emptyset \neq S \subsetneq V \Rightarrow \#S \leq
+\#R(S) - 1$:}] Take any edge $(v,w) \in G$ and construct the bipartite graph
+$G' = G \setminus \{v,w\}$. Hence the vertex partitions of $G'$ are $V
+\setminus \{v\}$ and $W \setminus \{w\}$. So $m' = \#(V \setminus \{v\}) = m - 1 < m$.
+Clearly, $G'$ poses a smaller problem than $G$. Now let us show that it satisfies
+the condition of Hall's Theorem.
+\begin{itemize}
+\item[]
+Before we proceed, from now on we add a subscript to $R$ with the target vertex
+set to avoid confusion between $G$ and $G'$. 
 
-Let $m = |V|$. We prove by induction on $m$ that the condition is
-sufficient. The base case is $m=1$: it is clear that a perfect match
-exists. So assume $m \geq 2$. We distinguish between two cases:
+It follows from the definition of $R$ that 
+\[ \forall T \subseteq V: R_{W \setminus \{w\}}(T) = R_W(T) \setminus \{ w\}\] 
+Moreover, for any two sets $A, B$, it is true that $\#A - \#B \leq \#(A
+\setminus B)$. Hence, it follows that
+\[ \forall T \subseteq V:  \#R_W(T) - 1 \leq \#R_{W \setminus \{w\}}(T)\] 
 
+Now let us restate the case assumption:
+\[\forall S: \emptyset \neq S \subsetneq V \Rightarrow \#S \leq \#R_W(S) - 1\]
+As $V \setminus \{ v \} \subsetneq V$, it follows that:
+\[\forall S: \emptyset \neq S \subseteq V\setminus \{ v \} \Rightarrow \#S \leq \#R_W(S) - 1\]
+If we take the upper bound for $\#R_W(S) - 1$ into account:
+\[\forall S: \emptyset \neq S \subseteq V\setminus \{ v \} \Rightarrow \#S \leq \#R_{W\setminus\{w\}}(S)\]
+Because $R(\emptyset) = \emptyset$ in any bipartite graph, we can include $S = \emptyset$ in the above:
+\[\forall S: S \subseteq V\setminus \{ v \} \Rightarrow \#S \leq \#R_{W\setminus\{w\}}(S)\]
+\end{itemize}
+This establishes the condition of Hall's Theorem for $G'$. Hence, we can apply the induction
+hypothesis to $G'$ and conclude that $G'$ has a perfect match $M'$. We can extend
+this perfect match for $G'$ to a perfect match for $G$ by adding the removed edge $(v,w)$:
+$M = M' \cup \{ (v,w)\}$.
+ 
+\item[\dashuline{$\exists S: \emptyset \neq S \subsetneq V \wedge \#S =\#R(S)$:}]
+In this case we can partition $G$ into two bipartite subgraphs $G_1$ and $G_2$,
+illustrated in Figure \ref{hallfig}. $G_1$ gets the vertex partitions $S$ and $R_W(S)$, 
+while $G_2$ gets the remainders $V \setminus S$ and $W \setminus R_W(S)$.
+If we can show that $G_1$ and $G_2$ are smaller and satisfy Hall's condition,
+we can apply the induction hypothesis to them. It follows that $G_1$
+has a perfect match $M_1$ and $G_2$ has a perfect match $M_2$. As $G_1$ 
+and $G_2$ are disjoint, so are there matchings and together they
+form a perfect match for $G$: $M = M_1 \cup M_2$.
 
-\begin{enumerate}
-\item
-Suppose that for all $S$ such that $\emptyset \neq S \subsetneq V$ it
-is true that $|S| + 1 \leq |R(S)|$. Take any edge $(v,w)$ with $v \in
-V$ and consider the $G' = G \setminus \{v,w\}$. $G'$ fulfills the
-conditions of Hall and $V'$ is strictly smaller than $m$: by the
-induction hypothesis there exists a perfect matching of $G'$. Add the
-edge $(v,w)$ to it and obtain a perfect match of $G$.
+All that remains is to show that $G_1$ and $G_2$ indeed satisfy the necessary
+conditions.
+\begin{itemize}
+\item[\dotuline{$G_1$:}]
+As $S$ is a strict subset of $V$, we have that $m_1 = \#S < \#V = m$.
+So $G_1$ is indeed smaller.
 
-\item
-Now assume the existence of a set $S$ with $\emptyset \neq S
-\subsetneq V$ and $|S| = |R(S)|$. Consider the subgraph $G_1$ induced
-by the vertices $S \cup R(S)$, and the subgraph $G_2$ induced by
-$(V\setminus S) \cup (W \setminus R(S))$. Now prove that $G_1$ and
-$G_2$ fulfill the conditions of Hall, so they both have a perfect
-matching. Take the union of these perfect matchings to obtain a perfect
-matching of $G$. Figure \ref{hallfig} illustrates the construction.
-\end{enumerate}
+Let us state upfront a property of $R$ that we will need shortly:
+$R$ preserves the subset relation:
+\[ \forall A, B. A \subseteq B \Rightarrow R(A) \subseteq R(B) \]
+This follows trivally from the definition of $R$.
+
+Let us formulate again the assumption that Hall's condition applies to $G$:
+\[ \forall T \subseteq V: \#T \leq \#R_W(T) \]
+Because $S \subsetneq V$:
+\[ \forall T \subseteq S: \#T \leq \#R_W(T) \]
+Also, because $R$ preserves the subset relation, 
+we know that $R_W(T) \cap R_W(S) = R_W(T)$. Hence,
+\[ \forall T \subseteq S: \#T \leq \#(R_W(T) \cap R_W(S)) \]
+Moreover, because $R_W(S) \subseteq W$, we have that
+\[ \forall T \subseteq S: \#T \leq \#R_{R_W(S)}(T) \]
+
+In other words $G_1$ satifies both conditions of
+the induction hypothesis.
+
+\item[\dotuline{$G_2$:}]
+As $V$ is non-empty and $S$ is a non-empty subset of $V$, we have that $m_2 =
+\#(V \setminus S) < \#V = m$. So $G_2$ is indeed smaller.
+
+Let us formulate yet again the assumption that Hall's condition applies to $G$:
+\[ \forall T \subseteq V: \#T \leq \#R_W(T) \]
+Since $\forall T \subseteq V\setminus S: T \cup S$, we can specialize this to:
+\[ \forall T \subseteq V \setminus S: \#(T \cup S) \leq \#R_W(T \cup S) \]
+Because $T$ and $S$ are disjoint, we have that $\#(T \cup S) = \#T + \#S$:
+\[ \forall T \subseteq V \setminus S: \#T + \#S \leq \#R_W(T \cup S) \]
+Also, as $R$ preserves union, we have that $R_W(T \cup S) = R_W(T) \cup R_W(S)$:
+\[ \forall T \subseteq V \setminus S: \#T + \#S \leq \#(R_W(T) \cup R_W(S)) \]
+We also have for all sets $A, B$ that $\#(A \cup B) = \#A + \#B - \#(A \cap B)$.
+So:
+\[ \forall T \subseteq V \setminus S: \#T + \#S \leq \#R_W(T) + \#R_W(S) - \#(R_W(T) \cap R_W(S)) \]
+Since we have assumed that $\#S = \#R_W(S)$, we can simplify this to:
+\[ \forall T \subseteq V \setminus S: \#T \leq \#R_W(T) - \#(R_W(T) \cap R_W(S)) \]
+As before, we can rewrite the last term:
+\[ \forall T \subseteq V \setminus S: \#T \leq \#R_W(T) - \#R_{R_W(S)}(T) \]
+Finally, we can also rewrite the right-hand side:
+\[ \forall T \subseteq V \setminus S: \#T \leq \#R_{W \setminus R_W(S)}(T) \]
+
+In other words $G_2$ satifies both conditions of
+the induction hypothesis.
+
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\end{itemize}
 \end{proof}
 
 \begin{figure}[h]
