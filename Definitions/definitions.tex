@@ -1,18 +1,23 @@
-\chapter*{Some definitions}
+\chapter*{Prerequisites}
 
-There are some mathematical definitions that you might be unfamiliar with, that are required for understanding the course material. These are covered here.
+There are several basic mathematical notions used
+throughout this course that you should be familiar with.
+These are briefly summarized here as a refresher.
 
-\subsection*{Partial and total function}
+%-------------------------------------------------------------------------------
+\section*{Sets, Relations and Functions}
 
-A function $ f: X \mapsto Y $ is a partial function if it is only defined for the domain $X' \subseteq X$. If $X' = X$, $f$ is a total function.
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+\subsection*{Cartesian Products}
+The Cartesian product of two sets $A$ and $B$, which is denoted $A \times B$ is
+the set of all tuples that can be formed by pairing an element of $A$ with one
+of $B$:
+\[ A \times B = \{ (x,y) \mid x \in A, y \in B \} \]
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+\subsection*{Powersets}
 
-\subsection*{Multiset}
-
-A multiset is similar to a set, but an element can occur more than once, for example: $\{1, 1, 1, 2, 2, 3, 4, 5, 5\}$.
-
-\subsection*{Powerset}
-
-The powerset of a set $S$ is the set of all subsets of $S$.
+The powerset of a set $S$, denoted $\mathcal{P}(S)$ or $2^S$,  is the set of
+all subsets of $S$.
 
 For example:
 
@@ -21,38 +26,119 @@ S &= \{1, 2, 3\} \\
 {\cal P}(S) &= \{\emptyset, \{1\}, \{2\}, \{3\}, \{1, 2\}, \{1, 3\}, \{2, 3\}, \{1, 2, 3\}\}
 \end{align*}
 
-\subsection*{Equivalence relation}
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+\subsection*{Multisets}
 
-A binary relation R on a set $S$ is an equivalence relation if and only if it is
-\begin{enumerate}
-\item reflexive $ a = a $
-\item symmetric $ a = b \Leftrightarrow b = a $
-\item transitive $ a = b \land b = c \Rightarrow a = c $
-\end{enumerate}
+A multiset is similar to a set, but an element can occur more than once, for
+example: $\{1, 1, 1, 2, 2, 3, 4, 5, 5\}$. We call the number of times an 
+element appears in a multiset that element's \emph{multiplicity}.
 
-\subsection*{Order relations}
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+\subsection*{Predicates and Relations}
 
-A binary relation $R$ on a set $S$ is a \em{partial} order if and only if it is
-\begin{enumerate}
-\item reflexive $ a \leq a $
-\item antisymmetric $ a \leq b \land b \leq a \Rightarrow a = b $
-\item transitive $ a \leq b \land b \leq c \Rightarrow a \leq c $
-\end{enumerate}
+Informally, a predicate $\mathcal{P}$\footnote{Confusingly, $\mathcal{P}$ is
+used as the name of a predicate and to denote the powerset. You will have to
+infer from the context which is meant.} over a set $A$ denotes a property that
+elements of set $A$ may have. We write $P(x)$, with $x \in A$ to denote that
+element $x$ has the property. Formally, a predicate $\mathcal{P}$ over a set
+$A$ is just a subset of $A$; it is the subset of all elements of $A$ that have
+the property. Hence, $\mathcal{P}(x)$ is just an alternative notation for $x \in \mathcal{P}$.
 
-A binary relation $R$ on a set $S$ is a \em{total} order if and only if it is
-\begin{enumerate}
-\item a partial order
-\item for any pair of elements $a$ and $b$ of $S$: $ (a, b) \in R \lor (b, a) \in R $
-\end{enumerate}
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection*{Binary Relations}
 
+A binary relation $\mathcal{R}$ over sets $A$ and $B$ is a predicate over $A
+\times B$. We say that $x \in A$ is related to $y \in B$ when
+$\mathcal{R}(x,y)$ holds. Sometimes, we also write $x\mathcal{R}y$ instead of
+$\mathcal{R}(x,y)$.
+
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection*{Partial and Total functions}
+
+A function $f: A \mapsto B$ is a binary relation on $A \times B$ where
+we write $f(x) = y$ rather than $f(x,y)$ to denote that $x \in A$ and $y \in B$
+are related. Moreover, a function satisifies the \emph{functional dependency}
+property:
+\[ \forall x \in A, \forall y_1, y_2 \in B: f(x) = y_1 \wedge f(x) = y_2 \Rightarrow y_1 = y_2 \]
+
+We say that a function $f$ is \emph{total} iff:
+\[ \forall x \in A, \exists y \in B: f(x) = y \]
+If a function is not total, it is called \emph{partial}. Usually, when we do
+not specify that a function is partial, we implicitly assume that it is total.
+
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection*{Equivalence Relations}
+
+A binary relation $\mathcal{R}$ on $S \times S$ is an equivalence relation if and only if
+it satisfies three properties:
+\begin{center}
+\begin{tabular}{r@{\hspace{1cm}}l}
+reflexivity  & $\forall x \in S: x\mathcal{R}x$ \\
+symmetry     & $\forall x, y \in S: x\mathcal{R}y \Leftrightarrow y\mathcal{R}x$ \\
+transitivity & $\forall x, y, z \in S: x\mathcal{R}y \wedge y\mathcal{R}z \Rightarrow x\mathcal{R}z$ 
+\end{tabular}
+\end{center}
+
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection*{Order Relations}
+
+A binary relation $\mathcal{R}$ on $S \times S$ is a \em{partial} order on $S$ if and only if it
+has the following three properties:
+\begin{center}
+\begin{tabular}{r@{\hspace{1cm}}l}
+reflexivity  & $\forall x \in S: x\mathcal{R}x$ \\
+antisymmetry     & $\forall x, y \in S: x\mathcal{R}y \wedge y\mathcal{R}x \Rightarrow x = y$ \\
+transitivity & $\forall x, y, z \in S: x\mathcal{R}y \wedge y\mathcal{R}z \Rightarrow x\mathcal{R}z$ 
+\end{tabular}
+\end{center}
+
+A partial order $\mathcal{R}$ on $S$ is a \em{total} order if and only if also satisfies a fourth
+property:
+\begin{center}
+\begin{tabular}{r@{\hspace{1cm}}l}
+connexity& $\forall x, y \in S: x\mathcal{R}y \vee y\mathcal{R}x$ 
+\end{tabular}
+\end{center}
+Observe that connexity generalizes reflexivity.
+
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection*{Transitive closure}
 
-The transitive closure of a binary relation $R$ on a set $S$ is the smallest relation on $S$ that contains $R$ and is transitive.
+The transitive closure of a binary relation $\mathcal{R}$ on $S \times S$,
+denoted $\mathcal{R}^+$, is
+the smallest relation on $S \times S$ that contains $\mathcal{R}$ and that 
+has the transitivity property.
 
 For example:
 
 \begin{align*}
 S &= \{1, 2, 3\} \\
-R &= \{(1, 2), (2, 3)\} \\
-T &= \{(1, 2), (2, 3), (1, 3)\}
+\mathcal{R} &= \{(1, 2), (2, 3)\} \\
+\mathcal{R}^+ &= \{(1, 2), (2, 3), (1, 3)\}
 \end{align*}
+
+%-------------------------------------------------------------------------------
+\section*{Proof Techniques}
+
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection*{Weak Induction}
+
+Weak induction is a proof technique that establishes $\forall n \in \mathbb{N}:
+\mathcal{P}(n)$, with $\mathcal{P}$ some predicate on $\mathbb{N}$.
+It requires proving two simpler statements:
+\begin{itemize}
+\item[(a)] $\mathcal{P}(0)$, and
+\item[(b)] $\forall n \in \mathbb{N}: \mathcal{P}(n) \Rightarrow \mathcal{P}(n+1)$.
+\end{itemize}
+
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection*{Strong Induction}
+
+Strong induction is a proof technique derived from weak induction that also
+establishes $\forall n \in \mathbb{N}: \mathcal{P}(n)$, with $\mathcal{P}$ some
+predicate on $\mathbb{N}$. It requires proving two simpler statements, the second
+of which differs from weak induction:
+\begin{itemize}
+\item[(a)] $\mathcal{P}(0)$, and
+\item[(b')] $\forall n \in \mathbb{N}: (\forall m \leq n: \mathcal{P}(m)) \Rightarrow \mathcal{P}(n+1)$.
+\end{itemize}
