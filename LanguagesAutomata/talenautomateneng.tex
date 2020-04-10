@@ -647,7 +647,7 @@ and later we do the reverse. Together, this will prove that the two
 formalisms are (in some sense) equivalent.
 
 
-\section{The Transition Table}
+\subsection*{The Transition Table}
 
 The $\delta$ of an NFA is a function with a finite domain. It can be
 represented in the form of a table named the {\em transition table}:
@@ -1579,36 +1579,77 @@ Prove: every regular language has a minimal pumping length. Is it
 related to the minimal DFA for that language?
 \end{itemize}
 
+\newpage
+%===============================================================================
+\section{DFA Product}
 
-\section{Intersection, Difference and Complement of Two DFAs}
+Given are two DFAs $A_1$ and $A_2$ with $A_1 = (Q_i,\Sigma,\delta_i,q_{si},F_i)$ for
+i=1,2. These DFAs define two languages $L_{A_1}$ and $L_{A_2}$. How do we obtain
+a DFA $B = (Q_B,\Sigma,\delta_B,q_{sB},F_B)$ whose language $L_B = L_{A_1}
+\odot L_{A_2}$ with $\odot$ some binary operator on sets like $\cup$,
+$\cap$, $\setminus$, $\ominus$, \ldots
 
-We have considered the union of regular languages before. Now it is
-time to study the other usual set operations: intersection,
-(symmetric) difference, and complement. We assume given two DFAs
-$(Q_i,\Sigma,\delta_i,q_{si},F_i)$ for i=1,2. We construct a generic
-product DFA $(Q,\Sigma,\delta,q_s,F)$ as follows:
+We can bring $L_B = L_{A_1} \odot L_{A_2}$ down from the set level to the
+string level by mapping the binary set operator $\odot$ to an appropriate binary
+boolean operator $\circledast$. For instance, $w \in (L_{A_1} \cup L_{A_2})$
+iff $(w \in L_{A_1}) \vee (w \in L_{A_2})$. Similarly, we have to map $\cap$ to $\wedge$,
+$\setminus$ to $>$, and $\ominus$ to $\oplus$ (exclusive or). More abstractly, 
+we can say that $w \in (L_{A_1} \odot L_{A_2})$ iff $(w \in L_{A_1}) \circledast (w \in L_{A_2})$
 
+This transformation of the problem is useful because we have translated the
+membership test of the combined language into a membership test on the given
+languages. We don't know how to do the former, but we have automata available
+for the latter. Indeed $w$ belongs to $L_(A_i)$ iff $\delta_i(q_{si},w) \in
+F_i$. Hence, to determine $w \in L_B$ we can compute $(\delta_1(q_{s1},w) \in
+F_1) \circledast (\delta_2(q_{s2},w) \in F_2)$.
+
+The string $s$ is of course of the general form $s = a_1 \cdots a_n$ with all $a_j \in
+\Sigma$ and $n \geq 0$. This means that the membership tests on the two automata proceed
+through $n + 1$ states of the two automata:
+\begin{equation*}
+\begin{array}{ccccccc}
+q_{s1} & \stackrel{a_1}{\longrightarrow} & q_{11} & \stackrel{a_2}{\longrightarrow} & \cdots & \stackrel{a_n}{\longrightarrow} & q_{n1} \\
+q_{s2} & \stackrel{a_1}{\longrightarrow} & q_{12} & \stackrel{a_2}{\longrightarrow} & \cdots & \stackrel{a_n}{\longrightarrow} & q_{n2}
+\end{array}
+\end{equation*}
+where $q_{j1} \in Q_1$ and $q_{j2} \in Q_2$. Observe that these two transition
+sequences operate in lockstep: they take the same number of steps, and each
+step with the same symbol. Hence, we can actually merge the two transitions 
+on different state spaces into one transition on the product of the state spaces:
+\begin{equation*}
+\begin{array}{ccccccc}
+(q_{s1}, q_{s2}) & \stackrel{a_1}{\longrightarrow} & (q_{11}, q_{12}) & \stackrel{a_2}{\longrightarrow} & \cdots & \stackrel{a_n}{\longrightarrow} & (q_{n1}, q_{n2}) 
+\end{array}
+\end{equation*}
+This of course a regular transition sequence in the automaton $B$ that
+is defined as:
 \begin{itemize}
-\item $Q = Q_1 \times Q_2$
-\item $\delta(p \times q,x) = \delta_1(p,x) \times \delta_2(q,x)$
-\item $q_s = q_{s1} \times q_{s2}$
+\item $Q_B = Q_1 \times Q_2$
+\item $\delta_B((p, q),x) = (\delta_1(p,x), \delta_2(q,x))$
+\item $q_s = (q_{s1}, q_{s2})$
 \end{itemize}
+Finally, we have to define $F_B \subseteq Q_1 \times Q_2$ in such a way 
+that $(q_{n1},q_{n2}) \in F_B$ iff $(q_{n1} \in F_1) \circledast (q_{n1} \in F_1)$.
 
-We still have some freedom in defining $F$:
-
+This depends on the choice of $\circledast$ and thus the underlying choice of $\odot$.
 \begin{itemize}
-\item $F = F_1 \times F_2$: the new DFA defines the intersection of
-  the two given languages
-\item $F = (F_1 \times Q_2) \cup (Q_1 \times F_2)$: ... union ...
-of the two languages
-\item $F = F_1 \times (Q_2 \setminus F_2)$: the new DFA determines
- $L_1 \setminus L_2$
-\item $F = (Q_1 \setminus F_1) \times (Q_2 \setminus F_2)$: the new
-  DFA determines $L_1 \triangle L_2$
+\item If $\odot \equiv \cap$, $\circledast \equiv \wedge$, then $F_B = F_1
+      \times F_2$. Then $B$ defines the intersection of the two given languages.
+\item If $\odot \equiv \cup$, $\circledast \equiv \vee$, 
+      then $F_B = (F_1 \times Q_2) \cup (Q_1 \times F_2)$. 
+      Then $B$ defines the union of the two given languages.
+\item If $\odot \equiv \setminus$, $\circledast \equiv >$, 
+      then $F_B = F_1 \times \overline{F}_2$.
+      Then $B$ defines the difference of the two given languages.
+\item If $\odot \equiv \ominus$, $\circledast \equiv \oplus$, 
+      then $F_B = (F_1 \times \overline{F}_2) \cup (\overline{F}_1 \times F_2)$.
+      Then $B$ defines the symmetric difference of the two given languages.
 \end{itemize}
+Here $\overline{F}_i$ is the complement of $F_i$, which can be obtained as
+$Q_i\setminus F_i$.
 
 The above constructions show that the union, the intersection, and the
-(symmetric) difference of two regular languages is also regular. It
+(symmetric) difference of two regular languages are also regular. It
 follows that also the complement is regular, since
 %
 $\overline{L} = \Sigma^* \setminus L$.
@@ -1622,7 +1663,9 @@ Now use that same construction on an NFA; do you get what you wanted?
 Why (not)?
 \end{itemize}
 
-\subsection{Discussion}
+\newpage
+%===============================================================================
+\section{Discussion}
 
 \subsection{Regular Expressions and Lexical Analysis}
 
