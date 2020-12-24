@@ -328,7 +328,7 @@ rules above.
 It is often implicitly clear which alphabet is used, and we often do
 not mention it.
 %
-We use the brackets to avoid ambiguity: the brackets to not belong to
+We use the brackets to avoid ambiguity: the brackets do not belong to
 the alphabet.
 %
 In the next examples, $\Sigma = \{a,b,c\}$.
@@ -360,7 +360,7 @@ just one string, consisting of the character a)
 
 This similarity between the structure of the regular expressions and
 the structure of the languages they determine is not a coincidence,
-and we can exploit it to use less brackets in regular expressions. We
+and we can exploit it to use fewer brackets in regular expressions. We
 just agree that $^*$ takes precedence over concatenation, which takes
 precedence over union. Note also that concatenation is associative. So
 we can agree that $L_{(((a)^*(b))c)} = L_{a^*bc}$. You should however
@@ -476,38 +476,53 @@ in a constructive way, i.e. (for union) construct an E so that $L_E =
 L_{E_1} \cup L_{E_2}$. Did you succeed for complement?
 
 
+%===============================================================================
+\section{Finite State Machines}
 
+\newcommand{\atm}{\entrymodifiers={++[o][F-]}}
+\newcommand{\accept}[1]{*++[o][F=]{#1}}
 
-\section{Finite Automata}
+While regular expressions are a declarative way of describing (regular)
+languages, 
+Finite state machines (FSM) are a more operationl formalism. They
+capture how to test and/or generate strings that belong
+to a language.
 
-Finite state machines (FSM) are used to describe languages: testing
-and generating strings is part of that. We start with a
+In this chapter we focus on the particular class 
+of FSMs known as deterministic finite state automata (DFAs).
+We start with a
 graphical representation of an FSM. The formal definition follows
 later. Figure~\ref{fsa1} shows a first example of an {\em
-  NFA} \footnote{The explanation of this acronym follows later.} over
+DFA}  over
 the alphabet $\{a,b,c\}$.
 
 \begin{figure}[h]
-\begin{center}\includegraphics[%
-  width=0.5\linewidth,
-  keepaspectratio]{fsa1}\end{center}
+\begin{equation*}
+\atm\xymatrix{
+*{} \ar[r] & q_0 \ar[r]^b\ar@(u,ul)_a\ar@/^/[d]_c & \accept{q_1}\ar@(u,ur)^{b}\ar[dl]_c\ar[d]_a \\
+*{}        & q_2\ar[r]_c\ar@/^/[u]^{a,b} & \accept{q_3}\ar@(r,rd)^{a,b,c}
+}
+\end{equation*}
+%  \begin{center}\includegraphics[%
+%    width=0.5\linewidth,
+%    keepaspectratio]{fsa1}\end{center}
 \caption{A finite state machine\label{fsa1}}
 \end{figure}
 
 The most important characteristics are:
 
 \begin{itemize}
-\item we see a directed graph
+\item we see a directed graph;
 \item the vertices have a name (in this case a number) - the vertices
-  are named {\em states}
+  are called {\em states};
 \item there are two kinds of states: states with a double circle are
-  named accepting states (sometimes also named end states or final
-  states)
-\item loops are allowed
+  called accepting states (sometimes also end states or final
+  states)--the other states are non-acceping;
+\item loops are allowed;
 \item the edges are labelled with zero, one, or more symbols from the
-  alphabet, and/or $\epsilon$
+  alphabet;
 \item there is exactly one edge not starting from a vertex: the vertex
-  in which it arrives is named the start state
+  in which it arrives is the start state.
 \end{itemize}
 
 We can use this graphical representation as follows:
@@ -518,24 +533,23 @@ We can use this graphical representation as follows:
 \item you can now go from one state to the other along any given
   edge but you must pay a price for that: you spend from the beginning
   of your current string a symbol that appears on the edge (meaning
-  that your string shortens); in case the edge contains $\epsilon$,
-  you do not need to spend a symbol from your string
-\item if you manage to arrive in a final state with an empty string,
-  we say {\em the NFA accepts the initial string $s$}
+  that your string shortens)
+  % ; in case the edge contains $\epsilon$,
+  % you do not need to spend a symbol from your string
+\item if you manage to arrive in an accepting state with an empty string,
+  we say {\em the DFA accepts the initial string $s$}
 \end{enumerate}
 
 This constitues only an informal definition of which strings are
-accepted by an NFA.
+accepted by an DFA.
 
 Here is a different use of the graphical representation:
 
 \begin{enumerate}
 \item start with an empty string in the start state: that is your
   current string
-\item now follow any edges: if the edge has a label with symbols from
-  the alphabet, add any of these symbols to you string; if the edge
-  contains $\epsilon$ you don't have to add any symbol; keep doing that
-\item any time you arrive at a final state, you may say {\em this machine generates the current string}
+\item now follow any edges: add one of the symbols on the edge to your string; keep doing that
+\item any time you arrive at an accepting state, you may say {\em this machine generates the current string}
 \end{enumerate}
 
 
@@ -544,620 +558,1132 @@ Here is a different use of the graphical representation:
 
 \begin{itemize}
 \item[]
-does the NFA in Figure~\ref{fsa1} accept ac?
+does the DFA in Figure~\ref{fsa1} accept ac?
 
-does the NFA in Figure~\ref{fsa1} accept bbb?
+does the DFA in Figure~\ref{fsa1} accept bbb?
 
 is there more than one way to accept bbb?
 
 is it possible that you get stuck with bbb and what does that mean for bbb?
 
-can you give some strings not accepted by this NFA?
+can you give some strings not accepted by this DFA?
 
-construct an NFA with a circuit - can you now get into an endless
-loop? is that a problem?
+% construct an NFA with a circuit - can you now get into an endless
+% loop? is that a problem?
 
-can you comment on {\em the set of strings generated by the NFA equals
-  the set of strings accepted by the NFA} ?
+can you comment on {\em the set of strings generated by the DFA equals
+  the set of strings accepted by the DFA} ?
 \end{itemize}
 
-\begin{definition}[An NFA M determines a language (informal)]
-A language L is determined by the NFA M, if M accepts every string
+\begin{definition}[A DFA M determines a language (informal)]
+A language L is determined by the DFA M, if M accepts every string
 from L, and no other strings. We denote this language by $L_M$.
 \end{definition}
 
-The alphabets of the NFA and the language do not need to be the same,
+The alphabets of the DFA and the language do not need to be the same,
 but it is convenient to assume they are.
 
-\begin{definition}[Equivalence of NFAs]
-Two NFAs are {\bf equivalent} if they determine the same language.
+\begin{definition}[Equivalence of DFAs]
+Two DFAs are {\bf equivalent} if they determine the same language.
 \end{definition}
 
-The relation {\em NFA-equivalence} defines an equivalence relation on
-NFAs: each equivalence class corresponds to one language.
+The relation {\em DFA-equivalence} defines an equivalence relation on
+DFAs: each equivalence class corresponds to one language.
 
 
 \paragraph{Selfie:} think about the following
 
 \begin{itemize}
-\item[] there exists a procedure for deciding whether two given NFAs
+\item[] there exists a procedure for deciding whether two given DFAs
   are equivalent
 
-for each NFA there exists an equivalent one with at most one final
+for each DFA there exists an equivalent one with at most one accepting
 state
 
-for each NFA there exists an equivalent one in which {\em you can't
-  get stuck}
+% for each NFA there exists an equivalent one in which {\em you can't
+%   get stuck}
 \end{itemize}
 
-We often need the set $\Sigma \cup \{\epsilon\}$: we abbreviate it by
-$\Sigma_\epsilon$.
+% We often need the set $\Sigma \cup \{\epsilon\}$: we abbreviate it by
+% $\Sigma_\epsilon$.
 
-\begin{definition}[Non-deterministic finite state automaton] \label{nfadef}
-A {\bf non-deterministic finite state automaton} is a 5-tuple
+\begin{definition}[Deterministic finite state automaton] \label{dfadef}
+A {\bf deterministic finite state automaton} is a 5-tuple
 $(Q,\Sigma,\delta,q_s,F)$ with
 \begin{itemize}
 \item Q a finite set of states
 \item $\Sigma$ a finite alphabet
-\item $\delta$ a transition function, i.e.
-%
-$\delta: Q \times \Sigma_\epsilon \rightarrow {\cal P}(Q)$
-\item $q_s$ is the start state and an element of $Q$
-\item $F \subseteq Q$: F is the set of final states
+\item $\delta: Q \times \Sigma \to Q$ is the transition function
+\item $q_s \in Q$ is the start state
+\item $F \subseteq Q$: F is the set of accepting states
 \end{itemize}
 \end{definition}
 
-As you guessed by now: NFA is an acronym of {\em Non-deterministic Finite
-  Automaton}.
 
+The domain of $\delta$ in a DFA is $Q \times \Sigma$. It is useful to extend
+$\delta$ to a function $\delta^*$ on the domain $Q \times \Sigma^*$ as follows:
 
-We formally define what it means for a string $s$ to be accepted by an
-NFA.
+\begin{eqnarray*}
+\delta^*(q,\epsilon) & = & q \\
+\delta^*(q,a \cdot w) & = & \delta^*(\delta(q,a),w)
+\end{eqnarray*}
 
-\begin{definition}[A string accepted by an NFA] \label{defacceptnfa}
-A string $s$ is accepted by an NFA
-$(Q,\Sigma,\delta,q_s,F)$ if $s$ can be written as
-$a_1a_2a_3...a_n$ with $a_i \in \Sigma_\epsilon$, and there
-exist a sequence of states $t_1t_2t_2t_3...t_{n+1}$ so that
+\paragraph{Selfie:}
 \begin{itemize}
-\item $t_1 = q_s$
-\item $t_{i+1} \in \delta(t_i,a_i)$
-\item $t_{n+1} \in F$
+\item[]
+Prove that $\delta^*(q,wa) = \delta(\delta^*(q,w),a)$ for $a \in
+\Sigma$ and $w \in \Sigma^*$
 \end{itemize}
+
+%  \begin{definition}[Non-deterministic finite state automaton] \label{nfadef}
+%  A {\bf non-deterministic finite state automaton} is a 5-tuple
+%  $(Q,\Sigma,\delta,q_s,F)$ with
+%  \begin{itemize}
+%  \item Q a finite set of states
+%  \item $\Sigma$ a finite alphabet
+%  \item $\delta$ a transition function, i.e.
+%  %
+%  $\delta: Q \times \Sigma_\epsilon \rightarrow {\cal P}(Q)$
+%  \item $q_s$ is the start state and an element of $Q$
+%  \item $F \subseteq Q$: F is the set of final states
+%  \end{itemize}
+%  \end{definition}
+%  
+%  As you guessed by now: NFA is an acronym of {\em Non-deterministic Finite
+%    Automaton}.
+
+
+We formally define what it means for a string $s$ to be accepted by a
+DFA.
+
+%  \begin{definition}[A string accepted by an NFA] \label{defacceptnfa}
+%  A string $s$ is accepted by an NFA
+%  $(Q,\Sigma,\delta,q_s,F)$ if $s$ can be written as
+%  $a_1a_2a_3...a_n$ with $a_i \in \Sigma_\epsilon$, and there
+%  exist a sequence of states $t_1t_2t_2t_3...t_{n+1}$ so that
+%  \begin{itemize}
+%  \item $t_1 = q_s$
+%  \item $t_{i+1} \in \delta(t_i,a_i)$
+%  \item $t_{n+1} \in F$
+%  \end{itemize}
+%  \end{definition}
+
+\begin{definition}[A string accepted by a DFA] \label{defacceptdfa}
+A string $s$ is accepted by an DFA
+$(Q,\Sigma,\delta,q_s,F)$ iff $\delta^*(q_s,w) \in F$.
 \end{definition}
 
 \paragraph{Selfie:}
 \begin{itemize}
 \item[]
-You now have both an intuitive notion of acceptance by an NFA (through
+You now have both an intuitive notion of acceptance by a DFA (through
 its graphical representation) and a formal definition: make sure that
 your intuition matches the definition.
 \end{itemize}
 
 
-Up to now, we have defined only non-deterministic automata: it is
-possible that at a particular state, there is more than one outgoing
-edge with the same symbol. This leaves a potential choice. But some of
-those NFAs are deterministic: there is no choice. Such an automaton is
-a DFA.
+%  Up to now, we have defined only non-deterministic automata: it is
+%  possible that at a particular state, there is more than one outgoing
+%  edge with the same symbol. This leaves a potential choice. But some of
+%  those NFAs are deterministic: there is no choice. Such an automaton is
+%  a DFA.
 
 The next section shows the connection between regular expressions and
-NFAs: we first construct an NFA from a RE so that $L_{RE} = L_{NFA}$,
+DFAs: we first construct a DFA from a RE so that $L_{RE} = L_{DFA}$,
 and later we do the reverse. Together, this will prove that the two
 formalisms are (in some sense) equivalent.
 
 
 \subsection*{The Transition Table}
 
-The $\delta$ of an NFA is a function with a finite domain. It can be
+The $\delta$ of a DFA is a function with a finite domain. It can be
 represented in the form of a table named the {\em transition table}:
-it shows which transitions are possible in the NFA. As an example:
+it shows the transitions of the DFA. As an example,
+here is the transition table for the DFA in Figure~\ref{fsa1}:
 
-\begin{table}[ht]
-\center
-\begin{tabular}{|r|r|r|}
+%\begin{table}[ht]
+{\center
+\begin{tabular}{|r|r||r|}
 \hline
-$Q$    & $\Sigma_\epsilon$ &  ${\cal P}(Q)$ \\ \hline
-1      & a                  &  $\{2\}$         \\
-1      & b                  &  $\{3\}$         \\
-1      & $\epsilon$         &  $\{2\}$         \\
-2      & a                  &  $\{2\}$         \\
-2      & b                  &  $\{2,4\}$         \\
-3      & a                  &  $\{3\}$         \\
-3      & b                  &  $\{3\}$         \\ \hline
-2      & $\epsilon$         &  $\emptyset$         \\
-3      & $\epsilon$         &  $\emptyset$         \\
-4      & a                  &  $\emptyset$         \\
-4      & b                  &  $\emptyset$         \\
-4      & $\epsilon$         &  $\emptyset$         \\
-1,2,3,4 & c                 &  $\emptyset$         \\
+$Q$    & $\Sigma$           & $Q$ \\ \hline
+$q_0$    & a                  & $q_0$       \\
+$q_0$    & b                  & $q_1$       \\
+$q_0$    & c                  & $q_2$       \\
+$q_1$    & a                  & $q_3$       \\
+$q_1$    & b                  & $q_1$       \\
+$q_1$    & c                  & $q_2$       \\
+$q_2$    & a                  & $q_0$       \\
+$q_2$    & b                  & $q_0$       \\
+$q_2$    & c                  & $q_3$       \\
+$q_3$    & a                  & $q_3$       \\
+$q_3$    & b                  & $q_3$       \\
+$q_3$    & c                  & $q_3$       \\
 \hline
 \end{tabular}
-\caption{The transition table of the NFA in
-Figure~\ref{fsa1}} \label{transitietabel}
-\end{table}
+% \caption{The transition table of the DFA in
+% Figure~\ref{fsa1}} \label{transitietabel}
+}
+% \end{table}
+%  %\begin{table}[ht]
+%  {\center
+%  \begin{tabular}{|r|r|r|}
+%  \hline
+%  $Q$    & $\Sigma_\epsilon$ &  ${\cal P}(Q)$ \\ \hline
+%  1      & a                  &  $\{2\}$         \\
+%  1      & b                  &  $\{3\}$         \\
+%  1      & $\epsilon$         &  $\{2\}$         \\
+%  2      & a                  &  $\{2\}$         \\
+%  2      & b                  &  $\{2,4\}$         \\
+%  3      & a                  &  $\{3\}$         \\
+%  3      & b                  &  $\{3\}$         \\ \hline
+%  2      & $\epsilon$         &  $\emptyset$         \\
+%  3      & $\epsilon$         &  $\emptyset$         \\
+%  4      & a                  &  $\emptyset$         \\
+%  4      & b                  &  $\emptyset$         \\
+%  4      & $\epsilon$         &  $\emptyset$         \\
+%  1,2,3,4 & c                 &  $\emptyset$         \\
+%  \hline
+%  \end{tabular}
+%  % \caption{The transition table of the DFA in
+%  % Figure~\ref{fsa1}} \label{transitietabel}
+%  }
+%  % \end{table}
 
-For a combination of a state in the NFA and a symbol in
-$\Sigma_\epsilon$ for which there is an edge in the graphical
-representation, there is a set of states to which transition is
-possible. When there is no edge, one can add the entry with an empty
-set of states.
+For each combination of a state in the DFA and a symbol in
+$\Sigma$, there is a corresponding destination state of the transition. 
 
-The transition table definitely looks usable in a program that
-implements the NFA. The non-determinism is perhaps a bit scary, but
-don't panic: we will get rid of it.
+% When there is no edge, one can add the entry with an empty
+% set of states.
 
-
-
-
-\section{An Algebra of NFAs}
-
-We fix the alphabet: we might relax this later. The set of NFAs
-over this alphabet is well defined: use the definition on page
-\pageref{nfadef}. We will show that on this set, we can define three
-internal operations: two binary ones (union and concatenation) and a
-unary one (the star). In the mean time, you know that an NFA can
-always be transformed to an equivalent one with exactly one accepting
-state from which no edges leave. That will make things a little easier.
-
-\paragraph{The union of two NFAs:}
-
-
-Figure~\ref{uniefsa} shows the intuition about the union of two NFAs:
-construct a new accepting state and draw an $\epsilon$-edge from the
-old end states to the new one; the old end states become
-non-accepeting. Construct a new starting state, with $\epsilon$-edges
-to the old starting states.
-
-
-\begin{figure}[h]
-\begin{center}\includegraphics[%
-  width=0.6\linewidth,
-  keepaspectratio]{uniefsaeng}\end{center}
-\caption{The union of two NFAs\label{uniefsa}}
-\end{figure}
-
-We can write formally:
-
-Given $NFA_1 = (Q_1,\Sigma,\delta_1,q_{s1},\{q_{f1}\})$ and
-%
-$NFA_2 = (Q_2,\Sigma,\delta_2,q_{s2},\{q_{f2}\})$.
-
-The union $NFA_1 \cup NFA_2$ is an $NFA = (Q,\Sigma,\delta,q_s,F)$
-in which
-\begin{itemize}
-\item $Q = Q_1 \cup Q_2 \cup \{q_s,q_f\}$ with $q_s$ and $q_f$ new states
-\item $F = \{q_f\}$
-\item $\delta$ is defined as
-
- $\delta(q,x) = \delta_i(q,x)~~\forall q \in Q_i \backslash \{q_{fi}\}, x \in \Sigma_\epsilon$ for i=1,2 \\
- $\delta(q_s,\epsilon) = \{q_{s1}, q_{s2}\}$ \\
- $\delta(q_s,x) = \emptyset ~~\forall x \in \Sigma$ \\
- $\delta(q_{fi},\epsilon) = \{q_f\}$ for i = 1,2 \\
- $\delta(q_{fi}, x) = \emptyset ~~\forall x \in \Sigma$ and for i = 1,2
-\end{itemize}
-
-
-\paragraph{The concatenation of two NFAs:} this time we just give the
-graphical representation of concatenation in Figure~\ref{concatfsa}:
-
-\begin{figure}[h]
-\begin{center}\includegraphics[%
-  width=0.6\linewidth,
-  keepaspectratio]{concatfsaeng}\end{center}
-\caption{Concatenation of two NFAs\label{concatfsa}}
-\end{figure}
-
-
-\paragraph{The star of an NFA:} see Figure~\ref{starfsa}.
-
-\begin{figure}[h]
-\begin{center}\includegraphics[%
-  width=0.6\linewidth,
-  keepaspectratio]{sterfsaeng}\end{center}
-\caption{The star of an NFA\label{starfsa}}
-\end{figure}
-
-You should work out the formal description of concatenation and star
-yourself.
-
-\paragraph{Selfie:}
-\begin{itemize}
-\item[]
-The concatenation of $NFA_1$ and $NFA_2$ determines
-$L_{NFA_1}L_{NFA_2}$: prove this.
-
-Formulate a similar statement for star and union.
-
-What does this prove about the algebraic isomorphism between ... and ... ?
-
-\end{itemize}
+The transition table definitely can be used as the basis for a program that
+implements the DFA.
+%  The non-determinism is perhaps a bit scary, but
+% don't panic: we will get rid of it.
 
 
 
-\section{From Regular Expression to NFA}\label{re2fsasec}
+%  %===============================================================================
+%  \section{An Algebra of NFAs}
+%  
+%  We fix the alphabet: we might relax this later. The set of NFAs
+%  over this alphabet is well defined: use the definition on page
+%  \pageref{nfadef}. We will show that on this set, we can define three
+%  internal operations: two binary ones (union and concatenation) and a
+%  unary one (the star). In the mean time, you know that an NFA can
+%  always be transformed to an equivalent one with exactly one accepting
+%  state from which no edges leave. That will make things a little easier.
+%  
+%  \paragraph{The union of two NFAs:}
+%  
+%  
+%  Figure~\ref{uniefsa} shows the intuition about the union of two NFAs:
+%  construct a new accepting state and draw an $\epsilon$-edge from the
+%  old end states to the new one; the old end states become
+%  non-accepeting. Construct a new starting state, with $\epsilon$-edges
+%  to the old starting states.
+%  
+%  
+%  \begin{figure}[h]
+%  \begin{center}\includegraphics[%
+%    width=0.6\linewidth,
+%    keepaspectratio]{uniefsaeng}\end{center}
+%  \caption{The union of two NFAs\label{uniefsa}}
+%  \end{figure}
+%  
+%  We can write formally:
+%  
+%  Given $NFA_1 = (Q_1,\Sigma,\delta_1,q_{s1},\{q_{f1}\})$ and
+%  %
+%  $NFA_2 = (Q_2,\Sigma,\delta_2,q_{s2},\{q_{f2}\})$.
+%  
+%  The union $NFA_1 \cup NFA_2$ is an $NFA = (Q,\Sigma,\delta,q_s,F)$
+%  in which
+%  \begin{itemize}
+%  \item $Q = Q_1 \cup Q_2 \cup \{q_s,q_f\}$ with $q_s$ and $q_f$ new states
+%  \item $F = \{q_f\}$
+%  \item $\delta$ is defined as
+%  
+%   $\delta(q,x) = \delta_i(q,x)~~\forall q \in Q_i \backslash \{q_{fi}\}, x \in \Sigma_\epsilon$ for i=1,2 \\
+%   $\delta(q_s,\epsilon) = \{q_{s1}, q_{s2}\}$ \\
+%   $\delta(q_s,x) = \emptyset ~~\forall x \in \Sigma$ \\
+%   $\delta(q_{fi},\epsilon) = \{q_f\}$ for i = 1,2 \\
+%   $\delta(q_{fi}, x) = \emptyset ~~\forall x \in \Sigma$ and for i = 1,2
+%  \end{itemize}
+%  
+%  
+%  \paragraph{The concatenation of two NFAs:} this time we just give the
+%  graphical representation of concatenation in Figure~\ref{concatfsa}:
+%  
+%  \begin{figure}[h]
+%  \begin{center}\includegraphics[%
+%    width=0.6\linewidth,
+%    keepaspectratio]{concatfsaeng}\end{center}
+%  \caption{Concatenation of two NFAs\label{concatfsa}}
+%  \end{figure}
+%  
+%  
+%  \paragraph{The star of an NFA:} see Figure~\ref{starfsa}.
+%  
+%  \begin{figure}[h]
+%  \begin{center}\includegraphics[%
+%    width=0.6\linewidth,
+%    keepaspectratio]{sterfsaeng}\end{center}
+%  \caption{The star of an NFA\label{starfsa}}
+%  \end{figure}
+%  
+%  You should work out the formal description of concatenation and star
+%  yourself.
+%  
+%  \paragraph{Selfie:}
+%  \begin{itemize}
+%  \item[]
+%  The concatenation of $NFA_1$ and $NFA_2$ determines
+%  $L_{NFA_1}L_{NFA_2}$: prove this.
+%  
+%  Formulate a similar statement for star and union.
+%  
+%  What does this prove about the algebraic isomorphism between ... and ... ?
+%  
+%  \end{itemize}
+%  
+%===============================================================================
+\section{From Regular Expression to DFA}\label{fsa2resec}
 
-We now have all the necessary ingredients to construct an NFA from a regular
-expression RE such that $L_{RE} = L_{NFA}$. Since regular
-expressions are defined inductively (see definition page
-\pageref{defregexp}) we define a corresponding NFA for each case in the
-definition. $NFA_{RE}$ denotes the NFA corresponding to a
-regular expression RE.
+%-------------------------------------------------------------------------------
+\subsection{The Brzozowski Derivative}
 
-Figure~\ref{re2fsa} shows the NFA for the first three bases cases in
-the definition on page \pageref{defregexp}:
+The (Brzozowski) derivative of a language $L$ with respect to a string
+$v$ is the language $D_s(L)$ of suffixes $w$ such that $v \cdot w \in L$.
+For example, $D_{\mathit{hel}}(\{\mathit{hell}, \mathit{hello},\mathit{helper},\mathit{world}\}) = 
+\{ \mathit{l}, \mathit{lo}, \mathit{per} \}$.
 
-\begin{figure}[h]
-\begin{center}\includegraphics[%
-  width=0.55\linewidth,
-  keepaspectratio]{re2fsa}\end{center}
-\caption{An NFA for the three base cases\label{re2fsa}}
-\end{figure}
+Formally,
+\begin{equation*}
+D_v(L) = \{ w \mid v \cdot w \in L \}
+\end{equation*}
 
-The three {\em recursive} cases are described as follows: let $E_1$
-and $E_2$ be two regular expressions, then
-\begin{itemize}
-\item $NFA_{E_1E_2} = concat(NFA_{E_1},NFA_{E_2})$
-\item $NFA_{E_1^*} = star(NFA_{E_1})$
-\item $NFA_{E_1|E_2} = union(NFA_{E_1},NFA_{E_2})$
-\end{itemize}
+A consequence of this definition is that a word $w$ is in a language $w$ if and only if
+the empty word $\epsilon$ is in the derivative $D_w(L)$.
+\begin{equation*}
+w \in L ~\Leftrightarrow~ \epsilon \in D_w(L)
+\end{equation*}
 
-\begin{theorem}
-The construction above preserves the language, i.e.
+From this observation we can derive a string matching algorithm for regular
+expressions.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $L_{NFA_E} = L_E$.
-\end{theorem}
-\begin{proof}
-Prove this yourself - use structural induction.
-\end{proof}
+Indeed, by extension, the derivative can also be defined for regular
+expressions by specifying that the language corresponding to the derivative of
+the regular expression must be the same as the derivative of the language
+corresponding to the regular expression.  (We can also say that ``the
+derivative of'' must commute with ``the language corresponding to''.) More
+formally, the derivative of a regular expression must satisfy the property:
+\begin{equation}\label{eq:deriv_re:spec}
+L_{D_v(E)} = D_v(L_E)
+\end{equation}
+Observe that this does not uniquely determine the derivative of a regular
+expression because many regular expressions determine the same language.
 
+We can exploit this leeway to provide a convenient definition.
+\begin{definition}[Brzozowski Derivative of a Regular Expression]\label{def:derivative}
+The derivative $D_w(E)$ of a regular expression $E$ with respect to a word $w$ is
+defined by structural recursion on $w$: 
+\begin{eqnarray*}
+D_\epsilon(E)     & = & E \\
+D_{a \cdot w}(E)  & = & D_w(D_a(E))
+\end{eqnarray*}
+This definition comes down to repeatedly deriving with respect to a single
+symbol. We define this separately, now by structural recursion on $E$.
+\begin{eqnarray*}
+D_a(\phi)           & = & \phi \\
+D_a(\epsilon)       & = & \phi \\
+D_a(b)              & = & \left\{ \begin{array}{ll} \phi & \text{, }a \neq b \\ \epsilon & \text{, }a = b \end{array}\right. \\
+D_a(E_1 \mid E_2)   & = & D_a(E_1) \mid D_a(E_2) \\
+D_a(E_1 \cdot E_2)  & = & \left\{ \begin{array}{ll} D_a(E_1) \cdot E_2 \mid D_a(E_2) & \text{, }\nu(E_1)  \\ D_a(E_1) \cdot E_2 & \text{, otherwise} \end{array}\right. \\
+D_a(E^*)            & = & D_a(E) \cdot E^*
+\end{eqnarray*}
 
-\section{From NFA to Regular Expression}
-
-The opposite way is a bit more complicated: we first introduce a new
-kind of finite automata, the {\em Generalized Non-deterministic Finite
-Automata} or GNFAs. We will then follow the path:
-
-
-$NFA \rightarrow GNFA \rightarrow GNFA~with~2~states \rightarrow regular~expression$
-
-In each of the steps, we must prove that the language stays the same.
-
-\begin{definition}[GNFA (informal)]
-A {\bf GNFA} is a finite state machine with the following
-modifications and restrictions:
-\begin{itemize}
-\item there is exactly one end state and it differs from the start state
-\item there is exactly one edge from the start state to any other
-state, but the start state has no incoming edge (except for the start arrow)
-\item there is exactly one edge from each state to the end state, but
-the end state has no outgoing edge
-\item there is exactly one edge between every other two states (in both
-directions) and an edge from each state to itself
-\item the edges carry a regular expression as a label
-\end{itemize}
+Here, $\nu(E)$ determines wether $E$ is nullable, i.e., whether its language
+contains the empty word $\epsilon$. This is also defined by structural recursion.
+\begin{eqnarray*}
+\nu(\phi)           & = & \bot \\
+\nu(\epsilon)       & = & \top \\
+\nu(b)              & = & \bot \\
+\nu(E_1 \mid E_2)   & = & \nu(E_1) \vee \nu(E_2)  \\
+\nu(E_1 \cdot E_2)  & = & \nu(E_1) \wedge \nu(E_2) \\
+\nu(E^*)            & = & \top
+\end{eqnarray*}
+($\top$ means true and $\bot$ means false.)
 \end{definition}
 
+For example, 
+\begin{eqnarray*}
+D_0( (0 \mid 1)^*) & = & D_0( 0 \mid 1) \cdot (0 \mid 1)^* \\
+                   & = & (D_0(0) \mid D_0(1)) \cdot (0 \mid 1)^* \\
+                   & = & (\epsilon \mid \phi) \cdot (0 \mid 1)^*
+\end{eqnarray*}
 
-Figure~\ref{gfsa1} shows a GNFA.
+\paragraph{Selfie:} 
+Verify that the definition of nullability satisifies the specification:
+\begin{equation*}
+	\nu(E) ~\Leftrightarrow~ \epsilon \in L_E
+\end{equation*}
 
-\begin{figure}[h]
-\begin{center}\includegraphics[%
-  width=0.5\linewidth,
-  keepaspectratio]{gfsa1}\end{center}
-\caption{A GNFA\label{gfsa1}}
-\end{figure}
+\paragraph{Selfie:} 
+Verify that the above definition of derivative satisfies the specification, Equation~\ref{eq:deriv_re:spec}. 
+You may find Arden's Lemma from the next section helpful for the last case.
 
-We use the (graphical representation of the) GNFA as follows:
+\paragraph{Selfie:} 
+Implement regular expressions as an algebraic datatype in Haskell and 
+derivation and nullability as functions over that datatype.
 
+
+Observe that we now have an effective procedure for checking whether a word $w$
+\emph{matches} a regular expression $E$, i.e., whether the word $w$ is in the language
+$L_E$ of the regular expression:
+\begin{equation*}
+	w \in L_E ~\Leftrightarrow~ \nu(D_w(E))
+\end{equation*}
+
+%-------------------------------------------------------------------------------
+\subsection{Derivation-based DFA Construction}
+
+Above we have given a prodcure for matching a single word with a given regular
+expression $E$ by repeated derivation for the successive symbols in the word. 
+
+Computing all these derivates can be costly as it involves repeated structural
+recusion on regular expressions. Hence, if we know in advance that we will be
+matching many words, we can share the common work among them. For example,
+say we want to match $aba$ and $abb$ against $E$ by computing 6 derivatives:
+\begin{equation*}
+\atm\xymatrix{
+  E   \ar[d]_{D_a} &  E   \ar[d]_{D_a}  \\
+  E_1 \ar[d]_{D_b} &  E_4 \ar[d]_{D_b}  \\
+  E_2 \ar[d]_{D_a} &  E_5 \ar[d]_{D_b}  \\
+  E_3              &  E_6              
+}
+\end{equation*}
+We can observe that the first two derivatives are actually common and exploit this
+fact to share the work and only compute 4 distinct derivatives.
+\begin{equation*}
+\atm\xymatrix{
+ *{} & E   \ar[d]_{D_a} & *{}    \\
+ *{} & E_1 \ar[d]_{D_b} & *{}   \\
+ *{} & E_2 \ar[dl]_{D_a}\ar[dr]^{D_b} & *{}   \\
+ E_3 & *{}            &  E_6              
+}
+\end{equation*}
+In fact, we can also mark the nullable nodes in this graph with a double border.
+This way we do not have to recompute the nullability when matching with the same
+word again. Say that $E_3$ is nullable. Then the graph becomes.
+\begin{equation*}
+\atm\xymatrix{
+ *{} & E   \ar[d]_{D_a} & *{}    \\
+ *{} & E_1 \ar[d]_{D_b} & *{}   \\
+ *{} & E_2 \ar[dl]_{D_a}\ar[dr]^{D_b} & *{}   \\
+ \accept{E_3} & *{}            &  E_6              
+}
+\end{equation*}
+
+We could be overeager and compute all possible derivatives and their nullability
+up front. Clearly this would be folly as the resulting graph would be infinitely
+large. Consider the example of the $(0 \mid 1)^*$ regular expression and
+computing the successive $D_0$ derivatives:
+\begin{equation*}
+\begin{array}{rcccl}
+  E_0 & = & E        & = & (0 \mid 1)^* \\
+  E_1 & = & D_0(E_0) & = & (\epsilon \mid \phi) \cdot (0 \mid 1)^* \\
+  E_2 & = & D_0(E_1) & = & \underline{(\phi\mid \phi) \cdot (0 \mid 1)^*} \mid (\epsilon \mid \phi) \cdot (0 \mid 1)^* \\
+  E_3 & = & D_0(E_2) & = & \underline{(\phi\mid \phi) \cdot (0 \mid 1)^*} \mid \underline{(\phi\mid \phi) \cdot (0 \mid 1)^*} \mid (\epsilon \mid \phi) \cdot (0 \mid 1)^* \\
+  \vdots & & \vdots & & \vdots
+\end{array}
+\end{equation*}
+The derivatives become bigger and bigger. Yet, we can see the underlinded
+repeated pattern appearing as several of the different top-level alternatives.
+Clearly, this repetition is redundant and redundant alternatives can be dropped.
+
+It turns out that, by exploiting these repeated patterns, we can capture all
+possible derivatives with only finitely many regular expressions.
+\begin{definition}[Similar Regular Expressions]
+We say that two regular expressions $E_1$ and $E_2$ are \emph{similar}, written
+$E_1 \approx E_2$, if one can be rewritten to the other using only the identities:
+\begin{eqnarray*}
+E \mid E & \approx & E \\
+E_1 \mid E_2 & \approx & E_2 \mid E_1 \\
+(E_1 \mid E_2) \mid E_3 & \approx & E_1 \mid (E_2 \mid E_3)
+\end{eqnarray*}
+Two regular expressions are \emph{dissimilar} if they are not similar.
+\end{definition}
+This notion of similarity accounts for the observed redundancy. The first
+identity clearly states that a duplicated alternative may be dropped. 
+The other two identities, expressing respectively commutativity and associativity,
+allow \emph{shuffling around} alternatives until duplicates are adjacent and
+can be dropped with the first alternative.
+Hence, in the above example $E_2$ and $E_3$ are similar.
+
+Based on the notion of similarity, Brzozowski has established an astounding fact.
+\begin{theorem}
+The number of dissimilar repeated derivatives of a regular expression is finite.
+\end{theorem} 
+We do not cover the proof.
+
+Hence, if we compute repeated derivatives of an initial regular expression $E$
+and we throw away all the ones that are similar to ones we have already
+encountered, the procedure ends after a finite number of steps with a finite
+number of regular expressions.
+
+Moreover, it is important to realize that two similar regular expressions
+represent the same language.
+\begin{equation*}
+E_1 \approx E_2 ~\Rightarrow~ L_{E_1} = L_{E_2} 
+\end{equation*}
+(Observe that the implication does not hold in the opposite direction. Come up
+with two dissimilar regular expressions that represent the same language.)
+
+Hence, we can use similarity to exploit the leeway we have in the specification
+of the derivative of a regular expression. If we compute a derivative with
+the function in Definition~\ref{def:derivative} and it turns out to be similar
+to one already computed before, we can use the latter instead.
+
+This gives a way to compute a finite matching graph for all possible words.
 \begin{enumerate}
-\item you start off with a string $s$ in the start state
-\item you may now move to any state (the same or another one) by
-following an edge as long as your string starts with a substring that
-matches the regular expression on the edge: during the transition, you
-chop off that substring; if the regular expression equals $\epsilon$,
-the substring has length zero; if the edge just contains $\phi$, you
-can't take that edge
-\item keep making transitions: if you arrive in the end state with an
-empty string, we say {\em the GNFA has accepted the initial string $s$}
+\item Start with a graph that contains one node $q_i$ for the initial
+      regular expression $E_0$, and initialize a worklist with the tuple $(E_0, q_0)$ as only element.
+\item Remove a tuple $(E, q)$ from the worklist, and for each symbol
+      $a$ in the alphabet:
+      \begin{enumerate}
+      \item Compute the derivative $E' = D_a(E)$.
+      \item Check whether $E' \approx E''$ for some regular expression $E''$
+            associated with a node $q''$ that is already in the graph.
+            \begin{description}
+            \item[If so:] Add a new edge $(q,q'')$ to the graph and label it with $a$.
+            \item[If not:] Add a new nodge $q'$ to the graph and a new edge $(q,q')$ labelled with $a$.
+                           Then add $(E',q')$ to the worklist.
+            \end{description}
+      \end{enumerate}
+\item If the worklist is not empty, go to step 2.
 \end{enumerate}
+Of course, with starting state $q_0$, this graph is none other than the
+determinstic finite state automaton that determines the same langauge as the
+initial regular expression.
+
+For our running example $E = (0 \mid 1)^*$, we get:
+\begin{equation*}
+\atm\xymatrix{
+*{} \ar[r] & 
+\accept{q_0} \ar@/_/[r]_0\ar@{.>}@/^/[r]_1 &
+\accept{q_1} \ar@/_/[r]_0\ar@{.>}@/^/[r]_1 & 
+\accept{q_2} \ar@{.>}@(r,dr)^0\ar@{.>}@(r,ur)_1  \\
+}
+\end{equation*}
+The dotted edges are the ones where an earlier similar state is found in step 2(b)
+of the algorithm. The states $q_0$, $q_1$ and $q_2$ are associated respectively
+with the regular expressions $E_0$, $E_1$ and $E_2$ computed earlier.
+
+Observe that the resulting DFA is far from minimal. More compact results can be obtained
+by incorporating additional identities in the notion of similarity, such as
+\begin{equation*}
+\begin{array}{c}
+E \mid \phi \approx E \approx \phi \mid E \\
+E \cdot \phi \approx \phi \approx \phi \cdot E \\
+E \cdot \epsilon \approx E \approx \epsilon \cdot E
+\end{array}
+\end{equation*}
+With these additional identities, we obtain a single-state DFA for our running example.
+\begin{equation*}
+\atm\xymatrix{
+*{} \ar[r] & 
+\accept{q_0} \ar@{.>}@(r,dr)^0\ar@{.>}@(r,ur)_1  \\
+}
+\end{equation*}
+
+%===============================================================================
+\section{From DFA to Regular Expression}\label{re2fsasec}
+
+We can turn a DFA into regular expression by capturing the DFA in a system of
+language equations. 
+
+%-------------------------------------------------------------------------------
+\subsection{Arden's Lemma for Recursive Equations}
+
+Arden's Lemma is an important tool for solving \emph{recursive} language equations.
+
+\begin{theorem}[Arden's Lemma]
+Given the languages $A$ and $B$, the linear equation:
+\begin{equation*}
+X = A \cup B \cdot X
+\end{equation*}
+has as \emph{smallest} solution $X = B^* \cdot A$. 
+
+Moreover, if $B$ does not contain the empty word $\epsilon$, then the equation
+has no other solution.
+\end{theorem}
+\begin{proof}
+
+We prove in turn several properties: $B^*\cdot A$ is a solution, it is the minimal
+solution, and it is unique (if $\epsilon \not\in B$).
+\begin{description}
+\item[Solution]
+We can verify that $B^* \cdot A$ is a solution of the equation by filling it in:
+\begin{equation*}
+B^* \cdot A = A \cup B \cdot (B^* \cdot A)
+\end{equation*}
+By definition, we have that $B^* = \epsilon \cup B \cdot B^*$. If we fill this
+in in the left-hand side, we get:
+\begin{equation*}
+(\epsilon \cup B \cdot B^*) \cdot A = A \cup B \cdot (B^* \cdot A)
+\end{equation*}
+We know that $\cdot$ distributes over $\cup$. Hence, we can rewrite the left-hand
+side to:
+\begin{equation*}
+(\epsilon \cdot A) \cup ((B \cdot B^*) \cdot A) = A \cup B \cdot (B^* \cdot A)
+\end{equation*}
+If we take into account that $\epsilon$ is the neutral element of $\cdot$ in the left-hand
+side, and that $\cdot$ is associative in the right-hand side, we get the tautology:
+\begin{equation*}
+A \cup ((B \cdot B^*) \cdot A) = A \cup ((B \cdot B^*) \cdot A)
+\end{equation*}
+Since we have applied a nunber of equivalence-preserving steps, we know that the initial
+equation is true, and thus that $B^* \cdot A$ is a solution.
+
+\item[Minimality]
+  The solution $B^* \cdot A$ is minimal iff, for every solution $S$, $(B^* \cdot A) \subseteq S$.
+
+  It follows from definition of the Kleene star and the distributivity of $\cdot$ over $\cup$ that
+  \begin{equation*}
+   B^* \cdot A = \bigcup_{i \in \mathbb{N}} (B^i \cdot A)
+ \end{equation*}
+
+  Hence, we establish minimality by showing that for every solution $S$: $\forall i \in \mathbb{N}, (B^i \cdot A \subseteq S)$.
+  We prove this by induction on $i$.
+  \begin{description}
+  \item[\underline{$i = 0$:}] \ \\
+    Since $S$ satisfies $S = A \cup B \cdot S$, it follows trivially that $A \subseteq S$ and thus
+    $(B^0 \cdot A) \subseteq S$
+  \item[\underline{$i = j + 1$:}] \ \\
+    Since $S$ satisfies $S = A \cup B \cdot S$, it follows that $(B \cdot S) \subseteq S$.
+    Also for all $T \subseteq S$, it holds that $(B \cdot T) \subset (B \cdot T)$, and thus
+    by transitivity, $(B \cdot T) \subseteq S$.
+
+    Assuming that $(B^{j} \cdot A) \subseteq S$---which is the induction hypothesis---it thus follows that 
+    $(B \cdot (B^j \cdot A)) \subseteq S$. By associativity of $\cdot$ it thus follows that
+    $(B^{j+1} \cdot A) \subseteq S$.
+
+  \end{description}
+
+\item[Uniqueness]
+
+   By repeatedly filling in the equation in its own right-hand side, we can show that any solution $S$ satisfies,
+   for any $n \in \mathbb{N}$,
+   \begin{equation*}
+   S = (\bigcup_{i = 0}^n B^i \cdot A) \cup B^{n+1} \cdot S
+   \end{equation*}
+   If $B$ does not contain $\epsilon$, then $B^j$ only contains words $w$ with $|w| \geq j$.
+
+   Hence, for any finite word $w \in S$ with $|w| = k$, we have that $w \in (\bigcup_{i = 0}^k B^i \cdot A)$
+   and $w \not\in B^{k+1} \cdot S$. As a consequence, $w$ must also be an element of any other solution $S'$.
+   If we generalize this, we conclude that, if $\epsilon \not\in B$, then any word in a solution also appears
+   in all other solutions. Hence, all solutions must be the same, or, put differently, the solution is unique.
+
+\end{description}
+
+\end{proof}
+
+\paragraph{Selfie:} Illustrate that there can be multiple solutions when $\epsilon \in B$. 
 
 
-\paragraph{Selfie:}
-\begin{itemize}
-\item[]
-For the GNFA in Figure~\ref{gfsa1}, find strings accepted by it and
-strings not accepted by it.
-\end{itemize}
+Observe that when $A$ and $B$ are regular languages, the solution provided by Arden's lemma is
+also regular. Moreover, it can be represented by the regular expression $E = E_B^* \cdot E_A$.
 
+%-------------------------------------------------------------------------------
+\subsection{From DFA to Language Equations}
 
+Given an DFA $(Q_d,\Sigma,\delta,q_{s},F)$, we now explain how to construct a system of equations.
+We number the states arbitrarily $Q = \{ q_0, \ldots, q_n\}$ and assume without loss of generality
+that $q_s = q_0$.
 
-Now is the time to describe an algorithm for constructing a RE from an NFA.
+Recall that the language determined by the DFA is $X_0 = \{ w \in \Sigma^* \mid \delta^*(q_0, w) \in F\}$.
+In fact, all states $q_i$ of the DFA determine a language $X_i = \{ w \in \Sigma^* \mid \delta^*(q_i, w) \in F\}$.
+If we do a case analysis in $w$, taking into account that $w$ can be either of the form $\epsilon$ or $c \cdot w'$,
+we can rewrite the language definition as:
+\begin{equation*}
+X_i = \{ \epsilon | q_i \in F\} \cup \bigcup_{c \in \Sigma} c \cdot \underline{\{  w ' \in \Sigma^* \mid \delta^*(\delta(q_i,c), w') \in F\}}
+\end{equation*}
 
-\begin{itemize}
-\item[Step 1:]  {\em Make a GNFA from an NFA}
+Observe that, if $\delta(q_i,c) = q_j$, then the underlined term corresponds to one of the languages $X_j$. Hence,
+if we write out the above equation for every state, we get a system of linear equations between the languags
+associated with those states. 
 
-Introduce a new start state and a new unique end state. Draw an
-$\epsilon$-edge from the new start state to the old start state. and
-from the old end states to the new end state. Draw all missing edges
-with label $\phi$. Replace parallel edges into a new edge with as
-label the union of the labels of the parallel edges.
+For example, given the DFA given by the following diagram:
+\begin{equation*}
+\atm\xymatrix @R=1cm @C=2cm {
+*{}  \ar[r] & \accept{q_0}  \ar@/^/^a[r] \ar@/^/^b[rd] & q_1 \ar@/^/_b[l] \ar@/_/_a[d] \\
+*{}         & *{}                                         & q_2 \ar@/^/^a[ul] \ar@/_/_b[u] \\
+}
+\end{equation*}
+we get languages $X_0$, $X_1$ and $X_2$ for the corresponding states $q_0$, $q_1$ and $q_2$.
+The system of equations between those languages, which we can easily read off from the diagram, is:
+\begin{equation*}
+\left\{
+\begin{array}{rcl}
+X_0 & = & \epsilon  \cup a \cdot X_1 \cup b \cdot X_2\\
+X_1 & = & \emptyset \cup a \cdot X_2 \cup b \cdot X_0\\
+X_2 & = & \emptyset \cup a \cdot X_0 \cup b \cdot X_1\\
+\end{array}
+\right.
+\end{equation*}
+We can simplify the equations by dropping the spurious $\emptyset$ occurrences in the right-hand sides.
+\begin{equation*}
+\left\{
+\begin{array}{rcl}
+X_0 & = & \epsilon  \cup a \cdot X_1 \cup b \cdot X_2\\
+X_1 & = & a \cdot X_2 \cup b \cdot X_0\\
+X_2 & = & a \cdot X_0 \cup b \cdot X_1\\
+\end{array}
+\right.
+\end{equation*}
 
-\item[Step 2:]  {\em Reduce the GNFA to a GNFA with two states}
+Now we can obtain a closed form expression for the languages by treating the
+languages as unknowns and solving the system of equations for them. We are in
+particular interested in the close form for $X_0$, the language of the DFA.
 
-Choose any state X different from start and end state: if there is
-none, go to step 3. Remove X and for each pair of states A and B with
-an edge
-% from
-A to X with $E_1$,
-%
-from X to itself with $E_2$,
-%
-from X to B with $E_3$,
-%
-from A to B with $E_4$,
-%
-replace the label on the edge from A to B by
-$E_4~|~E_1E_2^*E_3$. Finally, remove all edges connected to X.
-
-This base step is illustrated in Figure~\ref{redgfsa1}.
-
-Repeat step 2.
-
-\begin{figure}[h]
-\begin{center}\includegraphics[%
-  width=0.6\linewidth,
-  keepaspectratio]{redgfsa1}\end{center}
-\caption{Removal of one state from the GNFA \label{redgfsa1}}
-\end{figure}
-
-
-\item[Step 3:]  {\em Determine the RE}
-
-The GNFA has exactly two states: the start and the accepting
-state. There is only one edge and it has RE as a label.
-\end{itemize}
-
-
-\paragraph{Example:} Figures~\ref{gfsa2}~and~\ref{gfsa3} illustrate
-this on the GNFA of Figure~\ref{gfsa1}.
-
-
-\begin{figure}[h]
-\begin{center}\includegraphics[%
-  width=0.6\linewidth,
-  keepaspectratio]{gfsa2}\end{center}
-\caption{State 2 was removed \label{gfsa2}}
-\end{figure}
-
-\begin{figure}[h]
-\begin{center}\includegraphics[%
-  width=0.6\linewidth,
-  keepaspectratio]{gfsa3}\end{center}
-\caption{State 3 was removed \label{gfsa3}}
-\end{figure}
-
-
-The main thing to prove is that the elimination of X in
-Step 2 does not change the set of accepted strings. We need to prove
-two things: (1) if a string $s$ was accepted before the elimination,
-it is also accepted after elimination; (2) if a string was not accepted
-before elimination, it is not accepted afterwards.
-
-
-
-We use the notion of a path through the GNFA that can be followed to
-accept a string - the related notion for NFAs can be found on page
-\pageref{defacceptnfa}: write it out for a GNFA. Such an acceptance
-path is a sequence of states. We denote the GNFA before the reduction
-by $GNFA_{before}$ and the machine after the reduction by
-$GNFA_{after}$.
-
+Solving the system of equations happens by repeatedly eliminating an unknown
+from the equations of other unknowns. Elimination of $X_i$ proceeds in two steps:
 \begin{enumerate}
-\item
-If $s$ is accepted by $GNFA_{before}$ with a path that does not
-contain X, then $s$ is accepted by $GNFA_{after}$ with the same path.
+\item If the equation for $X_i$ is recursive (i.e., if $X_i$ also appears in the right-hand side),
+      we eliminate the recursion by means of Ardent's Lemma.
 
-If the accepting path contains X, then there are states A and B so
-that for some $n>0$, AX$^n$B is a subsequence in the path. The
-regular expressions on the edges AX, XX, XB are E1, E2, E3 and
-therefore, to go from A to B through X {\em costs} a piece of string
-that matches $E1(E2)^*E3$: that regular expression is part of the
-regular expression on the edge AB in $GNFA_{after}$, so ...
-
-\item
-If $s$ is accepted by $GNFA_{after}$ then an accepting path cannot
-contain X. Let AB be a subsequence of the path: on the edges from A to
-B, part of the regular expression is $E4 | E1(E2)^*E3$: using this
-while going from A to B, means in $GNFA_{before}$ following the
-original edge from A to B (with E4), or following AX, XX (as often as
-needed) and then XB, i.e. $E1(E2)^*E3$. It follows that a string
-accepted by $GNFA_{after}$ is also accepted by $GNFA_{before}$.
-
+\item We replace all occurrences of $X_i$, by the right-hand side of its equation.
 \end{enumerate}
+After these two steps, $X_i$ no longer occurs in the remaining equations.
+By eliminating all unknowns, we obtain a closed form solution for all of them.
+Typically, we do not go this far, as we are only interested in a closed form for $X_0$,
+amd thus stop as soon as we have found it.
 
-We also need to justify that the GNFA obtained in step 1 determines
-the same language as the NFA we started from: please do that.
+In the running example, we can start by eliminating $X_2$. Since it does not
+appear on the right-hand side of the third equation, we can immediately substitute
+it in the first two equations.
+\begin{equation*}
+\left\{
+\begin{array}{rcl}
+X_0 & = & \epsilon \cup a \cdot X_1 \cup b \cdot (a \cdot X_0 \cup b \cdot X_1)\\
+X_1 & = & a \cdot (a \cdot X_0 \cup b \cdot X_1) \cup b \cdot X_0
+\end{array}
+\right.
+\end{equation*}
 
+Next we eliminate $X_1$. Since the equation for $X_1$ is recursive, we must first 
+eliminate the recursion by bringing it into the form $X = A \cup B \cdot X$
+that makes it amenable to Arden's Lemma. We can do this by using the commutativity of $\cup$
+and the distributivity of $\cdot$ over $\cup$.
+\begin{equation*}
+X_1 = (a \cdot a \cup b) \cdot X_0 \cup (a \cdot b) \cdot X_1
+\end{equation*}
+Now we can apply Arden's Lemma to obtain a non-recursive equation:
+\begin{equation*}
+X_1 = (a \cdot b)^* \cdot (a \cdot a \cup b) \cdot X_0 
+\end{equation*}
+If we fill in this equation in that of $X_0$, we get:
+\begin{equation*}
+X_0 = \epsilon  \cup a \cdot ((a \cdot b)^* \cdot (a \cdot a \cup b) \cdot X_0) \cup b \cdot (a \cdot X_0 \cup b \cdot ((a \cdot b)^* \cdot (a \cdot a \cup b) \cdot X_0))\\
+\end{equation*}
+Finally, we elimate $X_0$ from the right-hand side, first by exploiting associtivity and distributivity:
+\begin{equation*}
+X_0 = \epsilon \cup (b \cdot a \cup (a \cup b \cdot b) \cdot (a \cdot b)^* \cdot (a \cdot a \cup b)) \cdot X_0
+\end{equation*}
+By applying Arden's Lemma, we obtain a closed form:
+\begin{equation*}
+X_0 =(b \cdot a \cup (a \cup b \cdot b) \cdot (a \cdot b)^* \cdot (a \cdot a \cup b))^* \cdot \epsilon 
+\end{equation*}
+This translates directly into a regular expression:
+\begin{equation*}
+E_0 =(b \cdot a \,|\, (a \,|\, b \cdot b) \cdot (a \cdot b)^* \cdot (a \cdot a \,|\, b))^* \cdot \epsilon 
+\end{equation*}
 
+Verify that the above procedure is always possible, notably that recursion can always be eliminated with Arden's
+Lemma. Also verify that Arden's Lemma always provides a unique solution here.
 
+%===============================================================================
+%  \section{From Regular Expression to NFA}\label{re2fsasec}
+%  
+%  We now have all the necessary ingredients to construct an NFA from a regular
+%  expression RE such that $L_{RE} = L_{NFA}$. Since regular
+%  expressions are defined inductively (see definition page
+%  \pageref{defregexp}) we define a corresponding NFA for each case in the
+%  definition. $NFA_{RE}$ denotes the NFA corresponding to a
+%  regular expression RE.
+%  
+%  Figure~\ref{re2fsa} shows the NFA for the first three bases cases in
+%  the definition on page \pageref{defregexp}:
+%  
+%  \begin{figure}[h]
+%  \begin{center}\includegraphics[%
+%    width=0.55\linewidth,
+%    keepaspectratio]{re2fsa}\end{center}
+%  \caption{An NFA for the three base cases\label{re2fsa}}
+%  \end{figure}
+%  
+%  The three {\em recursive} cases are described as follows: let $E_1$
+%  and $E_2$ be two regular expressions, then
+%  \begin{itemize}
+%  \item $NFA_{E_1E_2} = concat(NFA_{E_1},NFA_{E_2})$
+%  \item $NFA_{E_1^*} = star(NFA_{E_1})$
+%  \item $NFA_{E_1|E_2} = union(NFA_{E_1},NFA_{E_2})$
+%  \end{itemize}
+%  
+%  \begin{theorem}
+%  The construction above preserves the language, i.e.
+%  
+%  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ $L_{NFA_E} = L_E$.
+%  \end{theorem}
+%  \begin{proof}
+%  Prove this yourself - use structural induction.
+%  \end{proof}
+%  
+%  
+%  \section{From NFA to Regular Expression}
+%  
+%  The opposite way is a bit more complicated: we first introduce a new
+%  kind of finite automata, the {\em Generalized Non-deterministic Finite
+%  Automata} or GNFAs. We will then follow the path:
+%  
+%  
+%  $NFA \rightarrow GNFA \rightarrow GNFA~with~2~states \rightarrow regular~expression$
+%  
+%  In each of the steps, we must prove that the language stays the same.
+%  
+%  \begin{definition}[GNFA (informal)]
+%  A {\bf GNFA} is a finite state machine with the following
+%  modifications and restrictions:
+%  \begin{itemize}
+%  \item there is exactly one end state and it differs from the start state
+%  \item there is exactly one edge from the start state to any other
+%  state, but the start state has no incoming edge (except for the start arrow)
+%  \item there is exactly one edge from each state to the end state, but
+%  the end state has no outgoing edge
+%  \item there is exactly one edge between every other two states (in both
+%  directions) and an edge from each state to itself
+%  \item the edges carry a regular expression as a label
+%  \end{itemize}
+%  \end{definition}
+%  
+%  
+%  Figure~\ref{gfsa1} shows a GNFA.
+%  
+%  \begin{figure}[h]
+%  \begin{center}\includegraphics[%
+%    width=0.5\linewidth,
+%    keepaspectratio]{gfsa1}\end{center}
+%  \caption{A GNFA\label{gfsa1}}
+%  \end{figure}
+%  
+%  We use the (graphical representation of the) GNFA as follows:
+%  
+%  \begin{enumerate}
+%  \item you start off with a string $s$ in the start state
+%  \item you may now move to any state (the same or another one) by
+%  following an edge as long as your string starts with a substring that
+%  matches the regular expression on the edge: during the transition, you
+%  chop off that substring; if the regular expression equals $\epsilon$,
+%  the substring has length zero; if the edge just contains $\phi$, you
+%  can't take that edge
+%  \item keep making transitions: if you arrive in the end state with an
+%  empty string, we say {\em the GNFA has accepted the initial string $s$}
+%  \end{enumerate}
+%  
+%  
+%  \paragraph{Selfie:}
+%  \begin{itemize}
+%  \item[]
+%  For the GNFA in Figure~\ref{gfsa1}, find strings accepted by it and
+%  strings not accepted by it.
+%  \end{itemize}
+%  
+%  
+%  
+%  Now is the time to describe an algorithm for constructing a RE from an NFA.
+%  
+%  \begin{itemize}
+%  \item[Step 1:]  {\em Make a GNFA from an NFA}
+%  
+%  Introduce a new start state and a new unique end state. Draw an
+%  $\epsilon$-edge from the new start state to the old start state. and
+%  from the old end states to the new end state. Draw all missing edges
+%  with label $\phi$. Replace parallel edges into a new edge with as
+%  label the union of the labels of the parallel edges.
+%  
+%  \item[Step 2:]  {\em Reduce the GNFA to a GNFA with two states}
+%  
+%  Choose any state X different from start and end state: if there is
+%  none, go to step 3. Remove X and for each pair of states A and B with
+%  an edge
+%  % from
+%  A to X with $E_1$,
+%  %
+%  from X to itself with $E_2$,
+%  %
+%  from X to B with $E_3$,
+%  %
+%  from A to B with $E_4$,
+%  %
+%  replace the label on the edge from A to B by
+%  $E_4~|~E_1E_2^*E_3$. Finally, remove all edges connected to X.
+%  
+%  This base step is illustrated in Figure~\ref{redgfsa1}.
+%  
+%  Repeat step 2.
+%  
+%  \begin{figure}[h]
+%  \begin{center}\includegraphics[%
+%    width=0.6\linewidth,
+%    keepaspectratio]{redgfsa1}\end{center}
+%  \caption{Removal of one state from the GNFA \label{redgfsa1}}
+%  \end{figure}
+%  
+%  
+%  \item[Step 3:]  {\em Determine the RE}
+%  
+%  The GNFA has exactly two states: the start and the accepting
+%  state. There is only one edge and it has RE as a label.
+%  \end{itemize}
+%  
+%  
+%  \paragraph{Example:} Figures~\ref{gfsa2}~and~\ref{gfsa3} illustrate
+%  this on the GNFA of Figure~\ref{gfsa1}.
+%  
+%  
+%  \begin{figure}[h]
+%  \begin{center}\includegraphics[%
+%    width=0.6\linewidth,
+%    keepaspectratio]{gfsa2}\end{center}
+%  \caption{State 2 was removed \label{gfsa2}}
+%  \end{figure}
+%  
+%  \begin{figure}[h]
+%  \begin{center}\includegraphics[%
+%    width=0.6\linewidth,
+%    keepaspectratio]{gfsa3}\end{center}
+%  \caption{State 3 was removed \label{gfsa3}}
+%  \end{figure}
+%  
+%  
+%  The main thing to prove is that the elimination of X in
+%  Step 2 does not change the set of accepted strings. We need to prove
+%  two things: (1) if a string $s$ was accepted before the elimination,
+%  it is also accepted after elimination; (2) if a string was not accepted
+%  before elimination, it is not accepted afterwards.
+%  
+%  
+%  
+%  We use the notion of a path through the GNFA that can be followed to
+%  accept a string - the related notion for NFAs can be found on page
+%  \pageref{defacceptnfa}: write it out for a GNFA. Such an acceptance
+%  path is a sequence of states. We denote the GNFA before the reduction
+%  by $GNFA_{before}$ and the machine after the reduction by
+%  $GNFA_{after}$.
+%  
+%  \begin{enumerate}
+%  \item
+%  If $s$ is accepted by $GNFA_{before}$ with a path that does not
+%  contain X, then $s$ is accepted by $GNFA_{after}$ with the same path.
+%  
+%  If the accepting path contains X, then there are states A and B so
+%  that for some $n>0$, AX$^n$B is a subsequence in the path. The
+%  regular expressions on the edges AX, XX, XB are E1, E2, E3 and
+%  therefore, to go from A to B through X {\em costs} a piece of string
+%  that matches $E1(E2)^*E3$: that regular expression is part of the
+%  regular expression on the edge AB in $GNFA_{after}$, so ...
+%  
+%  \item
+%  If $s$ is accepted by $GNFA_{after}$ then an accepting path cannot
+%  contain X. Let AB be a subsequence of the path: on the edges from A to
+%  B, part of the regular expression is $E4 | E1(E2)^*E3$: using this
+%  while going from A to B, means in $GNFA_{before}$ following the
+%  original edge from A to B (with E4), or following AX, XX (as often as
+%  needed) and then XB, i.e. $E1(E2)^*E3$. It follows that a string
+%  accepted by $GNFA_{after}$ is also accepted by $GNFA_{before}$.
+%  
+%  \end{enumerate}
+%  
+%  We also need to justify that the GNFA obtained in step 1 determines
+%  the same language as the NFA we started from: please do that.
+%  
+%  
+%  
+%  
+%  \paragraph{Conclusion:} the two formalisms NFA and RE determine
+%  exactly the same class of languages, i.e. the regular languages. Our
+%  proofs were constructive and can be transformed into a program in
+%  Java, Prolog ... that compute from an RE an NFA, and vice versa.
+%  We will go two steps further: we will get rid of the non-determinism
+%  in Section~\ref{detfsa}, and we will build the smallest possible
+%  machine in Section~\ref{minfsa}.
 
-\paragraph{Conclusion:} the two formalisms NFA and RE determine
-exactly the same class of languages, i.e. the regular languages. Our
-proofs were constructive and can be transformed into a program in
-Java, Prolog ... that compute from an RE an NFA, and vice versa.
-We will go two steps further: we will get rid of the non-determinism
-in Section~\ref{detfsa}, and we will build the smallest possible
-machine in Section~\ref{minfsa}.
+%  %===============================================================================
+%  \section{Deterministic Finite State Machines}\label{detfsa}
+%  
+%  The definition of a (non-deterministic) finite state machine NFA
+%  allows for more than one edge leaving a state with the same symbol,
+%  and also with $\epsilon$: both are a source of
+%  non-determinism. Indeed, one has the choice to shorten the current
+%  string or not, and one has the choice of which state to
+%  move to. Implementing this (on the basis of the transition table for
+%  instance) is not so difficult, but it is clear that a program that is
+%  based on taking steps that might have to backtracked over cannot be
+%  optimal. It would be more efficient if there were no $\epsilon$-edges,
+%  and if for each symbol in the alphabet, there was only one edge with
+%  that label from each state. Such an automaton would be called a
+%  deterministic finite state machine, abbreviated as DFA.
+%  
+%  Formally, we restrict the transition function to the signature
+%  %
+%  $\delta : Q \times \Sigma \rightarrow Q$, but we allow it to be a
+%  partial function. It should be clear that DFAs determine regular
+%  languages. 
 
+%  So we are left with the question: is every regular language
+%  determined by a DFA? Or, equivalently, we can wonder whether every NFA
+%  can be transformed to an equivalent DFA.
+%  %
+%  We describe this transformation in general.
+%  
+%  
+%  \begin{itemize}
+%  \item[{\bf Given:}] an NFA = $(Q_n,\Sigma,\delta_n,q_{sn},F_n)$
+%  
+%  \item[{\bf To construct:}] a DFA = $(Q_d,\Sigma,\delta_d,q_{sd},F_d)$
+%  such that $L_{NFA} = L_{DFA}$
+%  
+%  \item[{\bf Construction:}]
+%  $Q_d = {\cal P}(Q_n)$: one state in the DFA is a set of NFA states
+%  
+%  $F_d = \{S |S \in Q_d, $S$ \cap F_n \neq \emptyset\}$: an end state in
+%  the DFA is any state that contains an NFA end state
+%  
+%  $\delta_d$ has signature
+%  %
+%  $\delta_d :  ({\cal P}(Q_n) \times \Sigma) \rightarrow {\cal P}(Q_n)$
+%  
+%  We first define $er : Q_n \rightarrow {\cal P}(Q_n)$ (er means {\bf
+%  e}psilon-{\bf r}eachable):
+%  
+%  \begin{itemize}
+%  \item $er(q)$ is the set of NFA states that can be reached from q
+%  using zero, one or more $\epsilon$-edges
+%  
+%  \item
+%  we lift the definition of er to ${\cal P}(Q_n)$ in the usual way: for
+%  ${\cal Q} \in {\cal P}(Q_n)$
+%  
+%  $~~~~~~~~~~~~~~~~~er({\cal Q}) = \cup_{q \in {\cal Q}} er(q)$
+%  
+%  \item
+%  we lift $\delta_n$ in a similar way.
+%  \end{itemize}
+%  
+%  
+%  We can now define $\delta_d$ as:
+%  \begin{itemize}
+%  \item
+%  $\delta_d({\cal Q},a) = er(\delta_n({\cal Q},a))$ \footnote{Check the
+%  signature!} for ${\cal Q} \in Q_d$
+%  
+%  \item
+%  in words: from a DFA state ${\cal Q}$, you move to the next DFA state
+%  by first using the symbol $a$ in each NFA state in ${\cal Q}$ using
+%  the NFA transition function, and then following as many
+%  $\epsilon$-edges as possible; then take the union of all the NFA
+%  states you could reach in this way.
+%  
+%  \end{itemize}
+%  
+%  Finally, we define
+%  
+%  $~~~~~~~~~~~~~~~~q_{sd} = er({q_{sn}})$.
+%  
+%  
+%  \item[{\bf End}]
+%  \end{itemize}
+%  
+%  
+%  We use this construction on the NFA of Figure~\ref{fsa2}. This NFA
+%  has 3 states, so we might need 8 DFA states.
+%  
+%  
+%  \begin{figure}[h]
+%  \begin{center}\includegraphics[%
+%    width=0.6\linewidth,
+%    keepaspectratio]{fsa2}\end{center}
+%  \caption{An NFA \label{fsa2}}
+%  \end{figure}
+%  
+%  
+%  Table~\ref{charstable} shows the resulting transition table, and er.
+%  
+%  \begin{table}[ht]
+%  \center
+%  \begin{tabular}{|r|r|r|r|r|r|}
+%  \hline
+%  $q \in Q_d$    & $er(q)$  &  $\delta_n(q,a) $ & $\delta_n(q,b) $ & $\delta_d(q,a)$ & $\delta_d(q,b)$ \\ \hline
+%  \{\}           & \{\}     &  \{\}             & \{\}             & \{\}            & \{\}            \\
+%  \{S\}          & \{S,A\}  &  \{A,E\}          & \{\}             & \{A,E\}         & \{\}            \\
+%  \{A\}          & \{A\}    &  \{E\}            & \{A\}            & \{A,E\}         & \{A\}           \\
+%  \{E\}          & \{A,E\}  &  \{E\}            & \{E\}            & \{A,E\}         & \{A,E\}         \\
+%  \{S,A\}        & \{S,A\}  &  \{A,E\}          & \{A\}            & \{A,E\}         & \{A\}           \\
+%  \{S,E\}        & \{S,A,E\}&  \{A,E\}          & \{E\}            & \{A,E\}         & \{A,E\}         \\
+%  \{A,E\}        & \{A,E\}  &  \{E\}            & \{A,E\}          & \{A,E\}         & \{A,E\}         \\
+%  \{S,A,E\}      & \{S,A,E\}&  \{A,E\}          & \{A,E\}          & \{A,E\}         & \{A,E\}         \\
+%  \hline
+%  \end{tabular}
+%  \caption{The DFA obtained from the NFA in Figure~\ref{fsa2}} \label{charstable}
+%  \end{table}
+%  
+%  
+%  Some states are not reachable from the start state $\{S,A\}$. It
+%  suffices to represent only the reachable states, as in the graphical
+%  representation of the DFA in Figure~\ref{fsa3}.
+%  
+%  
+%  \begin{figure}[h]
+%  \begin{center}\includegraphics[%
+%    width=0.45\linewidth,
+%    keepaspectratio]{fsa3}\end{center}
+%  \caption{The resulting DFA \label{fsa3}}
+%  \end{figure}
+%  
+%  \paragraph{Selfie:}
+%  \begin{itemize}
+%  \item[]
+%  Which language does the DFA determine? Give an RE for it, or express
+%  in words which strings are accepted. Is this the {\em smallest} DFA
+%  accepting the same language? What would be a good notion of {\em size}
+%  of a DFA?
+%  
+%  The construction could in the worst case require $2^{\#Q_n}$ DFA
+%  states, but the example shows that $Q_d$ does not need to be larger
+%  than $Q_n$ if we do not use the unreachable states. Is it possible
+%  that the DFA has fewer states than the NFA you start from?
+%  \end{itemize}
+%  
+%  
 
+%  \paragraph{Extending $\delta$ to strings:} the domain of $\delta$ in a
+%  DFA is $Q \times \Sigma$. It is useful to extend $\delta$ to a
+%  function $\delta^*$ on the domain $Q \times \Sigma^*$ as follows:
+%  
+%  \begin{itemize}
+%  \item $\delta^*(q,\epsilon) = q$
+%  \item $\delta^*(q,aw) = \delta^*(\delta(q,a),w)$ if $\delta(q,a)$
+%  exists - $a \in \Sigma$ and $w \in \Sigma^*$.
+%  \end{itemize}
+%  
+%  \paragraph{Selfie:}
+%  \begin{itemize}
+%  \item[]
+%  Prove that $\delta^*(q,wa) = \delta(\delta^*(q,w),a)$ for $a \in
+%  \Sigma$ and $w \in \Sigma_{\epsilon}^*$
+%  \end{itemize}
 
-
-
-
-\section{Deterministic Finite State Machines}\label{detfsa}
-
-The definition of a (non-deterministic) finite state machine NFA
-allows for more than one edge leaving a state with the same symbol,
-and also with $\epsilon$: both are a source of
-non-determinism. Indeed, one has the choice to shorten the current
-string or not, and one has the choice of which state to
-move to. Implementing this (on the basis of the transition table for
-instance) is not so difficult, but it is clear that a program that is
-based on taking steps that might have to backtracked over cannot be
-optimal. It would be more efficient if there were no $\epsilon$-edges,
-and if for each symbol in the alphabet, there was only one edge with
-that label from each state. Such an automaton would be called a
-deterministic finite state machine, abbreviated as DFA.
-
-Formally, we restrict the transition function to the signature
-%
-$\delta : Q \times \Sigma \rightarrow Q$, but we allow it to be a
-partial function. It should be clear that DFAs determine regular
-languages. So we are left with the question: is every regular language
-determined by a DFA? Or, equivalently, we can wonder whether every NFA
-can be transformed to an equivalent DFA.
-%
-We describe this transformation in general.
-
-
-\begin{itemize}
-\item[{\bf Given:}] an NFA = $(Q_n,\Sigma,\delta_n,q_{sn},F_n)$
-
-\item[{\bf To construct:}] a DFA = $(Q_d,\Sigma,\delta_d,q_{sd},F_d)$
-such that $L_{NFA} = L_{DFA}$
-
-\item[{\bf Construction:}]
-$Q_d = {\cal P}(Q_n)$: one state in the DFA is a set of NFA states
-
-$F_d = \{S |S \in Q_d, $S$ \cap F_n \neq \emptyset\}$: an end state in
-the DFA is any state that contains an NFA end state
-
-$\delta_d$ has signature
-%
-$\delta_d :  ({\cal P}(Q_n) \times \Sigma) \rightarrow {\cal P}(Q_n)$
-
-We first define $er : Q_n \rightarrow {\cal P}(Q_n)$ (er means {\bf
-e}psilon-{\bf r}eachable):
-
-\begin{itemize}
-\item $er(q)$ is the set of NFA states that can be reached from q
-using zero, one or more $\epsilon$-edges
-
-\item
-we lift the definition of er to ${\cal P}(Q_n)$ in the usual way: for
-${\cal Q} \in {\cal P}(Q_n)$
-
-$~~~~~~~~~~~~~~~~~er({\cal Q}) = \cup_{q \in {\cal Q}} er(q)$
-
-\item
-we lift $\delta_n$ in a similar way.
-\end{itemize}
-
-
-We can now define $\delta_d$ as:
-\begin{itemize}
-\item
-$\delta_d({\cal Q},a) = er(\delta_n({\cal Q},a))$ \footnote{Check the
-signature!} for ${\cal Q} \in Q_d$
-
-\item
-in words: from a DFA state ${\cal Q}$, you move to the next DFA state
-by first using the symbol $a$ in each NFA state in ${\cal Q}$ using
-the NFA transition function, and then following as many
-$\epsilon$-edges as possible; then take the union of all the NFA
-states you could reach in this way.
-
-\end{itemize}
-
-Finally, we define
-
-$~~~~~~~~~~~~~~~~q_{sd} = er({q_{sn}})$.
-
-
-\item[{\bf End}]
-\end{itemize}
-
-
-We use this construction on the NFA of Figure~\ref{fsa2}. This NFA
-has 3 states, so we might need 8 DFA states.
-
-
-\begin{figure}[h]
-\begin{center}\includegraphics[%
-  width=0.6\linewidth,
-  keepaspectratio]{fsa2}\end{center}
-\caption{An NFA \label{fsa2}}
-\end{figure}
-
-
-Table~\ref{charstable} shows the resulting transition table, and er.
-
-\begin{table}[ht]
-\center
-\begin{tabular}{|r|r|r|r|r|r|}
-\hline
-$q \in Q_d$    & $er(q)$  &  $\delta_n(q,a) $ & $\delta_n(q,b) $ & $\delta_d(q,a)$ & $\delta_d(q,b)$ \\ \hline
-\{\}           & \{\}     &  \{\}             & \{\}             & \{\}            & \{\}            \\
-\{S\}          & \{S,A\}  &  \{A,E\}          & \{\}             & \{A,E\}         & \{\}            \\
-\{A\}          & \{A\}    &  \{E\}            & \{A\}            & \{A,E\}         & \{A\}           \\
-\{E\}          & \{A,E\}  &  \{E\}            & \{E\}            & \{A,E\}         & \{A,E\}         \\
-\{S,A\}        & \{S,A\}  &  \{A,E\}          & \{A\}            & \{A,E\}         & \{A\}           \\
-\{S,E\}        & \{S,A,E\}&  \{A,E\}          & \{E\}            & \{A,E\}         & \{A,E\}         \\
-\{A,E\}        & \{A,E\}  &  \{E\}            & \{A,E\}          & \{A,E\}         & \{A,E\}         \\
-\{S,A,E\}      & \{S,A,E\}&  \{A,E\}          & \{A,E\}          & \{A,E\}         & \{A,E\}         \\
-\hline
-\end{tabular}
-\caption{The DFA obtained from the NFA in Figure~\ref{fsa2}} \label{charstable}
-\end{table}
-
-
-Some states are not reachable from the start state $\{S,A\}$. It
-suffices to represent only the reachable states, as in the graphical
-representation of the DFA in Figure~\ref{fsa3}.
-
-
-\begin{figure}[h]
-\begin{center}\includegraphics[%
-  width=0.45\linewidth,
-  keepaspectratio]{fsa3}\end{center}
-\caption{The resulting DFA \label{fsa3}}
-\end{figure}
-
-\paragraph{Selfie:}
-\begin{itemize}
-\item[]
-Which language does the DFA determine? Give an RE for it, or express
-in words which strings are accepted. Is this the {\em smallest} DFA
-accepting the same language? What would be a good notion of {\em size}
-of a DFA?
-
-The construction could in the worst case require $2^{\#Q_n}$ DFA
-states, but the example shows that $Q_d$ does not need to be larger
-than $Q_n$ if we do not use the unreachable states. Is it possible
-that the DFA has fewer states than the NFA you start from?
-\end{itemize}
-
-
-
-\paragraph{Extending $\delta$ to strings:} the domain of $\delta$ in a
-DFA is $Q \times \Sigma$. It is useful to extend $\delta$ to a
-function $\delta^*$ on the domain $Q \times \Sigma^*$ as follows:
-
-\begin{itemize}
-\item $\delta^*(q,\epsilon) = q$
-\item $\delta^*(q,aw) = \delta^*(\delta(q,a),w)$ if $\delta(q,a)$
-exists - $a \in \Sigma$ and $w \in \Sigma^*$.
-\end{itemize}
-
-\paragraph{Selfie:}
-\begin{itemize}
-\item[]
-Prove that $\delta^*(q,wa) = \delta(\delta^*(q,w),a)$ for $a \in
-\Sigma$ and $w \in \Sigma_{\epsilon}^*$
-\end{itemize}
-
-
+%===============================================================================
 \section{The Minimal DFA}\label{minfsa}
 
 For any regular language L, there exist many DFAs - how many? It is
@@ -1579,7 +2105,7 @@ Prove: every regular language has a minimal pumping length. Is it
 related to the minimal DFA for that language?
 \end{itemize}
 
-\newpage
+% \newpage
 %===============================================================================
 \section{DFA Product}
 
@@ -1659,11 +2185,11 @@ $\overline{L} = \Sigma^* \setminus L$.
 \item[]
 Find a simpler construction of the complement of a given DFA.
 
-Now use that same construction on an NFA; do you get what you wanted?
-Why (not)?
+% Now use that same construction on an NFA; do you get what you wanted?
+% Why (not)?
 \end{itemize}
 
-\newpage
+% \newpage
 %===============================================================================
 \section{Discussion}
 
@@ -1757,144 +2283,144 @@ meant for context free languages. BNF can also be used for regular
 languages, because they are context free as well: see
 Section~\ref{contextvrijelanguages}.
 
-\subsection{Variants of Finite State Automata}
-
-\subsection{The transducer}
-
-\project{minimisatie van transducer}
-
-A transducer transforms an input string into an output string: we
-adapt the definition of a DFA, so that it can produce output. One
-figure is almost worth a definition.
-
-\begin{figure}[h]
-\begin{center}\includegraphics[%
-  width=0.35\linewidth,
-  keepaspectratio]{trans1}\end{center}
-\caption{A simple transducer \label{trans1}}
-\end{figure}
-
-The labels on the arcs have the form $a/x$: $a$ belongs to the input
-alphabet, $x$ to the output alphabet. $x$ can also be the empty
-string. The $a$ is used for finding a path in the transducer as if it
-were a DFA. The $x$ is output when the edge is used.
-The above transducer accepts every string and outputs a 1 for every
-$b$ that follows an $a$.
-
-
-
-\subsection{A DFA that can check an addition}
-
-Since a DFA can only be used for deciding whether a string belongs to
-a language, we define the language of correct additions. If that
-language is regular, we should be able to build a DFA for it. Let's do
-it as follows: $\Sigma = \{0,1\}$. The two numbers we want to add and
-the result are represented in binary, in reverse order. We also add
-leading zeros so that all three numbers have the same length. As an
-example: adding 3 to 13 with result 16 gives us the strings
-11000 10110 and 00001. We merge them systematically, i.e. we make
-groups of 3 bits occurring in the i-th place, and write those groups
-in a sequence. This way we obtain
-
-$~~~~~~~~~~~~~~$110 100 010 010 001
-
-(the spaces are there only for showing the groups of three)
-As a result, the string 110100010010001 represents the correct
-addition 3+13=16. A DFA for this language is in Figure~\ref{telop}.
-
-
-\begin{figure}[h]
-\begin{center}\includegraphics[%
-  width=0.25\linewidth,
-  keepaspectratio]{telop}\end{center}
-\caption{An addition checker \label{telop}}
-\end{figure}
-
-
-\subsection{Adding by using a transducer}
-
-Addition is: given two numbers as input, output their sum. This is
-possible with a transducer: use the same representation as before for
-the two numbers to be added, and merge them in the same way. So 3+13
-is represented by the string 1110010100. Figure~\ref{telop2} shows two
-addition transducers that are derived from the checker.
-
-\begin{figure}[h]
-\begin{center}\includegraphics[%
-  width=0.7\linewidth,
-  keepaspectratio]{telop2}\end{center}
-\caption{Two transducers that produce the sum of two numbers as
-  output \label{telop2}}
-\end{figure}
-
-\paragraph{Selfie:}
-\begin{itemize}
-\item[]
-Can a transducer also perform other arithmetic operations, like
-subtraction or multiplication? Why or why not?
-
-Is the transducer output language regular?
-
-Can you write a transducer that outputs every third character of the
-input string?
-
-Can you write a transducer that outputs all but every third character
-of the input string?
-
-Can you write a transducer that outputs the input string in reverse
-order?
-
-Can every regular language be the output language of a transducer?
-\end{itemize}
-
-\subsection{Two-way finite automata}
-
-Sometimes, one calls a DFA a {\em one-way finite automaton}. The reason
-is that one describes the DFA as a machine with an input tape on which
-the input string resides: the machine has a reading head which is
-initially above the first character of the string. At each transition,
-the reading head moves one position to the right: always towards the
-end of the string.
-
-A small adaptation of this automaton allows it to move in both
-directions: you can adapt the definition of $\delta$ (see for instance
-Chapter \ref{berekenbaarheid}: there, it is done for Turing
-machines). What you get is a two-way finite automaton, or a 2DFA.
-
-About other classes of automata, we know that more freedom in how the
-{\em memory} can be manipulated, leads to more powerful automata: to
-fully appreciate this, you might have to wait until you learn about
-PDA and LBA, but keep this in mind.
-
-Therefore, the question {\em is a 2DFA more powerful than a DFA?}, or
-otherwise said {\em can a 2DFA recognise some non-regular languages?}
-is relevant. What do you think?
-
-\project{hier kan zeker een mooi ding mee gedaan worden}
-
-
-\subsection{B\"{u}chi automata}
-
-B\"{u}chi\footnote{Julius B\"{u}chi} automata are like NFAs, only you
-feed them infinite strings: at no moment is the string finished.
-That means that acceptance of a string by such an automata is
-different from acceptance by an NFA:
-
-\begin{definition}
-The infinite string is accepted by a B\"{u}chi automaton if the
-sequence of states followed by the string passes by an accepting state infinitely many times.
-\end{definition}
-
-Clearly that is something one can't try out or implement, but that is
-not the purpose of B\"{u}chi automata: you use them to model a problem
-(e.g. an infinitely repeating process, a protocol ...) and then prove
-which strings satisfy the acceptance condition.
-
-Non-deterministic B\"{u}chi automata are strictly stronger than
-deterministic B\"{u}chi automata: as an example, you could try to
-build a B\"{u}chi automaton for the language $(a|b)^*b^\omega$. \footnote{$\omega$: look up transfinite numbers}
-
-\project{buchi automaten bestuderen ?}
+%  \subsection{Variants of Finite State Automata}
+%  
+%  \subsection{The transducer}
+%  
+%  \project{minimisatie van transducer}
+%  
+%  A transducer transforms an input string into an output string: we
+%  adapt the definition of a DFA, so that it can produce output. One
+%  figure is almost worth a definition.
+%  
+%  \begin{figure}[h]
+%  \begin{center}\includegraphics[%
+%    width=0.35\linewidth,
+%    keepaspectratio]{trans1}\end{center}
+%  \caption{A simple transducer \label{trans1}}
+%  \end{figure}
+%  
+%  The labels on the arcs have the form $a/x$: $a$ belongs to the input
+%  alphabet, $x$ to the output alphabet. $x$ can also be the empty
+%  string. The $a$ is used for finding a path in the transducer as if it
+%  were a DFA. The $x$ is output when the edge is used.
+%  The above transducer accepts every string and outputs a 1 for every
+%  $b$ that follows an $a$.
+%  
+%  
+%  
+%  \subsection{A DFA that can check an addition}
+%  
+%  Since a DFA can only be used for deciding whether a string belongs to
+%  a language, we define the language of correct additions. If that
+%  language is regular, we should be able to build a DFA for it. Let's do
+%  it as follows: $\Sigma = \{0,1\}$. The two numbers we want to add and
+%  the result are represented in binary, in reverse order. We also add
+%  leading zeros so that all three numbers have the same length. As an
+%  example: adding 3 to 13 with result 16 gives us the strings
+%  11000 10110 and 00001. We merge them systematically, i.e. we make
+%  groups of 3 bits occurring in the i-th place, and write those groups
+%  in a sequence. This way we obtain
+%  
+%  $~~~~~~~~~~~~~~$110 100 010 010 001
+%  
+%  (the spaces are there only for showing the groups of three)
+%  As a result, the string 110100010010001 represents the correct
+%  addition 3+13=16. A DFA for this language is in Figure~\ref{telop}.
+%  
+%  
+%  \begin{figure}[h]
+%  \begin{center}\includegraphics[%
+%    width=0.25\linewidth,
+%    keepaspectratio]{telop}\end{center}
+%  \caption{An addition checker \label{telop}}
+%  \end{figure}
+%  
+%  
+%  \subsection{Adding by using a transducer}
+%  
+%  Addition is: given two numbers as input, output their sum. This is
+%  possible with a transducer: use the same representation as before for
+%  the two numbers to be added, and merge them in the same way. So 3+13
+%  is represented by the string 1110010100. Figure~\ref{telop2} shows two
+%  addition transducers that are derived from the checker.
+%  
+%  \begin{figure}[h]
+%  \begin{center}\includegraphics[%
+%    width=0.7\linewidth,
+%    keepaspectratio]{telop2}\end{center}
+%  \caption{Two transducers that produce the sum of two numbers as
+%    output \label{telop2}}
+%  \end{figure}
+%  
+%  \paragraph{Selfie:}
+%  \begin{itemize}
+%  \item[]
+%  Can a transducer also perform other arithmetic operations, like
+%  subtraction or multiplication? Why or why not?
+%  
+%  Is the transducer output language regular?
+%  
+%  Can you write a transducer that outputs every third character of the
+%  input string?
+%  
+%  Can you write a transducer that outputs all but every third character
+%  of the input string?
+%  
+%  Can you write a transducer that outputs the input string in reverse
+%  order?
+%  
+%  Can every regular language be the output language of a transducer?
+%  \end{itemize}
+%  
+%  \subsection{Two-way finite automata}
+%  
+%  Sometimes, one calls a DFA a {\em one-way finite automaton}. The reason
+%  is that one describes the DFA as a machine with an input tape on which
+%  the input string resides: the machine has a reading head which is
+%  initially above the first character of the string. At each transition,
+%  the reading head moves one position to the right: always towards the
+%  end of the string.
+%  
+%  A small adaptation of this automaton allows it to move in both
+%  directions: you can adapt the definition of $\delta$ (see for instance
+%  Chapter \ref{berekenbaarheid}: there, it is done for Turing
+%  machines). What you get is a two-way finite automaton, or a 2DFA.
+%  
+%  About other classes of automata, we know that more freedom in how the
+%  {\em memory} can be manipulated, leads to more powerful automata: to
+%  fully appreciate this, you might have to wait until you learn about
+%  PDA and LBA, but keep this in mind.
+%  
+%  Therefore, the question {\em is a 2DFA more powerful than a DFA?}, or
+%  otherwise said {\em can a 2DFA recognise some non-regular languages?}
+%  is relevant. What do you think?
+%  
+%  \project{hier kan zeker een mooi ding mee gedaan worden}
+%  
+%  
+%  \subsection{B\"{u}chi automata}
+%  
+%  B\"{u}chi\footnote{Julius B\"{u}chi} automata are like NFAs, only you
+%  feed them infinite strings: at no moment is the string finished.
+%  That means that acceptance of a string by such an automata is
+%  different from acceptance by an NFA:
+%  
+%  \begin{definition}
+%  The infinite string is accepted by a B\"{u}chi automaton if the
+%  sequence of states followed by the string passes by an accepting state infinitely many times.
+%  \end{definition}
+%  
+%  Clearly that is something one can't try out or implement, but that is
+%  not the purpose of B\"{u}chi automata: you use them to model a problem
+%  (e.g. an infinitely repeating process, a protocol ...) and then prove
+%  which strings satisfy the acceptance condition.
+%  
+%  Non-deterministic B\"{u}chi automata are strictly stronger than
+%  deterministic B\"{u}chi automata: as an example, you could try to
+%  build a B\"{u}chi automaton for the language $(a|b)^*b^\omega$. \footnote{$\omega$: look up transfinite numbers}
+%  
+%  \project{buchi automaten bestuderen ?}
 
 
 
@@ -1913,8 +2439,9 @@ Modern texts on regular languages/expressions/machines do not always
 follow the same order of presentation: in the previous sections, we
 have shows that there is no chicken-and-egg problem, since all three
 are equivalent. There is also a variety of small differences in the
-basic definitions (e.g. whether $\delta$ needs to be total, whether
-there can be more than one accepting end state for the NFA ...): these
+basic definitions (e.g. whether $\delta$ needs to be total, 
+% Vwhether there can be more than one accepting end state for the NFA 
+\ldots): these
 do not matter either.
 
 The same diversity in definitions and approaches exists for other
@@ -1946,9 +2473,10 @@ Marvin Lee Minsky {\em Computation: Finite and Infinite Machines
 \end{itemize}
 
 If all this gives you the hots, do not forget another important
-book: {\em Regular algebra and finite machines}\footnote{The book is
-  not in the library, but if it interests you, pass by my office} by
-John Horton Conway - the same person of {\em The Game of Life} (it
+book: {\em Regular algebra and finite machines}
+% \footnote{The book is
+%  not in the library, but if it interests you, pass by my office} 
+by John Horton Conway - the same person of {\em The Game of Life} (it
 appears later in this text) and other interesting issues (e.g. the
 {\em Angels and Devils game}) that directly affect our understanding
 of algorithmics.
@@ -2699,8 +3227,9 @@ deterministic one
 The construction of a PDA from a CFG is easy: you need only 3
 states and there is a very uniform description of its transitions.
 The reverse direction - from a PDA to a CFG - is disappointingly more
-complicated, partly because not every PDA has 3 states. Also, our
-DFA-to-RE method using the GNFA seems not to work here (why not?).
+complicated, partly because not every PDA has 3 states. 
+% Also, our
+% DFA-to-RE method using the GNFA seems not to work here (why not?).
 
 
 We will assume that the PDA has a particular form

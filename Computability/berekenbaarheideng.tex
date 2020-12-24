@@ -450,8 +450,8 @@ The signature of $\delta$ is adapted for non-determinism to
 i.e. from a given configuration possibly more than one new
 configuration can be reached. Two would have been enough actually -
 try to understand why. A string can have more than one computation history. A string is accepted if there exists an accepting computation history.
-That is similar to the notion of acceptance in an NFA: one accepting
-path is enough to be accepted.
+% That is similar to the notion of acceptance in an NFA: one accepting
+% path is enough to be accepted.
 
 A non-deterministic Turing Machine can be simulated by a
 deterministic one. Some books actually describe such a
@@ -631,22 +631,21 @@ We don't care whether M accepts or rejects s: in both cases, M stops.
 So, the question asks whether M goes into a loop or not. We want this
 question to be solved by an algorithm, so we actually want a
 Turing Machine H that {\bf decides} the language
-%
-$\{\langle M,s \rangle|
-M~is~a~Turing~Machine~that~stops~on~input~s\}$. We denote that
-language by $H_{TM}$.
+\begin{equation*}
+H_{TM} = \{\langle M,s \rangle| M~\textit{is a Turing Machine that stops on input}~s\}
+\end{equation*}
 
 
-We will show that such a machine H does not exist, by showing that
-$H_{TM}$ is undecidable. We already knew that such languages exist, but $H_{TM}$ is our first concrete example.
+We will show that such a machine H does not exist, by showing that $H_{TM}$ is
+undecidable. We already knew that such languages exist, but $H_{TM}$ is our
+first concrete example.
 
 A related problem is the acceptance problem for Turing Machines. The associated language is
+\begin{equation*}
+A_{TM} = \{\langle M,s \rangle| M~\textit{is a Turing Machine and}~s \in L_{M}\}
+\end{equation*}
 
-$~~~~~~~~~~A_{TM} = \{\langle M,s \rangle| M~is~a~Turing~Machine~and~s
-\in L_{M}\}$
-
-$A_{TM}$ is the first language for which we prove that it is
-undecidable.
+$A_{TM}$ is the first language for which we prove that it is undecidable.
 
 \begin{theorem}
 $A_{TM}$ is not decidable.
@@ -654,40 +653,36 @@ $A_{TM}$ is not decidable.
 \begin{proof}
 We prove this {\em by contradiction}.
 
+Assume that a decider B for $A_{TM}$ exists. The fact that $B$ is a decider for $A_{TM}$ means that given
+an input $\langle M, s \rangle$: 
+\begin{itemize}
+\item $B$ accepts iff $M$ accepts $s$, and
+\item $B$ rejects iff $M$ rejects $s$ or loops.
+\end{itemize}
 
-Assume the existence of a decider B for $A_{TM}$. This means that on
-input $\langle M,s \rangle$, B accepts if for input s M stops in its
-$q_a$, and rejects if for input s M stops in its $q_r$ or loops. We
-write:
+We now construct a Turing machine $C$, which we call the \emph{contradiction machine}, as
+\begin{equation*}
+C(\langle M \rangle) = \mathit{opposite}(B(\langle M,M \rangle))
+\end{equation*}
+with $M$ a Turing machine, and
+\begin{eqnarray*}
+\mathit{opposite}(\mathit{accept}) & = & \mathit{reject} \\
+\mathit{opposite}(\mathit{reject}) & = & \mathit{accept} 
+\end{eqnarray*}
 
-$~~~~~~~~B(\langle M,s \rangle)$ is accept if M accepts s and otherwise reject
-
-We now construct a contraction machine C defined as
-
-$~~~~~~~~C(\langle M \rangle) = opposite(B(\langle M,M \rangle))$ for
-any Turing Machine M.
-
-We used:
-$opposite(accept) = reject$ and $opposite(reject) = accept$.
-
-
-In the above definition, one of the possible M is C itself, and we get
-
-
-$~~~~~~~~C(\langle C \rangle) = opposite(B(\langle C,C \rangle))$
-
-
-Now,  $C(\langle C \rangle) = accept \Leftrightarrow B(\langle C,C \rangle)
-= accept$
-%
-$ \Leftrightarrow opposite(B(\langle C,C \rangle)) = reject$
-
-$~~~~~~~ \Leftrightarrow C(\langle C \rangle) = reject$
-
-(make sure you understand and can explain every step above)
-
-As a conclusion, $C$ does not exist, and likewise for $B$. So,
-$A_{TM}$ is undecidable.
+Since $C$ is a Turing machine that takes (an encoding of) a Turing machine as input, we
+can of course apply $C$ to itself.
+We have that:
+\begin{equation*}
+\begin{array}{crcl}
+                 & C(\langle C \rangle) & = & \mathit{reject} \\
+\Leftrightarrow  & \mathit{opposite}(B(\langle C, C \rangle)) & = & \mathit{reject} \\
+\Leftrightarrow  & B(\langle C, C \rangle) & = & \mathit{accept} \\
+\Leftrightarrow  &  C(\langle C \rangle)& = & \mathit{accept}
+\end{array}
+\end{equation*}
+Clearly, this is inconsistent. Hence, $C$ cannot exist, which means that $B$ cannot exist.
+So, $A_{TM}$ is undecidable.
 \end{proof}
 
 \begin{theorem}
@@ -862,15 +857,17 @@ that sentence, depending on how the regular language itself is given.
 \begin{itemize}
 \item
 $A_{DFA} = \{\langle D,s \rangle|D~is~a~DFA,~and~D~accepts~s\}$
-\item
-$A_{NFA} = \{\langle N,s \rangle|N~is~a~NFA,~and~N~accepts~s\}$
+% \item
+% $A_{NFA} = \{\langle N,s \rangle|N~is~a~NFA,~and~N~accepts~s\}$
 \item
 $A_{RegExp} = \{\langle RE,s
   \rangle|RE~is~a~regular~expression,~and~RE~generates~s\}$
 \end{itemize}
 
 \begin{theorem} \label{reglandec}
-$A_{DFA}$, $A_{NFA}$ and $A_{RegExp}$ are decidable.
+$A_{DFA}$
+%, $A_{NFA}$ 
+and $A_{RegExp}$ are decidable.
 \end{theorem}
 \begin{proof}
 The proof is constructive.
@@ -880,14 +877,14 @@ The decider B has input $\langle D,s \rangle$. B simulates D on s. If
 D accepts s, B stops in its $q_a$. If D rejects s, B stops in its
 $q_r$. Looping does not occur.
 
-\item
-The simulation of an NFA can loop, unless one performs loop detection
-... We chose an easier path: the decider B has input $\langle D,s
-\rangle$. B transforms the NFA D to a DFA (see the algorithm in
-Section~\ref{detfsa}). Now use the above simulation.
+%  \item
+%  The simulation of an NFA can loop, unless one performs loop detection
+%  ... We chose an easier path: the decider B has input $\langle D,s
+%  \rangle$. B transforms the NFA D to a DFA (see the algorithm in
+%  Section~\ref{detfsa}). Now use the above simulation.
 
 \item
-Given input $\langle RE,s \rangle$, first transform the RE to an NFA
+Given input $\langle RE,s \rangle$, first transform the RE to an DFA
 and proceed as above.
 \end{itemize}
 \end{proof}
