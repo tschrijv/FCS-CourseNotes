@@ -234,7 +234,7 @@ we write $v \in G$ when $v \in V$ and $V$ is a subset of the vertices of $G$
 let the edge $e = (x,y)$, and $G(V,E)$, then $G \cup \{e\}$ denotes
 the graph $(V \cup \{x,y\},E \cup \{e\})$; we say {\em add $e$ to $G$}
 \item
-let $b$ be an vertex, and $G(V,E)$, then $G \cup \{b\}$ denotes the
+let $b$ be a vertex, and $G(V,E)$, then $G \cup \{b\}$ denotes the
 graph $(V \cup \{b\},E )$; we say {\em add $b$ to $G$}
 \end{itemize}
 
@@ -1454,7 +1454,7 @@ For a simple graph $T$ with $n$ vertices
 (c)$, $(c) \Rightarrow (d)$ and $(d) \Rightarrow (a)$
 \begin{itemize}
 \item $(a) \Rightarrow (b)$: since $T$ is a tree, there is a path
-between any two vertices, so $T$ is connected; if $T$ contained a
+between any two edges, so $T$ is connected; if $T$ contained a
 cycle, some vertices would be connected by more than one path, so $T$
 is cycle free
 \item $(b) \Rightarrow (c)$:
@@ -1473,7 +1473,7 @@ has $(n-1)$ edges; consequently, $S$ has $n$ edges
 \item $(c) \Rightarrow (d)$: suppose $T$ contains a cycle; we can now
 remove at least one edge (and no vertices) from $T$ to obtain a
 connected, cycle free graph $T_{*}$; so we can use the previous result
-(from $(b) \Rightarrow (c)$, meaning $T_{*}$ has $(n-1)$ edges; this
+(from $(b) \Rightarrow (c)$), meaning $T_{*}$ has $(n-1)$ edges; this
 means that $T$ has strictly more than $(n-1)$ edges, so we get a
 contradiction, from which we must conclude that $T$ is cycle free
 
@@ -1892,7 +1892,7 @@ described informally here:
 
 \begin{description}
 \item[Depth-first construction of a spanning tree:] choose a vertex
-and a construct a simple path starting at this vertex with maximal
+and construct a simple path starting at this vertex with maximal
 length: this path belongs to the spanning tree; back up one step along
 that path and start at that node constructing a maximal simple path;
 repeat backing up and constructing paths ... until you are back at the
@@ -2003,7 +2003,7 @@ containing $e$.
 
 
 \begin{code}Prim\label{prim} \\
-  Let $G(V,E)$ be a connected weighted graph $G(V,E)$ where the
+  Let $G(V,E)$ be a connected weighted graph where the
 vertices are numbered: $V = \{v_{1},v_{2},\ldots,v_{n}\}$. The
 following procedure constructs a minimal spanning tree $T$ for $G$.
 \begin{enumerate}
@@ -2519,11 +2519,11 @@ $ and such that $w$ has no label yet.
 \begin{itemize}
 \item
 for an edge $(v,w)$ (i.e. outgoing of $v$):
-if $F(v,w) < C_{v,w}$ than give $w$ the label $(v,min\{\Delta,C_{v,w}-F(v,w)\})$
+if $F(v,w) < C_{v,w}$ then give $w$ the label $(v,min\{\Delta,C_{v,w}-F(v,w)\})$
 otherwise, do not label $w$
 \item
 for an edge $(w,v)$ (i.e. arriving in $v$):
-if $F(w,v) > 0$ than give $w$ the label $(v,min\{\Delta,F(w,v)\})$
+if $F(w,v) > 0$ then give $w$ the label $(v,min\{\Delta,F(w,v)\})$
 otherwise, do not label $w$
 \end{itemize}
 Go to \textbf{Arrived?}
@@ -2673,7 +2673,7 @@ maximal flow.
 
 
 
-\begin{proof} (of Theorem~\ref{maxflow})\\
+\begin{proof} (of Algorithm~\ref{maxflow})\\
 At the moment the algorithm ends, let $P$ be the set of vertices with
 a label (note: $a \in P$) and $\overline{P}$ the set of vertices
 without a label ($z \in \overline{P}$). $(P,\overline{P})$ is a cut.
