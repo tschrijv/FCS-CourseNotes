@@ -397,7 +397,7 @@ finite
 
 if a regular expression E contains a $^*$, then $L_E$ is infinite
 
-$L_E \subseteq L_{(E|F)}$ for all RE's E and F
+$L_E \subseteq L_{(E|F)}$ for all REs E and F
 
 the set of regular expressions (over a given alphabet) is itself a
 language (over which alphabet?)
@@ -484,7 +484,7 @@ L_{E_1} \cup L_{E_2}$. Did you succeed for complement?
 
 While regular expressions are a declarative way of describing (regular)
 languages, 
-Finite state machines (FSM) are a more operationl formalism. They
+Finite state machines (FSM) are a more operational formalism. They
 capture how to test and/or generate strings that belong
 to a language.
 
@@ -517,7 +517,7 @@ The most important characteristics are:
   are called {\em states};
 \item there are two kinds of states: states with a double circle are
   called accepting states (sometimes also end states or final
-  states)--the other states are non-acceping;
+  states)--the other states are non-accepting;
 \item loops are allowed;
 \item the edges are labelled with zero, one, or more symbols from the
   alphabet;
@@ -902,7 +902,7 @@ D_a(E_1 \cdot E_2)  & = & \left\{ \begin{array}{ll} D_a(E_1) \cdot E_2 \mid D_a(
 D_a(E^*)            & = & D_a(E) \cdot E^*
 \end{eqnarray*}
 
-Here, $\nu(E)$ determines wether $E$ is nullable, i.e., whether its language
+Here, $\nu(E)$ determines whether $E$ is nullable, i.e., whether its language
 contains the empty word $\epsilon$. This is also defined by structural recursion.
 \begin{eqnarray*}
 \nu(\phi)           & = & \bot \\
@@ -923,7 +923,7 @@ D_0( (0 \mid 1)^*) & = & D_0( 0 \mid 1) \cdot (0 \mid 1)^* \\
 \end{eqnarray*}
 
 \paragraph{Selfie:} 
-Verify that the definition of nullability satisifies the specification:
+Verify that the definition of nullability satisfies the specification:
 \begin{equation*}
 	\nu(E) ~\Leftrightarrow~ \epsilon \in L_E
 \end{equation*}
@@ -947,11 +947,11 @@ $L_E$ of the regular expression:
 %-------------------------------------------------------------------------------
 \subsection{Derivation-based DFA Construction}
 
-Above we have given a prodcure for matching a single word with a given regular
+Above we have given a procedure for matching a single word with a given regular
 expression $E$ by repeated derivation for the successive symbols in the word. 
 
 Computing all these derivates can be costly as it involves repeated structural
-recusion on regular expressions. Hence, if we know in advance that we will be
+recursion on regular expressions. Hence, if we know in advance that we will be
 matching many words, we can share the common work among them. For example,
 say we want to match $aba$ and $abb$ against $E$ by computing 6 derivatives:
 \begin{equation*}
@@ -997,7 +997,7 @@ computing the successive $D_0$ derivatives:
   \vdots & & \vdots & & \vdots
 \end{array}
 \end{equation*}
-The derivatives become bigger and bigger. Yet, we can see the underlinded
+The derivatives become bigger and bigger. Yet, we can see the underlined
 repeated pattern appearing as several of the different top-level alternatives.
 Clearly, this repetition is redundant and redundant alternatives can be dropped.
 
@@ -1056,14 +1056,14 @@ This gives a way to compute a finite matching graph for all possible words.
             associated with a node $q''$ that is already in the graph.
             \begin{description}
             \item[If so:] Add a new edge $(q,q'')$ to the graph and label it with $a$.
-            \item[If not:] Add a new nodge $q'$ to the graph and a new edge $(q,q')$ labelled with $a$.
+            \item[If not:] Add a new node $q'$ to the graph and a new edge $(q,q')$ labelled with $a$.
                            Then add $(E',q')$ to the worklist.
             \end{description}
       \end{enumerate}
 \item If the worklist is not empty, go to step 2.
 \end{enumerate}
 Of course, with starting state $q_0$, this graph is none other than the
-determinstic finite state automaton that determines the same langauge as the
+deterministic finite state automaton that determines the same language as the
 initial regular expression.
 
 For our running example $E = (0 \mid 1)^*$, we get:
@@ -1142,7 +1142,7 @@ side, and that $\cdot$ is associative in the right-hand side, we get the tautolo
 \begin{equation*}
 A \cup ((B \cdot B^*) \cdot A) = A \cup ((B \cdot B^*) \cdot A)
 \end{equation*}
-Since we have applied a nunber of equivalence-preserving steps, we know that the initial
+Since we have applied a number of equivalence-preserving steps, we know that the initial
 equation is true, and thus that $B^* \cdot A$ is a solution.
 
 \item[Minimality]
@@ -1210,7 +1210,7 @@ X_i = \{ \epsilon | q_i \in F\} \cup \bigcup_{c \in \Sigma} c \cdot \underline{\
 \end{equation*}
 
 Observe that, if $\delta(q_i,c) = q_j$, then the underlined term corresponds to one of the languages $X_j$. Hence,
-if we write out the above equation for every state, we get a system of linear equations between the languags
+if we write out the above equation for every state, we get a system of linear equations between the languages
 associated with those states. 
 
 For example, given the DFA given by the following diagram:
@@ -1250,7 +1250,7 @@ Solving the system of equations happens by repeatedly eliminating an unknown
 from the equations of other unknowns. Elimination of $X_i$ proceeds in two steps:
 \begin{enumerate}
 \item If the equation for $X_i$ is recursive (i.e., if $X_i$ also appears in the right-hand side),
-      we eliminate the recursion by means of Ardent's Lemma.
+      we eliminate the recursion by means of Arden's Lemma.
 
 \item We replace all occurrences of $X_i$, by the right-hand side of its equation.
 \end{enumerate}
@@ -1286,7 +1286,7 @@ If we fill in this equation in that of $X_0$, we get:
 \begin{equation*}
 X_0 = \epsilon  \cup a \cdot ((a \cdot b)^* \cdot (a \cdot a \cup b) \cdot X_0) \cup b \cdot (a \cdot X_0 \cup b \cdot ((a \cdot b)^* \cdot (a \cdot a \cup b) \cdot X_0))\\
 \end{equation*}
-Finally, we elimate $X_0$ from the right-hand side, first by exploiting associtivity and distributivity:
+Finally, we eliminate $X_0$ from the right-hand side, first by exploiting associativity and distributivity:
 \begin{equation*}
 X_0 = \epsilon \cup (b \cdot a \cup (a \cup b \cdot b) \cdot (a \cdot b)^* \cdot (a \cdot a \cup b)) \cdot X_0
 \end{equation*}
@@ -1712,7 +1712,7 @@ arriving in an end state. This shows that the two states are in some
 sense indistinguishable: from state 2 and 3, the same strings lead to
 F (the set of the final states). On the other hand, states 3 and 5 do not have this property: the
 same string can lead to F and not. So, states 3 and 5 are
-distinguishable. The minimalisation idea consists in: identify
+distinguishable. The minimisation idea consists in: identify
 indistinguishable states and collapse them.
 
 We will assume that $\delta$ is total, i.e. that from each state there
