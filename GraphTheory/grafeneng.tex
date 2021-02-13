@@ -349,25 +349,24 @@ vertices $v$ and $w$, there is a path from $v$ to $w$.}
 
 
 \begin{theorem}[Existence of an Eulerian cycle.]
-  A graph $G(V,E)$ has an Eulerian cycle if and only if $G$ is
-  connected and the degree of each vertex is even.
+A connected graph $G(V,E)$ has an Eulerian cycle if and only the degree of
+each vertex is even.
 \end{theorem}
 The intuition behind the proof is that when you arrive in a vertex,
 you can leave again because the degree is even. It therefore does not
 matter which path you follow, as long as you don't return to the
 starting point too soon. Even if you did, you can still mend the path.
 
-
 \begin{proof}
 ~\\
 \begin{itemize}
-\item A graph with an Eulerian cycle is connected: the cycle connects
-all vertices, so there is a path from each vertex to each other
-vertex. While traversing the cycle, we leave every vertex in which we
-arrive, and since all edges are traversed by the cycle, the degree of
-each vertex is even.
+\item[\underline{$\Rightarrow$}:] In a connected graph with an Eulerian cycle, the cycle connects all
+vertices as there is a path from each vertex to each other vertex and the cycle
+covers all paths. While traversing the cycle, we leave every vertex in which we
+arrive, and since all edges are traversed by the cycle, the degree of each
+vertex is even.
 
-\item Construct a cycle $P$: start from any vertex $s$, follow any
+\item[\underline{$\Leftarrow$}:] Construct a cycle $P$: start from any vertex $s$, follow any
 edge incident on $s$; from then on extend the partial path with any
 edge incident on the most recently added vertex, never using a
 previously used edge. Repeat until there are no more edges to choose
