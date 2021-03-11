@@ -669,7 +669,7 @@ DFA.
 %  \end{definition}
 
 \begin{definition}[A string accepted by a DFA] \label{defacceptdfa}
-A string $s$ is accepted by an DFA
+A string $w$ is accepted by an DFA
 $(Q,\Sigma,\delta,q_s,F)$ iff $\delta^*(q_s,w) \in F$.
 \end{definition}
 
@@ -853,7 +853,7 @@ implements the DFA.
 \subsection{The Brzozowski Derivative}
 
 The (Brzozowski) derivative of a language $L$ with respect to a string
-$v$ is the language $D_s(L)$ of suffixes $w$ such that $v \cdot w \in L$.
+$v$ is the language $D_v(L)$ of suffixes $w$ such that $v \cdot w \in L$.
 For example, $D_{\mathit{hel}}(\{\mathit{hell}, \mathit{hello},\mathit{helper},\mathit{world}\}) = 
 \{ \mathit{l}, \mathit{lo}, \mathit{per} \}$.
 
@@ -862,7 +862,7 @@ Formally,
 D_v(L) = \{ w \mid v \cdot w \in L \}
 \end{equation*}
 
-A consequence of this definition is that a word $w$ is in a language $w$ if and only if
+A consequence of this definition is that a word $w$ is in a language $L$ if and only if
 the empty word $\epsilon$ is in the derivative $D_w(L)$.
 \begin{equation*}
 w \in L ~\Leftrightarrow~ \epsilon \in D_w(L)
@@ -1161,7 +1161,7 @@ equation is true, and thus that $B^* \cdot A$ is a solution.
     $(B^0 \cdot A) \subseteq S$
   \item[\underline{$i = j + 1$:}] \ \\
     Since $S$ satisfies $S = A \cup B \cdot S$, it follows that $(B \cdot S) \subseteq S$.
-    Also for all $T \subseteq S$, it holds that $(B \cdot T) \subset (B \cdot T)$, and thus
+    Also for all $T \subseteq S$, it holds that $(B \cdot T) \subseteq (B \cdot S)$, and thus
     by transitivity, $(B \cdot T) \subseteq S$.
 
     Assuming that $(B^{j} \cdot A) \subseteq S$---which is the induction hypothesis---it thus follows that 

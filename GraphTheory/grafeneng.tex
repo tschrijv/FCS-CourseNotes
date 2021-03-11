@@ -346,7 +346,7 @@ vertices of the graph exactly once.}
 vertices $v$ and $w$, there is a path from $v$ to $w$.}
 \end{definition}
 
-
+\newpage
 
 \begin{theorem}[Existence of an Eulerian cycle.]
 A connected graph $G(V,E)$ has an Eulerian cycle if and only the degree of
@@ -387,6 +387,7 @@ unused edges. Figure~\ref{euler4} illustrates the construction.
 \end{figure}
 \end{proof}
 
+\newpage
 
 \begin{theorem}[Existence of an Eulerian path]
   A connected graph $G$ has an Eulerian path from vertex $v$ to $w$
@@ -2507,9 +2508,8 @@ from the flow in the bad edges. Finally, erase all labels in the network.
 \item
 \textbf{Choose the next vertex}: If ${\cal L} \setminus H =
 \emptyset$, \textbf{stop}: the flow $F$ is maximal.
-
-Let $v$ be the $v_{i} \notin H$ with a label and with minimal
-index $i$.
+Otherwise let $v$ be the $v_{i} \notin H$ with a label and with minimal
+index $i$. Add $v$ to $H$.
 \item
 \textbf{Label the neighbours}: Suppose the label of $v$ equals
 $(\alpha,\Delta)$. Treat any edge of the form $(v,w)$ or $(w,v)$ in
