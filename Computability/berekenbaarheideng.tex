@@ -1448,6 +1448,491 @@ Use Rice for new proofs of old theorems.
 %###############################################################################
 \chapter{Reductions}
 
+This chapter introduces relations between languages (or problems)
+that are known as \emph{reductions}. They allow transferring
+what is known about decidability or recognizability from one to
+the other.
+
+A reduction maps one problem $L_1$ to another problem $L_2$. 
+It may be a bit counterintuitive at first, but for such
+a mapping to be possible $L_2$ must be in some sense {\em more difficult}
+than $L_1$. This is because a method to solve $L_2$ is (together with the reduction) powerful
+enough to solve $L_1$. We will make all this very precise. It is important
+to get a good grasp on the reductions in this section, because in complexity
+theory, we use similar reductions, so it is a recurring concept.
+
+%===============================================================================
+\section{Many-one Reduction}\label{mappingreduction}
+
+We start with a highly structured class of reductions, the many-one reductions.
+These reductions are defined in terms of a Turing computable function.
+
+\begin{definition}[(Turing) computable function]
+A function $f$ is (Turing)
+       computable if there exists a Turing Machine that on input $s$
+       eventually halts with $f(s)$ on the tape.
+\end{definition}
+
+We do not care whether the machine stops in an accepting or a
+rejecting end state.
+
+\begin{definition}[Many-one Reduction of languages] \label{manyone}
+A many-one reduction of language $L_1$ (over $\Sigma_1$) to language
+$L_2$ (over $\Sigma_2$) is a total computable function $f$ from
+$\Sigma_1^*$ to $\Sigma_2^*$ so that: 
+\begin{equation*}
+\forall s \in \Sigma_1^*: \quad s \in L_1 ~~\Leftrightarrow~~ f(s) \in L_2
+\end{equation*}
+
+We denote this by $L_1 \leq_m L_2$, and we can also say {\em $L_1$
+  reduces to $L_2$}, or {\em $L_1$ is mapping reducible to $L_2$}.
+\end{definition}
+
+Figure~\ref{mapred} illustrates the condition on $f$. Observe that
+the condition can be equivallently written as:
+\begin{equation*}
+\forall s \in \Sigma_1^*: \quad s \not\in L_1 ~~\Leftrightarrow~~ f(s) \not\in L_2
+\end{equation*}
+or as
+\begin{equation*}
+\forall s \in \Sigma_1^*: \quad s \in \bar{L}_1 ~~\Leftrightarrow~~ f(s) \in \bar{L}_2
+\end{equation*}
+Sometimes it is also written as:
+\begin{equation*}
+f(L_1) \subseteq L_2 ~~\wedge~~ f(\bar{L}_1) \subseteq \bar{L}_2
+\end{equation*}
+
+\begin{figure}[th]
+\begin{center}
+\includegraphics[%
+  width=0.6\linewidth,
+  keepaspectratio]{mapred}
+\end{center}
+\caption{Schematic representation of a reduction\label{mapred}}
+\end{figure}
+
+
+
+A reduction $f$ offers a method to transform the decision question
+about $L_1$ into a decision question about $L_2$. Indeed,
+$s \in L_1?$ can be answered by deciding about $f(s) \in L_2$. The
+next theorems make that more precise. 
+
+\begin{theorem}
+If $L_1 \leq_m L_2$ and $L_2$ is decidable, then $L_1$ is decidable.
+\end{theorem}
+
+\begin{theorem}
+If $L_1 \leq_m L_2$ and $L_2$ is recognizable, then $L_1$ is recognizable.
+\end{theorem}
+
+\begin{corollary}
+If $L_1 \leq_m L_2$ and $L_1$ is not recognizable, then $L_2$ is not
+recognizable.  If $L_1 \leq_m L_2$ and $L_1$ is not decidable, then
+$L_2$ is not decidable.
+\end{corollary}
+You must be able to prove the above.
+
+We have used reductions informally in previous theorems, e.g. on page
+\pageref{reduction1} when we proved that $EQ_{TM}$ is not decidable.
+Let's do it now based on the definitions.
+
+\begin{theorem}
+$EQ_{TM}$ is not decidable.
+\end{theorem}
+\begin{proof}
+We reduce $E_{TM}$ to $EQ_{TM}$: $f$ maps input $\langle M \rangle$ to
+$\langle M,M_\phi \rangle$; $M_\phi$ a Turing Machine accepting the
+empty language. Clearly, $f$ is Turing computable.
+
+So, $E_{TM} \leq_m EQ_{TM}$, and since we know already that $E_{TM}$
+is not decidable, $EQ_{TM}$ is not decidable either.
+\end{proof}
+
+\begin{theorem}
+If $A \leq_m B$ then  $\overline{A} \leq_m \overline{B}$.
+\end{theorem}
+\begin{proof}
+Selfie!
+\end{proof}
+
+
+Also on page \pageref{nonreductie1}, we used a reduction from
+$\overline{A}_{TM}$ to $E_{TM}$: we mapped $\langle M,s \rangle$ to
+$\langle M_s \rangle$ ...  Note that a mapping reduction from
+$A_{TM}$ to $E_{TM}$ does not exist - can you explain why? Hint, 
+what do you know about the co-recognizability of both?
+
+
+\begin{theorem}
+$EQ_{TM}$ is not recognizable and not co-recognizable.
+\end{theorem}
+\begin{proof}
+We construct two mapping reductions: $A_{TM} \leq_m
+\overline{EQ}_{TM}$ and $A_{TM} \leq_m EQ_{TM}$. Since
+$\overline{A}_{TM}$ is not recognizable, the result follows.
+\begin{description}
+\item[$A_{TM} \leq_m \overline{EQ}_{TM}$:] ~\\ 
+$f$ maps $\langle M,s \rangle$ to $\langle M_s,M_\phi \rangle$;
+  $M_s$ is a machine that accepts every string if M accepts s; clearly
+  $f$ is computable; we should also prove the other conditions:
+\begin{itemize}
+\item if M accepts s, then the languages of $M_s$ and $M_\phi$ are
+  different
+\item if M does not accept s, then the languages of $M_s$ and $M_\phi$
+  are equal
+\end{itemize}
+
+\item[$A_{TM} \leq_m EQ_{TM}$:] ~\\
+$f$ maps $\langle M,s \rangle$ to $\langle M_s,M_{\Sigma^*}
+  \rangle$; $M_{\Sigma^*}$ is a machine accepting all strings; $M_s$
+  is like before; checking the conditions on $f$ should be
+straightforward.
+\end{description}
+\end{proof}
+
+%===============================================================================
+\section{Oracle Machines and a Decidability Hierarchy}
+
+Suppose we had another way to decide $A_{TM}$ - not via a TM of course -
+would there be a way to use that power to decide everything? Let's
+make the question a bit more concrete:
+\begin{itemize}
+\item Since no TM can decide $A_{TM}$, we must name this device
+  differently: it is an {\em oracle}; we get back to the
+  implementation of an oracle later ...
+
+\item A TM must be able to consult the oracle, i.e. the oracle for
+  $A_{TM}$ can be called by a TM as a subroutine, with a string $s$ as
+  input to the oracle; the oracle needs only a finite number of steps
+  to give its decision (is $s \in A_{TM}$?) to the TM.
+
+\item In this way, we build a so called oracle machine $O^{A_{TM}}$:
+  it is a TM that can ask questions to the oracle for $A_{TM}$.
+\end{itemize}
+
+It is clear that we can make an $O^{A_{TM}}$ that decides $A_{TM}$:
+give the input $\langle M,s \rangle$ to the oracle, and return its
+answer. So, the set of oracle machines with oracle $A_{TM}$ is
+strictly stronger than the set of Turing Machines. Here comes another
+example:
+
+\begin{theorem}
+There exists an $O^{A_{TM}}$ that decides $E_{TM}$.
+\end{theorem}
+\begin{proof}
+We construct $O^{A_{TM}}$ as follows: on input $\langle M \rangle$
+$O^{A_{TM}}$ performs the following actions
+\begin{itemize}
+\item
+it constructs a Turing Machine $P$ that on input $w$ performs the
+following actions
+\begin{itemize}
+\item run $M$ on all strings of $\Sigma^*$ (*)\label{allestrings}
+\item if $M$ accepts a string, accept
+\end{itemize}
+
+\item ask the oracle for $A_{TM}$ whether $\langle P,x \rangle \in
+  A_{TM}$
+
+\item if the oracle answers {\bf yes}, reject; otherwise accept
+\end{itemize}
+If $L_M \neq \emptyset$, then $P$ accepts every input, and for sure
+also input $x$; so, the oracle answers {\bf yes} and $O^{A_{TM}}$ must
+reject. Vice versa: if $L_M = \emptyset$, then $O^{A_{TM}}$
+accepts. We conclude that $O^{A_{TM}}$ decides the language $E_{TM}$.
+\end{proof}
+
+The theorem proves that $E_{TM}$ is decidable relative to
+$A_{TM}$. The relevant definition is:
+
+\begin{definition}[Turing reducible]
+A language $A$ is Turing reducible to language $B$, if $A$
+is decidable relative to $B$, i.e. there exists an oracle machine
+$O^B$ that decides $A$. We write this as $A \leq_T B$.
+\end{definition}
+
+The definition supports our intuition about what it means for one
+language to be reducible to another:
+
+\begin{theorem}
+If $A \leq_T B$ and $B$ is decidable, then $A$ is decidable.
+\end{theorem}
+
+The previous and following theorems are at your mercy!
+
+\begin{theorem}
+If $A \leq_m B$ then also $A \leq_T B$.
+
+In other words: $\leq_m$ is finer than $\leq_T$.
+\end{theorem}
+
+Time for a description of an oracle for any language $L$: each
+string has a running number in the lexicographic order on strings
+(shorter before longer, and alphabetic). That means that the language
+can be represented as an infinite bitmap: bit $i$ is one, if the
+$i^{th}$ string is in L, and otherwise zero. That bitmap could be on a
+tape. When an oracle gets a membership question about $s$, it first
+computes its corresponding number, and then looks up the right bit
+... So, do oracles exist or not?
+
+Another question: can the class of oracle machines with an oracle for
+$A_{TM}$ decide all languages? Certainly not, as a cardinality
+argument can show you! So there exists a language $X$ that is not
+decidable with an oracle for $A_{TM}$. You can now repeat the argument
+for the $X$ oracle ... and you soon note that there is an infinite
+hierarchy of ever more difficult languages. As a sidenote: also
+complexity theory has its oracle machines and a nice hierarchy. The
+difference is: the particular complexity hierarchy would still
+collapse in case it turns out that $NP = P$. Our computability
+hierarchy however stands strong!
+
+\paragraph{Selfie:} In the theorem on page \pageref{allestrings},
+a statement is marked by a (*): how can we let M run on all strings?
+There are infinitely many of them ...
+
+%===============================================================================
+\section{The Computable and the Recursive Functions}
+
+We gave a definition of Turing computable function in the previous
+section. It was rather abstract and {\em existential}. We can also
+get a grip on which functions are Turing-computable by
+working {\em bottom-up}: we start with very simple functions, and
+compose them with simple operators. That is what Kurt Goedel and
+Jacques Herbrand did.
+
+%-------------------------------------------------------------------------------
+\subsection{The Primitive Recursive Functions}
+
+The first attempt of Goedel and Herbrand is known as the \emph{primitive
+recursive functions}. These are all the functions on natural numbers that can
+constructed out of the first set of building blocks they devised. It was discovered
+that this first attempt fell short: it does not capture all Turing-computable
+functions; more on that later.
+
+There are five building blocks for primitive recursive functions: three basic
+functions (or rather families of functions) and two operators (or higher-order
+functions)
+for combining functions.
+
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+\subsubsection{The Basic Functions}
+There are three basic functions.
+\begin{itemize}
+\item
+The null function: $\mathit{null} : \N \rightarrow \N$
+\begin{equation*}
+\mathit{null}(x) = 0
+\end{equation*}
+
+\item
+The successor function: $\mathit{succ} : \N \rightarrow \N$
+\begin{equation*}
+\mathit{succ}(x) = x + 1
+\end{equation*}
+
+\item
+The family of projection functions : $p_i^n : \N^n \rightarrow \N$
+\begin{equation*}
+p_i^n(x_1,x_2,...,x_n) = x_i
+\end{equation*}
+There is a projection function $p_i^n$ for every $n \geq 1$ and every $1 \leq
+i \leq n$. Notably, $p_1^1(x) = x$ is the identity function.
+\end{itemize}
+
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+\subsubsection{The Operators}
+
+The two families of operators are higher-order functions that combine the basic
+functions to create more complex behavior.
+
+\begin{itemize}
+\item The family of function composition operators $\mathit{Cn}[f,g_1,\ldots,g_m] : \N^n \to \N$
+where $f : \N^m \to \N$ and $g_i : N^n \to N$ (for $i \in 1,\ldots,m$).
+\begin{equation*}
+\mathit{Cn}[f,g_1,\ldots,g_m](x_1,\ldots,x_n) = f(g_1(x_1,\ldots,x_n),\ldots,g_m(x_1,\ldots,x_1))
+\end{equation*}
+This operator takes $1 + m$ function parameters $f$ and $g_1,\ldots,g_m$, and
+$n$ natural numbers $x_1,\ldots,x_n$. There is one such operator for every $m
+\geq 1$ and $n \geq 1$. For example, we get regular function composition when
+$m = n = 1$. For instance, $\mathit{Cn}[\mathit{succ},\mathit{succ}]$ 
+denotes $\mathit{succ}\,\circ\,\mathit{succ}$, which is the function that
+adds $2$ to its input.
+Similarly, $\mathit{Cn}[\mathit{succ},\mathit{null}]$ 
+denotes $\mathit{succ}\,\circ\,\mathit{null}$, which is the function that
+returns $1$ regardless of its input.
+
+By repeated nesting we get more complex composition chains, e.g., 
+$\mathit{Cn}[\mathit{succ},\mathit{Cn}[\mathit{succ},\mathit{succ}]]$
+adds $3$ to its input.
+
+\item The family of primitive recursion operators $\mathit{Pr}[z,s] : \N^k \times \N \to N$
+where $z : \N^k \to N$ and $s : \N^k \times \N \times N \to N$.
+\begin{eqnarray*}
+\mathit{Pr}[z,s](x_1,\ldots,x_k,0) & = & z(x_1,\ldots,x_k) \\
+\mathit{Pr}[z,s](x_1,\ldots,x_k,y' + 1) & = & s(x_1,\ldots,x_k,y',\mathit{Pr}[z,s](x_1,\ldots,x_k,y'))
+\end{eqnarray*}
+The operator takes two function parameters $z$ and $s$, where $z$ handles the base case (zero) and 
+$s$ handles the recursive case (successor). It also takes $k + 1$ natural numbers: 
+the $x_1,\ldots,x_n$ are the auxiliary parameters and the $y$ parameter is the main one, the one on which
+the operator performs structural recursion.
+
+The base case is if $y$ is $0$. Then the operator returns the result of $z$ on the auxiliary parameters.
+The recursive case is when $y$ is of the form $y' + 1$. Then the operator recurses on  $y$'.
+The $s$ function is used to combine the auxiliary parameters, the value of $y'$ and the recursive
+result in the overall result.
+
+The recursion opertor allows us to define addition of natural numbers, which satisfies
+the following two equations:
+\begin{eqnarray*}
+\mathit{add}(x,0) & = & x \\
+\mathit{add}(x,y'+1) & = & 1 + \mathit{add}(x,y') 
+\end{eqnarray*}
+Hence, we can take $z = p_1^1$ for the base case, returning $x$ given $x$.
+For the recursive case, we take $s = \mathit{Cp}[\mathit{succ},p_3^3]$ 
+to return $1 + \mathit{add}(x,y')$ given $x$, $y'$ and $\mathit{add}(x,y')$. In short,
+the $\mathit{add}$ function can be constructed as:
+\begin{equation*}
+\mathit{add} = \mathit{Pr}[p_1^1,\mathit{Cp}[\mathit{succ},p_3^3]]
+\end{equation*}
+\end{itemize}
+
+
+\begin{definition}[Primitive recursive function]
+All functions that can be constructed from the basic functions and by using composition and primitive recursion, are named
+{\bf primitive recursive}.
+\end{definition}
+
+
+Primitive recursive functions are total. They can be
+computed by FOR-programs.
+
+\subsubsection{More Examples}
+
+\begin{itemize}
+\item
+$Cn[succ,null]$ is the constant function 1
+
+\item
+$Cn[succ,Cn[succ,Cn[succ,null]]]$ is the constant function 3
+
+\item
+
+$Pr[null,Cn[sum,{p_1}^3, {p_3}^3]]$ = product of 2 inputs ($\N^2 \rightarrow \N$)
+
+\item
+factorial, minus1 (or predecessor), ...
+
+\end{itemize}
+
+%-------------------------------------------------------------------------------
+\subsection{The Recursive Functions}
+
+\subsubsection{A Non-Primitive Recursive Function: the Ackermann Function}
+
+Initially, Goedel stopped at the primitive recursive functions when he
+was trying to define all {\em computable functions}: he was doing that
+without referring to TMs. However, in 1928, Wilhelm Ackermann, a
+student of David Hilbert, published what we now know as the Ackermann
+function: this function is clearly {\em computable} in an intuitive
+sense and understanding of computability (and also by a TM, but they
+did not exist in 1928!), still, the Ackermann function is not
+primitive recursive.\footnote{Actually, another student of Hilbert,
+ Gabriel Sudan, was the first to establish a computable, but not
+ primitive recursive function.} Here follows the definition of
+Ackermann's function with two arguments:
+
+\begin{itemize}
+\item[] Ack(0, y) = y + 1
+\item[] Ack(x + 1, 0) = Ack(x, 1)
+\item[] Ack(x + 1, y + 1) = Ack(x, Ack(x + 1, y ))
+\end{itemize}
+This function is total (try to understand this!) and monotonically increasing. 
+In fact, it increases faster than any primitive recursive function can: this
+was the arugment used to prove that it is not primitive recursive.
+
+Often one uses the words {\em Ackermann's function} to mean a function
+with one argument only. It is defined as
+\verb|Ack(n) = Ack(n,n)|. This function also increases faster than any
+primitive recursive function. Its inverse increases so slowly that it appears
+to be near-contant; it is important in complexity analysis of algorithms, e.g.,
+for the Union-Find algorithm.
+
+\subsubsection{Unbounded Minimization}
+
+Goedel had to enlarge his class of functions to accomodate the Ackermann
+function (and many other examples of non-primitive recursive functions).
+To do that he introduced one more operator, {\em unbounded minimization}.
+
+The family of primitive recursion operators $\mathit{Mn}[f] : \N^k \to N$
+where $f : \N \times \N^k \to N$.
+\begin{equation*}
+\mathit{Mn}[f](x_1,\ldots,x_k) = y
+\end{equation*}
+provided that $f(y,x_1,\ldots,x_k) = 0$ and $\forall z < y, f(z,x_1,\ldots,x_n,z) \neq 0$.
+Loosely speaking, $\mathit{Mn}[f]$ gives the minimal roots of f.
+
+Where primitive recursive functions correspond to imperative programs with FOR-loops,
+the minimazation operator introduces WHILE-loops. Specifically, the oprator
+itself can be implemented as follows.
+\begin{verbatim}
+       y = 0;
+       while (f(y,x) != 0)
+          y++;
+       return y;
+\end{verbatim}
+This imperative implementation you can end up in an infinite loop in two
+ways\ldots Such an infinite loop corresponds to the function being undefined,
+or partial,
+for that input.
+
+\begin{definition}[Recursive functions]
+{\bf Recursive functions} are constructed from the basic functions, and by
+applying $\mathit{Pr}$, $\mathit{Cn}$ and $\mathit{Mn}$. 
+\end{definition}
+One also names these functions {\em $\mu$-recursive} because $\mu$ is the
+original name for the minimalization operator $\mathit{Mn}$.
+
+These functions can be computed by a Turing Machine, and
+vice versa. It means that the Turing computable functions coincide with
+the recursive functions. It is clear from the definition of unbounded
+minimization that recursive functions can be partial. That is
+consistent with the notion of Turing computable: a TM often only defines
+a partial function. Yet, the Ackermann function shows that really
+recursive functions can also be total.
+
+\paragraph{Note:}
+We have not shown how to write the Ackermann function with the minimization
+operator. The reasone for that is that, while it is possible, it is rather
+laborious and lengthy. It involves:
+\begin{itemize}
+\item encoding the tuple of parameters $(x,y)$, which represents the call,
+      Ack($x$,$y$) as a single number;
+\item encoding nested calls as nested tuples and those nested tuples as a single
+      number;
+\item writing a step function that simulates a single evaluation step on the
+      encoding of nested tuples as a single number;
+\item writing a function that iterates a step function a given number of times with primitive
+      recursion; and
+\item finding the smallest iteration number that runs the simulation to completion with
+      the minimization operator.
+\end{itemize}
+
+\paragraph{Selfie:}
+\begin{itemize}
+\item[]
+Understand and/or prove: if the domain of a partial recursive function
+is decidable, then it can be extended to a total function that is also
+recursive.
+\item[]
+Do partial recursive functions exist whose domain is not decidable?
+\item[]
+Is the domain of a (partial) recursive function recognizable?
+\item[]
+Is the range of a (partial) recursive function recognizable?
+\end{itemize}
+
+%===============================================================================
 \section{The {\em Post Correspondence Problem}}
 
 \begingroup
@@ -1670,454 +2155,6 @@ This rewriting system is also Turing complete.
 2-tag systems have been used to simulate small UTMs.
 
 
-\section{Many-one Reduction}\label{mappingreduction}
-
-A reduction maps one problem L1 to another L2: it seems a bit counterintuitive,
-but L2 is in some sense {\em more difficult} than L1,
-because a method to solve L2 is (together with the reduction) powerful
-enough to solve L1. We will make all this very precise. It is important
-to get a good grasp on the reductions in this section: in complexity
-theory, we use similar reductions, so it is a recurring concept.
-
-%
-
-\begin{definition}[(Turing) computable function]
-A function $f$ is (Turing)
-       computable if there exists a Turing Machine that on input $s$
-       eventually halts with $f(s)$ on the tape.
-\end{definition}
-
-We do not care whether the machine stops in an accepting or a
-rejecting end state.
-
-\begin{definition}[Many-one Reduction of languages] \label{manyone}
-A many-one reduction of language $L_1$ (over $\Sigma_1$) to language
-$L_2$ (over $\Sigma_2$) is a total computable function $f$ from
-$\Sigma_1^*$ to $\Sigma_2^*$ so that $f(L_1) \subseteq L_2$ and
-%
-$f(\overline{L_1}) \subseteq \overline{L_2}$.
-
-We denote this by $L_1 \leq_m L_2$, and we can also say {\em $L_1$
-  reduces to $L_2$}, or {\em $L_1$ is mapping reducible to $L_2$}.
-\end{definition}
-
-Figure~\ref{mapred} shows the condition on $f$.
-
-\begin{figure}[h]
-\begin{center}
-\includegraphics[%
-  width=0.6\linewidth,
-  keepaspectratio]{mapred}
-\end{center}
-\caption{Schematic representation of a reduction\label{mapred}}
-\end{figure}
-
-A reduction $f$ offers a method to transform the decision question
-about $L_1$ into a decision question about $L_2$, indeed,
-%
-$s \in L_1?$ can be answered by deciding about $f(s) \in L_2$. The
-next theorems make that more precise: you must be able to prove them.
-
-\begin{theorem}
-If $L_1 \leq_m L_2$ and $L_2$ is decidable, then $L_1$ is decidable.
-\end{theorem}
-
-\begin{theorem}
-If $L_1 \leq_m L_2$ and $L_2$ is recognizable, then $L_1$ is recognizable.
-\end{theorem}
-
-\begin{corollary}
-If $L_1 \leq_m L_2$ and $L_1$ is not recognizable, then $L_2$ is not
-recognizable.  If $L_1 \leq_m L_2$ and $L_1$ is not decidable, then
-$L_2$ is not decidable.
-\end{corollary}
-
-We have used reductions informally in previous theorems, e.g. on page
-\pageref{reduction1} when we proved that $EQ_{TM}$ is not decidable.
-Let's do it now based on the definitions.
-
-\begin{theorem}
-$EQ_{TM}$ is not decidable.
-\end{theorem}
-\begin{proof}
-We reduce $E_{TM}$ to $EQ_{TM}$: $f$ maps input $\langle M \rangle$ to
-$\langle M,M_\phi \rangle$; $M_\phi$ a Turing Machine accepting the
-empty language. Clearly, $f$ is Turing computable.
-
-So, $E_{TM} \leq_m EQ_{TM}$, and since we know already that $E_{TM}$
-is not decidable, $EQ_{TM}$ is not decidable either.
-\end{proof}
-
-\begin{theorem}
-If $A \leq_m B$ then  $\overline{A} \leq_m \overline{B}$.
-\end{theorem}
-\begin{proof}
-Selfie!
-\end{proof}
-
-
-Also on page \pageref{nonreductie1}, we used a reduction from
-$\overline{A_{TM}}$ to $E_{TM}$: we mapped $\langle M,s \rangle$ to
-$\langle M_s \rangle$ ...  Note that a mapping reduction from
-$A_{TM}$ to $E_{TM}$ does not exist - can you explain why?
-
-\begin{theorem}
-$EQ_{TM}$ is not recognizable and not co-recognizable.
-\end{theorem}
-\begin{proof}
-We construct two mapping reductions: $A_{TM} \leq_m
-\overline{EQ_{TM}}$ and $A_{TM} \leq_m EQ_{TM}$. Since
-$\overline{A_{TM}}$ is not recognizable, the result follows.
-\begin{enumerate}
-\item $f$ maps $\langle M,s \rangle$ to $\langle M_s,M_\phi \rangle$;
-  $M_s$ is a machine that accepts every string if M accepts s; clearly
-  $f$ is computable; we should also prove the other conditions:
-\begin{itemize}
-\item if M accepts s, then the languages of $M_s$ and $M_\phi$ are
-  different
-\item if M does not accept s, then the languages of $M_s$ and $M_\phi$
-  are equal
-\end{itemize}
-
-\item now, $f$ maps $\langle M,s \rangle$ to $\langle M_s,M_{\Sigma^*}
-  \rangle$; $M_{\Sigma^*}$ is a machine accepting all strings; $M_s$
-  is like before; checking the conditions on $f$ should be
-straightforward.
-\end{enumerate}
-\end{proof}
-
-
-
-
-
-\section{Oracle Machines and a Decidability Hierarchy}
-
-Suppose we had another way to decide $A_{TM}$ - not a TM of course -
-would there be a way to use that power to decide everything? Let's
-make the question a bit more concrete:
-\begin{itemize}
-\item since no TM can decide $A_{TM}$, we must name this device
-  differently: it is an {\em oracle}; we get back to the
-  implementation of an oracle later ...
-
-\item a TM must be able to consult the oracle, i.e. the oracle for
-  $A_{TM}$ can be called by a TM as a subroutine, with a string $s$ as
-  input to the oracle; the oracle needs only a finite number of steps
-  to give its decision (is $s \in A_{TM}$?) to the TM
-
-\item in this way, we build a so called oracle machine $O^{A_{TM}}$:
-  it is a TM that can ask questions to the oracle for $A_{TM}$
-\end{itemize}
-
-It is clear that we can make an $O^{A_{TM}}$ that decides $A_{TM}$:
-give the input $\langle M,s \rangle$ to the oracle, and return its
-answer. So, the set of oracle machines with oracle $A_{TM}$ is
-strictly stronger than the set of Turing Machines. Here comes another
-example:
-
-\begin{theorem}
-There exists an $O^{A_{TM}}$ that decides $E_{TM}$.
-\end{theorem}
-\begin{proof}
-We construct $O^{A_{TM}}$ as follows: on input $\langle M \rangle$
-$O^{A_{TM}}$ performs the following actions
-\begin{itemize}
-\item
-it constructs a Turing Machine $P$ that on input $w$ performs the
-following actions
-\begin{itemize}
-\item run $M$ on all strings of $\Sigma^*$ (*)\label{allestrings}
-\item if $M$ accepts a string, accept
-\end{itemize}
-
-\item ask the oracle for $A_{TM}$ whether $\langle P,x \rangle \in
-  A_{TM}$
-
-\item if the oracle answers {\bf yes}, reject; otherwise accept
-\end{itemize}
-If $L_M \neq \emptyset$, then $P$ accepts every input, and for sure
-also input $x$; so, the oracle answers {\bf yes} and $O^{A_{TM}}$ must
-reject. Vice versa: if $L_M = \emptyset$, then $O^{A_{TM}}$
-accepts. We conclude that $O^{A_{TM}}$ decides the language $E_{TM}$.
-\end{proof}
-
-The theorem proves that $E_{TM}$ is decidable relative to
-$A_{TM}$. The relevant definition is:
-
-\begin{definition}[Turing reducible]
-A language $A$ is Turing reducible to language $B$, if $A$
-is decidable relative to $B$, i.e. there exists an oracle machine
-$O^B$ that decides $A$. We write this as $A \leq_T B$.
-\end{definition}
-
-The definition supports our intuition about what it means for one
-language to be reducible to another:
-
-\begin{theorem}
-If $A \leq_T B$ and $B$ is decidable, then $A$ is decidable.
-\end{theorem}
-
-The previous and following theorems are at your mercy!
-
-\begin{theorem}
-If $A \leq_m B$ then also $A \leq_T B$.
-
-In other words: $\leq_m$ is finer than $\leq_T$.
-\end{theorem}
-
-Time for a description of an oracle for any language $L$: each
-string has a running number in the lexicographic order on strings
-(shorter before longer, and alphabetic). That means that the language
-can be represented as an infinite bitmap: bit $i$ is one, if the
-$i^{th}$ string is in L, and otherwise zero. That bitmap could be on a
-tape. When an oracle gets a membership question about $s$, it first
-computes its corresponding number, and then looks up the right bit
-... So, do oracles exist or not?
-
-Another question: can the class of oracle machines with an oracle for
-$A_{TM}$ decide all languages? Certainly not, as a cardinality
-argument can show you! So there exists a language $X$ that is not
-decidable with an oracle for $A_{TM}$. You can now repeat the argument
-for the $X$ oracle ... and you soon note that there is an infinite
-hierarchy of ever more difficult languages. As a sidenote: also
-complexity theory has its oracle machines and a nice hierarchy. The
-difference is: the particular complexity hierarchy would still
-collapse in case it turns out that $NP = P$. Our compatibility
-hierarchy however stands strong!
-
-\paragraph{Selfie:} In the theorem on page \pageref{allestrings},
-a statement is marked by a (*): how can we let M run on all strings?
-There are infinitely many of them ...
-
-
-\section{The Computable and the Recursive Functions}
-
-We gave a definition of Turing computable function in the previous
-section. It was rather abstract and {\em existential}. We can also
-get a grip on which functions are computable by a Turing Machine, by
-working {\em bottom-up}: we start with very simple functions, and
-compose them with simple operators. That is how Kurt Goedel and
-Jacques Herbrand did it.
-
-
-
-
-\subsection{The primitive recursive functions}
-\subsubsection{The basic functions}
-
-\begin{itemize}
-\item
-the null function: $null : \N \rightarrow \N$
-
-$~~~~~~~~~~~~~~~~~~~null(x) = 0$
-
-
-\item
-the successor function: $succ : \N \rightarrow \N$
-
-$~~~~~~~~~~~~~~~~~~~~~~~~~~~succ(x) = x+1$
-
-\item
-the projections: ${p_i}^n : \N^n \rightarrow \N$
-
-$~~~~~~~~~~~~~~~{p_i}^n(x_1,x_2,...,x_n) = x_i$
-
-\end{itemize}
-
-
-\subsubsection{Composition}
-
-
-{\bf Given:}
-\begin{itemize}
-\item
-$g_1, g_2, ..., g_m$ functions $\N^k \rightarrow \N$
-
-\item
-$f$ function $\N^m \rightarrow \N$
-\end{itemize}
-
-{\bf construct by composition the function\footnote{($\overline{x} = x_1,x_2,...,x_k)$} $h : \N^k \rightarrow \N$}:
-
-$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~h(\overline{x}) = f(g_1(\overline{x}), g_2(\overline{x}), ..., g_m(\overline{x}))$
-
-Notation: $h = Cn[f,g_1,\ldots,g_m]$
-
-\subsubsection{Primitive recursion}
-
-{\bf Given:}
-\begin{itemize}
-\item
-$ f: \N^k \rightarrow \N$
-
-\item
-$g: \N^{k+2}  \rightarrow \N$
-
-\end{itemize}
-
-{\bf construct using primitive recursion $h: \N^{k+1}  \rightarrow \N$}:
-
-$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~h(\overline{x},0) = f(\overline{x})$
-
-$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~h(\overline{x},y+1) = g(\overline{x},y,h(\overline{x},y))$
-
-Notation: $h = Pr[f,g]$
-
-The above is valid for $k>0$. For $k=0$ we have: $h: \N \rightarrow \N$:
-
-$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~h(0) = c$  in which $c$ is a number
-
-$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~h(y+1) = g(y,h(y))$
-
-\begin{definition}[Primitive recursive function]
-All functions that can be constructed from the basic functions and by using composition and primitive recursion, are named
-{\bf primitive recursive}.
-\end{definition}
-
-
-Primitive recursive functions are total. They can be
-computed by FOR-programs.
-
-
-
-\subsubsection{Examples}
-
-\begin{itemize}
-\item
-$Cn[succ,null]$ is the constant function 1
-
-\item
-$Cn[succ,Cn[succ,Cn[succ,null]]]$ is the constant function 3
-
-\item
-$Pr[{p_1}^1,Cn[succ,{p_3}^3]]$ = sum of 2 inputs ($\N^2 \rightarrow \N$)
-
-write out the definition and see the analogy with the Haskell program:
-
-sum(x,0) = x
-
-sum(x,y+1) = sum(x,y) + 1
-
-
-\item
-
-$Pr[null,Cn[sum,{p_1}^3, {p_3}^3]]$ = product of 2 inputs ($\N^2 \rightarrow \N$)
-
-\item
-factorial, minus1 (or predecessor), ...
-
-\end{itemize}
-
-
-
-
-
-\subsection{The recursive functions}
-
-\subsubsection{Existence of a non primitive recursive function: the Ackermann function}
-
-Initially, Goedel stopped at the primitive recursive functions when he
-was trying to define all {\em computable functions}: he was doing that
-without referring to TMs. However, in 1928, Wilhelm Ackermann, a
-student of David Hilbert, published what we now know as the Ackermann
-function: this function is clearly {\em computable} in an intuitive
-sense and understanding of computability (and also by a TM, but they
-did not exist in 1928!), still, the Ackermann function is not
-primitive recursive.\footnote{Actually, another student of Hilbert,
- Gabriel Sudan, was the first to establish a computable, but not
- primitive recursive function.} Here follows the definition of
-Ackermann's function with two arguments:
-
-\begin{itemize}
-\item[] Ack(0, y) = y + 1
-\item[] Ack(x + 1, 0) = Ack(x, 1)
-\item[] Ack(x + 1, y + 1) = Ack(x, Ack(x + 1, y ))
-\end{itemize}
-
-This function is total (try to understand this!) and increases faster
-than any primitive recursive function: that's why it is not primitive
-recursive.
-
-Often one uses the words {\em Ackermann's function} to mean a function
-with one argument only. It is defined as
-\verb|Ack(n) = Ack(n,n)|. Also this function increases faster than any
-primitive recursive function. Its inverse is important in complexity
-analysis of algorithms, e.g., for the Union-Find algorithm.
-
-
-
-\subsubsection{Unbounded minimization}
-
-Goedel had to enlarge his class of functions, so that the
-Ackermann function was also included. He introduced {\em unbounded
-  minimization}.
-
-{\bf Given}
-\begin{itemize}
-\item $f: \N^{k+1} \rightarrow \N$
-\end{itemize}
-
-{\bf Construct by unbounded minimization:}
-
-$g: \N^k \rightarrow \N$ as follows:
-
-\begin{itemize}
-\item[] $g(\overline{x}) = y$ if
-\begin{itemize}
-\item[] $f(\overline{x},y) = 0$ and
-\item[] $f(\overline{x},z)$ is defined for all $z < y$ and
-$f(\overline{x},z) \neq 0$
-\end{itemize}
-\item[] otherwise $g(\overline{x})$ is not defined
-\end{itemize}
-
-
-Notation: $g = Mn[f]$
-
-Loosely speaking,
-{\em g gives the minimal roots of f}
-
-\subsubsection{Code to compute Mn[f](x)}
-
-
-\begin{verbatim}
-       y = 0;
-       while (f(x,y) != 0)
-          y++;
-       return y;
-\end{verbatim}
-
-There are two ways you can end up in a loop ...
-
-\begin{definition}[Recursive functions]
-{\bf Recursive functions} are constructed from the basic functions,
-and by applying Pr, Cn and Mn. One also names these functions {\em
-  $\mu$-recursive}. $\mu$ is the minimalization operator.
-\end{definition}
-
-The recursive functions can be computed with WHILE-programs. More
-specifically, these functions can be computed by a Turing Machine, and
-vice versa. It means that the Turing computable functions coincide with
-the recursive functions. It is clear from the definition of unbounded
-minimization that recursive functions can be partial. That is
-consistent with the notion of Turing computable: a TM often only defines
-a partial function. But the Ackermann function shows that really
-recursive functions can also be total.
-
-
-\paragraph{Selfie:}
-\begin{itemize}
-\item[]
-Understand and/or prove: if the domain of a partial recursive function
-is decidable, then it can be extended to a total function that is also
-recursive.
-\item[]
-Do partial recursive functions exist whose domain is not decidable?
-\item[]
-Is the domain of a (partial) recursive function recognizable?
-\item[]
-Is the range of a (partial) recursive function recognizable?
-\end{itemize}
 
 
 \section{The Busy Beaver and Fast Increasing Functions}
