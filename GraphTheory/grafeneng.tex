@@ -425,10 +425,12 @@ $\forall C' \subseteq G: C \subset C' \Rightarrow C'$ is not connected.}
  \begin{theorem}[\label{partitie} Partition of a graph]
 The components $(V_{i},E_{i})$ ($i=1,\ldots,n$) of a graph $(V,E)$
 form a partition,
-i.e. \\
-$(V,E) = (\cup_{i=1}^{n} V_{i},\cup_{i=1}^{n} E_{i})$ and
-for any $i \neq j$, $V_{i} \cap V_{j} = \emptyset$ and $E_{i} \cap E_{j} =
-\emptyset$
+i.e.,\begin{itemize} 
+\item
+$(V,E) = (\cup_{i=1}^{n} V_{i},\cup_{i=1}^{n} E_{i})$, and
+\item
+for any $i \neq j$, $V_{i} \cap V_{j} = \emptyset$ and $E_{i} \cap E_{j} = \emptyset$.
+\end{itemize}
 \end{theorem}
 \begin{proof}
 Clearly every vertex and edge belongs to at least one component.
@@ -556,15 +558,17 @@ As a consequence, the next theorem is about simple graphs.
 
  \begin{theorem}
 \label{aantalpathen}
-$ $ \\
-Let $A$ be the adjacency matrix of a simple graph $G(V,E)$,\\
+Let $A$ be the adjacency matrix of a simple graph $G(V,E)$,
 then
 $A^{n}[i,j] = $ the number of paths with length $n$ from vertex $i$ to vertex
 $j$.
 \end{theorem}
-\begin{proof} We use induction on $n$. For $n=1$, the theorem is true
+\begin{proof} We use induction on $n$. 
+\begin{description}
+\item[\underline{Base case}:] If $n=1$, the theorem is true
 because of the definition of adjacency matrix.
 
+\item[\underline{Inductive case}:]
 Suppose the theorem is true for $n$; we prove that the theorem is true
 for $(n+1)$: $A^{n+1}=A^{n}*A$, so $A^{n+1}[i,j] = \sum_{k=1}^{\#V}
 A^{n}[i,k]*A[k,j]$. By the induction hypothesis, $A^{n}[i,k]$ is the
@@ -573,6 +577,7 @@ $j$, (i.e. if $A[k,j] = 1$), then there are also $A^{n}[i,k]$ paths
 from $i$ to $j$ passing through $k$ just before arriving at
 $j$. Since no two paths are the same (why not?), the result for
 $(n+1)$ follows.
+\end{description}
 \end{proof}
 
 For the graph in Figure~\ref{adjacency1}, we have
@@ -738,14 +743,14 @@ $G_{1}$ and $G_{2}$ are equal.
 \begin{proof}
 ~\\
 \begin{itemize}
-\item
+\item[$\Rightarrow$]
 Let $G_{1}$ and $G_{2}$ be isomorphic, with isomorphism $f$.
 Choose any order of the vertices of $G_{1}$. Now order the vertices of
 $G_{2}$ by: $f(v) < f(w) \Leftrightarrow v < w$; the order on the
 edges of $G_{2}$ is induced in the same way by any order on the edges
 of $G_{1}$ and the bijection on the edges. The incidence matrices are
 equal.
-\item If the incidence matrices are equal, the isomorphism $f$ is
+\item[$\Leftarrow$] If the incidence matrices are equal, the isomorphism $f$ is
 trivial to specify.
 \end{itemize}
 \end{proof}
@@ -880,11 +885,12 @@ that lies outside of a (drawing of a) graph also counts as a face. The
 origin of the word {\em face} is in the study of polyhedra.
 
 
-\begin{proof} We use induction on the number of edges. Suppose
+\begin{proof} We use induction on the number of edges $e$. 
+\begin{itemize}
+\item[\underline{Base case}:]
+Suppose
 $e=1$. Then $G$ is one of the graphs in Figure~\ref{euler1}. In
-both cases, the Euler's formula is correct.  Suppose the formula is
-correct for all graphs with $n$ edges. Let $G$ be a graph with $(n+1)$
-edges.
+both cases, the Euler's formula is correct.  
 
 \begin{figure}[ht]
 \begin{center}
@@ -893,7 +899,14 @@ edges.
 \caption{The two graphs with $e=1$ \label{euler1}}
 \end{figure}
 
-1) First assume that $G$ does not contain a cycle. Consider a maximal
+
+\item[\underline{Inductive case}:]
+Suppose the formula is
+correct for all graphs with $n$ edges. Let $G$ be a graph with $(n+1)$
+edges. We distinguish two mutually exclusive cases:
+\begin{itemize}
+\item[\underline{$G$ does not contain a cycle:}]
+Consider a maximal
 simple path in $G$; that path contains a vertex $a$ with $\delta(a) =
 1$: now consider the graph $G'$ which you obtain by removing from $G$
 the vertex $a$ and the only edge arriving there; $G'$ has 1 vertex
@@ -907,8 +920,9 @@ consequently also for $G$ (see e.g. Figure~\ref{euler2}).\\
 \caption{G without a cycle \label{euler2}}
 \end{figure}
 
-2) Suppose now that $G$ contains a cycle: take away any edge $x$ from
-this cycle, but not its endpoints; the result is $G'$ (see
+\item[\underline{$G$ contains a cycle:}]
+Take away any edge $x$ from
+the cycle, but not its endpoints; the result is $G'$ (see
 e.g. Figure~\ref{euler3}).
 \begin{figure}[ht]
 \begin{center}
@@ -920,6 +934,8 @@ $G'$ has $n$ edges, the same number of vertices as $G$, and one less
 face than $G$; $G'$ is connected (why?); so Euler's formula is valid
 for $G'$ (by the induction hypothesis), and it follows that Euler's
 formula is also valid for $G$.
+\end{itemize}
+\end{itemize}
 \end{proof}
 
 Note that the connectedness condition is essential: the graph with two
@@ -1131,20 +1147,26 @@ the number of its vertices by $v'$; the number of faces is $f$
 because removing the particular edges did not change that. So we have
 $e-e'=v-v'$ which is equal to the number of removed edges (or
 vertices). Denote that quantity by $t$. We now make a case distinction:
-
-1) if $e' = 0$ then $v' = 1$; since $e > 1$ we also have $t > 1$;
+\begin{description}
+\item[\underline{$e'=0$}:]
+then $v' = 1$; since $e > 1$ we also have $t > 1$;
 so we know: $e = t$ and $3*v-6 = 3*(v'+t) -6 = 3*t-3$; since $t \leq
 3*t-3$, we get $e \leq 3*v-6$.
 
-2) $e'$ can't be equal to 1 or 2 (why not?)
+\item[\underline{$e'=1$}:]
+this is not possible (why not?)
+\item[\underline{$e'=2$}:]
+this is not possible (why not?)
 
-3) $e' > 2$; every face is delimited by at least 3 edges (because
+\item[\underline{$e' > 2$}:]
+every face is delimited by at least 3 edges (because
 there are no loops or parallel edges); let $\sum$ denote the sum of
 the number of edges in all faces. then $\sum \geq 3*f$; since each
 edge borders exactly 2 faces (why?), we also have $\sum = 2*e'$, so
 $2*e' \geq 3*f$. Now use Euler's formula for $G'$ to eliminate $f$
 from this inequality, and you get: $e' \leq 3*v'-6$ and thus $e'+t
 \leq 3*(v'+t)-6$ and $e \leq 3*v-6$.
+\end{description}
 \end{proof}
 
  \begin{theorem} A planar, simple graph has at least one
@@ -1164,15 +1186,17 @@ We are now ready to state and prove
      planar graph $G(V,E)$.
 \end{theorem} % uit Townsend
 \begin{proof} (the proof follows Townsend)
-
-We use induction of the number of vertices: a $G$ with just one vertex,
-can clearly be colored with 5 colors. Also, assume $G$ is connected:
-if not, the theorem will be proven true for its components, and carry
-over to the whole graph. So, assume that the theorem is true for
+Assume $G$ is connected.
+If not, the theorem will be proven true for its components, and carry
+over to the whole graph.
+\induction{the number of vertices}{A $G$ with just one vertex
+can clearly be colored with 5 colors.}  
+{Assume that the theorem is true for
 graphs with $n$ vertices; let $G$ have $n+1$ vertices. Then there is
 at least one vertex $v$ with degree 5 or less.
-
-1) If $v$ has degree 4 or less, then $v$ occurs in $G$ as in
+\begin{description}
+\item[1)]
+If $v$ has degree 4 or less, then $v$ occurs in $G$ as in
 Figure~\ref{5kleuring1}.
 
 \begin{figure}[ht]
@@ -1189,7 +1213,8 @@ $5$-coloring. Since $v$ has at most 4 neighbors, $v$ can get a color
 different from the color of all its neighbors, resulting in a
 $5$-coloring of $G$.
 
-2) If $\delta(v) = 5$, then $v$ occurs in $G$ as in
+\item[2)]
+If $\delta(v) = 5$, then $v$ occurs in $G$ as in
 Figure~\ref{5kleuring2}: each neighbor $w_{i}$ of $v$ has a color
 $c_{i}$ ($i = 1,\ldots,5$) as obtained by a $5$-coloring of $G'$.
 
@@ -1235,6 +1260,8 @@ $c_{1}-c_{3}$ paths.  There are two possibilities:
 \end{center}
 \caption{$p_{1,3}$ and $p_{2,5}$ \label{5kleuring3}}
 \end{figure}
+\end{description}
+}
 \end{proof}
 
 Appel and Haken {\em proved} that every planar graph has a
@@ -1458,17 +1485,17 @@ between any two edges, so $T$ is connected; if $T$ contained a
 cycle, some vertices would be connected by more than one path, so $T$
 is cycle free
 \item $(b) \Rightarrow (c)$:
-we prove this by induction on $n$ that $T$ has $(n-1)$ edges; for
-$n=1$ $T$ has zero edges, so the basis for the induction is true;
-suppose that every connected cycle free graph with $n$ vertices has
+\induction{the number of vertices $n$ to show that $T$ has $(n-1)$ edges}{for
+$n=1$ $T$ has zero edges, so the basis for the induction is true}
+{ suppose that every connected cycle free graph with $n$ vertices has
 $(n-1)$ edges; consider a connected cycle free graph $S$ with $(n+1)$
 vertices; choose a simple path $P$ of maximal length in $S$
 (convince yourself this is possible); $P$ contains a vertex $v$ with
 $\delta(v) = 1$, because there are no cycles in $S$: indeed, when
 $\delta(v) > 1$ then one can extend $P$; consider $S \setminus v$ -
 the graph $S$ from which $v$ is removed; $S \setminus v$ has $n$
-vertices, is cycle free and connected, so by induction $S \setminus v$
-has $(n-1)$ edges; consequently, $S$ has $n$ edges
+vertices, is cycle free and connected, so by the induction hypothesis $S \setminus v$
+has $(n-1)$ edges; consequently, $S$ has $n$ edges}
 
 \item $(c) \Rightarrow (d)$: suppose $T$ contains a cycle; we can now
 remove at least one edge (and no vertices) from $T$ to obtain a
@@ -1623,22 +1650,26 @@ For a binary tree $T$ with height $h$ and $t$ leaves $\log_2(t) \leq
 h$ (or $t \leq 2^h$).
 \end{theorem}
 \begin{proof}
-We prove the theorem by induction on $h$ and by considering the
-subtrees of $T$: for $h=0$, there is one leaf (the root), so
-$t=1=2^h=2^0$ this provides the base case.
-
+\induction{$h$ and by considering the
+subtrees of $T$}{for $h=0$, there is one leaf (the root), so
+$t=1=2^h=2^0$.}
+{
 Assume $h > 0$; consider $T_{l}$ and $T_{r}$, the left and right
 subtree of the root of $T$. $T_{l}$ or $T_{r}$ can be empty, but not both.
-Assume $T_{r}$ is empty: then we have $h_{l} = h-1$, and by induction
+\begin{itemize}
+\item
+Assume $T_{r}$ is empty: then we have $h_{l} = h-1$, and by the induction hypothesis
 $t_{l} \leq 2^{h_{l}}$; since $t_{l} = t$ we get $t \leq 2^{h-1}\leq
 2^h$.
-
+\item
 If $T_{l}$ is empty, we can reason analogously.
-
+\item
 Suppose neither $T_{l}$ nor $T_{r}$ is empty; so $h_{l} \leq h-1$ and
-by induction $t_{l} \leq 2^{h_{l}}$ and similarly $t_{r} \leq
+by the induction hypothesis $t_{l} \leq 2^{h_{l}}$ and similarly $t_{r} \leq
 2^{h_{r}}$, so $t=t_{l} + t_{r} \leq 2^{h_{l}} + 2^{h_{r}}\leq
 2^{h-1}+2^{h-1}=2^h$.
+\end{itemize}
+}
 \end{proof}
 
  \begin{theorem} For a binary tree $T$ with $n$ vertices and
@@ -1795,16 +1826,14 @@ If $G$ has a spanning tree $T$, then $G$ is connected: a path between
 any two edges can use the edges of $T$.
 
 \item[\fbox{$\Leftarrow$}]
-We prove this direction by induction on the number of cycles $c$ of $G$.
-\begin{itemize}
-\item[$c = 0$:]
-Then $G$ is a tree and a spanning tree of itself.
-\item[$c > 0$:]
-Remove one edge from a cycle (but not the vertices). The resulting graph $G'$
+\induction{the number of cycles $c$ of $G$}{
+If $c = 0$, then $G$ is a tree and a spanning tree of itself.}{
+If $c > 0$, 
+remove one edge from a cycle (but not the vertices). The resulting graph $G'$
 is still connected and has fewer than $c$ cycles. By the induction hypothesis,
 $G'$ has a spanning tree $T$. It should be easy to see that $T$ is also
 a spanning tree of $G$.
-\end{itemize}
+}
 \end{itemize}
 \end{proof}
 
