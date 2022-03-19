@@ -46,7 +46,7 @@ coins are tails up?
 
 One way to solve this (type of) problem goes as follows: draw a graph
 with each of the possible configurations of the 3 coins as a vertex,
-and an edge between two vertices if the allowed action transform one
+and an edge between two vertices if the allowed action transforms one
 configuration into the other. We get the graph in Figure~\ref{munten}.
 
 \begin{figure}[ht]
@@ -621,8 +621,8 @@ successive values of $n$, grow indefinitely, but for the boolean
 adjacency matrix, the entries can only be $false$ or $true$. Moreover,
 they are monotonically increasing, so the limit exists. In fact, the
 limit is reached after at most $|V|$ steps, and it is one way to
-compute the transitive closure of the relation {\em is connected by an
-edge}.
+compute the transitive closure of the relation ``{\em -- and -- are connected by an
+edge}''.
 
 Another graph representation consists of the incidence matrix $I$: it
 has a row for each vertex and a column for each edge. $I[i,j] = 1$
@@ -848,7 +848,7 @@ the problem of connecting $n$ houses with $m$ utilities (water, gas,
 electricity, internet \ldots).
 
 $K_{n}$ denotes the graph with $n$ vertices, in which there is an edge
-between every two vertex. Such graphs are {\em completely
+between every two vertices. Such graphs are {\em completely
 connected}, and we name them cliques.
 
 The $K$ is in honour of Kazimierz Kuratowski, a famous graph theorist.
@@ -875,7 +875,7 @@ proved the following formula in 1752\footnote{Descartes
 ($\pm$ --250).}:
 
  \begin{theorem}[Euler's formula for planar graphs]
-If $G$ is a connected planar graph with $e$ edges, $v$ vertices and
+If $G$ is a connected planar graph with $e$ edges, $v > 0$ vertices and
 $f$ {\em faces} then $v-e+f = 2$.
 \end{theorem}
 
@@ -889,15 +889,18 @@ origin of the word {\em face} is in the study of polyhedra.
 \begin{itemize}
 \item[\underline{Base case}:]
 Suppose
-$e=1$. Then $G$ is one of the graphs in Figure~\ref{euler1}. In
-both cases, the Euler's formula is correct.  
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=0.4\linewidth,keepaspectratio]{euler1}
-\end{center}
-\caption{The two graphs with $e=1$ \label{euler1}}
-\end{figure}
+$e=0$. Consider the possibilities for $v$: 
+\begin{itemize}
+\item[$v = 0$] is explicitly excluded from the theorem.
+\item[$v > 1$] is also excluded because the graph would be disconnected. 
+\item[$v=1$] is allowed and entails $f = 1$; the formula clearly holds in this case.
+\end{itemize}
+% \begin{figure}[ht]
+% \begin{center}
+% \includegraphics[width=0.4\linewidth,keepaspectratio]{euler1}
+% \end{center}
+% \caption{The two graphs with $e=1$ \label{euler1}}
+%  \end{figure}
 
 
 \item[\underline{Inductive case}:]
@@ -978,7 +981,7 @@ the proof is like above.
 
 When two graphs are isomorphic, they are basically the same up to a
 renaming of the vertices. But graphs sometimes look similar even
-though they they do not have the same number of edges or
+though they do not have the same number of edges or
 vertices. E.g. if we add a vertex in the middle of an edge, it feels
 like nothing essential has changed in the graph. For one thing, its
 planarity has not changed, neither its connectivity (and you may
@@ -1149,21 +1152,21 @@ $e-e'=v-v'$ which is equal to the number of removed edges (or
 vertices). Denote that quantity by $t$. We now make a case distinction:
 \begin{description}
 \item[\underline{$e'=0$}:]
-then $v' = 1$; since $e > 1$ we also have $t > 1$;
+Then $v' = 1$; since $e > 1$ we also have $t > 1$;
 so we know: $e = t$ and $3*v-6 = 3*(v'+t) -6 = 3*t-3$; since $t \leq
 3*t-3$, we get $e \leq 3*v-6$.
 
 \item[\underline{$e'=1$}:]
-this is not possible (why not?)
+This is not possible (why not?).
 \item[\underline{$e'=2$}:]
-this is not possible (why not?)
+This is not possible (why not?).
 
 \item[\underline{$e' > 2$}:]
-every face is delimited by at least 3 edges (because
-there are no loops or parallel edges); let $\sum$ denote the sum of
-the number of edges in all faces. then $\sum \geq 3*f$; since each
-edge borders exactly 2 faces (why?), we also have $\sum = 2*e'$, so
-$2*e' \geq 3*f$. Now use Euler's formula for $G'$ to eliminate $f$
+Every face is delimited by at least 3 edges because
+there are no loops or parallel edges. Let $\beta$ denote the sum of
+the number of edges in all faces. Then $3*f \leq \beta$. Since each
+edge borders at most 2 faces (why?), we also have $\beta \leq 2*e'$. So
+$3*f \leq 2*e'$. Now use Euler's formula for $G'$ to eliminate $f$
 from this inequality, and you get: $e' \leq 3*v'-6$ and thus $e'+t
 \leq 3*(v'+t)-6$ and $e \leq 3*v-6$.
 \end{description}
@@ -3025,7 +3028,7 @@ As $V$ is non-empty and $S$ is a non-empty subset of $V$, we have that $m_2 =
 
 Let us formulate yet again the assumption that Hall's condition applies to $G$:
 \[ \forall T \subseteq V: \#T \leq \#R_W(T) \]
-Since $\forall T \subseteq V\setminus S: T \cup S$, we can specialize this to:
+Since $\forall T \subseteq V\setminus S: T \cup S \subseteq V$, we can specialize this to:
 \[ \forall T \subseteq V \setminus S: \#(T \cup S) \leq \#R_W(T \cup S) \]
 Because $T$ and $S$ are disjoint, we have that $\#(T \cup S) = \#T + \#S$:
 \[ \forall T \subseteq V \setminus S: \#T + \#S \leq \#R_W(T \cup S) \]

@@ -2875,7 +2875,7 @@ Make sure you understand that the resulting grammar still defines the
 same language: reasoning on the derivations can help.
 
 
-\item[{\bf 4.}] There are now 3 types of rules:
+\item[{\bf 4.}] There are now 4 types of rules:
 \begin{enumerate}
 \item
 $A \rightarrow \gamma$ in which $\gamma$ has exactly two nonterminals:
@@ -2887,7 +2887,10 @@ $A \rightarrow \gamma$ in which $\gamma$ has at least two symbols;
   rule $A_a \rightarrow a$
 
 \item
-possible $S \rightarrow \epsilon$: it can stay
+$A \rightarrow a$; these can stay
+
+\item
+possibly, $S \rightarrow \epsilon$: it can stay
 
 \end{enumerate}
 Once more, make sure you understand that this ends and that the
@@ -3468,8 +3471,8 @@ cannot be done with a deterministic PDA.
 There is another way to construct examples of non-deterministic
 languages: one uses the fact that the complement operation is internal
 to DCFL\footnote{For a proof, see for instance the book by
-  Kozen}. Now consider $L = \{ss| $s$ \in \{a,b\}^*\}$. Use the
-pumping lemma to prove that $\overline{L}$ is not in CFL. But is
+  Kozen.}. Now consider $L = \{ss| s \in \{a,b\}^*\}$. Use the
+pumping lemma to prove that $L$ is not in CFL. Yet, $\overline{L}$ is
 context free: page \pageref{zelfdoen1} contains a CFG for $\overline{L}$.
 Consequently, $\overline{L}$ is not deterministic.
 
