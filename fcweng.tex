@@ -1,29 +1,49 @@
 \documentclass{tstextbook}
 
+%%%%%%%%%%%%%%%%
+%%% PACKAGES %%%
+%%%%%%%%%%%%%%%%
+% Figures
 \usepackage{epsfig}
 \usepackage{wrapfig}
-\usepackage{subfigure}
 \usepackage{graphics}
-\usepackage{subfigure}
-\usepackage{fancyvrb}
+%\usepackage{subfigure}  % This is old, makes for ugly code, and causes weird spacing.
+\usepackage{subcaption}
+
+% Algorithms
+\usepackage{fancyvrb}  % For the BVerbatim environment (verbatim but center works).
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+
 \usepackage{units}
 \usepackage[normalem]{ulem}
 \usepackage{paralist}
 \usepackage{hyperref}
 \usepackage[all,cmtip]{xy}
 
-\setlength{\textwidth}{15cm}
-\setlength{\oddsidemargin}{0.5cm}
-\setlength{\evensidemargin}{0.5cm}
-\setlength{\textheight}{20cm}
-
 \usepackage{amssymb}
 
 \usepackage{shadow}
 \usepackage{xcolor}
 \usepackage{soul}
+
+%%%%%%%%%%%%%%%%
+%%% COMMANDS %%%
+%%%%%%%%%%%%%%%%
+% Envs
+\newenvironment{proof*}  % Proof, but starts with a newline to facilitate e.g. itemizations.
+	{\begin{proof}~\vspace{-1.5em}\\}
+	{\end{proof}}  % Note that the proof, theorem ... environments are provided by amsthm, which is loaded in the tstextbook class.
+
+% Lengths
+\fvset{tabsize=4}  % BVerbatim tab size is 8 by default.
+
+\setlength{\textwidth}{15cm}
+\setlength{\oddsidemargin}{0.5cm}
+\setlength{\evensidemargin}{0.5cm}
+\setlength{\textheight}{20cm}
+
+\renewcommand\qedsymbol{$\blacksquare$}
 
 \newcommand{\marton}[1]{\marginpar{\color{red} Marton}\textbf{\color{red}{#1}}}
 \newcommand{\martonst}[2]{\marginpar{\color{red} Marton}\textbf{\color{red}{\st{#1}$~\mapsto~${#2}}}}
@@ -60,6 +80,7 @@
 \newcommand{\EXP}{{\bf EXP} }
 \newcommand{\NEXP}{{\bf NEXP} }
 
+% Induction layout, used in e.g. Theorem 2.6.
 \newcommand{\induction}[3]{
 We use induction on {#1}.
 \begin{description}
@@ -68,44 +89,40 @@ We use induction on {#1}.
 \item[\underline{Inductive case}:]
 {#3}
 \end{description}
+\vspace{-2em}
 }
 
+
+%%%%%%%%%%%%
+%%% MAIN %%%
+%%%%%%%%%%%%
 \begin{document}
 
 \tsbook{Fundamentals for Computer Science}
        {Bart Demoen, Tom Schrijvers}
        {Tobias van Schneider}
        {2021}
-       {xxxxx}{xxx--xx--xxxx--xx--x}{2.0}
-       {}
+       {xxxxx}{xxx--xx--xxxx--xx--x}{2.0 (compiled \today)}
+       {VTK}
        {Leuven}
 
 \include{Foreword/inleidingeng}
-
 \include{Definitions/definitions}
 
 \part{Graph Theory}
-
 \graphicspath{{./GraphTheory/figures/}}
-
 \include{GraphTheory/grafeneng}
 
 \part{Languages \& Automata}
-
 \graphicspath{{./LanguagesAutomata/figures/}}
-
 \include{LanguagesAutomata/talenautomateneng}
 
 \part{Computability}
-
 \graphicspath{{./Computability/figures/}}
-
 \include{Computability/berekenbaarheideng}
 
 \part{Complexity}
-
 \graphicspath{{./Complexity/figures/}}
-
 \include{Complexity/complexiteiteng}
 
 \end{document}

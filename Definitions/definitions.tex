@@ -9,22 +9,21 @@ These are briefly summarized here as a refresher.
 
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 \subsection*{Cartesian Products}
-The Cartesian product of two sets $A$ and $B$, which is denoted $A \times B$ is
+The Cartesian product of two sets $A$ and $B$, which is denoted $A \times B$, is
 the set of all tuples that can be formed by pairing an element of $A$ with one
 of $B$:
 \[ A \times B = \{ (x,y) \mid x \in A, y \in B \} \]
+
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 \subsection*{Powersets}
-
 The powerset of a set $S$, denoted $\mathcal{P}(S)$ or $2^S$,  is the set of
 all subsets of $S$.
 
 For example:
-
-\begin{align*}
-S &= \{1, 2, 3\} \\
-{\cal P}(S) &= \{\emptyset, \{1\}, \{2\}, \{3\}, \{1, 2\}, \{1, 3\}, \{2, 3\}, \{1, 2, 3\}\}
-\end{align*}
+\begin{equation*}\begin{aligned}
+	S &= \{1, 2, 3\} \\
+	{\cal P}(S) &= \{\emptyset, \{1\}, \{2\}, \{3\}, \{1, 2\}, \{1, 3\}, \{2, 3\}, \{1, 2, 3\}\}
+\end{aligned}\end{equation*}
 
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 \subsection*{Multisets}
@@ -36,13 +35,11 @@ element appears in a multiset that element's \emph{multiplicity}.
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 \subsection*{Predicates and Relations}
 
-Informally, a predicate $\mathcal{P}$\footnote{Confusingly, $\mathcal{P}$ is
-used as the name of a predicate and to denote the powerset. You will have to
-infer from the context which is meant.} over a set $A$ denotes a property that
-elements of set $A$ may have. We write $\mathcal{P}(x)$, with $x \in A$ to denote that
-element $x$ has the property. Formally, a predicate $\mathcal{P}$ over a set
+Informally, a predicate $P$ over a set $A$ denotes a property that
+elements of set $A$ may have. We write $P(x)$, with $x \in A$ to denote that
+element $x$ has the property. Formally, a predicate $P$ over a set
 $A$ is just a subset of $A$; it is the subset of all elements of $A$ that have
-the property. Hence, $\mathcal{P}(x)$ is just an alternative notation for $x \in \mathcal{P}$.
+the property. Hence, $P(x)$ is just an alternative notation for $x \in P$.
 
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection*{Binary Relations}
@@ -53,69 +50,87 @@ $\mathcal{R}(x,y)$ holds. Sometimes, we also write $x\mathcal{R}y$ instead of
 $\mathcal{R}(x,y)$.
 
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-\subsection*{Partial and Total functions}
-
-A function $f: A \mapsto B$ is a binary relation on $A \times B$ where
-we write $f(x) = y$ rather than $f(x,y)$ to denote that $x \in A$ and $y \in B$
-are related. Moreover, a function satisifies the \emph{functional dependency}
-property:
-\[ \forall x \in A, \forall y_1, y_2 \in B: f(x) = y_1 \wedge f(x) = y_2 \Rightarrow y_1 = y_2 \]
-
-We say that a function $f$ is \emph{total} iff:
-\[ \forall x \in A, \exists y \in B: f(x) = y \]
-If a function is not total, it is called \emph{partial}. Usually, when we do
-not specify that a function is partial, we implicitly assume that it is total.
-
-%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection*{Equivalence Relations}
 
-A binary relation $\mathcal{R}$ on $S \times S$ is an equivalence relation if and only if
-it satisfies three properties:
-\begin{center}
-\begin{tabular}{r@{\hspace{1cm}}l}
-reflexivity  & $\forall x \in S: x\mathcal{R}x$ \\
-symmetry     & $\forall x, y \in S: x\mathcal{R}y \Leftrightarrow y\mathcal{R}x$ \\
-transitivity & $\forall x, y, z \in S: x\mathcal{R}y \wedge y\mathcal{R}z \Rightarrow x\mathcal{R}z$ 
-\end{tabular}
-\end{center}
+A binary relation $\mathcal{R}$ on $S \times S$ is an \emph{equivalence} relation iff it satisfies three properties:
+\begin{equation*}\begin{aligned}
+	\text{reflexivity}  && &\forall x \in S: x\mathcal{R}x \\
+	\text{symmetry}     && &\forall x, y \in S: x\mathcal{R}y \;\;\Leftrightarrow\;\; y\mathcal{R}x \\
+	\text{transitivity} && &\forall x, y, z \in S: x\mathcal{R}y \;\wedge\; y\mathcal{R}z \;\;\Rightarrow\;\; x\mathcal{R}z
+\end{aligned}\end{equation*}
+An obvious example of an equivalence relation is equality ($=$) over numbers. Another equivalence is parallelism ($\,||\,$) over the set of straight lines.
+
+An \emph{equivalence class} of $S$ is a subset $E\subseteq S$ so that the equivalence holds between all elements of $E$, and it doesn't between elements of $E$ and those in $S\setminus E$.
 
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection*{Order Relations}
 
-A binary relation $\mathcal{R}$ on $S \times S$ is a \em{partial} order on $S$ if and only if it
+A binary relation $\mathcal{R}$ on $S \times S$ is a \emph{partial order} on $S$ iff it
 has the following three properties:
 \begin{center}
 \begin{tabular}{r@{\hspace{1cm}}l}
 reflexivity  & $\forall x \in S: x\mathcal{R}x$ \\
-antisymmetry     & $\forall x, y \in S: x\mathcal{R}y \wedge y\mathcal{R}x \Rightarrow x = y$ \\
-transitivity & $\forall x, y, z \in S: x\mathcal{R}y \wedge y\mathcal{R}z \Rightarrow x\mathcal{R}z$ 
+antisymmetry     & $\forall x, y \in S: x\mathcal{R}y \;\wedge\; y\mathcal{R}x \;\;\Rightarrow\;\; x = y$ \\
+transitivity & $\forall x, y, z \in S: x\mathcal{R}y \;\wedge\; y\mathcal{R}z \;\;\Rightarrow\;\; x\mathcal{R}z$ 
 \end{tabular}
 \end{center}
+A good example of a partial order is the non-strict subset relation ($\subseteq$) over sets.
 
-A partial order $\mathcal{R}$ on $S$ is a \em{total} order if and only if also satisfies a fourth
+A partial order $\mathcal{R}$ on $S$ is a \emph{total} order if and only if also satisfies a fourth
 property:
 \begin{center}
 \begin{tabular}{r@{\hspace{1cm}}l}
 connexity& $\forall x, y \in S: x\mathcal{R}y \vee y\mathcal{R}x$ 
 \end{tabular}
 \end{center}
-Observe that connexity generalizes reflexivity.
+That is, all elements can be compared by the order. Observe that connexity generalizes reflexivity. A typical example is less-than-or-equal-to ($\leq$) over the real numbers.
 
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-\subsection*{Transitive closure}
+\subsection*{Preorder Relations}
+A \emph{preorder} is a binary relation $\mathcal{R}$ on $S \times S$ that has reflexivity and transitivity, but isn't consistently symmetric or anti-symmetric. Sometimes $x\mathcal{R}y$ and $y\mathcal{R}x$, sometimes only $x\mathcal{R}y$, and sometimes neither.
+
+After grouping together the subsets for which symmetry does hold, i.e.\ the subset of $\mathcal{R}$ that is an equivalence relation, the preorder $\mathcal{R}$ is a partial order between the elements of these equivalence classes. This kind of relation appears often in computer science: in this course, we'll encounter the example of polynomial reducibility ($\leq_p$) and its symmetric subset, polynomial equivalence ($\sim_p$).
+
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection*{Transitive Closure}
 
 The transitive closure of a binary relation $\mathcal{R}$ on $S \times S$,
 denoted $\mathcal{R}^+$, is
 the smallest relation on $S \times S$ that contains $\mathcal{R}$ and that 
-has the transitivity property.
-
-For example:
-
-\begin{align*}
+has the transitivity property. For example:
+\begin{equation*}
+\begin{aligned}
 S &= \{1, 2, 3\} \\
 \mathcal{R} &= \{(1, 2), (2, 3)\} \\
 \mathcal{R}^+ &= \{(1, 2), (2, 3), (1, 3)\}
-\end{align*}
+\end{aligned}
+\end{equation*}
+
+%-------------------------------------------------------------------------------
+\subsection*{Partial and Total Functions}
+
+A function $f: A \to B : x \mapsto f(x)$ is a binary relation on $A \times B$ where
+we write $f(x) = y$ rather than $f(x,y)$ to denote that $x \in A$ and $y \in B$
+are related. We tend to think of $x$ as the input and $y$ as the output. Moreover, a function satisifies the \emph{functional dependency}
+property:
+\[ \forall x \in A, \forall y_1, y_2 \in B: f(x) = y_1 \wedge f(x) = y_2 \;\;\Rightarrow\;\; y_1 = y_2 \]
+We say that a function $f$ is \emph{total} iff:\footnote{The word \emph{iff} is short for ``if and only if''. It represents logical equivalence ($\Leftrightarrow$).}
+\[ \forall x \in A, \exists y \in B: f(x) = y \]
+If a function is not total, it is called \emph{partial}. Usually, when we do
+not specify that a function is partial, we implicitly assume that it is total.
+
+
+%-------------------------------------------------------------------------------
+\subsection*{Injection, Surjection and Bijection}
+A function maps the same input to one or no output. A binary relation $\mathcal{R}$ on $A\times B$ that maps to the same output once or never is called \emph{injective}. Formally:
+\begin{equation*}
+	\forall x_1,x_2\in A, \forall y\in B : \mathcal{R}(x_1,y)  \wedge \mathcal{R}(x_2,y) \;\;\Rightarrow\;\; x_1 = x_2
+\end{equation*}
+A binary relation that maps at least one input to each output is called \emph{surjective}. Formally:
+\begin{equation*}
+	\forall y \in B, \exists x\in A : \mathcal{R}(x,y)
+\end{equation*}
+A \emph{bijection} is a function that is both injective and surjective. It matches all outputs to exactly one input, and if the function is total (which is usually the case in computer science), we can uniquely translate back and forth between all elements of $A$ and $B$.
 
 %-------------------------------------------------------------------------------
 \section*{Proof Techniques}
@@ -124,21 +139,21 @@ S &= \{1, 2, 3\} \\
 \subsection*{Weak Induction}
 
 Weak induction is a proof technique that establishes $\forall n \in \mathbb{N}:
-\mathcal{P}(n)$, with $\mathcal{P}$ some predicate on $\mathbb{N}$.
+P(n)$, with $P$ some predicate on $\mathbb{N}$.
 It requires proving two simpler statements:
 \begin{itemize}
-\item[(a)] $\mathcal{P}(0)$, and
-\item[(b)] $\forall n \in \mathbb{N}: \mathcal{P}(n) \Rightarrow \mathcal{P}(n+1)$.
+	\item[(a)] $P(0)$, and
+	\item[(b)] $\forall n \in \mathbb{N}: P(n) \Rightarrow P(n+1)$.
 \end{itemize}
 
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection*{Strong Induction}
 
 Strong induction is a proof technique derived from weak induction that also
-establishes $\forall n \in \mathbb{N}: \mathcal{P}(n)$, with $\mathcal{P}$ some
+establishes $\forall n \in \mathbb{N}: P(n)$, with $P$ some
 predicate on $\mathbb{N}$. It requires proving two simpler statements, the second
 of which differs from weak induction:
 \begin{itemize}
-\item[(a)] $\mathcal{P}(0)$, and
-\item[(b')] $\forall n \in \mathbb{N}: (\forall m \leq n: \mathcal{P}(m)) \Rightarrow \mathcal{P}(n+1)$.
+	\item[(a)] $P(0)$, and
+	\item[(b')] $\forall n \in \mathbb{N}: (\forall m \leq n: P(m)) \Rightarrow P(n+1)$.
 \end{itemize}
