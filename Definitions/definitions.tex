@@ -89,7 +89,7 @@ That is, all elements can be compared by the order. Observe that connexity gener
 \subsection*{Preorder Relations}
 A \emph{preorder} is a binary relation $\mathcal{R}$ on $S \times S$ that has reflexivity and transitivity, but isn't consistently symmetric or anti-symmetric. Sometimes $x\mathcal{R}y$ and $y\mathcal{R}x$, sometimes only $x\mathcal{R}y$, and sometimes neither.
 
-After grouping together the subsets for which symmetry does hold, i.e.\ the subset of $\mathcal{R}$ that is an equivalence relation, the preorder $\mathcal{R}$ is a partial order between the elements of these equivalence classes. This kind of relation appears often in computer science: in this course, we'll encounter the example of polynomial reducibility ($\leq_p$) and its symmetric subset, polynomial equivalence ($\sim_p$).
+After grouping together the subsets for which symmetry does hold, i.e.\ the subset of $\mathcal{R}$ that is an equivalence relation, the preorder $\mathcal{R}$ is a partial order between the elements of the equivalence classes. This kind of relation appears often in computer science: in this course, we'll encounter the example of polynomial reducibility ($\leq_p$) and its symmetric subset, polynomial equivalence ($\sim_p$).
 
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection*{Transitive Closure}
@@ -136,6 +136,18 @@ A \emph{bijection} is a function that is both injective and surjective. It match
 \section*{Proof Techniques}
 
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection*{Pigeonhole Principle}
+The \emph{pigeonhole principle} states that if there are $n$ pigeonholes and more than $n$ pigeons, at least one hole must contain two pigeons. This obvious fact can be very powerful already: for example, by applying the pigeon and hole metaphor correctly to graphs, it's easy to prove that simple graphs have at least two vertices with the same degree. (You should come back to try proving this once you've learnt what all those terms mean!)
+
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection*{Proof by contradiction and contrapositive}
+To prove a conditional statement $p \Rightarrow q$ for two other statements $p$ and $q$ (e.g.\ $p =$ ``$D$ is a dog'' and $q =$ ``$D$ has four legs''), we often use proofs that aren't direct:
+\begin{itemize}
+\item \emph{By contrapositive}: $p \Rightarrow q$ is equivalent to $\neg q \Rightarrow \neg p$, so we can prove that instead (check that this works for the example above).
+\item \emph{By contradiction}: assume that $q$ is false even while $p$ is true (violating the implication). By proving that this situation allows deriving a falsehood (a logical contradiction like $0 = 1$), this must mean $\neg (p \wedge \neg q)$, equivalent to $\neg p \vee q$ and thus $p \Rightarrow q$.
+\end{itemize}
+
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection*{Weak Induction}
 
 Weak induction is a proof technique that establishes $\forall n \in \mathbb{N}:
@@ -148,11 +160,7 @@ It requires proving two simpler statements:
 
 %- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \subsection*{Strong Induction}
-
-Strong induction is a proof technique derived from weak induction that also
-establishes $\forall n \in \mathbb{N}: P(n)$, with $P$ some
-predicate on $\mathbb{N}$. It requires proving two simpler statements, the second
-of which differs from weak induction:
+Strong induction is derived from weak induction. It requires proving two simpler statements, the second of which differs from weak induction:
 \begin{itemize}
 	\item[(a)] $P(0)$, and
 	\item[(b')] $\forall n \in \mathbb{N}: (\forall m \leq n: P(m)) \Rightarrow P(n+1)$.
