@@ -2163,7 +2163,7 @@ later in this section are concerned.
 \label{stromingdef}
 {\rm A {\bf network flow} in a network $G(V,E)$ with capacities $C_{i,j}$ is a mapping $F : E\to\R^{+}$ obeying two laws:
 \begin{enumerate}
-	\item \emph{Limitation:} $F(i,j) \leq C_{i,j}$;
+	\item \emph{Limitation:}\label{limit1} $F(i,j) \leq C_{i,j}$;
 	\item \emph{Conservation:}\label{conserve1} for each vertex $j$ different from source and sink:
 	\[\displaystyle \sum_{i \in V} F(i,j) = \sum_{i \in V} F(j,i)\]
 \end{enumerate}
@@ -2336,7 +2336,7 @@ we name an edge $(v_{i},v_{i+1})$ \textbf{good} if $(v_{i},v_{i+1})
 In a path $P$, we denote the good edges by $P_{+}$, the bad edges by $P_{-}$.
 
 \begin{theorem}[Improving a flow]\label{verbeterflow}~\\
-Let $P$ be a simple path from $a$ to $z$ in a network $G(V,E)$, so that
+Let $P$ be a simple path from $a$ to $z$ in a network $G(V,E)$ with flow $F$, so that
 \begin{verse}
 1. $\forall (i,j) \in P_{+}: F(i,j) < C_{i,j}$
 
@@ -2354,15 +2354,15 @@ F'(i,j) = \begin{dcases}
 	\end{dcases}
 \end{equation*}
 
-Then $F'$ is a flow and it is (strictly) larger than $F$ by $\Delta$.
+Then $F'$ is a flow and its value is (strictly) larger than that of $F$ by $\Delta$.
 
 \end{theorem}
-\begin{proof} In order to prove that $F'$ is a flow, we must check
-\ref{stromingdef1} and ~\ref{conserve1} from
+\begin{proof} In order to prove that $F'$ is still a flow, we must check
+conditions \ref{limit1} and \ref{conserve1} from
 Definition~\ref{stromingdef}: neither is difficult.
 
 The fact that the flow is improved by $\Delta$, follows from the fact
-that the flow over the edge $(a,\_) \in P$ (a good edge! why?) is
+that the flow over the edge\footnote{A good edge! Why?} $(a,\hdots) \in P$ is
 increased by $\Delta$, while the flow through the other edges starting
 at $a$ has not changed. \end{proof}
 
@@ -2534,7 +2534,7 @@ two is even stronger:
 \begin{equation*}
 	\mathcal{F} = C(P,\overline{P})  \quad \text{or in full} \quad \sum_{i \in V} F(a,i) = \sum_{i \in P} \sum_{j \in \overline{P}} C_{i,j}
 \end{equation*}
-then $\mathcal{F}$ is maximal and the cut is minimal. Moreover, the equality is equivalent to
+then $F$ is maximal and the cut is minimal. Moreover, the equality is equivalent to
 \begin{enumerate}
 	\item $\forall i \in P, \forall j \in \overline{P}: F(i,j) = C_{i,j}$
 	\item $\forall i \in \overline{P}, \forall j \in P: F(i,j) = 0$
