@@ -1,4 +1,4 @@
-\chapter{Turing Machines}\label{berekenbaarheid}
+\chapter{Turing machines}\label{berekenbaarheid}
 
 %===============================================================================
 \section{The Turing Machine as a Decider or Recognizer}\label{turingmachines}
@@ -11,9 +11,8 @@ are beyond the decision power of DFAs, PDAs, and even LBAs. So it is
 time to start studying machines that can do more. We use Turing
 machines.
 
-Roughly speaking, a TM has a two infinite (unlimited would be enough)
-% \marton{maybe a short explanation of what two infinite and unlimited are would be nice here}
-tape consisting of squares (or cells) with one symbol each, a control
+Roughly speaking, a TM has a tape infinite on two ends (unlimited would be enough)
+consisting of squares (or cells) with one symbol each, a control
 unit, a tape head that can read the symbol in a square, and write a
 new one. The action of the machine depends on the internal state of
 its control unit and the symbol being read. Possible actions are:
@@ -21,12 +20,12 @@ writing a symbol and moving the tape head. Figure~\ref{turing1} shows
 the parts of the machine and the actions that are described by a
 function $\delta$.
 
-
 \begin{figure}[h]
-\includegraphics[%
-  width=0.6\linewidth,
-  keepaspectratio]{turing1eng}
-\caption{Schema of a Turing machine\label{turing1}}
+	\centering
+	\includegraphics[%
+	  width=0.6\linewidth,
+	  keepaspectratio]{turing1eng}
+	\caption{Schema of a Turing machine\label{turing1}}
 \end{figure}
 
 \begin{wrapfigure}[7]{r}{.2\textwidth}
@@ -35,8 +34,8 @@ function $\delta$.
 
  More formally:
 
-\begin{definition}[Turing Machine]
-A {\bf Turing Machine} is a 7-tuple
+\begin{definition}[Turing machine]
+A {\bf Turing machine} is a 7-tuple
 %
 $(Q, \Sigma, \Gamma, \delta, q_s, q_a, q_r)$
 %
@@ -44,7 +43,7 @@ with $Q, \Sigma, \Gamma$ finite sets:
 
 \begin{itemize}
 \item
-Q is the set of states
+$Q$ is the set of states
 
 \item
 $\Sigma$ is an input alphabet not containing \#
@@ -135,13 +134,13 @@ A Turing machine TM recognizes $L_{TM}$.
 
 Its complementary definition is
 
-\begin{definition}[Turing recognizable language]
-A language L is Turing recognizable if there exists a Turing Machine
+\begin{definition}[Turing-recognizable language]
+A language $L$ is Turing-recognizable if there exists a Turing machine
 TM so that TM recognizes $L$ or alternatively, $L = L_{TM}$
 \end{definition}
 
-Here is an example of a recognizable language L and a TM that
-recognizes L: $\Sigma = \{a,b\}$, $L = \{a\}^*$. Table \ref{turing3}
+Here is an example of a recognizable language $L$ and a TM that
+recognizes $L$: $\Sigma = \{a,b\}$, $L = \{a\}^*$. Table \ref{turing3}
 describes $\delta$.
 
 \begin{table}[ht]
@@ -159,8 +158,8 @@ x      &  \#        &  x    &    \#     &  S   \\
 \end{tabular}
 \caption{A TM recognizing $\{a\}^*$} \label{turing3}
 \end{table}
-$\infty_{TM}$ is not empty: every string not in L brings the machine
-in an infinite loop. But we can also construct a TM for L that always
+$\infty_{TM}$ is not empty: every string not in $L$ brings the machine
+in an infinite loop. But we can also construct a TM for $L$ that always
 halts, this is shown in table \ref{turing4}.
 
 \begin{table}[ht]
@@ -179,13 +178,13 @@ $q_s$  &  \#        &  $q_a$&    -      &  -   \\
 This distinction is captured in the following definitions:
 
 \begin{definition}[To decide]
-A Turing Machine TM decides a language L, if TM recognizes L and
-$\infty_{TM} = \emptyset$
+A Turing machine TM decides a language $L$, if TM recognizes $L$ and
+$\infty_{TM} = \emptyset$.
 \end{definition}
 
-\begin{definition}[Turing decidable language]
-A language L is Turing decidable if there exists a Turing Machine that
-decides L.
+\begin{definition}[Turing-decidable language]
+A language $L$ is Turing-decidable if there exists a Turing machine that
+decides $L$.
 \end{definition}
 
 It might not be clear at this point that to recognize and to decide
@@ -198,44 +197,44 @@ Other terminology for {\em decidable language} is {\em recursive
   recursively enumerable}, or sometimes {\em semidecidable}.
 
 \begin{definition}[Co-recognizable/co-decidable]
-A language L is \textbf{co-recognizable/co-decidable} if $\overline{L}$
+A language $L$ is \textbf{co-recognizable/co-decidable} if $\overline{L}$
 is recognizable/decidable.
 \end{definition}
 
 \begin{theorem} \label{corecognizable}
-If L is decidable, then L is also co-decidable.
+If $L$ is decidable, then $L$ is also co-decidable.
 \end{theorem}
 \begin{proof}
-Let M be the TM deciding L; now switch the roles of $q_a$ and $q_r$.
+Let $M$ be the TM deciding $L$; now switch the roles of $q_a$ and $q_r$.
 \end{proof}
 
 \begin{theorem} \label{isdec}
-If L is recognizable and co-recognizable, then L is decidable.
+If $L$ is recognizable and co-recognizable, then $L$ is decidable.
 \end{theorem}
 \begin{proof}
-Let M1 be the machine that recognizes L, and M2 the machine
-recognizing $\overline{L}$. The idea is to have a machine M that
-lets M1 and M2 run in parallel: as soon as M1 accepts, accept; as soon
-as M2 accepts, reject. M1 and M2 can not accept both, and for any
+Let $M_1$ be the machine that recognizes $L$, and $M_2$ the machine
+recognizing $\overline{L}$. The idea is to have a machine $M$ that
+lets $M_1$ and $M_2$ run in parallel: as soon as $M_1$ accepts, accept; as soon
+as $M_2$ accepts, reject. $M_1$ and $M_2$ can not accept both, and for any
 given string, at least one of them halts in the accepting state. This
-M decides L.
+$M$ decides $L$.
 
-The definition of M is informal, and we should make it more formal:
-define M as a 2-tape machine and work out the details.
+The definition of $M$ is informal, and we should make it more formal:
+define $M$ as a 2-tape machine and work out the details.
 \end{proof}
 
 \begin{theorem}
 Some languages are not recognizable.
 \end{theorem}
 \begin{proof}
-The set of Turing Machines is countably infinite, so the set of
+The set of Turing machines is countably infinite, so the set of
 recognizable languages can be at most countably infinite. On the other
 hand, the set of languages (being ${\cal P}(\Sigma^*)$) is uncountably
 infinite. So there must exist languages that are not recognizable.
 In fact, most languages are not recognizable.
 \end{proof}
 
-What is our plan with Turing Machines?
+What is our plan with Turing machines?
 
 \begin{itemize}
 \item we want to further explore the difference between deciding and
@@ -246,10 +245,8 @@ What is our plan with Turing Machines?
   recognized by a TM and general techniques for proving this
 \end{itemize}
 
-
-
-\paragraph{Selfie:} Comment on the following sentences:
-
+\begin{exercise}
+Comment on the following sentences:
 \begin{itemize}
 \item every string is recognizable
 \item every string is decidable
@@ -258,8 +255,7 @@ What is our plan with Turing Machines?
 \item the intersection of a recognizable and a decidable language is
   decidable
 \end{itemize}
-
-
+\end{exercise}
 
 
 
@@ -268,16 +264,15 @@ What is our plan with Turing Machines?
 
 Just as FSAs and PDAs, TMs can be visualized by a graph: the vertices
 are the states. Figure~\ref{turing2} illustrates it for the TM
-deciding the language $\{0^n1^n|n \geq 0\}$.
-
-
-
+deciding the language $\{0^n1^n\mid n \geq 0\}$.
 
 \begin{figure}[h]
-\begin{center}\includegraphics[%
+	\centering
+\includegraphics[%
   width=0.7\linewidth,
-  keepaspectratio]{turing2}\end{center}
-\caption{Graphical representation of a Turing Machine\label{turing2}}
+  keepaspectratio]{turing2}
+\caption{Graphical representation of a Turing machine}
+\label{turing2}
 \end{figure}
 
 Each state has as many outgoing edges as elements in $\Gamma$ (some
@@ -300,7 +295,7 @@ consisting of only zeroes and ones.
   will skip all zeroes
 \end{itemize}
 
-\item if in state $n$ the head sees a
+\item if in state $n$ (``nul'') the head sees a
 \begin{itemize}
 \item \#: reject
 \item 1: go right to state $e$; it will skip all ones
@@ -308,14 +303,14 @@ consisting of only zeroes and ones.
 \end{itemize}
 
 
-\item in state $e$
+\item in state $e$ (``één'')
 \begin{itemize}
 \item 1: go right
 \item 0: reject
 \item \#: go left, switch to $v$; it will erase one 1
 \end{itemize}
 
-\item in state $v$
+\item in state $v$ (``verwijder'')
 \begin{itemize}
 \item 0: reject (but actually can't occur)
 \item \#: reject (but actually can't occur)
@@ -323,7 +318,7 @@ consisting of only zeroes and ones.
   state $l$; it will find the leftmost symbol of the string
 \end{itemize}
 
-\item in $l$
+\item in state $l$ (``links'')
 \begin{itemize}
 \item 0/1: go left;
 \item \#: go right and to the start state
@@ -332,12 +327,12 @@ consisting of only zeroes and ones.
 \end{itemize}
 
 As you see, every state has its little something to contribute to the
-whole program.
+whole program. Intuitively, what this TM does is identify a word that starts with a $0$ and ends with a $1$, whilst simultaneously removing those end symbols. It then repeats this process on the reduced word, hopefully until both the $0$s and $1$s run out at the same time. The only words that satisfy this are of the form $0^n 1^n$.
 
 
 The TM in Figure~\ref{turing2} proves that
 %
-$\{0^n1^n|n \geq 0\}$ is a decidable language.
+$\{0^n1^n\mid n \geq 0\}$ is a decidable language.
 
 
 %===============================================================================
@@ -347,10 +342,11 @@ It is often handy to be able to compactly represent a {\em
   configuration} of a TM: it is like a computer memory dump, together
 with all registers and the hardware state, so that execution could
 restart from that information. For a TM, we can do that because at
-each moment, only a finite part of the tape is in use, i.e. is
-different from \#. So, a string of the form
+each moment, only a finite part of the tape is in use, i.e. is not \#. A string of the form
 
-$~~~~~~~~~~~~~~~~\alpha q \beta$
+\begin{equation*}
+	\alpha q \beta
+\end{equation*}
 
 can represent the tape containing $\alpha\beta$ with to its left and
 right only \#; moreover, the machine is in state $q$ and the head is
@@ -358,18 +354,14 @@ positioned under the leftmost symbol of $\beta$. $\alpha$ and $\beta$
 may contain \#.
 
 A start configuration is always of the form $q_s\alpha$, and an end
-configuration is either $\alpha q_a \beta$ or $\alpha q_r \beta$.
+configuration is either $\alpha q_a \beta$ or $\alpha q_r \beta$. During the execution of the TM, two successive configurations are
+related by $\delta$. Say $\delta(q,b) = (p,c,D)$, with $D\in\{L,S,R\}$. Then valid transitions are:
 
-During the execution of the TM, two successive configurations are
-related by $\delta$ as follows:
-
-
-$~~~~~~~~~~\alpha q b \beta$ \rpijl $\alpha p c \beta$ if $\delta(q,b) = (p,c,S)$
-
-$~~~~~~~~~~\alpha a q b \beta$ \rpijl $\alpha p a c \beta$ if $\delta(q,b) = (p,c,L)$
-
-$~~~~~~~~~~\alpha q b \beta$ \rpijl $\alpha c p \beta$ if $\delta(q,b) = (p,c,R)$
-
+\begin{align*}
+	\alpha q b \beta &\rpijl \alpha p c \beta & (D = S) \\
+	\alpha a q b \beta &\rpijl \alpha p a c \beta & (D = L) \\
+	\alpha q b \beta &\rpijl \alpha c p \beta & (D = R)
+\end{align*}
 You can add some transitions for the case where $\alpha$ or $\beta$ is
 empty: you might need to generate extra occurrences of \#.
 
@@ -381,11 +373,10 @@ It is reasonably easy to see that the computation of any TM can be
 simulated by a program, for instance in Prolog. To make that more
 concrete, here is some Prolog code. A configuration $\alpha q \beta$
 is represented as a term with principal functor conf/3, as follows:
-
-$~~~~~~~~~~~~conf([a_n, ... , a_2,a_1],q,[b_1,b_2,...,b_m])$, where
-$a_1a_2...a_n = \alpha$ and $b_1b_2...b_m = \beta$
-%
-\\ and $a_i, b_j \in \Gamma$.\footnote{Look up {\em Huet's Zipper}}
+\begin{equation*}
+	conf([a_n, ... , a_2,a_1],q,[b_1,b_2,...,b_m])
+\end{equation*}
+where $a_1a_2...a_n = \alpha$ and $b_1b_2...b_m = \beta$ and $a_i, b_j \in \Gamma$.\footnote{Look up {\em Huet's Zipper}.}
 
 Here is part of the Prolog program working with configurations:
 
@@ -396,8 +387,9 @@ Here is part of the Prolog program working with configurations:
                  delta(Q,B,P,C,stop).
 \end{verbatim}
 
-\paragraph{Selfie:} Extend the above program, and explain in words the function of each clause.
-
+\begin{exercise}
+Extend the above program, and explain what each clause does.
+\end{exercise}
 
 We should also understand that a TM can simulate a Prolog program: to
 do that directly would be a lot of work, so here is a classical road
@@ -416,20 +408,11 @@ We can often use the equivalence between TMs and more recent
 programming formalisms.
 
 
-
-\paragraph{Selfie: Composition of Turing Machines}
-
-We often need to combine a number of Turing Machines $TM_1, TM_2
-... TM_n$ into a new Turing Machine TM. We use words like
-
-$~~~~~~~$ {\em TM calls T$M_1$ as a subroutine}\\
-and
-
-$~~~~~~~$ {\em when $TM_1$ stops in its accepting end state,
-let $TM_2$ run on s}
-
-
-Make sure you know what this means, i.e. formalize it to some extent.
+\begin{exercise}
+We often need to combine a number of Turing machines $TM_1, TM_2
+... TM_n$ into a new Turing machine TM. We use words like ``{\em TM calls T$M_1$ as a subroutine}'' and ``{\em when $TM_1$ stops in its accepting end state,
+let $TM_2$ run on s}''. Make sure you know what this means, i.e. formalize it to some extent.
+\end{exercise}
 
 
 
@@ -453,11 +436,11 @@ try to understand why. A string can have more than one computation history. A st
 % That is similar to the notion of acceptance in an NFA: one accepting
 % path is enough to be accepted.
 
-A non-deterministic Turing Machine can be simulated by a
+A non-deterministic Turing machine can be simulated by a
 deterministic one. Some books actually describe such a
 simulation. For us, it is more natural to reason as follows:
-the Prolog program given earlier can be meta-interpreted according to
-iterative deepening (of breadth-first), and as soon as it arrives in an end state, it stops with the same result. So, if we can simulate a NDTM in Prolog, we can with a DTM.
+the Prolog program given earlier can be meta-interpreted\footnote{Interpreting the Prolog program means to propose a valid solution to a query. Meta-interpreting means to propose an algorithm that finds these valid solutions.} according to
+iterative deepening (or breadth-first) search, and as soon as it arrives in an end state, it stops with the same result. So, if we can simulate a NDTM in Prolog, we can with a DTM. 
 
 
 %===============================================================================
@@ -473,7 +456,7 @@ term {\em (recursive) enumerable} for such sets (or languages), and
 the terms {\em decidable} and {\em recognizable} for properties or
 decision problems. The distinction is not so important: let $P$ be a
 property that elements of a set $V$ might or might not have; we can
-define the subsets $\{x | x \in V, x~has~property~P\}$. It now becomes
+define the subsets $\{x \mid x \in V \wedge P(x)\}$. It now becomes
 apparent that properties and subsets give an equivalent view on the
 issues.
 
@@ -497,8 +480,8 @@ Such a mapping is an encoding. Encodings need to be {\em
   reasonable}. An encoding must have at least the following three
 properties (related to encoding of graphs):
 \begin{itemize}
-\item one graph encodes to one string
-\item two {\em different} graphs encode to two different strings
+\item one graph encodes to one string (encoding is a function)
+\item two {\em different} graphs encode to two different strings (the function is injective)
 \item it must be decidable whether a string is the encoding of a graph
   and of which one
 \end{itemize}
@@ -549,23 +532,22 @@ above are equivalent: you can transform one into the other with an
 algorithm implemented on a TM.
 
 As far as complexity theory is concerned, the two encodings are not
-equivalent! E.g. adding two numbers in unary notation is O(n) (with $n$
-the size of the numbers), while in binary encoding, it is
-O(log(n)).
+equivalent! E.g. adding two numbers in unary notation is $O(n)$ (with $n$
+the value of the numbers), while in binary encoding, it is
+$O(\log(n))$.
 
 We denote the encoding of an object $S$ by $\langle S \rangle$. When
 we encode a sequence of objects $S_i$, we use $\langle
 S_1,S_2,... \rangle$.
 
-\paragraph{Selfie:}
-
+\begin{exercise}
+About encodings:
 \begin{itemize}
-\item[]
-Find reasonable encodings for trees, XML-documents, ...
+\item Find reasonable encodings for trees, XML-documents, ...
 
-Find some unreasonable encodings for the same objects, or for others.
+\item Find some unreasonable encodings for the same objects, or for others.
 
-For a function, say from $\N$ to $\N$, one can also encode the
+\item For a function, say from $\N$ to $\N$, one can also encode the
 output. Your professor gave you as project to compute, on input $i$, the
 $i^{th}$ prime number. You finished very quickly: for input $i$, you
 produced output $i$, arguing that $i$ in the output is just the
@@ -573,18 +555,25 @@ encoding of the $i^{th}$ prime number. Your professor was not
 happy. Was that reasonable?
 
 \end{itemize}
+\end{exercise}
 
-
-
+In the next chapters, languages that consist of encodings of TMs (denoted $\langle M\rangle$) occur often. Say we have a predicate $P$ over TMs, and that we have the language:
+\begin{equation*}
+	L = \{\langle M\rangle \mid \text{$M$ is a TM and } P(M)\}.
+\end{equation*}
+One could wonder what the meaning of $\overline L$ is. On the one hand, we would like $L$ and $\overline L$ to partition $\Sigma^*$ (the set of all strings built from the encoding alphabet). But clearly, for some encodings, there are strings in $\Sigma^*$ that are bogus, and it's often inconvenient to consider those part of $\overline L$: we will usually write (or tacitly assume) that
+\begin{equation*}
+	\overline L = \{\langle M\rangle \mid \text{$M$ is a TM and } \neg P(M)\}
+\end{equation*}
+... whilst other textbooks might add the set $\{s\in\Sigma^* \mid \text{$\neg\exists M: M$ is a TM and $s = \langle M\rangle$} \}$ to it. Since it is decidable whether a string is a valid encoding (for reasonable encodings), our convention doesn't change the computability, but it's good to be aware that $L \cup \overline L \neq \Sigma^*$ in our case (unless the encoding is surjective, i.e. all strings built from encoding symbols are valid encodings).
 
 %===============================================================================
 \section{Universal Turing Machines}
-
-A TM can be described completely by its transition table (plus some
+We just mentioned encodings of TMs. A TM can be described completely by its transition table (plus some
 conventions to identify the start and end states). One can encode the
 transition table, by using numbers for the states (from 1 to ...),
-numbers for the symbols, and a number for the L,R,S. These numbers
-would then be encoded in - say - unary, and one would just need a new
+numbers for the symbols, and a number for $L$, $R$ and $S$. These numbers
+would then be encoded in e.g. unary, and one would just need a new
 symbol for delimiting the different numbers. We put the encoding of
 the transition table on the first tape of a UTM (the program tape). On
 its second tape (the memory), we write an input string (using the same
@@ -597,7 +586,7 @@ given string. As soon as TM would stop in its $q_a$ or $q_r$, UTM
 makes a transition to its $q_a'$ or $q_r'$.
 
 We could provide more detail about the construction above, but for us,
-it is detailed enough: the Universal Turing Machine can simulate any
+it is detailed enough: the Universal Turing machine can simulate any
 (properly encoded) TM: UTM could even start by checking whether the
 tapes contain a proper encoding.
 
@@ -616,7 +605,7 @@ has become a bit of a habit to express the size of a TM as
 $(|Q|,|\Gamma|)$, or even just the product $|Q| \times |\Gamma|$. In
 1956 Marvin Minsky\footnote{Turing award 1969} constructed a (7,4)
 UTM. In the meantime, it has been proven that a particular (2,3)
-machine is universal - but it is a bit controversial.  By the way, (2,2) TMs
+machine is universal -- but it is a bit controversial.  By the way, (2,2) TMs
 cannot be universal.
 
 %###############################################################################
@@ -625,59 +614,55 @@ cannot be universal.
 %===============================================================================
 \section{The Halting Problem}\label{halting}
 
-Informally, the question is this: given a Turing Machine M and a
-string s, is it possible to determine whether M stops on input s?
-We don't care whether M accepts or rejects s: in both cases, M stops.
-So, the question asks whether M goes into a loop or not. We want this
+Informally, the question is this: given a Turing machine $M$ and a
+string $s$, is it possible to determine whether $M$ stops on input $s$?
+We don't care whether $M$ accepts or rejects $s$: in both cases, $M$ stops.
+So, the question asks whether $M$ goes into a loop or not. We want this
 question to be solved by an algorithm, so we actually want a
-Turing Machine H that {\bf decides} the language
+Turing machine $H$ that {\bf decides} the language
 \begin{equation*}
-H_{TM} = \{\langle M,s \rangle| M~\textit{is a Turing Machine that stops on input}~s\}
+	H_{TM} = \{\langle M,s \rangle \mid \text{$M$ is a TM and stops on input $s$, i.e. $s\notin\infty_M$}\}.
 \end{equation*}
 
-
-We will show that such a machine H does not exist, by showing that $H_{TM}$ is
+We will show that such a machine $H$ does not exist, by showing that $H_{TM}$ is
 undecidable. We already knew that such languages exist, but $H_{TM}$ is our
 first concrete example.
 
-A related problem is the acceptance problem for Turing Machines. The associated language is
+A related problem is the acceptance problem for Turing machines. The associated language is
 \begin{equation*}
-A_{TM} = \{\langle M,s \rangle| M~\textit{is a Turing Machine and}~s \in L_{M}\}
+A_{TM} = \{\langle M,s \rangle \mid \text{$M$ is a TM and $s\in L_M$}\}.
 \end{equation*}
 
-$A_{TM}$ is the first language for which we prove that it is undecidable.
+$A_{TM}$ is the first language for which we prove that it is undecidable.  % [NOTE TB] The traditional proof for H_TM being undecidable is much nicer, and a reduction from H_TM to A_TM exists (a decider for A_TM on M and its complement identifies the language of halting).
 
 \begin{theorem}
-$A_{TM}$ is not decidable.
+$A_{TM}$ is undecidable.
 \end{theorem}
+\vspace{-0.75em}
 \begin{proof}
 We prove this {\em by contradiction}.
 
-Assume that a decider B for $A_{TM}$ exists. The fact that $B$ is a decider for $A_{TM}$ means that given
+Assume that a decider $B$ for $A_{TM}$ exists. The fact that $B$ is a decider for $A_{TM}$ means that given
 an input $\langle M, s \rangle$: 
 \begin{itemize}
 \item $B$ accepts iff $M$ accepts $s$, and
 \item $B$ rejects iff $M$ rejects $s$ or loops.
 \end{itemize}
 
-We now construct a Turing machine $C$, which we call the \emph{contradiction machine}, as
-\begin{equation*}
-C(\langle M \rangle) = \mathit{opposite}(B(\langle M,M \rangle))
-\end{equation*}
-with $M$ a Turing machine, and
-\begin{eqnarray*}
-\mathit{opposite}(\mathit{accept}) & = & \mathit{reject} \\
-\mathit{opposite}(\mathit{reject}) & = & \mathit{accept} 
-\end{eqnarray*}
-
+We now construct a Turing machine $C$ which we call the \emph{contradiction machine}. It takes a Turing machine $M$ as input, constructs the tuple $\langle M,s\rangle$ with $s = \langle M\rangle$, applies $B$ to this, and inverts the answer. In short:
+\begin{align*}
+	C(\langle M \rangle) &= \mathit{opposite}(B(\langle M, \langle M \rangle\rangle)) \\
+	\mathit{opposite}(\mathit{accept}) & = \mathit{reject} \\
+	\mathit{opposite}(\mathit{reject}) & =  \mathit{accept}.
+\end{align*}
 Since $C$ is a Turing machine that takes (an encoding of) a Turing machine as input, we
 can of course apply $C$ to itself.
 We have that:
 \begin{equation*}
 \begin{array}{crcl}
                  & C(\langle C \rangle) & = & \mathit{reject} \\
-\Leftrightarrow  & \mathit{opposite}(B(\langle C, C \rangle)) & = & \mathit{reject} \\
-\Leftrightarrow  & B(\langle C, C \rangle) & = & \mathit{accept} \\
+\Leftrightarrow  & \mathit{opposite}(B(\langle C, \langle C \rangle\rangle)) & = & \mathit{reject} \\
+\Leftrightarrow  & B(\langle C, \langle C \rangle\rangle) & = & \mathit{accept} \\
 \Leftrightarrow  &  C(\langle C \rangle)& = & \mathit{accept}
 \end{array}
 \end{equation*}
@@ -689,14 +674,12 @@ So, $A_{TM}$ is undecidable.
 $H_{TM}$ is undecidable.
 \end{theorem}
 \begin{proof}
-Suppose $H_{TM}$ is decidable by H. We define a decider $B$ for
+Suppose $H_{TM}$ is decidable by $H$. We define a decider $B$ for
 $A_{TM}$ as follows: on input $\langle M,s \rangle$:
 \begin{itemize}
 \item $B$ runs $H$ on $\langle M,s \rangle$
-\item if $H(\langle M,s \rangle) = accept$, then $B$ lets $M$ run on s
-  and gives as result what $M$ gives
-\item if $H(\langle M,s \rangle) = reject$ then $B$ rejects the string
-  $\langle M,s \rangle$.
+\item if $H(\langle M,s \rangle) = \mathit{accept}$, then $B$ lets $M$ run on $s$ and relays the result to its own output;
+\item if $H(\langle M,s \rangle) = \mathit{reject}$ then $B$ rejects $\langle M,s \rangle$.
 \end{itemize}
 Convince yourself that $B$ decides $A_{TM}$, in particular that it
 does not loop.
@@ -710,7 +693,7 @@ $H_{TM}$ is recognizable.
 \end{theorem}
 \begin{proof}
 On input $\langle M,s \rangle$, the recognizer $H$ for $H_{TM}$ simply
-runs $M$ on s: if it stops (either end state), $H$ accepts its input;
+runs $M$ on $s$: if it stops (either end state), $H$ accepts its input;
 otherwise it keeps running ... and that is OK.
 \end{proof}
 
@@ -728,7 +711,7 @@ Similar to the recognizer for $H_{TM}$.
 As a direct consequence we have
 
 \begin{corollary}
-$\overline{A_{TM}}$ and $\overline{H_{TM}}$ are not recognizable.
+$\overline{A_{TM}}$ and $\overline{H_{TM}}$ are unrecognizable.
 \end{corollary}
 \begin{proof}
 This follows from Theorem~\ref{isdec} and the fact that $A_{TM}$ is
@@ -745,21 +728,16 @@ The enumerator machine seems to be the machine as originally described
 by Alan Turing in his 1936 publication: he was interested in
 generating decimal expansions of {\em computable real numbers}. The
 link with recognizable languages is quite direct. We had to wait with
-introducing the enumerator until we dealt with the halting problem: we
-will need it.
-
+introducing the enumerator until we dealt with the halting problem.
 
 \begin{figure}[h]
-\begin{center}
-\includegraphics[%
-  width=0.7\linewidth,
-  keepaspectratio]{enumerator1eng}
-\end{center}
-\caption{Schema of an enumerator machine\label{enumerator1}}
+	\centering
+	\includegraphics[  width=0.7\linewidth,  keepaspectratio]{enumerator1eng}
+	\caption{Schema of an enumerator machine\label{enumerator1}}
 \end{figure}
 
 In Figure~\ref{enumerator1} you can see that the enumerator is like a
-Turing Machine with some extras
+Turing machine with some extras
 \begin{itemize}
 \item an enumerator state $q_e$
 \item an output tape
@@ -771,9 +749,8 @@ $Q \times \Gamma \rightarrow Q \times \Gamma \times \Gamma_\epsilon \times \{L,R
 The last $\Gamma_\epsilon$ is meant to be the symbol written at that
 transition to the output tape.
 
-
-The machine starts with an empty tape and empty output tape, in the
-usual $q_s$ and starts working. Whenever something is written on the
+The machine \emph{starts with an empty tape} (unlike a TM) and empty output tape, and starts working from the
+usual $q_s$. Whenever something is written on the
 output tape, the write head moves one position to the right. Whenever
 the machine gets in state $q_e$, the output marker is written on the
 output, the machine goes to state $q_s$ and the machine continues.
@@ -787,58 +764,60 @@ It is also possible that the machine stops after a while and leaves a (finite!) 
 the output separated by output markers.
 
 Whichever of the above scenarios, it makes sense to talk about the set
-of (finite) output strings produced by the enumerator: that is the
+of (finite) output strings produced by an enumerator: that is the
 language determined by the enumerator, or enumerated by the
-enumerator. The enumerator is allowed to produce the same output
+enumerator. An enumerator is allowed to produce the same output
 string multiple times. We can now prove:
 
 \begin{theorem}
 The language enumerated by an enumerator is recognizable, and every
 recognizable language can be enumerated by an enumerator.
 \end{theorem}
-\begin{proof}
-(1) Given an enumerator Enu for L, we describe informally a recognizer
-  M for L: M uses Enu as a subroutine as follows:
+\begin{proof*}
 \begin{itemize}
-\item[]
-On input s, M starts Enu. Any time Enu is in its $q_e$ state, M
-inspects the most recently produced string on the output tape of
-Enu. If it equals s, M accepts s. Otherwise Enu continues.
+	\item[$\Rightarrow$] 
+	Given an enumerator Enu for $L$, we describe informally a recognizer
+	  $M$ for $L$: $M$ uses Enu as a subroutine as follows:
+	\begin{itemize}
+	\item On input $s$, $M$ starts Enu. Any time Enu is in its $q_e$ state, M
+	inspects the most recently produced string on the output tape of
+	Enu. If it equals $s$, $M$ accepts $s$. Otherwise Enu continues.
+	\end{itemize}
+
+	\item[$\Leftarrow$] 
+	Suppose $M$ recognizes $L$. We construct an enumerator Enu for $L$ with the following ingredients:
+	
+	\begin{itemize}
+	\item
+	a $TM_{gen}$ that given a number $n$ puts the first $n$
+	strings from $\Sigma^*$ on a tape: $s_1, s_2, ... s_n$
+	
+	\item
+	a $TM_n$ that executes $n$ transitions
+	of $M$ on each of the $n$ strings: if a string $s_i$ is accepted within that budget, it is written
+	on the output tape of Enu
+	
+	\item
+	a $TM_{driver}$ that generates the numbers 1,2,... one after the
+	other and for each of them calls $TM_{gen}$ and $TM_n$\vspace{-2em}
+	\end{itemize}
 \end{itemize}
-
-(2) Suppose M recognizes L. We construct an enumerator Enu for L with the following ingredients:
-
-\begin{itemize}
-\item[-]
-a $TM_{gen}$ that given a number $n$ puts the first $n$
-strings from $\Sigma^*$ on a tape: $s_1, s_2, ... s_n$
-
-\item[-]
-a $TM_n$ that executes $n$ transitions
-of M on each of the $n$ strings: if a string $s_i$ is accepted within that budget, it is written
-on the output tape of Enu
-
-\item[-]
-a $TM_{driver}$ that generates the numbers 1,2,... one after the
-other and for each of them calls $TM_{gen}$ and $TM_n$
-
-\end{itemize}
-\end{proof}
+\end{proof*}
 
 Why did we need acquaintance with the halting problem? Naively, we
 would have proposed the following procedure to make an enumerator Enu
-out of a Turing Machine TM:
+for the recognisable language of a Turing machine $M$:
 
 \begin{itemize}
-\item[]
+\item
 generate the strings from $\Sigma^*$ in any order:
-$s_1, s_2...$
+$s_1, s_2, \hdots$
 
-\item[]
-give each $s_i$ as input to M and if M accepts, output $s_i$
+\item
+give each $s_i$ as input to $M$ and if $M$ accepts, output $s_i$
 \end{itemize}
 
-That does not work, because M might loop on some $s_i$, and thanks to
+That does not work, because $M$ might loop on some $s_i$, and thanks to
 the halting problem, we understand there is no way to know this in
 advance. Suppose $s_{i+1}$ belongs to $L_M$, then our thus constructed
 Enu would not enumerate it.
@@ -856,12 +835,10 @@ that sentence, depending on how the regular language itself is given.
 
 \begin{itemize}
 \item
-$A_{DFA} = \{\langle D,s \rangle|D~is~a~DFA,~and~D~accepts~s\}$
+$A_{DFA} = \{\langle D,s \rangle\mid \text{$D$ is a DFA and $D$ accepts $s$} \}$
 % \item
 % $A_{NFA} = \{\langle N,s \rangle|N~is~a~NFA,~and~N~accepts~s\}$
-\item
-$A_{RegExp} = \{\langle RE,s
-  \rangle|RE~is~a~regular~expression,~and~RE~generates~s\}$
+\item $A_{RegExp} = \{\langle RE,s\rangle\mid \text{RE is a regular expression and RE generates $s$}\}$
 \end{itemize}
 
 \begin{theorem} \label{reglandec}
@@ -873,8 +850,8 @@ and $A_{RegExp}$ are decidable.
 The proof is constructive.
 \begin{itemize}
 \item
-The decider B has input $\langle D,s \rangle$. B simulates D on s. If
-D accepts s, B stops in its $q_a$. If D rejects s, B stops in its
+The decider $B$ has input $\langle D,s \rangle$. $B$ simulates $D$ on $s$. If
+$D$ accepts $s$, $B$ stops in its $q_a$. If $D$ rejects $s$, $B$ stops in its
 $q_r$. Looping does not occur.
 
 %  \item
@@ -884,9 +861,9 @@ $q_r$. Looping does not occur.
 %  Section~\ref{detfsa}). Now use the above simulation.
 
 \item
-Given input $\langle RE,s \rangle$, first transform the RE to an DFA
+Given input $\langle RE,s \rangle$, first transform the RE to a DFA
 and proceed as above.
-\end{itemize}
+\end{itemize}\vspace{-1.5em}
 \end{proof}
 
 The technicalities of reductions are introduced only later, but
@@ -914,32 +891,29 @@ realizable as a TM.
 The first question is trivial, because $A_{DFA}$ is decidable.
 
 \begin{theorem}
-$E_{DFA} = \{\langle DFA \rangle| L_{DFA} = \phi\}$ is decidable.
+$E_{DFA} = \{\langle DFA \rangle\mid L_{DFA} = \emptyset\}$ is decidable.
 \end{theorem}
 \begin{proof}
-There are many ways to prove this. Here is one that uses some theory
-we studied before, but is also a bit of an overkill: you are invited
-to find shorter and/or more elegant ways.
-
 Transform the DFA to a minimal $DFA_{min}$ accepting the same language.
-If $L_{DFA} = \phi$ then $DFA_{min}$ is isomorphic with ... (draw that
-machine). Deciding that is easy.
+If $L_{DFA} = \emptyset$ then $DFA_{min}$ is isomorphic with ... (draw that
+machine). Deciding that is easy.\footnote{There are many other ways to prove this. We used some theory we studied before, but is also a bit overkill: you are invited to find shorter and/or more elegant ways.}
 \end{proof}
 
 \begin{theorem}
-$EQ_{DFA} = \{\langle DFA_1,DFA_2 \rangle| L_{DFA_1} = L_{DFA_2}\}$ is decidable.
+$EQ_{DFA} = \{\langle DFA_1,DFA_2 \rangle\mid L_{DFA_1} = L_{DFA_2}\}$ is decidable.
 \end{theorem}
 \begin{proof}
 We use some algebraic properties of the set of DFAs.
 
 From $DFA_1$ and $DFA_2$, construct $DFA_\Delta$ that accepts the
 symmetric difference between $L_{DFA_1}$ and $L_{DFA_2}$. Then decide
-whether $DFA_\Delta$ accepts the empty language using the previous
-theorem. (did you see the reduction?)
+whether $DFA_\Delta$ corresponds to the empty language using the previous
+theorem. (Did you see the reduction?)
 \end{proof}
 
-
-\paragraph{Selfie:} Find other proofs for the theorems above.
+\begin{exercise}
+Find other proofs for the theorems above.
+\end{exercise}
 
 
 \subsection{Related to context free languages}
@@ -949,12 +923,12 @@ be formulated either by giving the CFG or the PDA for the context free
 language at hand. We show it for the grammar only.
 
 \begin{theorem} \label{acfg}
-$A_{CFG} = \{\langle G,s \rangle|G~is~a~CFG,~and~s \in L_G\}$ is
+$A_{CFG} = \{\langle G,s \rangle\mid \text{$G$ is a CFG and $s\in L_G$}\}$ is
     decidable: {\em acceptance} of a string by a CFG is decidable.
 \end{theorem}
 \begin{proof}
 A naive proof idea consists in using the CFG to generate strings, and
-accepting as soon as s is generated. You can see why this does not work:
+accepting as soon as $s$ is generated. You can see why this does not work:
 when do you reject? We have a recognizer, not a decider.
 
 It would be convenient if the CFG were in Chomsky Normal Form: we
@@ -963,15 +937,15 @@ given string.
 
 So, for input $\langle G,s \rangle$, first convert G to its Chomsky
 Normal Form. Generate all possible strings with a derivation length
-$2|s|-1$: there are only finitely many of them. If s is one of them,
+$2|s|-1$: there are only finitely many of them. If $s$ is one of them,
 accept, otherwise reject.
 \end{proof}
 
 \begin{theorem}
-$E_{CFG} = \{\langle G \rangle|G~is~a~CFG,~and~L_G = \phi\}$ is decidable: {\em emptiness} of a CFL is decidable.
+$E_{CFG} = \{\langle G \rangle\mid \text{$G$ is a CFG and $L_G = \emptyset$}\}$ is decidable: {\em emptiness} of a CFL is decidable.
 \end{theorem}
 \begin{proof}
-We informally describe an algorithm transforming G to a form in which
+We informally describe an algorithm transforming $G$ to a form in which
 taking the decision is easier.
 \begin{itemize}
 \item
@@ -996,14 +970,14 @@ keep doing this until
 Be careful with the above proof: the grammar is transformed to a
 non-equivalent one!
 
-
-\paragraph{Selfie:}
+\begin{exercise}
 Write down a grammar that determines the empty language and apply the
 above procedure to it. Did you learn something about Prolog programs
 that have no answers?
+\end{exercise}
 
 \begin{theorem} \label{escfg}
-$ES_{CFG} = \{\langle G \rangle|G~is~a~CFG,~and~\epsilon \in L_G\}$ is
+$ES_{CFG} = \{\langle G \rangle\mid \text{$G$ is a CFG and $\eps\in L_G$}\}$ is
     decidable: it is decidable whether a CFG generates the empty string.
 \end{theorem}
 \begin{proof}
@@ -1026,20 +1000,20 @@ relied on the symmetric difference of regular languages. We can not
 use the same idea for CFLs, because they are not closed under
 complement or intersection.
 
-\paragraph{Selfie:}
+\begin{exercise}
+Do this yourself:
 \begin{itemize}
-\item[]
-Prove that $\overline{EQ_{CFG}}$ is recognizable.
+\item Prove that $EQ_{CFG}$ is undecidable (you may want Theorem~\ref{allcfg} for this).
 
-What does that mean for $EQ_{CFG}$?
+\item Prove that $\overline{EQ_{CFG}}$ is recognizable.
 
-Prove that Theorem~\ref{escfg} follows directly from Theorem~\ref{acfg}.
+\item What does that mean for $EQ_{CFG}$?
+
+\item Prove that Theorem~\ref{escfg} follows directly from Theorem~\ref{acfg}.
 \end{itemize}
+\end{exercise}
 
-% los eindje in de cursus: nergens wordt bewezen dat $EQ_{CFG}$
-% niet-recognizable is
-
-
+% los eindje in de cursus: nergens wordt bewezen dat $EQ_{CFG}$ niet-recognizable is
 
 \section{Undecidable Languages}
 
@@ -1047,59 +1021,47 @@ In Section~\ref{halting} we proved that $A_{TM}$ and $H_{TM}$ are not
 decidable. Here are some more of the same kind.
 
 \begin{theorem} \label{nonreductie1}
-$E_{TM} = \{\langle M \rangle | M~is~a~TM,~and~L_M = \phi\}$ is not
-     decidable: it is not decidable whether a Turing Machine accepts
+$E_{TM} = \{\langle M \rangle \mid \text{$M$ is a TM and $L_M = \emptyset$}\}$ is not
+     decidable: it is not decidable whether a Turing machine accepts
      no input.
 \end{theorem}
 \begin{proof}
 Assume that $E_{TM}$ is decidable, then there exists a decider $E$ for
-it. We now describe a decider B for $A_{TM}$ using $E$:
-B receives as input $\langle M,s \rangle$ and works as follows:
-\begin{itemize}
-\item
-it constructs a machine $M_{M,s}$ whose working is given by: on input
-$w$, $M_{M,s}$ does the following
-\begin{itemize}
-\item if $w \neq s$, reject
-\item else run M on $w$ (or $s$) and return the same result
-\end{itemize}
-
-\item
-run $E$ on input $\langle M_{M,s} \rangle$
-\begin{itemize}
-\item if $E$ accepts $\langle M_{M,s} \rangle$, then B rejects its
-  input $\langle M,s \rangle$; indeed: $M_{M,s}$ determines the empty
-  language, so M has not accepted s
-\item if $E$ rejects $\langle M_{M,s} \rangle$, B accepts its input: since  $M_{M,s}$ is not empty, M accepts s
-\end{itemize}
-
-\end{itemize}
-It follows that B is a decider for $A_{TM}$, which is impossible, so
+it. We now describe a decider $B$ for $A_{TM}$ using $E$:
+$B$ receives as input $\langle M,s \rangle$ and works in two steps.
+\begin{enumerate}
+	\item It constructs a machine $M_{M,s}$ whose internal mechanism is as follows: on input
+	$w$,
+	\begin{itemize}
+		\item if $w \neq s$, reject
+		\item else run $M$ on $s$ and relay the result to the output.\footnote{We don't often acknowledge that $M$ possibly loops, but it's good to know that this is also allowed. By relaying the output of $M$ to the output of $M_{M,s}$, the latter loops when the former does on a given input, without knowing it -- if it did always know, then this would violate the properties of the halting problem.}
+	\end{itemize}
+	
+	\item It runs $E$ on input $\langle M_{M,s} \rangle$, and
+	\begin{itemize}
+		\item if $E$ accepts $\langle M_{M,s} \rangle$, then $B$ rejects its
+		  input $\langle M,s \rangle$; indeed: $M_{M,s}$ determines the empty
+		  language, so $M$ has not accepted s
+		\item if $E$ rejects $\langle M_{M,s} \rangle$, $B$ accepts its input: since  $M_{M,s}$ is not empty, $M$ accepts s
+	\end{itemize}
+\end{enumerate}
+It follows that $B$ is a decider for $A_{TM}$, which is impossible, so
 $E$ does not exist, so $E_{TM}$ is not decidable.
 \end{proof}
 
 We can define the $E_{TM}$ problem slightly differently, as an instance
-of a more general problem: does a given machine M determine a language
+of a more general problem: does a given machine $M$ determine a language
 from a given set? So we have
-
-$~~~~~~~~~IsIn_{TM,S} = \{\langle M \rangle| L_M \in S\}$.
-
-
-Then $E_{TM} = IsIn_{TM,\{\phi\}}$
-
-
-Another instance of the general problem:
-\begin{itemize}
-\item[] does a given Turing Machine M determine a regular language,
-  i.e.  is $IsIn_{TM,RegLan}$ decidable? We denote that problem as
-$REGULAR_{TM}$
-\end{itemize}
+\begin{equation*}
+	\text{IsIn}_{TM,S} = \{\langle M \rangle\mid L_M \in S\}.
+\end{equation*}
+Then $E_{TM} = \text{IsIn}_{TM,\{\emptyset\}}$. Another instance of the general problem: does a given Turing machine $M$ determine a regular language, i.e. is $\text{IsIn}_{TM,RegLan}$ decidable? We denote that problem as $REGULAR_{TM}$.
 
 \begin{theorem}
 $REGULAR_{TM}$ is not decidable.
 \end{theorem}
 \begin{proof}
-Suppose Turing Machine $R$ decides $REGULAR_{TM}$. Fix two symbols
+Suppose Turing machine $R$ decides $REGULAR_{TM}$. Fix two symbols
 from the alphabet, say 0 and 1. Make a decider $B$ for $A_{TM}$ as
 follows: on input $\langle M,s \rangle$ $B$ does the following:
 \begin{itemize}
@@ -1131,7 +1093,7 @@ $EQ_{TM}$ is not decidable.
 \end{theorem}
 \begin{proof}
 We already know that $E_{TM}$ is not decidable. $E_{TM}$ is a special
-case of $EQ_{TM}$, in which the second machine is $M_\phi$. It is
+case of $EQ_{TM}$, in which the second machine is $M_{\emptyset}$. It is
 clear that if we could decide the equality of two arbitrary languages,
 we would also be able to decide about one arbitrary language
 and the empty one. So, we arrive at a contradiction by assuming that
@@ -1141,13 +1103,11 @@ $EQ_{TM}$ is decidable.
 The above proof technique is studied in more detail in
 Section~\ref{mappingreduction}.
 
-
-
-The following is about context sensitive languages. We first define
+The following is about context-sensitive languages. We first define
 the machinery needed to decide them:
 
 \begin{definition}[Linear Bounded Automaton]
-A Linear Bounded Automaton is a (non-deterministic) Turing Machine
+A \textbf{linear bounded automaton (LBA)} is a (non-deterministic) Turing machine
 that reads and writes only on the part of the tape that contained the
 initial input.
 \end{definition}
@@ -1165,14 +1125,15 @@ There is no decision procedure for deciding whether a given Turing
 Machine is actually an LBA (adapt the proof for $REGULAR_{TM}$). But a
 TM can be turned into an LBA by adding a marker at the left and right
 of the input, and adapting the transition table so that this marker is
-never crossed.\footnote{{\bf Selfie}: show with an example that in
-  general you have changed the language!}
-
+never crossed.
+\begin{exercise}
+Show with an example that in general you have changed the language.
+\end{exercise}
 
 The acceptance problem for LBAs is
-
-$~~~~~~~~~A_{LBA} = \{\langle M,s \rangle | M~is~an~LBA~and~s \in L_{LBA}\}$.
-
+\begin{equation*}
+	A_{LBA} = \{\langle M,s \rangle \mid \text{$M$ is an LBA and $s\in L_M$} \}.
+\end{equation*}
 The following might surprise you ...
 
 \begin{theorem}
@@ -1186,33 +1147,34 @@ compute the number of possible tape contents: it is bounded by
 $b^n$. The tape head can be on any cell of the allowed portion of the
 tape, so the upper bound for the number of configurations is $qnb^n$.
 
-A decider B for $A_{LBA}$ can now be constructed as follows:
-on input $\langle M,s \rangle$, B performs the following
+A decider $B$ for $A_{LBA}$ can now be constructed as follows:
+on input $\langle M,s \rangle$, $B$ performs the following
 \begin{itemize}
 \item it computes $Max = qnb^n$
 \item it simulates $M$ on $s$ for at most $Max$ steps
 \item if $M$ accepted in the mean time, accept
 \item if $M$ rejected in the mean time, reject
 \item if $M$ has not yet stopped, it means that $M$ loops and does not
-  accept: reject
+  accept: reject\vspace{-1.5em}
 \end{itemize}
 \end{proof}
 
 \begin{theorem}
-$E_{LBA} = \{M | M~is~an~LBA~with~L_M = \emptyset\}$ is not decidable.
+$E_{LBA} = \{\langle M\rangle \mid \text{$M$ is an LBA and $L_M = \emptyset$}\}$ is not decidable.
 \end{theorem}
 \begin{proof}
-We first show that for a given Turing Machine $M$ and string
+We first show that for a given Turing machine $M$ and string
 $s$, we can construct an LBA that can decide about a finite sequence
-of configurations of $M$, whether it is an accepting computation
+of configurations of $M$ whether it is an accepting computation
 history for $s$. A sequence of configurations can be put on a tape
-easily as in the figure below
-\begin{center}
+easily as in the figure.
+\begin{figure}
+\centering
 \includegraphics[%
   width=0.5\linewidth,
   keepaspectratio]{comphistband}
-\end{center}
-It represents a transition for which $\delta(q_4,c) = (q_7,b,R)$.
+  \caption{Computation history for a transtion $\delta(q_4,c) = (q_7,b,R)$.}
+\end{figure}
 
 To check whether a sequence of configurations is an accepting computation
 history for $s$, the following is needed:
@@ -1248,74 +1210,76 @@ So, $B$ does not exist, so neither can $E$, and as a conclusion:
 $E_{LBA}$ is not decidable.
 \end{proof}
 
-A small summary of the differences and similarities between PDAs, LBAs
-and TMs follows:
+\begin{theorem}[Undecidability of some machines]
+	A small summary of the differences and similarities between PDAs, LBAs
+	and TMs:
+	\begin{itemize}
+		\item acceptance and halting
+		\begin{itemize}
+			\item Decidable: PDA and LBA
+			\item Undecidable: TM
+		\end{itemize}
 
-\begin{itemize}
-\item acceptance and halting
-\begin{itemize}
-\item PDA and LBA are similar: acceptance and halting are decidable
-\item TM is different: acceptance and halting are not decidable
-\end{itemize}
-\item emptiness
-\begin{itemize}
-\item LBA are TM are similar: emptiness is not decidable
-\item PDA differs: emptiness is decidable
-\end{itemize}
-\end{itemize}
+		\item emptiness
+		\begin{itemize}
+			\item Decidable: PDA
+			\item Undecidable: LBA and TM
+		\end{itemize}
+	\end{itemize}
+\end{theorem}
 
 To conclude for now: it is not decidable whether a CFG generates all
-strings from $\Sigma^*$, i.e. $ALL_{CFG} = \{\langle G \rangle|L_G =
+strings from $\Sigma^*$, i.e. $ALL_{CFG} = \{\langle G \rangle\mid L_G =
 \Sigma^*\}$ is not decidable. That is a bit weird, as $E_{CFG}$ is
 decidable. Then again, complement is not internal for CFLs ...
 
-\begin{theorem}
+\begin{theorem}\label{allcfg}
 $ALL_{CFG}$ is not decidable.
 \end{theorem}
 \begin{proof}
-No proof this year.
+No proof this year.  % [NOTE TB] A textbook is timeless! Communicate this in class!
 \end{proof}
 
-\paragraph{Selfie:} Prove that $ALL_{RegExp}$ is decidable.
-
+\begin{exercise}
+Prove that $ALL_{RegExp}$ is decidable.
+\end{exercise}
+We should make one thing explicit before we move on. To prove a language's exact computability class -- e.g.\ for the languages we mentioned above -- you'll likely need two proofs: two for recognisability, or one for undecidability and one for recognisability. We just proved a bunch of undecidabilities, but some of those languages are still recognisable while others aren't. Conversely, if you find a claim (or even a proof) somewhere of a language's recognisability, be careful about whether it is strict or not. You can easily prove that $A_{DFA}$ is recognisable, but it's not \emph{just} that; to be precise, you either need a proof that $A_{DFA}$ or $\overline{A_{DFA}}$ is decidable, or that the latter is also recognisable.
 
 \section{Some Trivia on Languages}
-
+\subsection{Hierarchy}
 Let $Dec$ denote the set of decidable languages, and $Rec$ the
-recognizable languages. First some inclusions, all strict:
+recognizable languages. Here are some inclusions, all strict:
+\begin{equation*}
+	RegLan \subset DCFL \subset CFL \subset Dec \subset Rec \subset {\cal P}(\Sigma^*)
+\end{equation*}
 
+\subsection{Operation closure}
+A somewhat unusual operation on languages is \emph{inversion}. Denote the string obtained by writing the symbols of $s$ in reverse order with $\hat{s}$. We define $\widehat{L} = \{\hat{s}\mid s \in L\}$.
+
+Now, some closure properties:
+\begin{center}
+\begin{tabular}{r|ccccc}
+	   & $\cup$ & $\cap$ & $\overline{L}$ &  $\widehat{L}$ & $\cdot$\\\hline
+RegLan & X & X & X & X & X\\
+DCFL   &   &   & X &   &  \\
+CFL    & X &   &   & X & X\\
+Dec    & X & X & X & X & X\\
+Rec    & X & X &   & X & X\\
+\end{tabular}
+\end{center}
+You can read this table from the perspective of the languages, but it's more memorable to consider its transpose:
 \begin{itemize}
-\item[] $RegLan \subset DCFL \subset CFL \subset Dec \subset Rec
-\subset {\cal P}(\Sigma^*)$
+	\item DCFL is the only class not closed under union, inversion and concatenation;
+	\item DCFL and CFL are the only classes not closed under intersection;
+	\item CFL and Rec are the only classes not closed under complement;
 \end{itemize}
+All language classes closed under complement match in their closure under union and intersection due to De Morgan's laws: $L_1 \cup L_2 = \overline{\overline{L_1} \cap \overline{L_2}}$ and its dual $L_1 \cap L_2 = \overline{\overline{L_1} \cup \overline{L_2}}$.
 
-Some properties of operations on languages:
-
-\begin{itemize}
-\item[] $RegLan$ is closed under union, intersection and complement
-\item[] $DCFL$ is closed under complement, but $CFL$ is not
-\item[] $CFL$ is closed under union, but $DCFL$ is not
-\item[] $Dec$ is closed under union and complement
-\item[] $Rec$ is closed under union
-\end{itemize}
-
-Let us also have a look at a somewhat unusual operation on languages:
-inversion. Denote the string obtained by writing the
-symbols of $s$ in reverse order with $\hat{s}$. We define $\widehat{L} = \{\hat{s}|s
-\in L\}$.
-
-\begin{itemize}
-\item[] $RegLan$, $CFL$, $Dec$ and $Rec$ are closed under inversion
-\item[] $DCFL$ is NOT closed under inversion
-\end{itemize}
-
-{\bf Example:} The language
-%
-$L = \{ba^mb^nc^k|m \neq n\} \cup \{ca^mb^nc^k|n \neq k\}$ is
+\begin{example}
+The language $L = \{ba^mb^nc^k\mid m \neq n\} \cup \{ca^mb^nc^k\mid n \neq k\}$ is
 deterministic context free (construct its DCFG) but $\widehat{L}$ is
 not.
-
-
+\end{example}
 
 \section{Countable}
 
@@ -1325,7 +1289,7 @@ not care about the ease with which the bijection can be computed: as
 far as the definition goes, there is no need for that.
 
 Still, in the context of computability, we care about such bijection
-being computable by a Turing Machine. We have indeed used
+being computable by a Turing machine. We have indeed used
 constructions that use a TM that generates the strings of $\Sigma^*$
 one by one. It is thus not enough that $\Sigma^*$ is countable, it
 needs to be (effectively) enumerable (by a TM). You should be able to prove at
@@ -1339,11 +1303,11 @@ little: any time the enumerator arrives in its enumerator state, we
 check whether the most recently generated string is really new: if
 not, we erase it. Now the enumerator effectively enumerates all its
 strings. Since every language generated by an enumerator is recognizable,
-and since we proved that there exists a non-recognizable language L,
-it follows that this L can not be enumerated, although it is
-countable.
-
-\paragraph{Selfie:} Construct languages that are countable, but not enumerable.
+and since we proved that there exists a non-recognizable language $L$,
+it follows that this $L$ \emph{can be counted, but not enumerated}.
+\begin{exercise}
+Construct languages that are countable, but not enumerable.
+\end{exercise}
 
 
 \section{Rice's Theorem}
@@ -1352,44 +1316,46 @@ We have seen some concrete examples of undecidable languages, often by
 reduction to $A_{TM}$: every time, we found a new little trick so that
 a supposed decider for a language could be used in a decider for
 $A_{TM}$ and lead to contradiction. So, Rice's theorem comes as a
-relief: in one go, it proves that a whole lot (how many?) languages
+relief: in one go, it proves that a whole lot of languages (how many?)
 are undecidable.
 
-Consider the set of Turing Machines (for convenience over a fixed
-alphabet). A property $P$ of the Turing Machines splits the set in two
+Consider the set of Turing machines (for convenience over a fixed
+alphabet). A property $P$ of the Turing machines splits the set in two
 parts: the machines that have property $P$, denoted
 %
-$Pos_P = \{M|P(M) = true\}$, and the machines that do not have the
+$Pos_P = \{M\mid P(M) = \mathit{true}\}$, and the machines that do not have the
 property, denoted
 %
-$Neg_P = \{M|P(M) = false\}$.
+$Neg_P = \{M\mid P(M) = \mathit{false}\}$.
 
 \begin{definition}[Non-trivial property]
 A property $P$ of TMs is {\em non-trivial} if
-
-$~~~~~~~~~~~~Pos_P \neq \emptyset$ and also $Neg_P \neq \emptyset$.
+\begin{equation*}
+	Pos_P \neq \emptyset \quad\wedge\quad Neg_P \neq \emptyset
+\end{equation*}
+or in words: there is at least one machine that has the property and one that doesn't.
 \end{definition}
 
 \begin{definition}[Semantic property]
 The property $P$ is {\em semantic} if
-
-$~~~~~~~~~L_{M_1} = L_{M_2} \Longrightarrow P(M_1) = P(M_2)$
-
-or in words: {\em machines recognizing the same language either all
-  have $P$ or none have $P$}.
+\begin{equation*}
+	L_{M_1} = L_{M_2} \Longrightarrow P(M_1) = P(M_2)
+\end{equation*}
+or in words: equivalent machines have equivalence in $P$.
 \end{definition}
 
-\paragraph{Selfie:}
+\begin{exercise}
+~
 \begin{itemize}
-\item[]
-Invent some examples of semantic, non-trivial
+\item Invent some examples of semantic, non-trivial
 properties of TMs.
 
-Invent some examples of properties of TMs that are not semantic.
+\item Invent some examples of properties of TMs that are not semantic.
 
-For a given non-trivial and semantic property $P$, how many
+\item For a given non-trivial and semantic property $P$, how many
 machines have $P$? How many don't?
 \end{itemize}
+\end{exercise}
 
 
 
@@ -1418,8 +1384,6 @@ $A$ has as input $\langle M,s \rangle$ and does the following:
 \end{itemize}
 First check that $H_{M,s}$ accepts either the empty language or
 $L_X$. This is used in the following:
-
-
 $A$ accepts $\langle M,s \rangle$ iff $B$ accepts $H_{M,s}$, iff
 %
 $H_{M,s}$ has property $P$, iff
@@ -1427,7 +1391,6 @@ $H_{M,s}$ has property $P$, iff
 $H_{M,s}$ accepts $L_X$, iff
 %
 $M$ accepts $s$.
-
 So, $A$ is a decider for $A_{TM}$, clearly impossible, so $B$ does not
 exist, and $Pos_P$ is not decidable.
 \end{proof}
@@ -1435,14 +1398,16 @@ exist, and $Pos_P$ is not decidable.
 Rice also has a second theorem: every non-monotone property is not
 recognizable; it is worth having a look at it!
 
-\paragraph{Selfie:}
+\begin{exercise}
+In the context of Rice's theorem:
 \begin{itemize}
-\item[]
+\item
 What can you conclude regarding whether $Pos_P$ and/or $Neg_P$ are
 recognizable?
 
-Use Rice for new proofs of old theorems.
+\item Use Rice for new proofs of old theorems.
 \end{itemize}
+\end{exercise}
 
 
 %###############################################################################
@@ -1467,14 +1432,10 @@ theory, we use similar reductions, so it is a recurring concept.
 We start with a highly structured class of reductions, the many-one reductions.
 These reductions are defined in terms of a Turing computable function.
 
-\begin{definition}[(Turing) computable function]
-A function $f$ is (Turing)
-       computable if there exists a Turing Machine that on input $s$
-       eventually halts with $f(s)$ on the tape.
+\begin{definition}[Turing-computable function]
+A function $f$ is Turing-computable if there exists a Turing machine that on input $s$
+halts (in $q_a$/$q_e$) with $f(s)$ on the tape.
 \end{definition}
-
-We do not care whether the machine stops in an accepting or a
-rejecting end state.
 
 \begin{definition}[Many-one Reduction of languages] \label{manyone}
 A many-one reduction of language $L_1$ (over $\Sigma_1$) to language
@@ -1485,7 +1446,7 @@ $\Sigma_1^*$ to $\Sigma_2^*$ so that:
 \end{equation*}
 
 We denote this by $L_1 \leq_m L_2$, and we can also say {\em $L_1$
-  reduces to $L_2$}, or {\em $L_1$ is mapping reducible to $L_2$}.
+  reduces to $L_2$}, or {\em $L_1$ is mapping-reducible to $L_2$}.
 \end{definition}
 
 Figure~\ref{mapred} illustrates the condition on $f$. Observe that
@@ -1503,12 +1464,9 @@ f(L_1) \subseteq L_2 ~~\wedge~~ f(\bar{L}_1) \subseteq \bar{L}_2
 \end{equation*}
 
 \begin{figure}[th]
-\begin{center}
-\includegraphics[%
-  width=0.6\linewidth,
-  keepaspectratio]{mapred}
-\end{center}
-\caption{Schematic representation of a reduction\label{mapred}}
+	\centering
+	\includegraphics[  width=0.6\linewidth,  keepaspectratio]{mapred}
+	\caption{Schematic representation of a reduction\label{mapred}}
 \end{figure}
 
 
@@ -1542,7 +1500,7 @@ $EQ_{TM}$ is not decidable.
 \end{theorem}
 \begin{proof}
 We reduce $E_{TM}$ to $EQ_{TM}$: $f$ maps input $\langle M \rangle$ to
-$\langle M,M_\phi \rangle$; $M_\phi$ a Turing Machine accepting the
+$\langle M,M_{\emptyset} \rangle$; $M_{\emptyset}$ a Turing machine accepting the
 empty language. Clearly, $f$ is Turing computable.
 
 So, $E_{TM} \leq_m EQ_{TM}$, and since we know already that $E_{TM}$
@@ -1550,10 +1508,10 @@ is not decidable, $EQ_{TM}$ is not decidable either.
 \end{proof}
 
 \begin{theorem}
-If $A \leq_m B$ then  $\overline{A} \leq_m \overline{B}$.
+$A \leq_m B$ if and only if  $\overline{A} \leq_m \overline{B}$.
 \end{theorem}
 \begin{proof}
-Selfie!
+Do it yourself.
 \end{proof}
 
 
@@ -1573,13 +1531,13 @@ We construct two mapping reductions: $A_{TM} \leq_m
 $\overline{A}_{TM}$ is not recognizable, the result follows.
 \begin{description}
 \item[$A_{TM} \leq_m \overline{EQ}_{TM}$:] ~\\ 
-$f$ maps $\langle M,s \rangle$ to $\langle M_s,M_\phi \rangle$;
-  $M_s$ is a machine that accepts every string if M accepts s; clearly
+$f$ maps $\langle M,s \rangle$ to $\langle M_s,M_{\emptyset} \rangle$;
+  $M_s$ is a machine that accepts every string if $M$ accepts $s$; clearly
   $f$ is computable; we should also prove the other conditions:
 \begin{itemize}
-\item if M accepts s, then the languages of $M_s$ and $M_\phi$ are
+\item if $M$ accepts $s$, then the languages of $M_s$ and $M_{\emptyset}$ are
   different
-\item if M does not accept s, then the languages of $M_s$ and $M_\phi$
+\item if $M$ does not accept $s$, then the languages of $M_s$ and $M_{\emptyset}$
   are equal
 \end{itemize}
 
@@ -1614,7 +1572,7 @@ make the question a bit more concrete:
 It is clear that we can make an $O^{A_{TM}}$ that decides $A_{TM}$:
 give the input $\langle M,s \rangle$ to the oracle, and return its
 answer. So, the set of oracle machines with oracle $A_{TM}$ is
-strictly stronger than the set of Turing Machines. Here comes another
+strictly stronger than the set of Turing machines. Here comes another
 example:
 
 \begin{theorem}
@@ -1625,7 +1583,7 @@ We construct $O^{A_{TM}}$ as follows: on input $\langle M \rangle$
 $O^{A_{TM}}$ performs the following actions
 \begin{itemize}
 \item
-it constructs a Turing Machine $P$ that on input $w$ performs the
+it constructs a Turing machine $P$ that on input $w$ performs the
 following actions
 \begin{itemize}
 \item run $M$ on all strings of $\Sigma^*$ (*)\label{allestrings}
@@ -1646,8 +1604,8 @@ accepts. We conclude that $O^{A_{TM}}$ decides the language $E_{TM}$.
 The theorem proves that $E_{TM}$ is decidable relative to
 $A_{TM}$. The relevant definition is:
 
-\begin{definition}[Turing reducible]
-A language $A$ is Turing reducible to language $B$, if $A$
+\begin{definition}[Turing-reducible]
+A language $A$ is Turing-reducible to language $B$, if $A$
 is decidable relative to $B$, i.e. there exists an oracle machine
 $O^B$ that decides $A$. We write this as $A \leq_T B$.
 \end{definition}
@@ -1659,8 +1617,15 @@ language to be reducible to another:
 If $A \leq_T B$ and $B$ is decidable, then $A$ is decidable.
 \end{theorem}
 
-The previous and following theorems are at your mercy!
+So how does Turing-reducibility differ from mapping-reducibility? Turing-reducibility is clearly weaker: it just requires decidability of one language to be linked to another, without there being a mapping $f$ between them. But how can there be a link without a mapping? Here's an example that should clear that up.
 
+\begin{example}
+There cannot be a mapping reduction $f$ as defined in Definition~\ref{manyone} between $H_{TM}$ (the halting problem) and $\overline{H_{TM}}$ (the looping problem). Let's say we have a tuple $\langle M,s\rangle$, and (but we haven't checked this yet) $\langle M,s\rangle\in H_{TM}$. Suppose we had a mapping reduction $f$. Since $\langle M,s\rangle$ is in $H_{TM}$, $f$ should map it to a tuple $\langle M',s'\rangle \in \overline{H_{TM}}$. But which one? Clearly not $M = M'$ and $s = s'$, because $\langle M,s\rangle$ can only be in one of the two languages. Since $f$ has no more information than $\langle M,s\rangle$, the only alternative is to map to an arbitrarily different $M'$, or $s'$, or both, and in all cases, there is no way for $f$ to ensure that $\langle M',s'\rangle \in \overline{H_{TM}}$. So $H_{TM} \not\leq_m \overline{H_{TM}}$.
+
+Yet, a decider that can say whether $\langle M,s\rangle \in H_{TM}$ immediately tells you whether $\langle M,s\rangle \in \overline{H_{TM}}$: it's just the opposite answer! Hence, there is no mapping between the halting problem and looping problem, yet their decidability is linked. This makes each one strictly Turing-reducible to the other: $H_{TM} \leq_T \overline{H_{TM}}$ and $\overline{H_{TM}} \leq_T H_{TM}$.
+\end{example}
+
+You might have already suspected the following to be true.
 \begin{theorem}
 If $A \leq_m B$ then also $A \leq_T B$.
 
@@ -1684,12 +1649,15 @@ for the $X$ oracle ... and you soon note that there is an infinite
 hierarchy of ever more difficult languages. As a sidenote: also
 complexity theory has its oracle machines and a nice hierarchy. The
 difference is: the particular complexity hierarchy would still
-collapse in case it turns out that $NP = P$. Our computability
+collapse in case it turns out that $\P = \NP$. Our computability
 hierarchy however stands strong!
 
-\paragraph{Selfie:} In the theorem on page \pageref{allestrings},
-a statement is marked by a (*): how can we let M run on all strings?
+\begin{exercise}
+In the proof on page \pageref{allestrings},
+a statement is marked by a (*): how can we let $M$ run on all strings?
 There are infinitely many of them ...
+\end{exercise}
+
 
 %===============================================================================
 \section{The Computable and the Recursive Functions}
@@ -1698,13 +1666,13 @@ We gave a definition of Turing computable function in the previous
 section. It was rather abstract and {\em existential}. We can also
 get a grip on which functions are Turing-computable by
 working {\em bottom-up}: we start with very simple functions, and
-compose them with simple operators. That is what Kurt Goedel and
+compose them with simple operators. That is what Kurt Gödel and
 Jacques Herbrand did.
 
 %-------------------------------------------------------------------------------
 \subsection{The Primitive Recursive Functions}
 
-The first attempt of Goedel and Herbrand is known as the \emph{primitive
+The first attempt of Gödel and Herbrand is known as the \emph{primitive
 recursive functions}. These are all the functions on natural numbers that can
 constructed out of the first set of building blocks they devised. It was discovered
 that this first attempt fell short: it does not capture all Turing-computable
@@ -1748,9 +1716,9 @@ functions to create more complex behavior.
 
 \begin{itemize}
 \item The family of function composition operators $\mathit{Cn}[f,g_1,\ldots,g_m] : \N^n \to \N$
-where $f : \N^m \to \N$ and $g_i : N^n \to N$ (for $i \in 1,\ldots,m$).
+where $f : \N^m \to \N$ and $g_i : \N^n \to \N$ (for $i \in 1,\ldots,m$).
 \begin{equation*}
-\mathit{Cn}[f,g_1,\ldots,g_m](x_1,\ldots,x_n) = f(g_1(x_1,\ldots,x_n),\ldots,g_m(x_1,\ldots,x_1))
+\mathit{Cn}[f,g_1,\ldots,g_m](x_1,\ldots,x_n) = f(g_1(x_1,\ldots,x_n),\ldots,g_m(x_1,\ldots,x_n))
 \end{equation*}
 This operator takes $1 + m$ function parameters $f$ and $g_1,\ldots,g_m$, and
 $n$ natural numbers $x_1,\ldots,x_n$. There is one such operator for every $m
@@ -1766,8 +1734,8 @@ By repeated nesting we get more complex composition chains, e.g.,
 $\mathit{Cn}[\mathit{succ},\mathit{Cn}[\mathit{succ},\mathit{succ}]]$
 adds $3$ to its input.
 
-\item The family of primitive recursion operators $\mathit{Pr}[z,s] : \N^k \times \N \to N$
-where $z : \N^k \to N$ and $s : \N^k \times \N \times N \to N$.
+\item The family of primitive recursion operators $\mathit{Pr}[z,s] : \N^k \times \N \to \N$
+where $z : \N^k \to \N$ and $s : \N^k \times \N \times \N \to \N$.
 \begin{eqnarray*}
 \mathit{Pr}[z,s](x_1,\ldots,x_k,0) & = & z(x_1,\ldots,x_k) \\
 \mathit{Pr}[z,s](x_1,\ldots,x_k,y' + 1) & = & s(x_1,\ldots,x_k,y',\mathit{Pr}[z,s](x_1,\ldots,x_k,y'))
@@ -1782,7 +1750,7 @@ The recursive case is when $y$ is of the form $y' + 1$. Then the operator recurs
 The $s$ function is used to combine the auxiliary parameters, the value of $y'$ and the recursive
 result in the overall result.
 
-The recursion opertor allows us to define addition of natural numbers, which satisfies
+The recursion operator allows us to define addition of natural numbers, which satisfies
 the following two equations:
 \begin{eqnarray*}
 \mathit{add}(x,0) & = & x \\
@@ -1807,8 +1775,8 @@ All functions that can be constructed from the basic functions and by using comp
 Primitive recursive functions are total. They can be
 computed by FOR-programs.
 
-\subsubsection{More Examples}
-
+\begin{example}
+More examples of primitive recursive functions:
 \begin{itemize}
 \item
 $Cn[succ,null]$ is the constant function 1
@@ -1818,19 +1786,20 @@ $Cn[succ,Cn[succ,Cn[succ,null]]]$ is the constant function 3
 
 \item
 
-$Pr[null,Cn[sum,{p_1}^3, {p_3}^3]]$ = product of 2 inputs ($\N^2 \rightarrow \N$)
+$Pr[null,Cn[sum,p_1^3, p_3^3]]$ = product of 2 inputs ($\N^2 \rightarrow \N$)
 
 \item
 factorial, minus1 (or predecessor), ...
 
 \end{itemize}
+\end{example}
 
 %-------------------------------------------------------------------------------
 \subsection{The Recursive Functions}
 
 \subsubsection{A Non-Primitive Recursive Function: the Ackermann Function}
 
-Initially, Goedel stopped at the primitive recursive functions when he
+Initially, Gödel stopped at the primitive recursive functions when he
 was trying to define all {\em computable functions}: he was doing that
 without referring to TMs. However, in 1928, Wilhelm Ackermann, a
 student of David Hilbert, published what we now know as the Ackermann
@@ -1841,15 +1810,16 @@ primitive recursive.\footnote{Actually, another student of Hilbert,
  Gabriel Sudan, was the first to establish a computable, but not
  primitive recursive function.} Here follows the definition of
 Ackermann's function with two arguments:
-
-\begin{itemize}
-\item[] Ack(0, y) = y + 1
-\item[] Ack(x + 1, 0) = Ack(x, 1)
-\item[] Ack(x + 1, y + 1) = Ack(x, Ack(x + 1, y ))
-\end{itemize}
+\begin{equation*}
+\left\{\begin{aligned}
+	\text{Ack}(0, y) &= y + 1\\
+	\text{Ack}(x + 1, 0) &= \text{Ack}(x, 1) \\
+	\text{Ack}(x + 1, y + 1) &= \text{Ack}(x, \text{Ack}(x + 1, y ))
+\end{aligned}\right.
+\end{equation*}
 This function is total (try to understand this!) and monotonically increasing. 
 In fact, it increases faster than any primitive recursive function can: this
-was the arugment used to prove that it is not primitive recursive.
+was the argument used to prove that it is not primitive recursive.
 
 Often one uses the words {\em Ackermann's function} to mean a function
 with one argument only. It is defined as
@@ -1860,7 +1830,7 @@ for the Union-Find algorithm.
 
 \subsubsection{Unbounded Minimization}
 
-Goedel had to enlarge his class of functions to accomodate the Ackermann
+Gödel had to enlarge his class of functions to accommodate the Ackermann
 function (and many other examples of non-primitive recursive functions).
 To do that he introduced one more operator, {\em unbounded minimization}.
 
@@ -1873,16 +1843,17 @@ provided that $f(y,x_1,\ldots,x_k) = 0$ and $\forall z < y, f(z,x_1,\ldots,x_n,z
 Loosely speaking, $\mathit{Mn}[f]$ gives the minimal roots of f.
 
 Where primitive recursive functions correspond to imperative programs with FOR-loops,
-the minimazation operator introduces WHILE-loops. Specifically, the oprator
+the minimization operator introduces WHILE-loops. Specifically, the operator
 itself can be implemented as follows.
+\newpage
 \begin{verbatim}
-       y = 0;
-       while (f(y,x) != 0)
-          y++;
-       return y;
+    y = 0;
+    while (f(y,x) != 0)
+       y++;
+    return y;
 \end{verbatim}
-This imperative implementation you can end up in an infinite loop in two
-ways\ldots Such an infinite loop corresponds to the function being undefined,
+This imperative implementation can end up in an infinite loop in two
+ways\ldots{} Such an infinite loop corresponds to the function being undefined,
 or partial,
 for that input.
 
@@ -1893,17 +1864,17 @@ applying $\mathit{Pr}$, $\mathit{Cn}$ and $\mathit{Mn}$.
 One also names these functions {\em $\mu$-recursive} because $\mu$ is the
 original name for the minimalization operator $\mathit{Mn}$.
 
-These functions can be computed by a Turing Machine, and
-vice versa. It means that the Turing computable functions coincide with
+These functions can be computed by a Turing machine, and
+vice versa. It means that the Turing-computable functions coincide with
 the recursive functions. It is clear from the definition of unbounded
 minimization that recursive functions can be partial. That is
-consistent with the notion of Turing computable: a TM often only defines
+consistent with the notion of Turing-computable: a TM often only defines
 a partial function. Yet, the Ackermann function shows that really
 recursive functions can also be total.
 
 \paragraph{Note:}
 We have not shown how to write the Ackermann function with the minimization
-operator. The reasone for that is that, while it is possible, it is rather
+operator. The reason for that is that, while it is possible, it is rather
 laborious and lengthy. It involves:
 \begin{itemize}
 \item encoding the tuple of parameters $(x,y)$, which represents the call,
@@ -1918,19 +1889,22 @@ laborious and lengthy. It involves:
       the minimization operator.
 \end{itemize}
 
-\paragraph{Selfie:}
+\begin{exercise}
+We can link recursive functions with computability.
 \begin{itemize}
-\item[]
+\item
 Understand and/or prove: if the domain of a partial recursive function
 is decidable, then it can be extended to a total function that is also
 recursive.
-\item[]
+\item
 Do partial recursive functions exist whose domain is not decidable?
-\item[]
+\item
 Is the domain of a (partial) recursive function recognizable?
-\item[]
+\item
 Is the range of a (partial) recursive function recognizable?
 \end{itemize}
+\end{exercise}
+
 
 %===============================================================================
 \section{The {\em Post Correspondence Problem}}
@@ -1954,14 +1928,12 @@ lower strings are the same?
 
 \endgroup
 
-An example:
 \begin{figure}[h]
-\begin{center}
-\includegraphics[%
-  width=0.5\linewidth,
-  keepaspectratio]{pcp1}
-  \end{center}
-\caption{Four given dominoes and a solution\label{pcp1}}
+	\centering
+	\includegraphics[%
+	  width=0.5\linewidth,
+	  keepaspectratio]{pcp1}
+	\caption{Four given dominoes and a solution\label{pcp1}}
 \end{figure}
 
 Figure~\ref{pcp1} shows that you don't need to use all dominoes and
@@ -1972,13 +1944,32 @@ yes or no to the question, there is no need to construct the
 corresponding sequence of dominoes.
 
 This simple game is (1) undecidable and (2) powerful enough to mimic all
-computations by all Turing Machines. Actually, the former follows from
+computations by all Turing machines. Actually, the former follows from
 the latter, as soon as we have shown that the halting of a TM can be
-reduced to the existence of a solution to the PCP. We show this by
-example: the books by Sipser or Minsky contain a general construction.
+reduced to the existence of a solution to the PCP.
 
-\subsection{Turning a Turing Machine into a PCP game}
+\subsection{Turning a Turing machine into a PCP game}
+Any Turing machine can be turned into a set of PCP dominoes, as can the TM's input; it then remains to be proved that playing the PCP game with the input domino is equivalent to running the TM on its input. The following algorithm is after the books by Sipser and Minsky.
 
+\begin{code}[TM to PCP dominoes]
+Starting from a TM $(\Sigma,\Gamma,\delta,Q,q_0,q_a,q_r)$:
+\begin{enumerate}
+\item Add the three fixed dominoes: one with bottom $\$$ and top $q_a \$\$$, and two with top $\$$ where one has bottom $\#\$$ and the other has bottom $\$\#$.
+
+\item For each $\sigma\in \Gamma \cup \{\$\}$, add three dominoes: one with $\sigma$ as top and bottom string, and two with bottom $q_a$ where one has top $q_a \sigma$ and the other has top $\sigma q_a$.
+
+\item For each $\delta(q,\sigma) = (p,\tau,D)$ where $p\neq q_r$:
+\begin{itemize}
+	\item If $D=L$: add a domino with top $\sigma q$ and bottom $p\tau$.   % This simulates a movement L that writes nothing and then an S that writes tau. Although this isn't exactly a simulation of just L, I'm pretty sure a Turing machine that has this restriction is still equivalent to one that can make single moves leftward.
+	\item If $D=S$: add a domino with top $q \sigma$ and bottom $p\tau$.
+	\item If $D=R$: add a domino with top $q \sigma$ and bottom $\tau p$.
+\end{itemize}
+
+\item Every TM input string $s$ corresponds to a starting domino with $\$$ on top and $\$q_0 s\$$ on the bottom.
+\end{enumerate}
+\end{code}
+
+\begin{example}
 In this example we use X for the start state, A for the accepting
 state, Z for the reject state. The alphabet is $\{a,b\}$, and the
 transition table looks like:
@@ -2000,60 +1991,10 @@ The numbers at the left are there for ease of reference. Check that
 this TM accepts the language $(ab)^*$. Take $ab$ as the input string.
 %
 We introduce an extra symbol \$. We now define the dominoes needed in
-the Post game for imitating the above Turing Machine:
+the Post game for imitating the above Turing machine:
 
-\begin{itemize}
-\item for each symbol $x$ create a domino with both the upper and lower string
-  equal to $x$, i.e. 4 dominoes:
-\begin{tabular}{|l||l||l||l|}
-\hline
-a & b & \$ & \# \\ \hline
-a & b & \$ & \# \\
-\hline
-\end{tabular}
-and dominoes with Ax or xA as the upper string, and A as lower
-string, i.e. 8 dominoes:
-\begin{tabular}{|l||l||l||l|}
-\hline
-aA & bA & \$A & \#A \\ \hline
-A & A & A & A \\
-\hline
-\end{tabular}
-\begin{tabular}{|l||l||l||l|}
-\hline
-Aa & Ab & A\$ & A\# \\ \hline
-A & A & A & A \\
-\hline
-\end{tabular}
-
-\item rule 1 in the transition table results in a domino
-\begin{tabular}{|l|}
-\hline
-Xa \\ \hline
-aB \\
-\hline
-\end{tabular}
-
-\item from rule 5 we get
-\begin{tabular}{|l|}
-\hline
-Bb \\ \hline
-bX \\
-\hline
-\end{tabular}
-
-\item
-from rule 3
-\begin{tabular}{|l|}
-\hline
-X\# \\ \hline
-A\# \\
-\hline
-\end{tabular}
-
-
-\item
-the following dominoes do not depend on the TM
+\begin{enumerate}
+\item The fixed dominoes:
 
 the end domino
 \begin{tabular}{|l|}
@@ -2070,20 +2011,73 @@ and the blank generators left and right
 \hline
 \end{tabular}
 
-\item
-finally, the input $ab$ turns into a starting domino
+
+\item We have the 4 dominoes:
+
+\begin{tabular}{|l||l||l||l|}
+\hline
+a & b & \$ & \# \\ \hline
+a & b & \$ & \# \\ \hline
+\end{tabular}
+
+and 8 dominoes with Ax or xA as the upper string, and A as lower
+string:
+
+\begin{tabular}{|l||l||l||l|}
+\hline
+aA & bA & \$A & \#A \\ \hline
+A & A & A & A \\
+\hline
+\end{tabular}\quad
+\begin{tabular}{|l||l||l||l|}
+\hline
+Aa & Ab & A\$ & A\# \\ \hline
+A & A & A & A \\
+\hline
+\end{tabular}
+
+\item Now for the transitions to non-rejecting states:
+\begin{itemize}
+\item Row 1:
+\begin{tabular}{|l|}
+\hline
+Xa \\ \hline
+aB \\
+\hline
+\end{tabular}
+
+\item Row 3:
+\begin{tabular}{|l|}
+\hline
+X\# \\ \hline
+A\# \\
+\hline
+\end{tabular}
+
+\item Row 5:
+\begin{tabular}{|l|}
+\hline
+Bb \\ \hline
+bX \\
+\hline
+\end{tabular}
+
+\end{itemize}
+
+\item Finally, the input $ab$ turns into a starting domino
 \begin{tabular}{|l|}
 \hline
 \$ \\ \hline
 \$Xab\$ \\
 \hline
 \end{tabular}
-\end{itemize}
+\end{enumerate}
+\end{example}
 
-The question is now: construct a correspondence with these dominoes,
-starting from the input domino.\footnote{The general PCP allows to
+For this example, the question is now: construct a correspondence with these dominoes,
+starting from the input domino. (The general PCP allows to
   start from an arbitrary domino: one problem can be reduced to the
-  other.} Here is the solution:
+  other.) Here is the solution:
 
 
 % \hspace{-1.5cm}
@@ -2104,17 +2098,19 @@ the configuration is emptied until only the accepting state and the
 end domino appears. Now, upper and lower are equal.
 
 
-\paragraph{Selfie:}
+\begin{exercise}
+With respect to the above example and algorithm:
 \begin{itemize}
-\item[]
+\item
 Convince yourself that by starting with an input string not in the
 language $(ab)^*$, no correspondence can be found.
 
-Find out about the general correspondence between $\delta$ and the
-dominoes: our $\delta$ did not have movements to the left!
+\item Find out about the general correspondence between $\delta$ and the
+dominoes. The example did not have movements to the left; can you justify the algorithm's domino for $D = L$? How would you use it in a PCP solution?
 
-Formulate more precisely the link between PCP and $H_{TM}$.
+\item Formulate more precisely the link between PCP and $H_{TM}$.
 \end{itemize}
+\end{exercise}
 
 
 
@@ -2162,43 +2158,37 @@ This rewriting system is also Turing complete.
 The Ackermann function showed us that the fact that a function
 increases fast, can be an indication that extra machinery is needed to
 compute its values. For the Ackermann function, that worked with
-Turing Machines: TMs can implement unbounded minimization. The essence
+Turing machines: TMs can implement unbounded minimization. The essence
 is to {\em find the {\bf smallest} number with a particular property
   V}. This can be implemented as
-
-$~~~~~~i = 0;$
-
-$~~~~~~while~not(V(i))~i++;$
-
-
+\begin{verbatim}
+    i = 0;
+    while not V(i)
+       i++;
+\end{verbatim}
 and you already know that it does not finish if no i satisfies V.
 
 We introduce another novelty here, just for trying it out: {\em
-  unbounded maximalization}, i.e. {\em find the {\bf largest} number
+  unbounded maximization}, i.e. {\em find the {\bf largest} number
   with a particular property V}. How could we implement that? Here is
 a first attempt:
 
+\begin{verbatim}
+    i = +infinity;
+    while not V(i)
+        i--;
+\end{verbatim}•
 
-$~~~~~~i = \infty;$
-
-$~~~~~~while~not(V(i))~i--;$
-
-
-That has no chance of working - please argue.
-
-
-Here is a second attempt:
-
-
-$~~~~~~i = 0;$
-
-$~~~~~~while~i < \infty$
-
-$~~~~~~~~~~~~if~V(i)~max = i;$
-
-$~~~~~~~~~~~~i++;$
-
-
+That has no chance of working - please argue. Here is a second attempt:
+\begin{verbatim}
+    i = 0;
+    m = -1;
+    while (i < +infinity) {
+        if V(i)
+            m = i;
+        i++;
+    }
+\end{verbatim}
 and you can certainly spot the weakness here as well ...
 
 This shows that the introduction of a method to construct new
@@ -2241,24 +2231,24 @@ Nevertheless, the values for $S(n)$ are known exactly for $n <
 about some machines whether they are in a loop, so that record could
 still be broken. The record for $n = 6$ is $10^{2879}$.
 
-$S$ is obtained by {\em bounded} maximalization, but over a
+$S$ is obtained by {\em bounded} maximization, but over a
 non-computable set: the set of halting TMs with $n$ states. That is
 the inherent reason why $S$ is not computable, even though the
-function is total and in the abstract sense well defined.
+function is total and in the abstract sense well-defined.
 
 Lots of open problems in mathematics could be solved {\em easily} if
 we knew $S$ for some $n$.
 
-
-\paragraph{Selfie:} Which sentences below are true? Please give good arguments for your answer.
-
+\begin{exercise}
+Which sentences below are true? Please give good arguments for your answer.
 \begin{itemize}
-\item[] $S(n)$ can be determined for every $n$, but it is $\infty$ for
+\item $S(n)$ can be determined for every $n$, but it is $\infty$ for
   large enough $n$s.
 
-It is possible that for a large enough $n$, $Ack(n) > S(n)$.
+\item It is possible that for a large enough $n$, $Ack(n) > S(n)$.
 
-Every function that increases slower than a given primitive recursive
+\item Every function that increases slower than a given primitive recursive
 function is primitive recursive.
 \end{itemize}
+\end{exercise}
 

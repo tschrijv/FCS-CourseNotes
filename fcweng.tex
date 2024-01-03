@@ -1,32 +1,62 @@
 \documentclass{tstextbook}
 
-\usepackage{epsfig}
-\usepackage{wrapfig}
-\usepackage{subfigure}
-\usepackage{graphics}
-\usepackage{subfigure}
-\usepackage{fancyvrb}
+%%%%%%%%%%%%%%%%
+%%% PACKAGES %%%
+%%%%%%%%%%%%%%%%
+% Figures
+%\usepackage{epsfig}    % For using .eps files as figures, which we don't do.
+\usepackage{wrapfig}   % For wrapping text around photos, which we do less than 5 times.
+%\usepackage{graphics}  % https://tex.stackexchange.com/a/23076/203081. Don't worry, tstextbook already loads graphicx, the good package.
+%\usepackage{subfigure}  % This is old, makes for ugly code, and causes weird spacing.
+\usepackage{subcaption}
+\usepackage[margin=10pt,font=small,labelfont=bf,labelsep=colon]{caption}
+
+% Algorithms
+\usepackage{fancyvrb}  % For the BVerbatim environment (verbatim, but works inside a center).
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-\usepackage{units}
-\usepackage[normalem]{ulem}
-\usepackage{paralist}
-\usepackage{hyperref}
-\usepackage[all,cmtip]{xy}
+
+%\usepackage{units}           % Typesetting for units and fractions of units like m/s. Obsolete.
+\usepackage[normalem]{ulem}  % Underlining ... because \underline isn't enough natively?
+%\usepackage{paralist}        % Uglier itemisations that don't stay indented on the second line.
+\usepackage{hyperref}        % Hyperlinks.
+
+\usepackage[all,cmtip]{xy}   % Finite-state machines, e.g. figure 6.1.
+
+\usepackage{amssymb}
+\let\nr\relax%          https://tex.stackexchange.com/a/512854/203081
+\usepackage{nccmath}  % https://tex.stackexchange.com/a/467619/203081
+
+%\usepackage{shadow}
+\usepackage{xcolor}
+\usepackage{soul}      % More underlining?
+
+\usepackage{pgfplots}   % For O(f(n)) plots
+
+
+%%%%%%%%%%%%%%%%
+%%% COMMANDS %%%
+%%%%%%%%%%%%%%%%
+% Envs
+\newenvironment{proof*}  % Proof, but starts with a newline to facilitate e.g. itemizations.
+	{\begin{proof}~\vspace{-1.5em}\\}
+	{\end{proof}}  % Note that the proof, theorem ... environments are provided by amsthm, which is loaded in the tstextbook class.
+
+% Lengths
+\setlength{\parindent}{0cm}
 
 \setlength{\textwidth}{15cm}
 \setlength{\oddsidemargin}{0.5cm}
 \setlength{\evensidemargin}{0.5cm}
 \setlength{\textheight}{20cm}
 
-\usepackage{amssymb}
+\newlength{\grammarindent}
+\setlength{\grammarindent}{3em}
 
-\usepackage{shadow}
-\usepackage{xcolor}
-\usepackage{soul}
+\fvset{tabsize=4}  % BVerbatim tab size is 8 by default.
 
-\newcommand{\marton}[1]{\marginpar{\color{red} Marton}\textbf{\color{red}{#1}}}
-\newcommand{\martonst}[2]{\marginpar{\color{red} Marton}\textbf{\color{red}{\st{#1}$~\mapsto~${#2}}}}
+% Some common symbols
+\renewcommand\qedsymbol{$\blacksquare$}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -34,32 +64,26 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 
-%  Een paar definities
-\newcommand{\rpijl}{$\rightarrow~$}
-\newcommand{\eps}{$\epsilon~$}
-\newcommand{\project}[1]{}
-
-\newcommand{\myref}[1]{~\ref{#1} on page~\pageref{#1}}
-
-\lhead[\fancyplain{}{\rm\thepage}]{\fancyplain{}{\rightmark}}
-\chead[]{}
-\rhead[\fancyplain{}{\leftmark}]{\fancyplain{}{\rm\thepage}}
-\lfoot[]{}
-\cfoot[]{\fancyplain{\rm\thepage}{}}
-\rfoot[]{}
-
-\setlength{\parindent}{0cm}
-
 \renewcommand{\P}{{\bf P} }
 \newcommand{\NP}{{\bf NP} }
 \newcommand{\LL}{{\bf L} }
 \newcommand{\NL}{{\bf NL} }
 \newcommand{\NPC}{{\bf NPC} }
+\newcommand{\NPhard}{\text{\bf NP--hard} }
 \newcommand{\PSPACE}{{\bf PSPACE} }
 \newcommand{\NPSPACE}{{\bf NPSPACE} }
 \newcommand{\EXP}{{\bf EXP} }
 \newcommand{\NEXP}{{\bf NEXP} }
 
+\newcommand{\rpijl}{\ensuremath\rightarrow~}
+\newcommand{\eps}{\ensuremath\epsilon}
+\newcommand{\project}[1]{}
+
+\newcommand{\myref}[1]{~\ref{#1} on page~\pageref{#1}}  % Used at the end of the regex chapter.
+\newcommand{\marton}[1]{\marginpar{\color{red} Marton}\textbf{\color{red}{#1}}}
+\newcommand{\martonst}[2]{\marginpar{\color{red} Marton}\textbf{\color{red}{\st{#1}$~\mapsto~${#2}}}}
+
+% Induction layout, used in e.g. Theorem 2.6.
 \newcommand{\induction}[3]{
 We use induction on {#1}.
 \begin{description}
@@ -68,44 +92,75 @@ We use induction on {#1}.
 \item[\underline{Inductive case}:]
 {#3}
 \end{description}
+\vspace{-2em}
 }
 
+% Finite-state machine commands to work alongside xy
+\newcommand{\atm}{\entrymodifiers={++[o][F-]}}
+\newcommand{\accept}[1]{*++[o][F=]{#1}}
+
+% Custom alignment environment for grammars (https://tex.stackexchange.com/q/162885/203081)
+\newcounter{grammarcounter}[chapter]
+\renewcommand{\thegrammarcounter}{\thechapter.\arabic{grammarcounter}}
+
+\newenvironment{grammar}
+{%
+    \refstepcounter{grammarcounter}%
+    \begin{fleqn}[\grammarindent]\begin{equation*}\left\{\:\tag{$G_{\thegrammarcounter}$}\begin{aligned}%
+}%
+{%
+    \end{aligned}\right.\end{equation*}\par\end{fleqn}% You need the \par to eliminate \end{fleqn}'s space.
+}
+
+\newenvironment{grammar*}
+{%
+    \begin{fleqn}[\grammarindent]\begin{equation*}\left\{\:\begin{aligned}%
+}
+{%
+    \end{aligned}\right.\end{equation*}\par\end{fleqn}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+%%% HEADER/FOOTER %%%
+%%%%%%%%%%%%%%%%%%%%%
+\lhead[\fancyplain{}{\rm\thepage}]{\fancyplain{}{\rightmark}}
+\chead[]{}
+\rhead[\fancyplain{}{\leftmark}]{\fancyplain{}{\rm\thepage}}
+\lfoot[]{}
+\cfoot[]{\fancyplain{\rm\thepage}{}}
+\rfoot[]{}
+
+
+%%%%%%%%%%%%
+%%% MAIN %%%
+%%%%%%%%%%%%
 \begin{document}
 
 \tsbook{Fundamentals for Computer Science}
        {Bart Demoen, Tom Schrijvers}
        {Tobias van Schneider}
        {2021}
-       {xxxxx}{xxx--xx--xxxx--xx--x}{2.0}
-       {}
+       {xxxxx}{xxx--xx--xxxx--xx--x}{2.0 (compiled \today)}
+       {VTK}
        {Leuven}
 
 \include{Foreword/inleidingeng}
-
 \include{Definitions/definitions}
 
 \part{Graph Theory}
-
 \graphicspath{{./GraphTheory/figures/}}
-
 \include{GraphTheory/grafeneng}
 
 \part{Languages \& Automata}
-
 \graphicspath{{./LanguagesAutomata/figures/}}
-
 \include{LanguagesAutomata/talenautomateneng}
 
 \part{Computability}
-
 \graphicspath{{./Computability/figures/}}
-
 \include{Computability/berekenbaarheideng}
 
 \part{Complexity}
-
 \graphicspath{{./Complexity/figures/}}
-
 \include{Complexity/complexiteiteng}
 
 \end{document}
